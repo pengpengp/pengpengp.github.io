@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        
+        LAMP环境搭建｜undefined
         
     </title>
 
-    <link rel="canonical" href="https://pengpengp.github.io/archives/">
+    <link rel="canonical" href="https://pengpengp.github.io/2018/12/05/LAMP/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -43,7 +43,7 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="false" data-istags="false
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
 " data-ishome="false">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -116,177 +116,155 @@
 
 <!-- Main Content -->
 
+<!--only post-->
 
-<!-- Page Header -->
-<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 visible-xs-block visible-sm-block">
-    <div class="row">
-        <header class="intro-header">
-            <div class="container">
-                <div class="site-heading text-center">
-                    <div class="about-me">
-                        <!--移动端头部显示-->
-                        <img src="">
-                        <h5><a href="/about/">pengpengp</a></h5>
-                        <p></p>
+
+<img class="wechat-title-img" src="">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>LAMP环境搭建</h1>
+                    
+                    <span class="meta">
+                         作者 pengpengp
+                        <span>
+                          日期 2018-12-05
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
     </div>
-</div>
-<!-- Main Content -->
-<div class="container custom-haojen-container">
-    <!-- Post Container -->
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container">
-            <!-- Main Content -->
-
-
-
-<div class="post-preview " style="background-image: url('')">
-    <a href="/2018/12/05/LAMP/">
-        <h2 class="post-title">
+    <div class="post-title-haojen">
+        <span>
             LAMP环境搭建
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-05
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                l—linux；A—Apache；M—mysql;P—PHP;Apache是一款web服务器，mysql是多线程、多用户管理系统，PHP可以用来编写网站源代码，作为Apache的扩展，今天的主题就是如何搭建一款LAMP环境。
-Apache：
-1.安装yum install httpd httpd..
-            </p>
-        </div>
-    </a>
+        </span>
+    </div>
+</header>
 
-</div>
-
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="l—linux；A—Apache；M—mysql-P—PHP"><a href="#l—linux；A—Apache；M—mysql-P—PHP" class="headerlink" title="l—linux；A—Apache；M—mysql;P—PHP;"></a>l—linux；A—Apache；M—mysql;P—PHP;</h2><h2 id="Apache是一款web服务器，mysql是多线程、多用户管理系统，PHP可以用来编写网站源代码，作为Apache的扩展，今天的主题就是如何搭建一款LAMP环境。"><a href="#Apache是一款web服务器，mysql是多线程、多用户管理系统，PHP可以用来编写网站源代码，作为Apache的扩展，今天的主题就是如何搭建一款LAMP环境。" class="headerlink" title="Apache是一款web服务器，mysql是多线程、多用户管理系统，PHP可以用来编写网站源代码，作为Apache的扩展，今天的主题就是如何搭建一款LAMP环境。"></a>Apache是一款web服务器，mysql是多线程、多用户管理系统，PHP可以用来编写网站源代码，作为Apache的扩展，今天的主题就是如何搭建一款LAMP环境。</h2><hr>
+<h3 id="Apache："><a href="#Apache：" class="headerlink" title="Apache："></a>Apache：</h3><ul>
+<li><p>1.安装yum install httpd httpd-devel httpd-menaul mod_ssl mod_perl mod_auth_mysql -y</p>
+</li>
+<li><p>2.启动服务service httpd start</p>
+</li>
+<li><p>3.更改servername（vi /etc/httpd/conf/httpd.conf）<br><img src="/2018/12/05/LAMP/servername.jpg" alt="servername"></p>
+</li>
+<li><p>4.重启apache服务：service httpd restart</p>
+</li>
+<li><p>5.启动Apache服务service httpd start</p>
+</li>
+<li><p>6.设置开机自启动chkconfig httpd on</p>
+</li>
+</ul>
 <hr>
-
-
-
-<div class="post-preview " style="background-image: url('')">
-    <a href="/2018/12/04/APACHE-linux/">
-        <h2 class="post-title">
-            学习如何在linux环境安装Apache
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-04
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                1.首先需要下载好安装套件（yum groupinstall “Development Tools”）然后在网上下载好apache的安装包,（这里使用下载的是源码压缩包，名字为httpd-2.4.37.tar.gz）2.把httpd-2.4.37.tar.gz传到虚拟机中，我用的是centOS7..
-            </p>
-        </div>
-    </a>
-
-</div>
-
+<h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql:"></a>mysql:</h3><ul>
+<li><p>1.安装yum install mysql-server mysql -y</p>
+</li>
+<li><p>2.设置mysql开机启动chkconfig mysqld on</p>
+</li>
+<li><p>3.启动服务service mysqld start</p>
+</li>
+<li><p>4.mysql服务初始化 mysql_secure_installation（如果默认有密码，在/etc/my.cnf中加入参数skip-grant-tables然后在输入密码阶段，直接回车登陆）<br><img src="/2018/12/05/LAMP/mycnf.jpg" alt="mycnf"></p>
+</li>
+</ul>
 <hr>
-
-
-
-<div class="post-preview " style="background-image: url('')">
-    <a href="/2018/12/03/first_blog/">
-        <h2 class="post-title">
-            在windows下如何开通自己的博客
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-03
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-先期准备工作：配置.net   安装shadowsocks（代理服务器）
-1.github安装注册，下载githubDesktop（同步工具）2.下载node.js安装包node.js官网*    安装好node.js后可以cmd中运行npm试试安装成功了没   （node.js安装软件用的命..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview " style="background-image: url('')">
-    <a href="/2018/12/03/hello-world/">
-        <h2 class="post-title">
-            Hello World
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-03
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer i..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-
-<!-- 翻页 pager -->
-
-<ul class="pager">
-    
-    
+<h3 id="PHP："><a href="#PHP：" class="headerlink" title="PHP："></a>PHP：</h3><ul>
+<li><p>1.安装yum install php php-mysql php-gd libjpeg* php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-mcrypt php-bcmath php-mhash libmcrypt -y</p>
+</li>
+<li><p>2.修改PHP配置文件vi  /etc/httpd/conf/httpd.conf</p>
+</li>
+<li><p>3.重启apache服务： service httpd restart</p>
+</li>
+<li><p>4.打开网页输入localhost即可看到效果<br><img src="/2018/12/05/LAMP/apache.jpg" alt="apache"></p>
+</li>
+<li>5.把自己做好的网页文件传入/var/www/html目录下，再打开网页</li>
+</ul>
+<p><img src="/2018/12/05/LAMP/copy -r.jpg" alt="copy"></p>
+<ul>
+<li><p>6.打开mysql，选择数据库use vauditdemo；<br>  <img src="/2018/12/05/LAMP/use database.jpg" alt="use database"></p>
+</li>
+<li><p>7.用source /var/www/html/install/install.sql命令导入数据库文件<br><img src="/2018/12/05/LAMP/source database.jpg" alt="source database"></p>
+</li>
 </ul>
 
+                <hr>
+                
 
-        </div>
-        <!-- Sidebar Container -->
-        <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
-
-            <!-- About Me -->
-            <section class="visible-md visible-lg" style="padding: 0 18px">
-                <div class="short-about">
-                    <!--侧边栏头像-->
+                <ul class="pager">
                     
-                    <h5><a href="/about/">pengpengp</a></h5>
                     
-                    <hr>
-                    <!-- SNS Link 社交 -->
-                    <ul class="list-inline">
-                        
-                        
-                        
+                    <li class="next">
+                        <a href="/2018/12/04/APACHE-linux/" data-toggle="tooltip" data-placement="top" title="学习如何在linux环境安装Apache">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
 
-                        
+                
 
-                        
+                
 
-                        
 
-                        
-                    </ul>
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#l—linux；A—Apache；M—mysql-P—PHP"><span class="toc-text">l—linux；A—Apache；M—mysql;P—PHP;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Apache是一款web服务器，mysql是多线程、多用户管理系统，PHP可以用来编写网站源代码，作为Apache的扩展，今天的主题就是如何搭建一款LAMP环境。"><span class="toc-text">Apache是一款web服务器，mysql是多线程、多用户管理系统，PHP可以用来编写网站源代码，作为Apache的扩展，今天的主题就是如何搭建一款LAMP环境。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Apache："><span class="toc-text">Apache：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql"><span class="toc-text">mysql:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP："><span class="toc-text">PHP：</span></a></li></ol></li></ol>
                 </div>
-            </section>
-
-            <!-- Featured Tags  标签 -->
-            
-
-            
-
+            </div>
         </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
     </div>
-</div>
+</article>
+
+
+
+
+
+
 
 <!-- Footer -->
 <!-- Footer -->
