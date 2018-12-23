@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="pengpengp&#39;s BLOG" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        PHP_useage｜undefined
+        
+    </title>
+
+    <link rel="canonical" href="https://pengpengp.github.io/2018/12/23/PHP-useage/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    pengpengp&#39;s BLOG
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>PHP_useage</h1>
+                    
+                    <span class="meta">
+                         作者 pengpengp
+                        <span>
+                          日期 2018-12-23
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            PHP_useage
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <pre><code>*** php用法 ***
+</code></pre><p>文件包含    include(‘文件名’)    require(‘文件名’)</p>
+<ul>
+<li><p>用法1.包含头信息—每个页面头部都是一样的</p>
+</li>
+<li><p>用法2.包含账号密码的配置文件</p>
+</li>
+<li><p>用法3.包含远程文件<br>  include “<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>;</p>
+</li>
+</ul>
+<p>注意：远程文件任何后缀都可以打开<br>（图片木马的制作执行）</p>
+<ul>
+<li><p>区别:include出错会继续执行，程序开始时候包含；require出错终止，在执行到require代码时才包含进来</p>
+</li>
+<li><p>//伪协议常用  <a href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html" target="_blank" rel="noopener">https://www.leavesongs.com/PENETRATION/php-filter-magic.html</a></p>
+</li>
+<li><p>cookie<br>  setcookie(‘user’,’admin’，time()+3600)设置一个cookie<br>  $_COOKIE[‘user’]获取一个cookie</p>
+</li>
+<li><p>如何放置cookie伪造？<br>  setcookie(‘id’,’’,time()-1)清空COOKIE</p>
+</li>
+<li><p>session—-全局变量<br>  session_start()启动session功能</p>
+</li>
+</ul>
+<p>例子PHP用session做验证：<br>    session_start();</p>
+<pre><code>$_SESSION[&apos;name&apos;]=&quot;za&quot;;
+
+验证
+    if(isset($_SESSION[&apos;name&apos;])){
+echo &quot;欢迎&quot;;
+}
+session_destory（）    删除session创建的文件
+
+
+//header(&quot;location:a.php&quot;);跳转
+</code></pre><p>** PHP中的文件上传：<br>    <form enctype="multipart/form-data" method="post"><br>    <input type="file" name="Filedata"><br>    <input type="submit"><br>    </form></p>
+<pre><code>接收：$_FILES;
+</code></pre><p><strong>  mysql </strong></p>
+<ul>
+<li><p>往表中插入数据：<br>  insert into 表名称(字段1，字段2…) value(字段1的值，字段2的值…)</p>
+<p>  例子：insert into news(title,content) value(‘标题’,’内容‘)；</p>
+</li>
+<li><p>查询数据：<br>  select 字段名1,字段名2,…,字段名n from 表名称</p>
+<p>  select username,password from user where id =1;单条件</p>
+<p>  select * from stu where number=31100 and name=hu;多条件用and连接</p>
+<p>  select 字段1，字段2，字段n from 表名 limit 0,1；用limit加限制条件 从0开始读1条</p>
+<p>  limit a,b  limit—限制读取记录   a—索引  b—-记录数</p>
+</li>
+<li><p>更新：<br>  update 表名 set 字段1=新值1，字段2=新值2 条件；</p>
+</li>
+</ul>
+<ul>
+<li><p>删除表：<br>  delete from 表名 条件；一定要加好条件，否则都删了</p>
+<p>  delete from 表名；清空一个表</p>
+</li>
+<li><p>like子句：<br>  通配符：</p>
+<pre><code>*表示任意的字符
+%表示任意的字符
+？表示任意一个字符
+select * from 表名  where name like &apos;%sd&apos;;
+</code></pre></li>
+<li><p>union***    联合查询</p>
+<pre><code>select * from 表1 union select * from 表2；把表1和表2内容放在一起展示
+注意：表1和表2中字段个数要保持一致，否则会报错
+</code></pre></li>
+<li><p>order by 条件***    根据条件排序</p>
+<pre><code>select * from user where city =&apos;beijng&apos; order by name;
+ASC（升序） 或DESC（降序）默认升序
+order by 1\2\3.。。 根据第几列来排序，如果超过列数就会报错*****
+</code></pre></li>
+<li><p>group by 根据一个或多个列对结果进行分组，常和count sum、AVG组合使用</p>
+<pre><code>select name，count（*）from  emply by name；根据名字来给表分组；
+</code></pre></li>
+<li><p>删除字段：</p>
+<pre><code>alter table 表名  drop 字段名；在表中将某个字段删除
+</code></pre></li>
+<li><p>增加字段：</p>
+<pre><code>alter table 字段名 add 字段名 字段类型
+</code></pre></li>
+<li><p>改字段：</p>
+<pre><code>alter table to modify 字段名 字段类型;
+</code></pre></li>
+<li><p>改表名：</p>
+<pre><code>alter table 原表名 rename to  新表名;
+</code></pre></li>
+</ul>
+<ul>
+<li><p>导入数据：</p>
+<pre><code>方法1.mysql -uroot -p 密码 &lt; 要导入的数据（注意：.sql中要自动创建数据库，如果runoob.sql中不会自动创建数据库，需要用第二种方法）
+
+方法2.登录mysql，use数据库，source 路径文件
+
+方法3.mysqlimport -uroot -p --local database_name dump.txt dump.txt（注意：dump.txt不会创建数据库时，需要database_name）
+</code></pre></li>
+<li><p>导出数据：</p>
+<pre><code>方法1.select * from 表名 into outfile 文件路径；
+</code></pre></li>
+<li><p>注释<em>**</em>注入</p>
+<pre><code>#（%23） --  注释当前行
+/*  */      中间注释
+</code></pre></li>
+<li><p>查询用户连接数</p>
+<pre><code>select connection_id();
+</code></pre></li>
+<li><p>替换字符<br>  例子</p>
+<pre><code>select insert(&apos;ichunqiu&apos;,1,1,&apos;kk&apos;);结果是kkchunqiu
+</code></pre></li>
+<li><p>截取字符串<br>  例子</p>
+<pre><code>select LEFT(&quot;helloworld&quot;,5);结果是hello
+select LEFT（被截取的字符串，左截取长度）;
+select RIGHT 同理
+</code></pre><p>  截取</p>
+<pre><code>select substring()/mid()/substr()都是三个参数，第一个：被截取的字符串，第二个：开始的位置，第三个：截取的长度
+</code></pre></li>
+<li><p>2个报错函数***  一般情况下要放在条件后面</p>
+<pre><code>1.extractvalue(XML_document，XPath_string)；
+例子：
+select * from news where tid=1 and extractvalue(1,concat(0x7e,(select user()),0x7e));
+两个参数（1，拼接的第二个报错参数）
+
+2.UPDATEXML (XML_document, XPath_string, new_value); 
+updatexml（1，拼接参数，1）；
+</code></pre></li>
+<li><p>去重函数    </p>
+<pre><code>select distinct title from news;不显示重复函数
+</code></pre></li>
+<li><p>把查询结果连接在一起</p>
+<pre><code>group_concat(DISTINCT field) from table_name where conditions;
+</code></pre></li>
+<li><p>PHP连接mysql数据库</p>
+<pre><code>方法1：使用mysqli扩展连接(面向对象)
+方法2：使用mysql扩展（php低于5.5）
+
+方法3：使用PDO技术（面向对象的，防止sql注入）
+</code></pre></li>
+</ul>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/12/16/php-shuzu/" data-toggle="tooltip" data-placement="top" title="php_shuzu">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; pengpengp&#39;s BLOG 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://pengpengp.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="">
+</body>
+
+</html>
