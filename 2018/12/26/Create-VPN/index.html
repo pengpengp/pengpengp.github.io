@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        http_request ｜undefined
+        Create_VPN｜undefined
         
     </title>
 
-    <link rel="canonical" href="https://pengpengp.github.io/2018/12/24/http-request/">
+    <link rel="canonical" href="https://pengpengp.github.io/2018/12/26/Create-VPN/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -136,12 +136,12 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>http_request </h1>
+                    <h1>Create_VPN</h1>
                     
                     <span class="meta">
                          作者 pengpengp
                         <span>
-                          日期 2018-12-24
+                          日期 2018-12-26
                          </span>
                     </span>
                     <div class="tags text-center">
@@ -153,7 +153,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            http_request 
+            Create_VPN
         </span>
     </div>
 </header>
@@ -164,89 +164,103 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>*** 一.http基础：</p>
-<ul>
-<li><p>URL：<a href="http://admin:123@www.baidu.com：80/new/index.php？id=1#" target="_blank" rel="noopener">http://admin:123@www.baidu.com：80/new/index.php？id=1#</a><br>  *协议  + http基础认证  +域名     +端口  +路径  +文件名  +参数  +锚部分</p>
-</li>
-<li><p>URL编码<em>**</em></p>
-<pre><code>‘’    --%27
-“”    --%22
-#    --%23
-空格    --%20
-%    --%25
-</code></pre></li>
-<li><p>GET\POST请求结构</p>
-<pre><code>GET请求
-GET  /HTTP基础/123.txt   /HTTP/1.1
-hOST:192.168.11.111:8000
-Accept：*/*
-换行
-
-POST请求
-POST /HTTP基础/123.txt   /HTTP/1.1
-hOST:192.168.11.111:8000
-Accept：*/*
-换行
-id=123&amp;password=123
-</code></pre></li>
-<li><p>请求方法：</p>
-<pre><code>GET
-HEAD  用于捕获报头
-PUT        iis put方法漏洞（自己研究）
-DELETE    请求删除
-CONNECT
-OPTIONS    允许客户端查看服务器支持的方法
-</code></pre></li>
-<li><p>*状态码   302临时重定向（location）</p>
-<pre><code>301永久跳转        百度看一下区别
-
-400
-403 禁止访问
-404    Not Found
-405  不允许
-
-5xx  服务器问题（代码）
-</code></pre></li>
-<li><p>练习：用wireshark抓http数据包</p>
-</li>
-</ul>
-<p>** 二.总结请求头：</p>
-<ul>
-<li><p>Host：表示服务器监听的端口号；</p>
-</li>
-<li><p>User-Agent：请求所使用的浏览器</p>
-</li>
-<li><p>Accept：可接受的响应类型     例子：Accept: text/plain（当作文本不处理）     text/html （调用HTML解析器进行解析）</p>
-</li>
-<li><p>Accept-language：可接受的相应语言清单 例子：<br>zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</p>
-</li>
-<li><p>Accept-Encoding：    可接受的响应的编码方式    例子：gzip, deflate</p>
-</li>
-<li><p>Cache-Control：指定当前的请求/回复中，是否使用缓存</p>
-</li>
-<li><p>Pragma：只用于客户端发送的请求中。客户端会要求所有的中间服务器不返回缓存的资源。<br>如果所有的中间服务器都以实现http/1.1为标准，那么直接使用Cache-Control:no-cache即可，如果不是的话，就要包含两个字段</p>
-</li>
-<li><p>Connection：处理完这次请求后是否断开连接还是继续保持连接    例子：close</p>
-</li>
-<li><p>Referer：客户机通过这个头告诉服务器，它是从哪个资源来访问服务器的（防盗链）</p>
-</li>
-<li><p>Cookie：客户机通过这个头可以向服务器带数据</p>
-</li>
-</ul>
-<p><strong>*</strong>三.重点：  五层模型、tcp三次握手 、 四次挥手 、wireshark、http请求\响应的行、头、空行、内容 、burpSuite代理，看数据包    </p>
+                <p><strong><em>创建VPN连接</em></strong></p>
+<p>一.安装浏览器插件<br>    hackbar、Header Edit、wappalzer、 proxy、server ip</p>
+<p>二.在windows 2008上搭建vpn</p>
+<p>搭建PPTP连接</p>
+<blockquote>
+<p>1.打开服务管理器—&gt;添加角色—-&gt;勾选“网络策略和访问服务 ”——&gt;下一步—–&gt;勾选”路由和远程访问服务”—&gt;开始安装</p>
+</blockquote>
+<blockquote>
+<p>2.角色中出现了“路由和远程访问”，现在是红色的，右键选择配置它，打开向导—&gt;选择自定义配置–&gt;服务里全选–&gt;完成–&gt;变成绿色</p>
+</blockquote>
+<blockquote>
+<p>3.新增一个接口：ipv4–&gt;NAT—&gt;新建一个接口–&gt;选择要使用的网卡—&gt;接口类型选择“公用接口连接到Internet”,勾选“在此接口上启用NAT”</p>
+</blockquote>
+<blockquote>
+<p>4.开始菜单–&gt;管理工具–&gt;网络策略服务器–&gt;策略–&gt;网络策略–&gt;把里面的两项被组织的属性改成“授予访问权限”</p>
+</blockquote>
+<blockquote>
+<p>5.服务器管理器–&gt;配置–&gt;本地用户和组–&gt;添加一个用户–&gt;填写用户名、密码、勾选“用户不能更改密码”和“密码永不过期”，去掉“下次登陆须更改密码”的勾，点创建。</p>
+</blockquote>
+<blockquote>
+<p>6.开始菜单–&gt;管理工具–&gt;本地安全策略–&gt;本地策略–&gt;用户权限分配–&gt;拒绝本地登陆，添加vpn用户—&gt;拒绝通过远程桌面登陆,添加vpn用户。</p>
+</blockquote>
+<blockquote>
+<p>7.连接VPN：在客户机创建一个新连接–&gt;选择连接到工作区—&gt;使用我的internet连接–&gt;填写ip地址–&gt;填写之前创建的VPN用户名和密码–&gt;连接即可</p>
+</blockquote>
+<p>三.docker：</p>
+<blockquote>
+<p>安装docker：sudo apt-get install docker.io</p>
+</blockquote>
+<blockquote>
+<p>安装加速器（可选）<a href="https://yeasy.gitbooks.io/docker_practice/install/mirror.html" target="_blank" rel="noopener">https://yeasy.gitbooks.io/docker_practice/install/mirror.html</a></p>
+</blockquote>
+<blockquote>
+<p>或者在 /etc/docker/daemon.json 中写入<br>    {<br>        “registry-mirrors”: [“<a href="https://registry.docker-cn.com&quot;]" target="_blank" rel="noopener">https://registry.docker-cn.com&quot;]</a><br>    }</p>
+</blockquote>
+<blockquote>
+<p>启动docker：sudo docker run –rm -it alpine /bin/sh</p>
+</blockquote>
+<blockquote>
+<p>在docker中启动ubuntu：sudo docker run –rm -it ubuntu /bin/sh</p>
+</blockquote>
+<blockquote>
+<p>在docker中启动centOS：sudo docker run –rm -it centos /bin/sh</p>
+</blockquote>
+<p>四.VPN :PPTP   L2TP </p>
+<p>第一种连接方法：</p>
+<blockquote>
+<p>1.把镜像拉入虚拟机：</p>
+</blockquote>
+<blockquote>
+<p>2.docker pull mobtitude/vpn-pptp<br>然后创建一个文件chap-secrets，打开写入   name <em>  password </em> 并记住路径/vpn-k</p>
+</blockquote>
+<blockquote>
+<p>3.docker run -d –privileged –net host -v /root/chap-secrets:/ppp/chap-secrets mobtitude/vpn-pptp</p>
+</blockquote>
+<p>第二种连接方法：</p>
+<blockquote>
+<p>1.docker pull hwdsl2/ipsec-vpn-server</p>
+</blockquote>
+<blockquote>
+<p>2.modprobe af_key</p>
+</blockquote>
+<blockquote>
+<p>3.VPN_IPSEC_PSK=ipsec-keydoc<br>VPN_USER=uname<br>VPN_PASSWORD=upass</p>
+</blockquote>
+<blockquote>
+<p>4.docker run –name vpn-docker –privileged –env-file /root/vpn.env -p 500:500/udp -p 4500:4500/udp -v /lib/modules:/lib/modules:ro  -d –privileged hwdsl2/ipsec-vpn-server</p>
+</blockquote>
+<p>第三种方法：使用shadowsocks工具代理连接VPN</p>
+<blockquote>
+<p>1.apt install shadowsocks先安装</p>
+</blockquote>
+<blockquote>
+<p>2.修改配置文件  vi /etc/shadowsocks/config.json</p>
+</blockquote>
+<pre><code>&quot;server&quot;:&quot;0.0.0.0&quot;,
+&quot;server_port&quot;:8888,
+&quot;local_address&quot;: &quot;127.0.0.1&quot;,
+&quot;local_port&quot;:1080,
+&quot;password&quot;:&quot;123456&quot;,
+&quot;timeout&quot;:300,
+&quot;method&quot;:&quot;aes-256-cfb&quot;,
+&quot;fast_open&quot;: false,
+&quot;workers&quot;: 1,
+&quot;prefer_ipv6&quot;: false
+</code></pre><blockquote>
+<p>3.（可选）开启BBR加速支持echo “net.core.default_qdisc=fq” &gt;&gt; /etc/sysctl.conf<br>echo “net.ipv4.tcp_congestion_control=bbr” &gt;&gt; /etc/sysctl.conf<br>sysctl -p<br>lsmod | grep bbr</p>
+</blockquote>
 
                 <hr>
                 
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2018/12/26/Create-VPN/" data-toggle="tooltip" data-placement="top" title="Create_VPN">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2018/12/23/PHP-useage/" data-toggle="tooltip" data-placement="top" title="PHP_useage">Next Post &rarr;</a>
+                        <a href="/2018/12/24/http-request/" data-toggle="tooltip" data-placement="top" title="http_request ">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
