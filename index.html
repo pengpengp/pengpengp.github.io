@@ -264,6 +264,36 @@
 
 
 <div class="post-preview " style="background-image: url('')">
+    <a href="/2018/12/28/sql-inject-Process/">
+        <h2 class="post-title">
+            'sql_inject_Process'
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-28
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                
+留言板安全问题
+
+用户名root &#39; or 1 = 1#    密码1    –&gt;万能密码注入
+
+原理：
+
+​    SELECT * FROM users WHERE username=’$user’ AND passwd =’”.md5($pwd).被变成
+select * ..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+<div class="post-preview " style="background-image: url('')">
     <a href="/2018/12/28/sql-inject/">
         <h2 class="post-title">
             'sql_inject'
@@ -507,30 +537,6 @@ Apache：
         <div class="post-content-preview">
             <p>
                 1.首先需要下载好安装套件（yum groupinstall “Development Tools”）然后在网上下载好apache的安装包,（这里使用下载的是源码压缩包，名字为httpd-2.4.37.tar.gz）2.把httpd-2.4.37.tar.gz传到虚拟机中，我用的是centOS7..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview " style="background-image: url('')">
-    <a href="/2018/12/03/first_blog/">
-        <h2 class="post-title">
-            在windows下如何开通自己的博客
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-03
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-先期准备工作：配置.net   安装shadowsocks（代理服务器）
-1.github安装注册，下载githubDesktop（同步工具）2.下载node.js安装包node.js官网*    安装好node.js后可以cmd中运行npm试试安装成功了没   （node.js安装软件用的命..
             </p>
         </div>
     </a>

@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        &#39;sql_inject&#39;｜undefined
+        &#39;sql_inject_Process&#39;｜undefined
         
     </title>
 
-    <link rel="canonical" href="https://pengpengp.github.io/2018/12/28/sql-inject/">
+    <link rel="canonical" href="https://pengpengp.github.io/2018/12/28/sql-inject-Process/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -136,7 +136,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>&#39;sql_inject&#39;</h1>
+                    <h1>&#39;sql_inject_Process&#39;</h1>
                     
                     <span class="meta">
                          作者 pengpengp
@@ -146,7 +146,7 @@
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#sql注入" title="sql注入">sql注入</a>
+                        <a class="tag" href="/tags/#sql注入流程" title="sql注入流程">sql注入流程</a>
                         
                     </div>
                 </div>
@@ -155,7 +155,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            'sql_inject'
+            'sql_inject_Process'
         </span>
     </div>
 </header>
@@ -167,93 +167,82 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <blockquote>
-<p>流程：</p>
+<p>留言板安全问题</p>
 </blockquote>
+<p><code>用户名root &#39; or 1 = 1#</code><br>    <code>密码1</code><br>    –&gt;万能密码注入</p>
 <blockquote>
-<p>1.前期沟通</p>
+<p>原理：</p>
 </blockquote>
+<p>​    SELECT * FROM users WHERE username=’$user’ AND passwd =’”.md5($pwd).被变成</p>
+<p>select * from root username = ‘root ‘ or 1=1 # ‘and passwd =’’</p>
+<p>#后面被注释了   1=1导致查询语句总为真 衡真的原理</p>
+<p>判断能否注入：<br>    用户能控制输入的内容<br>    web应用能把用户输入的内容带到数据库中</p>
 <blockquote>
-<p>2.信息搜集（四五天）</p>
+<p>测试是否存在注入</p>
 </blockquote>
+<p>​<br>分类：<br>    根据输入内容：    字符型注入、数字型注入<br>    根据上面两种类型可以加括号和字符能使用双引号和单引号，分为：以下几种</p>
+<p>​    1.select <em> from users where id=1 纯数字型<br>        2.select </em> from users where id=’1’只加单引号<br>        3.select <em> from users where id=”1” 只加双引号<br>        4.select </em> from users where (id=1)数字加括号<br>        5.select <em> from users where (id=’1’)单引号加括号<br>        6.select </em> from users where (id=”1”)双引号加括号</p>
 <blockquote>
-<p>3.威胁建模：根据信息进行分析攻击点（一天）</p>
-</blockquote>
-<blockquote>
-<p>4.渗透测试：根据分析进行攻击</p>
-</blockquote>
-<blockquote>
-<p>5.后渗透测试：根据测试结果进行更多尝试</p>
-</blockquote>
-<blockquote>
-<p>6.写报告</p>
+<p>快速注入流程：–&gt;脑图</p>
 </blockquote>
 <p>​    </p>
-<pre><code>www.exploit-db.com
-https://www.somd5.com/
-https://blog.csdn.net/u012278016/article/details/81772566
-</code></pre><p>扫描工具：</p>
-<ul>
-<li><p>测网站漏洞工具：    </p>
-<p>​    AWVS（通过爬虫进行网站漏洞测试）的安装</p>
-<p>​    网站漏洞扫描<a href="https://butian.360.cn/Register/补天公益" target="_blank" rel="noopener">https://butian.360.cn/Register/补天公益</a></p>
-<p>​    啊d–&gt;ASP网站</p>
-<p>​    sql注入工具</p>
-<pre><code>sqlmap
-</code></pre></li>
-<li><p>综合平台类：</p>
-<p>BurpSuite、Metasploit</p>
-</li>
-<li><p>搜集域名信息</p>
-<p>//子域名：news.baidu.com这种</p>
-<pre><code>子域名挖掘：subDomainsBrute、子域名挖掘机
-</code></pre></li>
-<li><p>端口扫描：NMAP—功能强大，隐蔽</p>
-<p>安装vc扩展、npcap组件，增加环境变量</p>
-<pre><code>扫描指定ip：    nmap ip
-原理：只发送SYN，不建立连接
-nmap -Pn  强制为激活的主机，进行强制扫描
-nmap -sn  主机发现
-nmap    -sn -oX     Desktop/report.mxl报告输出到文件
-nmap -sS    半开放扫描（默认方式）
-nmap -p 80    指定扫描端口
-nmap -O    ip    探测操作系统版本
-nmap -A        详细信息
-nmap -iL 目录 根据ip列表进行扫描
-nmap -iL 目录 --webxml 文件名    把结果以xml形式&gt;输出        到文件
-</code></pre></li>
-<li><p>python环境安装</p>
-<p>1.安装python2.7</p>
-<pre><code>2.在家目录下创建.pip文件夹，把源文件移动进去
-3.执行pip install requests
-</code></pre></li>
-<li><p>字典生成工具</p>
-<p>pentest.db工具</p>
-<pre><code>解压，在目录中用cmd执行pip install lxml
-使用 python pen.py
-帮助    python pen.py --help
-</code></pre></li>
-<li><p>爆破工具</p>
-<p>*BurpSuite</p>
-<pre><code>*hydra***   hydra -l用户名 -p密码字典 
--s指定非默认端口
--e ns空密码试探
--f成功后立刻停止
-例子：hydra -l root -P 目录 -s 3308  -e ns -t 5         114.115.175.102 mysql
-</code></pre></li>
-</ul>
+<blockquote>
+<p>步骤1.先加’看看会不会有变化，</p>
+</blockquote>
+<p>​    如果变化了–&gt;可能是纯数字、只有单引号、单引号加括号、数字加括号</p>
+<p>如果不出现变化–&gt;双引号、</p>
+<p>步骤2.再加‘%23页面会回复正常</p>
+<p>步骤3.依次排除字符的类型</p>
+<p>步骤4.再在后面加入 1、0</p>
+<blockquote>
+<p>注入可以做哪些事：</p>
+</blockquote>
+<p>获取数据–&gt;<br>    修改数据<br>    上传文件<br>    读取文件</p>
+<blockquote>
+<p>mysql常用   </p>
+</blockquote>
+<p>​    limit 0,1 从0开始取1条记录–&gt;限制输出结果的行数</p>
+<p>select user()    显示当前用户<br>    select database()显示当前使用的数据库<br>    select version()显示版本<br>    select group_concat();连接字符串</p>
+<p>​    select 0x313233会把16进制–&gt;正常数字  0x7e –&gt;~</p>
+<p>联合查询 union select 1，2，3，4，5<br>    需要列数一致，如果不清楚列数，可以用order by来查询</p>
+<p>order by 通过指定列数进行排序–&gt;用来判断有多少列</p>
+<p>distinct 去重</p>
+<blockquote>
+<p>数据库目录知识：    <strong>*</strong></p>
+</blockquote>
+<p>​    information_schema库–&gt;schemata表 存放所有数据库信息，是公用数据库，任何用户都可以访问</p>
+<p>information_schema.schemata   表存放所有数据库名字</p>
+<p>information_schema.TABLES  表存放所有表的名字</p>
+<p>information_schema.COLUMN  表存放所有字段名字</p>
+<p>column_name    字段名<br>    table_schema    库名字段<br>    table_name   表名字段</p>
+<p>查询数据库中有那些库<br>select schema_name from information_schema.SCHEMATA</p>
+<p>查询数据库中有那些表<br>select table_name from information_schema.TABLES</p>
+<p>查询数据库中test库中有哪些表<br>select table_name from information_schema.TABLES where table_schema = ‘test’  // test 可以写成 0x7a73</p>
+<p>查询数据库中有那些字段<br>select column_name from information_schema.COLUMNS</p>
+<p>查询数据库中test库中user表有哪些字段<br>select column_name from information_schema.COLUMNS where table_schema = ‘test’ and table_name = ‘user’    </p>
+<p>有了库名，表名，列名，然后–&gt;</p>
+<p>猜解内容<br>    select pass from test.user;</p>
+<p>​    </p>
+<blockquote>
+<p>总体流程 </p>
+</blockquote>
+<p>​    1~用‘尝试有没有注入—&gt;可能有注入</p>
+<p>2~用%23 报错恢复–&gt;数字型注入</p>
+<p>3~用order by 1 2 3 4–&gt;测有多少列</p>
+<p>4~用union select 1，2，3进行输出，发现页面不显示–&gt;显示不下</p>
+<p>5~更改显示的内容 –&gt;用limit 1，1或者改条件为id =0</p>
+<p>6~找到1，2，3中显示的数字，改为想要查询的语句</p>
+<p>7.开始查询数据库–&gt;把查询数据库语句替换数字，发现只能显示一行，–&gt;尝试在sql语句两侧加入（），还是不行–&gt;加入group_concat，发现正常</p>
+<p>理解：直接放入sql语句不符合代码规范，必须括起来；加入group_concat恢复正常，是因为查询所有的库名字时返回的结果是多行，而union select 的第三位是只能写单行内容！！！，所以用group_concat进行组合成一行    </p>
 
                 <hr>
                 
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2018/12/28/sql-inject-Process/" data-toggle="tooltip" data-placement="top" title="'sql_inject_Process'">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2018/12/26/Create-VPN/" data-toggle="tooltip" data-placement="top" title="Create_VPN">Next Post &rarr;</a>
+                        <a href="/2018/12/28/sql-inject/" data-toggle="tooltip" data-placement="top" title="'sql_inject'">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
