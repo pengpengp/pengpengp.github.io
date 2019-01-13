@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        sql_注入进阶｜undefined
+        &#39;file_update&#39;｜undefined
         
     </title>
 
-    <link rel="canonical" href="https://pengpengp.github.io/2019/01/04/sql-inject-advance/">
+    <link rel="canonical" href="https://pengpengp.github.io/2019/01/13/file-update/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -136,17 +136,17 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>sql_注入进阶</h1>
+                    <h1>&#39;file_update&#39;</h1>
                     
                     <span class="meta">
                          作者 pengpengp
                         <span>
-                          日期 2019-01-04
+                          日期 2019-01-13
                          </span>
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#sql_inject" title="sql_inject">sql_inject</a>
+                        <a class="tag" href="/tags/#文件上传" title="文件上传">文件上传</a>
                         
                     </div>
                 </div>
@@ -155,7 +155,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            sql_注入进阶
+            'file_update'
         </span>
     </div>
 </header>
@@ -166,114 +166,72 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <blockquote>
-<p>基于时间延时的盲注</p>
-</blockquote>
+                <ul>
+<li>文件上传一：    漏洞原理及三个测试点</li>
+</ul>
+<p>一.问题：服务器中webshell怎么运行</p>
+<p>lamp环境要求：apache nginx iis tomcat</p>
+<p>1.路径要求   脚本必须在/var/www/html中</p>
+<p>2.后缀名要求    .php .asp</p>
+<p>二. 上传漏洞</p>
+<p>1.哪里会产生漏洞：相册、视频、附件、文件管理器</p>
+<p>2.php接收上传的方式：</p>
+<pre><code>$_FILES[&apos;file&apos;]            文件名
+$_FILES[&apos;temp_name&apos;]    临时目录
+$_FILES[&apos;type&apos;]            类型
+$_FILES[&apos;size&apos;]            大小
+</code></pre><p>3.移动接收到的文件    </p>
+<p><code>move_uploaded_files($_FILES[&#39;file&#39;],&#39;uploads/a.jpg&#39;)</code></p>
+<p>4.上传成功后需要找到文件名和路径==》<br>问题：<br>    文件名处理：<br>    后缀名处理：<br>    不显示路径:先传正常的文件，找到文件，再上传木马 </p>
+<p>5.上传文件的处理方式：***重要</p>
+<p><em>不处理
+    </em>js验证  ==》关闭浏览器js/用burp工具改文件名<br>    <em>type类型验证：浏览器识别的类型            content-type修改
+    </em>文件头检测</p>
 <blockquote>
-<p>一. 基于时间延时的盲注</p>
+<p>测试文件上传漏洞的三个点：类型、内容、后缀名</p>
 </blockquote>
-<p>​        <code>select sleep(5)；等待五秒，返回值是0***</code></p>
-<p>​        <code>select if(arg1,arg2,arg3);判断返回值的真假</code></p>
-<p>​        <code>select benchmark(50000,md5(&#39;abc&#39;))</code>前面是执行次数，后面是执行的命令</p>
+<p>注意burp抓到包后显示的内容的对应关系：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">name=&quot;file&quot; 对应--&gt; &lt;name=&quot;file&quot;&gt;	</span><br><span class="line"></span><br><span class="line">filename=&quot;123.jpg&quot;对应--&gt;上传的文件名</span><br><span class="line"></span><br><span class="line">content-Type对应--&gt;浏览器识别的文件类型</span><br><span class="line"></span><br><span class="line">下面的空白  对应--&gt;上传文件的内容</span><br></pre></td></tr></table></figure>
+<p>制作图片木马：cmd下  <code>copy 213.jpg/b + 123.php /a 1.php</code></p>
+<p>实验：i春秋网站文件上传实验</p>
 <ul>
-<li>判断第一个字母的方法</li>
-</ul>
-<p>  ​    <code>ASCII(substr(version(),1,1)&gt;50)</code></p>
-<ul>
-<li><p>判断ASCII码对应的值：    </p>
-<p>​    <code>select chr(49);</code></p>
-</li>
-<li><p>例子：</p>
-<p>​    <code>1.select if(length(versioin())&gt;5,sleep(3),1);先判段长度</code></p>
-<p>​    <code>2.select if(ascii substr((version()),1,1))&gt;50,sleep(2),0);再判断每个字母是什么</code></p>
-</li>
-</ul>
-<p>（先测试普通的注入，都不行就开始测试时间延迟盲注）</p>
-<blockquote>
-<p>二. 应用：—-&gt;除了select语句以外，其他的sql语句都有危险性，千万小心！！！    </p>
-</blockquote>
-<ul>
-<li>select（搜索功能）的注入：</li>
-</ul>
-<p>​        <code>select * from books where name like &#39;zs&#39;;</code></p>
-<ul>
-<li><p>update语句注入：</p>
-<ul>
-<li>原句：<code>UPDATE Person SET FirstName = &#39;Fred&#39; WHERE LastName = &#39;Wilson&#39;</code></li>
-<li>构造的语句：<code>update users set pass = &#39;123&#39; where if(length(version())&gt;5,sleep(2),0)#</code></li>
-<li>注意：使用update时一定返回值为0，否则密码全被改掉了！！！</li>
-</ul>
-</li>
-<li><p>insert(插入语句)测注入：</p>
-<ul>
-<li><p>原句：<code>insert into users(id,name,password)value(1,&#39;we&#39;,&#39;123&#39;)</code></p>
-</li>
-<li><p>构造的：<code>1&#39;,1,1)#</code></p>
-</li>
-</ul>
-</li>
+<li>文件上传二：    文件名黑白名单</li>
 </ul>
 <ul>
-<li><p>delete语句：</p>
+<li>黑名单绕过方式：大小写 空格    [‘’]</li>
+<li>白名单绕过：截断</li>
+</ul>
+<p>  1.文件名截断：（php5.2漏洞）</p>
+<p>  ​    </p>
+<p>  1.1.–&gt;文件名后加点<code>.</code>、空格<code></code>、点空格点<code>. .</code>、?.jpg、冒号 冒号空格、%00、_、::$DATA加很多…….</p>
+<pre><code>例如：    404.php%00.jpg--&gt;会保存成404.php
+
+    404.php .jpg--&gt;会保存成404.php
+</code></pre><p>  1.2.–&gt;用<code>SetHandler application/x-httpd-php</code>命令,保存成.htaccess文件上传，然后用浏览器访问看看成功没有；–&gt;或者用<code>AddHandler application/x-httpd-php .jpg</code>命令添加一条允许的后缀</p>
+<p>  2.目录截断    </p>
+<p>  ​        文件名改成404.jpg，再把上传的目录后的文件名改成404.php .jpg, 然后在hex中找到20改成00再上传—- &gt;会保存成404.php</p>
 <ul>
-<li><p>原句：<code>delete from user where id =5</code></p>
-<p>如果数据够多，可以采用布尔盲注（省时间但是会删除成功）</p>
-<p>如果保留数据，就采用延时盲注（可能会比较浪费时间但不会真删除）</p>
-</li>
+<li>文件上传三.解析漏洞</li>
 </ul>
-</li>
-</ul>
-<blockquote>
-<p>三. 正确安全的测试注入步骤（不改数据库）：</p>
-</blockquote>
-<p>​    先–&gt;：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">123&apos; and sleep(1) #</span><br><span class="line">123&quot; and sleep(1) #</span><br><span class="line">123&apos;) and sleep(1) #</span><br><span class="line">123&quot;) and sleep(1) #</span><br></pre></td></tr></table></figure>
-<p>​    然后–&gt;：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">123&apos; and id = 100 and sleep(3)#</span><br><span class="line">123&apos; and id = 1 and sleep(3)#</span><br><span class="line">123&apos; and id = 10 and sleep(3)#</span><br><span class="line">123&apos; and id = 11 and sleep(3)#</span><br><span class="line">123&apos; and id = 111 and sleep(3)#</span><br></pre></td></tr></table></figure>
-<p>最后–&gt;：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">123&apos; and id = 1 and if(length(version())&gt;5,sleep(3),0) #</span><br><span class="line"></span><br><span class="line">update users set img = &apos;uploads/1546450026timg3.jpg&apos; where name &apos;qwerdf&apos;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>宽字节注入-GBK编码</p>
-<ul>
-<li><p>原理：</p>
-<p>GBK注入：DF 5c 2字节，利用%df’的方式就可以注入</p>
-<p>utf8 3字节    没有注入</p>
-</li>
-</ul>
-</li>
-<li><p>二次编码注入</p>
-</li>
-</ul>
-<p>​    使用比较少，这里就不总结了</p>
-<blockquote>
-<p>四. 自动扫描sql注入：sqlmap</p>
-</blockquote>
-<p>​    启动：<code>python sqlmap.py --url &#39;http://192.168.11.86/index.php?id=1&#39; 添加注入地址</code></p>
-<p>​    -v参数 1-6可以选择显示的详细程度，报告默认保存在家目录下</p>
-<p>​    常规步骤：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--dbs 列出所有的数据库</span><br><span class="line">-D	库 --tables列出所有的表		</span><br><span class="line">-T	表	--columns列出所有的字段		</span><br><span class="line">-C	字段 --dump获取字段内容	</span><br><span class="line">--dump列出详细信息</span><br></pre></td></tr></table></figure>
-<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><p>举例：<code>C:\tools\sqlmap-1.2.12&gt;python sqlmap.py --url http://192.168.11.86/index.php?id=1 -D mysql -T user --columns -C password --dump</code></p>
-<ul>
-<li>五.防御sql注入的方法：<ul>
-<li>1.addslashes(string)；可以把字符中的引号加上\进行转义，但是不能防御数字型注入即id=1 and 类型</li>
-<li>2.PDO进行绑定</li>
-<li>3.使用防御软件进行（如Web Application Firewall等）</li>
-</ul>
-</li>
-</ul>
+<p>1.利用<code>.htaccess</code>突破上传</p>
+<p>2.版本解析漏洞(iis5、iis6、iis7.5、nginx)</p>
+<p>iis5、iis6中:</p>
+<p>apache解析漏洞（1.x、2.x）会从右往左依次解析后缀名 如404.asp.jpg会-&gt;404.asp    但是php可能还会再次校验后缀造成不解析<br>`目录为.asp结尾的会把里面的文件都解析成asp文件</p>
+<p>-&gt;解释：apache运行php时有两种运行模式：<br>    fast-cgi–&gt;以接口方式，后续还会校验后缀<br>    module–&gt;php作为apache一部分，后缀名不再解析</p>
+<p>-&gt;线上实验：FCK编辑器漏洞</p>
+<p>nginx和iis7.5解析漏洞<br>        1.aa.pdf/aa.txt会被运行<br>        2.%00截断比较少见</p>
+<p>例：<code>http://192.168.11.29/404.txt/aaasfa.php会把404.txt里面的php</code>的代码运行</p>
+<p>windows解析漏洞（详情见前面的黑白名单解析部分）<br>        test.asp(空格)–&gt;在windows环境下，xx.jpg[空格] 或xx.jpg. 这两类文件都是不允许存在的，若这样命名，windows会默认除去空格或点，这也是可以被利用的！ {<a href="http://link.zhihu.com/?target=http%3A//lib.csdn.net/base/linux" target="_blank" rel="noopener">Linux</a>主机中不行，Linux允许这类文件存在}<br>        test.asp(. .)–&gt;点空格点</p>
+<p>​    </p>
 
                 <hr>
                 
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2019/01/13/file-update/" data-toggle="tooltip" data-placement="top" title="'file_update'">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2018/12/28/sql-inject-Process/" data-toggle="tooltip" data-placement="top" title="'sql_inject_Process'">Next Post &rarr;</a>
+                        <a href="/2019/01/04/sql-inject-advance/" data-toggle="tooltip" data-placement="top" title="sql_注入进阶">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -292,7 +250,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-text"> </span></a></li></ol>
+                    
                 </div>
             </div>
         </div>
