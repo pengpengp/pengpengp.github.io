@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        信息搜集｜undefined
+        grep.find.awk.sed指令基础｜undefined
         
     </title>
 
-    <link rel="canonical" href="https://pengpengp.github.io/2019/02/24/信息搜集/">
+    <link rel="canonical" href="https://pengpengp.github.io/2019/03/03/grep-find-awk-sed指令基础/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -136,17 +136,17 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>信息搜集</h1>
+                    <h1>grep.find.awk.sed指令基础</h1>
                     
                     <span class="meta">
                          作者 pengpengp
                         <span>
-                          日期 2019-02-24
+                          日期 2019-03-03
                          </span>
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#information collect" title="information collect">information collect</a>
+                        <a class="tag" href="/tags/#linux命令之查找" title="linux命令之查找">linux命令之查找</a>
                         
                     </div>
                 </div>
@@ -155,7 +155,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            信息搜集
+            grep.find.awk.sed指令基础
         </span>
     </div>
 </header>
@@ -166,105 +166,60 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>只要能挖掘到对黑客有用的信息,就是信息泄露</p>
-<h2 id="目标：只要能挖掘到对黑客有用的信息-就是信息泄露"><a href="#目标：只要能挖掘到对黑客有用的信息-就是信息泄露" class="headerlink" title="目标：只要能挖掘到对黑客有用的信息,就是信息泄露"></a>目标：只要能挖掘到对黑客有用的信息,就是信息泄露</h2><h3 id="需要搜集的信息-分类-web安全方向"><a href="#需要搜集的信息-分类-web安全方向" class="headerlink" title="*****需要搜集的信息:    分类(web安全方向)"></a><code>*****</code>需要搜集的信息:    分类(web安全方向)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.web服务器信息(中间件)</span><br><span class="line">2.web应用信息(web脚本,数据库类型,cms)</span><br><span class="line">3.服务器操作系统信息(系统版本)</span><br><span class="line">4.服务器其他信息(服务,端口)</span><br><span class="line">5.域名信息(子域名,ip)</span><br><span class="line">6.相关人员信息(注册域名相关人员)</span><br></pre></td></tr></table></figure>
-<hr>
-<hr>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="*****步骤:"></a><code>*****</code>步骤:</h3><h4 id="一-搜集域名-顶级域名-子域名"><a href="#一-搜集域名-顶级域名-子域名" class="headerlink" title="一.搜集域名(顶级域名,子域名)"></a>一.搜集域名(顶级域名,子域名)</h4><p><a href="https://baidu.com" target="_blank" rel="noopener">https://baidu.com</a>          顶级子域名</p>
-<p><a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a>       二级子域名<br>    <a href="https://baike.baidu.com" target="_blank" rel="noopener">https://baike.baidu.com</a></p>
-<p><a href="https://a.b.baidu.com" target="_blank" rel="noopener">https://a.b.baidu.com</a>       三级子域名    </p>
-<p>http:/asdasd.com.cn         顶级域名<br>    <a href="http://beijing.gov.cn" target="_blank" rel="noopener">http://beijing.gov.cn</a>       顶级域名</p>
-<ul>
-<li>搜索方式:工具(layer,sublist3r,wydomain),谷歌(site:域名),网站(site.ip138.com)/(dnsdb.io),http证书,备案信息(icp.chinaz.com)</li>
+                <h1 id="grep和find指定-匹配字符和文件名"><a href="#grep和find指定-匹配字符和文件名" class="headerlink" title="grep和find指定(匹配字符和文件名)"></a>grep和find指定(匹配字符和文件名)</h1><ul>
+<li>grep ‘字符串’ 源文件，例如grep ‘代码执行’  第*  —从包含“第”的文件中查找包含代码执行的字符串</li>
+<li>grep –color ‘字符串’ 文件名—匹配到的字符串高亮</li>
+<li>find 目录 -name ‘字符串’，举例：find ./ -name ‘第*’  —查找名字包含“第”的文件</li>
 </ul>
-<blockquote>
-<p>技巧1:在tool.chinaz.com的备案号查看所有顶级域名</p>
-<p>技巧2.:域名+crossdomain.xml也可以查看其他子域名</p>
-<p>技巧3:利用同源策略,通过子域名绕过当前无法突破的域名</p>
-</blockquote>
-<h4 id="二-搜集相关注册人"><a href="#二-搜集相关注册人" class="headerlink" title="二.搜集相关注册人"></a>二.搜集相关注册人</h4><p>1.通过搜集网站seo.chinaz.com–&gt;</p>
-<p>2.通过浏览器插件portal查看***</p>
-<p>3.whois反查</p>
-<h4 id="三-搜集服务器信息"><a href="#三-搜集服务器信息" class="headerlink" title="三.搜集服务器信息"></a>三.搜集服务器信息</h4><p>1.判断操作系统</p>
-<p>–&gt;通过开放的端口和服务(后台一直扫着就可以,同时往下进行)<br>    windows:</p>
-<blockquote>
-<p>iis 80<br>        rpc 135<br>        smb 445<br>       rdp 3389</p>
-</blockquote>
-<p>linux:</p>
-<blockquote>
-<p>ssh 22<br>        NETBIOS 137 138 139</p>
-</blockquote>
+<p>源文件都支持通配符匹配</p>
+<h1 id="awk指令-匹配列"><a href="#awk指令-匹配列" class="headerlink" title="awk指令(匹配列)"></a>awk指令(匹配列)</h1><p>解释：</p>
 <ul>
-<li><p>通过大小写  <code>http://test.com/test.php</code></p>
-<pre><code>`http://test.com/TEST.php`
-</code></pre></li>
-<li><p>通过nmap -O ip查看系统信息</p>
-</li>
+<li>awk 动作 文件名</li>
+<li>awk -F ‘:’—用-f指定字段分隔符为：冒号</li>
+<li>$NF表示最后一个字段，</li>
+<li>\$(NF-1)表示倒数第二个字段,举例：awk -F ‘:’ ‘{print $1, $(NF-1)}’ demo.txt    —输出每行的第一和倒数第二个字段</li>
+<li>\$NR表示当前处理的行(可以给行加上行号),举例：$ awk -F ‘:’ ‘{print NR “) “ $1}’ demo.txt</li>
+<li>\$ awk ‘{print $0}’ demo.txt —把每行原样输出</li>
+<li>tolower()：字符转为小写。</li>
+<li>length()：返回字符串长度。</li>
+<li>substr()：返回子字符串。</li>
+<li>sin()：正弦。</li>
+<li>cos()：余弦。</li>
+<li>sqrt()：平方根。</li>
+<li>rand()：随机数。</li>
 </ul>
-<p>2.脚本语言</p>
-<ul>
-<li><p>识别伪静态</p>
-</li>
-<li><p>类似:<code>http://test.com/index/id/49</code></p>
-</li>
-</ul>
-<p>3.web中间件</p>
-<ul>
-<li><p>nmap -A选项</p>
-</li>
-<li><p>burp抓包查看response的server头</p>
-</li>
-</ul>
-<p>4.搜集cms信息</p>
-<p>(1).查看首页源代码<br>    (2).访问wp-login.php文件<br>    (3).discuz(论坛)平台特性:包含forum.php文件<br>    (4).robots.txt文件<br>    (5).网页底部的版权信息(copyright)</p>
-<p>工具-&gt;whatweb  (ruby写的)</p>
-<p>5.搜集服务器开放的端口及服务</p>
-<p>工具-&gt;：</p>
-<ul>
-<li><p>nmap</p>
-</li>
-<li><p>masscan</p>
-</li>
-<li><p>x-scan</p>
-</li>
-</ul>
-<hr>
-<hr>
-<h4 id="四-可能存在的信息泄露"><a href="#四-可能存在的信息泄露" class="headerlink" title="四.可能存在的信息泄露"></a>四.可能存在的信息泄露</h4><p>1.github信息泄露</p>
-<ul>
-<li><p>管理员的博客会包含一些自己网站的信     </p>
-</li>
-<li><p>如:运维脚本\源代码\配置文件</p>
-</li>
-</ul>
-<p>2.目录遍历</p>
-<ul>
-<li>如:127.0.0.1/admin/目录能正常打开</li>
-</ul>
-<p>3.任意文件下载</p>
-<ul>
-<li><p>针对有下载功能的页面,尝试下载重要文件</p>
-</li>
-<li><p>分系统—windows\linux           </p>
-</li>
-<li><p>分权限</p>
-</li>
-<li><p>分重要文件—passwd\shadow\history\</p>
-</li>
-</ul>
+<p>实例：</p>
+<h2 id="格式：awk-‘条件-动作’-文件名"><a href="#格式：awk-‘条件-动作’-文件名" class="headerlink" title="###  格式：awk ‘条件 动作’  文件名"></a>###  格式：awk ‘条件 动作’  文件名</h2><p> <code>awk -F &#39;:&#39; &#39;{ print toupper($1) }&#39; demo.txt</code></p>
+<p><code>awk -F &#39;:&#39; &#39;/usr/ {print $1}&#39; demo.txt</code>    —输出包含usr的每行第一个字段</p>
+<p><code>awk -F &quot; &quot;&#39;{print $9}&#39;a.txt &gt;list.txt</code>    —把a.txt中被空格分隔的第九列内容重定向输出到list.txt中</p>
+<p><code>awk &#39;BEGIN{a=&quot;100testa&quot;;if(a ~ /^100*/){print &quot;ok&quot;;}}&#39;</code>    —ok 正则匹配加判断</p>
+<p><code>awk &#39;BEGIN{a=11;if(a &gt;= 9){print &quot;ok&quot;;}}&#39;</code>    —ok    加if判断</p>
+<p><code>awk -F &#39;:&#39; &#39;NR % 2 == 1 {print $1}&#39; demo.txt</code>    —输出奇数行</p>
+<p><code>awk -F &#39;:&#39; &#39;$1 == &quot;root&quot; || $1 == &quot;bin&quot; {print $1}&#39; demo.txt</code>    —输出第一字段等于root||bin行的第一个字段</p>
+<p><code>awk -F &#39;:&#39; &#39;{if ($1 &gt; &quot;m&quot;) print $1; else print &quot;---&quot;}&#39; demo.txt</code>    —如果字段1大于m就输出它，否则输出—</p>
+<h1 id="sed指令-匹配行"><a href="#sed指令-匹配行" class="headerlink" title="sed指令(匹配行)"></a>sed指令(匹配行)</h1><p>a ：新增， a 的后面可以接字串，而这些字串会在新的一行出现(目前的下一行)～</p>
+<p>c ：取代， c 的后面可以接字串，这些字串可以取代 n1,n2 之间的行！</p>
+<p>d ：删除，因为是删除啊，所以 d 后面通常不接任何咚咚；</p>
+<p>i ：插入， i 的后面可以接字串，而这些字串会在新的一行出现(目前的上一行)；</p>
+<p>p ：打印，亦即将某个选择的数据印出。通常 p 会与参数 sed -n 一起运行～</p>
+<p>s ：取代，可以直接进行取代的工作哩！通常这个 s 的动作可以搭配正规表示法！例如 1,20s/old/new/g 就是啦！</p>
+<p>实例：</p>
+<p>​    <code>nl /etc/passwd | sed &#39;/root/&#39;</code>—搜索/etc/passwd 有root关键字的行</p>
+<p>​    <code>sed &#39;s/^/#/g&#39; pets.txt</code>—每行开头加个#号</p>
+<p>​    <code>nl /etc/passwd | sed &#39;2,5c No 2-5 number&#39;</code> —将第2-5行的内容取代成为No 2-5 number</p>
+<p>​    <code>nl /etc/passwd|sed -n &#39;/root/p&#39;</code>   —n表示只输出包含模板的行</p>
+<p>​    sed ‘s/要被取代的字串/新的字串/g’</p>
+<p>​    <code>nl /etc/passwd | sed -n &#39;/root/{s/bash/blueshell/;p;q}&#39;</code>   —搜索/etc/passwd,找到root对应的行，执行后面花括号中的一组命令，每个命令之间用分号分隔，这里把bash替换为blueshell，再输出这行</p>
+<p>​    <code>sed -i &#39;s/\.$/\!/g&#39; regular_express.txt  ---sed</code> 将 regular_express.txt 内每一行结尾若为 . 则换成 !</p>
 
                 <hr>
                 
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2019/03/03/grep-find-awk-sed指令基础/" data-toggle="tooltip" data-placement="top" title="grep.find.awk.sed指令基础">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2019/02/18/redis未授权漏洞/" data-toggle="tooltip" data-placement="top" title="redis未授权漏洞">Next Post &rarr;</a>
+                        <a href="/2019/02/24/信息搜集/" data-toggle="tooltip" data-placement="top" title="信息搜集">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -283,7 +238,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#目标：只要能挖掘到对黑客有用的信息-就是信息泄露"><span class="toc-text">目标：只要能挖掘到对黑客有用的信息,就是信息泄露</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#需要搜集的信息-分类-web安全方向"><span class="toc-text">*****需要搜集的信息:    分类(web安全方向)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#步骤"><span class="toc-text">*****步骤:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一-搜集域名-顶级域名-子域名"><span class="toc-text">一.搜集域名(顶级域名,子域名)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二-搜集相关注册人"><span class="toc-text">二.搜集相关注册人</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三-搜集服务器信息"><span class="toc-text">三.搜集服务器信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四-可能存在的信息泄露"><span class="toc-text">四.可能存在的信息泄露</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#grep和find指定-匹配字符和文件名"><span class="toc-text">grep和find指定(匹配字符和文件名)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#awk指令-匹配列"><span class="toc-text">awk指令(匹配列)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#格式：awk-‘条件-动作’-文件名"><span class="toc-text">###  格式：awk ‘条件 动作’  文件名</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sed指令-匹配行"><span class="toc-text">sed指令(匹配行)</span></a></li></ol>
                 </div>
             </div>
         </div>
