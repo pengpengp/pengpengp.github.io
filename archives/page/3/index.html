@@ -22,7 +22,7 @@
         
     </title>
 
-    <link rel="canonical" href="https://pengpengp.github.io/archives/2019/">
+    <link rel="canonical" href="https://pengpengp.github.io/archives/page/3/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -144,260 +144,17 @@
 
 
 <div class="post-preview " style="background-image: url('')">
-    <a href="/2019/03/03/提权/">
+    <a href="/2018/12/03/hello-world/">
         <h2 class="post-title">
-            提权
+            Hello World
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-03
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-03
         </p>
         
         <div class="post-content-preview">
             <p>
-                
-
-0x00本地服务提权windows1.从外部攻击服务器
-
-ms17-010
-
-ms08-067
-
-…
-
-
-  2.从内部攻击服务器
-
-上传提权脚本    x64.exe\pr.exe
-然后运行就可以了
-
-linux只能从内部攻击服务器
-
-获取内核版本，操作系统版本，
-
-去找对应的exp
-
-下..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview " style="background-image: url('')">
-    <a href="/2019/03/03/grep-find-awk-sed指令基础/">
-        <h2 class="post-title">
-            grep.find.awk.sed指令基础
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-03
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                grep和find指定(匹配字符和文件名)
-grep ‘字符串’ 源文件，例如grep ‘代码执行’  第*  —从包含“第”的文件中查找包含代码执行的字符串
-grep –color ‘字符串’ 文件名—匹配到的字符串高亮
-find 目录 -name ‘字符串’，举例：find ./ -name..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview " style="background-image: url('')">
-    <a href="/2019/02/24/信息搜集/">
-        <h2 class="post-title">
-            信息搜集
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-02-24
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                只要能挖掘到对黑客有用的信息,就是信息泄露
-目标：只要能挖掘到对黑客有用的信息,就是信息泄露*****需要搜集的信息:    分类(web安全方向)1234561.web服务器信息(中间件)2.web应用信息(web脚本,数据库类型,cms)3.服务器操作系统信息(系统版本)4.服务器其他信息(..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview " style="background-image: url('')">
-    <a href="/2019/02/18/redis未授权漏洞/">
-        <h2 class="post-title">
-            redis未授权漏洞
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-02-18
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等防御：限制redis权限一。 数据库原理：redis数据库(临时存储数据库)下载redis文件
-
-解压，`make --&gt;cd src make--&g..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview " style="background-image: url('')">
-    <a href="/2019/02/17/文件包含/">
-        <h2 class="post-title">
-            文件包含
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-02-17
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-一.相关的四个函数：
-
-include “$path”    出错继续执行
-require        出错终止
-include once()    只能包含一次
-require once()
-
-
-二.本地文件包含：
-
-​    include($_GET[‘abc’])        然后..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview " style="background-image: url('')">
-    <a href="/2019/01/16/shell-rebound/">
-        <h2 class="post-title">
-            shell_rebound
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-01-16
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-命令执行漏洞eval=($_POST[&#39;eval&#39;])
-
-特点：能直接执行命令，也就直接能菜刀连接。计算器执行任意命令漏洞：一般需要代码审计才能找到
-
-连接蚁剑得方法：
-
-在请求信息里添加name=eval;value=1，eval($_POST[1])
-
-菜刀得连接方法：配置..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview " style="background-image: url('')">
-    <a href="/2019/01/15/cross-waf/">
-        <h2 class="post-title">
-            cross_waf
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-01-15
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                三种waf
-代码waf    云waf    物理waf
-绕过waf的方式：
-1.大小写混合2.替换关键字selselectect 1,2,3,43.使用编码%554.使用注释 union/**/select 1,2,4,5.特殊符号6.等价函数    @@user=user()7.HTTP参数..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview " style="background-image: url('')">
-    <a href="/2019/01/13/file-update/">
-        <h2 class="post-title">
-            'file_update'
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-01-13
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-文件上传一：    漏洞原理及三个测试点
-
-一.问题：服务器中webshell怎么运行
-lamp环境要求：apache nginx iis tomcat
-1.路径要求   脚本必须在/var/www/html中
-2.后缀名要求    .php .asp
-二. 上传漏洞
-1.哪里会产生漏洞：相册..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview " style="background-image: url('')">
-    <a href="/2019/01/04/sql-inject-advance/">
-        <h2 class="post-title">
-            sql_注入进阶
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-01-04
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-基于时间延时的盲注
-
-
-一. 基于时间延时的盲注
-
-​        select sleep(5)；等待五秒，返回值是0***
-​        select if(arg1,arg2,arg3);判断返回值的真假
-​        select benchmark(50000,md5(&#..
+                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer i..
             </p>
         </div>
     </a>
@@ -412,6 +169,10 @@ lamp环境要求：apache nginx iis tomcat
 <!-- 翻页 pager -->
 
 <ul class="pager">
+    
+    <li class="previous">
+        <a href="/archives/page/2/">&larr; Newer Posts</a>
+    </li>
     
     
 </ul>
