@@ -22,7 +22,7 @@
         
     </title>
 
-    <link rel="canonical" href="https://pengpengp.github.io/archives/2019/page/2/">
+    <link rel="canonical" href="https://pengpengp.github.io/tags/shell-脚本-Linux-search/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -43,7 +43,7 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="false" data-istags="false
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="false" data-istags="true
 " data-ishome="false">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -144,80 +144,17 @@
 
 
 <div class="post-preview " style="background-image: url('')">
-    <a href="/2019/01/15/cross-waf/">
+    <a href="/2019/03/24/first-shell/">
         <h2 class="post-title">
-            cross_waf
+            first shell
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-01-15
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-24
         </p>
         
         <div class="post-content-preview">
             <p>
-                三种waf
-代码waf    云waf    物理waf
-绕过waf的方式：
-1.大小写混合2.替换关键字selselectect 1,2,3,43.使用编码%554.使用注释 union/**/select 1,2,4,5.特殊符号6.等价函数    @@user=user()7.HTTP参数..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview " style="background-image: url('')">
-    <a href="/2019/01/13/file-update/">
-        <h2 class="post-title">
-            'file_update'
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-01-13
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-文件上传一：    漏洞原理及三个测试点
-
-一.问题：服务器中webshell怎么运行
-lamp环境要求：apache nginx iis tomcat
-1.路径要求   脚本必须在/var/www/html中
-2.后缀名要求    .php .asp
-二. 上传漏洞
-1.哪里会产生漏洞：相册..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview " style="background-image: url('')">
-    <a href="/2019/01/04/sql-inject-advance/">
-        <h2 class="post-title">
-            sql_注入进阶
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-01-04
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-基于时间延时的盲注
-
-
-一. 基于时间延时的盲注
-
-​        select sleep(5)；等待五秒，返回值是0***
-​        select if(arg1,arg2,arg3);判断返回值的真假
-​        select benchmark(50000,md5(&#..
+                12345678910111213141516171819#!/bin/bashecho $*if [ $# == 0 ];then    echo '-h获取帮助';    exitelif [ $1 = '-h' ];then    echo 'search使用说明:先输入-p 后面加路径，..
             </p>
         </div>
     </a>
@@ -232,10 +169,6 @@ lamp环境要求：apache nginx iis tomcat
 <!-- 翻页 pager -->
 
 <ul class="pager">
-    
-    <li class="previous">
-        <a href="/archives/2019/">&larr; Newer Posts</a>
-    </li>
     
     
 </ul>
