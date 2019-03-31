@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        first shell｜undefined
+        
         
     </title>
 
-    <link rel="canonical" href="https://pengpengp.github.io/2019/03/24/first-shell/">
+    <link rel="canonical" href="https://pengpengp.github.io/tags/python-扫描/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -43,7 +43,7 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="false" data-istags="true
 " data-ishome="false">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -116,117 +116,108 @@
 
 <!-- Main Content -->
 
-<!--only post-->
 
-
-<img class="wechat-title-img" src="">
-
-
-<style>
-    
-    header.intro-header {
-        background-image: url('')
-    }
-
-    
-</style>
-
-<header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <div class="post-heading">
-                    <h1>first shell</h1>
-                    
-                    <span class="meta">
-                         作者 pengpengp
-                        <span>
-                          日期 2019-03-24
-                         </span>
-                    </span>
-                    <div class="tags text-center">
-                        
-                        <a class="tag" href="/tags/#shell 脚本 Linux search" title="shell 脚本 Linux search">shell 脚本 Linux search</a>
-                        
+<!-- Page Header -->
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 visible-xs-block visible-sm-block">
+    <div class="row">
+        <header class="intro-header">
+            <div class="container">
+                <div class="site-heading text-center">
+                    <div class="about-me">
+                        <!--移动端头部显示-->
+                        <img src="">
+                        <h5><a href="/about/">pengpengp</a></h5>
+                        <p></p>
                     </div>
                 </div>
             </div>
+        </header>
+    </div>
+</div>
+<!-- Main Content -->
+<div class="container custom-haojen-container">
+    <!-- Post Container -->
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container">
+            <!-- Main Content -->
+
+
+
+<div class="post-preview " style="background-image: url('')">
+    <a href="/2019/03/31/python批量爬取URL配合AWVS/">
+        <h2 class="post-title">
+            python批量爬取URL配合AWVS
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-31
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                1.1.     用这段代码先爬出厂商的URL地址,写入到一个文本文档
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606..
+            </p>
         </div>
-    </div>
-    <div class="post-title-haojen">
-        <span>
-            first shell
-        </span>
-    </div>
-</header>
+    </a>
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-            <!-- Post Container -->
-            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">echo $*</span><br><span class="line">if [ $# == 0 ];</span><br><span class="line">then</span><br><span class="line">    echo '-h获取帮助';</span><br><span class="line">    exit</span><br><span class="line">elif [ $1 = '-h' ];</span><br><span class="line">then</span><br><span class="line">    echo 'search使用说明:先输入-p 后面加路径，再输入-f后面加搜索的文件';</span><br><span class="line"></span><br><span class="line">elif [ $1 ] &amp;&amp; [ $3 ] &amp;&amp; [ $1 = '-p' ] &amp;&amp; [ $3 = '-f' ]; </span><br><span class="line">then</span><br><span class="line">    echo "files:"</span><br><span class="line">    find $2/ -iregex ".*$4.*"</span><br><span class="line">    count=$(find $2/ -iregex ".*$4.*" |wc -l)</span><br><span class="line">    echo "count:$count";</span><br><span class="line">else</span><br><span class="line">    echo "请检查输入是否正确";</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+</div>
 
-                <hr>
-                
+<hr>
 
-                <ul class="pager">
+
+
+
+<!-- 翻页 pager -->
+
+<ul class="pager">
+    
+    
+</ul>
+
+
+        </div>
+        <!-- Sidebar Container -->
+        <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+
+            <!-- About Me -->
+            <section class="visible-md visible-lg" style="padding: 0 18px">
+                <div class="short-about">
+                    <!--侧边栏头像-->
                     
-                    <li class="previous">
-                        <a href="/2019/03/31/python批量爬取URL配合AWVS/" data-toggle="tooltip" data-placement="top" title="python批量爬取URL配合AWVS">&larr; Previous Post</a>
-                    </li>
+                    <h5><a href="/about/">pengpengp</a></h5>
                     
-                    
-                    <li class="next">
-                        <a href="/2019/03/24/域渗透/" data-toggle="tooltip" data-placement="top" title="域渗透">Next Post &rarr;</a>
-                    </li>
-                    
-                </ul>
+                    <hr>
+                    <!-- SNS Link 社交 -->
+                    <ul class="list-inline">
+                        
+                        
+                        
 
-                
+                        
 
-                
+                        
 
+                        
 
-                <!--加入新的评论系统-->
-                
-
-                
-
-            </div>
-
-            <div class="hidden-xs col-sm-3 toc-col">
-                <div class="toc-wrap">
-                    
+                        
+                    </ul>
                 </div>
-            </div>
+            </section>
+
+            <!-- Featured Tags  标签 -->
+            
+
+            
+
         </div>
-
-        <div class="row">
-            <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-
-                <!-- Friends Blog -->
-                
-            </div>
-        </div>
-
     </div>
-</article>
-
-
-
-
-
-
+</div>
 
 <!-- Footer -->
 <!-- Footer -->

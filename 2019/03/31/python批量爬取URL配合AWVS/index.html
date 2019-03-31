@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="pengpengp&#39;s BLOG" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        python批量爬取URL配合AWVS｜undefined
+        
+    </title>
+
+    <link rel="canonical" href="https://pengpengp.github.io/2019/03/31/python批量爬取URL配合AWVS/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    pengpengp&#39;s BLOG
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>python批量爬取URL配合AWVS</h1>
+                    
+                    <span class="meta">
+                         作者 pengpengp
+                        <span>
+                          日期 2019-03-31
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#python 扫描" title="python 扫描">python 扫描</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            python批量爬取URL配合AWVS
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>1.1.     用这段代码先爬出厂商的URL地址,写入到一个文本文档</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!coding:utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">import</span> queue <span class="keyword">as</span> Queue</span><br><span class="line"></span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:                              <span class="comment">#导入queue'''</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">import</span> Queue</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#厂商id=(30-4555)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#厂商id=(61785,61184)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#创建请求</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">qq</span><span class="params">(que)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> que.empty():</span><br><span class="line"></span><br><span class="line">        id=que.get()</span><br><span class="line"></span><br><span class="line">        url=<span class="string">'https://URL/Loo/submit?cid=&#123;&#125;'</span>.format(id)</span><br><span class="line"></span><br><span class="line">        cookie =&#123;<span class="string">'PHPSESSID'</span>:<span class="string">'b1e5pmgfeamvopn8fi5if23151'</span>,<span class="string">'__guid'</span>:<span class="string">'138613664.2718517027106703000.1552008209413.7473'</span>,<span class="string">'__DC_sid'</span>:<span class="string">'138613664.506728041006725900.1553871635984.757'</span>,<span class="string">'Q'</span>:<span class="string">'u%3D360H3104709625%26n%3D%26le%3D%26m%3DZGp2WGWOWGWOWGWOWGWOWGWOZwVm%26qid%3D3104709625%26im%3D1_t01923d359dad425928%26src%3Dpcw_webscan%26t%3D1'</span>,<span class="string">'T'</span>:<span class="string">'s%3D184251f5a38ba45d06144c26cf5f02e2%26t%3D1552008252%26lm%3D%26lf%3D2%26sk%3Dc19128be09646066b6bb9a543a35569a%26mt%3D1552008252%26rc%3D%26v%3D2.0%26a%3D1'</span>&#125;</span><br><span class="line"></span><br><span class="line">        headers = &#123;<span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'</span>&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        qingqiu = requests.get(url,cookies=cookie,headers=headers).text.encode(<span class="string">'utf8'</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">#qingqiu.decode('raw_unicode_escape')</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#qingqiu.encoding = qingqiu.apparent_encoding</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#print (qingqiu)</span></span><br><span class="line"></span><br><span class="line">        company = re.findall(<span class="string">r'"请输入厂商名称"\svalue="(.*?)"'</span>,qingqiu)</span><br><span class="line"></span><br><span class="line">        yuming = re.findall(<span class="string">r'"请输入厂商域名"\svalue="(.*?)"'</span>,qingqiu)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">print</span> (<span class="string">'https://URL/Loo/submit?cid=&#123;&#125;扫描成功!'</span>.format(id))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        f = open(<span class="string">'list.txt'</span>,<span class="string">'a'</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">#f.write((company)[0])</span></span><br><span class="line"></span><br><span class="line">        f.write((yuming)[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">        f.write(<span class="string">"\n"</span>)</span><br><span class="line"></span><br><span class="line">        f.close()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> que.empty():</span><br><span class="line"></span><br><span class="line">        <span class="keyword">print</span> (<span class="string">'url获取完毕!'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建队列</span></span><br><span class="line"></span><br><span class="line">que = Queue.Queue()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> q <span class="keyword">in</span> range(<span class="number">30</span>,<span class="number">4555</span>):</span><br><span class="line"></span><br><span class="line">    que.put(q)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#创建线程</span></span><br><span class="line"></span><br><span class="line">xianchengmax=[]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>):</span><br><span class="line"></span><br><span class="line">    xiancheng = threading.Thread(target=qq,args=(que,))</span><br><span class="line"></span><br><span class="line">    xianchengmax.append(xiancheng)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> xiancheng <span class="keyword">in</span> xianchengmax:</span><br><span class="line"></span><br><span class="line">    xiancheng.start()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> xiancheng <span class="keyword">in</span> xianchengmax:</span><br><span class="line"></span><br><span class="line">    xiancheng.join()</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>再从文本文档中筛选出合格的URL,(^[http://|https://].*)这个可以先把规范的URL匹配出来</p>
+<p><img src="/2019/03/31/python批量爬取URL配合AWVS/1.png" alt="筛选有开头的URL"></p>
+</li>
+</ol>
+<p>3.1.     把不合适的URL修改成合格的URL,添加到AWVS中,AWVS只能之别出标准格式的URL,所以这些不带http://的就需要修改一下，如果还剩下了  也可以再匹配,这样逐步把URL的格式规范化了</p>
+<p><img src="/2019/03/31/python批量爬取URL配合AWVS/2.png" alt="给没开头的URL添加开头"></p>
+<ol start="4">
+<li><p>把选好的URL加入AWVS的批量扫描列表中<a href="http://localhost:8183/" target="_blank" rel="noopener">http://localhost:8183/</a></p>
+</li>
+<li><p>可以开始扫描了</p>
+<p><img src="/2019/03/31/python批量爬取URL配合AWVS/3.png" alt="AWVS批扫页面"></p>
+</li>
+</ol>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/03/24/first-shell/" data-toggle="tooltip" data-placement="top" title="first shell">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; pengpengp&#39;s BLOG 2019
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://pengpengp.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="">
+</body>
+
+</html>
