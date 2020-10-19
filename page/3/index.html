@@ -1,589 +1,729 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <meta name="theme-color" content="#600090">
-    <meta name="msapplication-navbutton-color" content="#600090">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
-    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
-    <link rel="alternate" type="application/atom+xml" title="pengpengp&#39;s BLOG" href="/atom.xml">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
-    <title>
-        
-        
-        
-    </title>
+  <meta charset="utf-8">
+  
 
-    <link rel="canonical" href="https://pengpengp.github.io/page/3/">
-
-    <!-- Bootstrap Core CSS -->
-    
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-
-
-    <!-- Custom CSS -->
-    
-<link rel="stylesheet" href="/css/blog-style.css">
-
-
-    <!-- Pygments Github CSS -->
-    
-<link rel="stylesheet" href="/css/syntax.css">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
 <meta name="generator" content="Hexo 5.2.0"></head>
 
-<style>
-
-    header.intro-header {
-        background-image: url('')
-    }
-</style>
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="" class="animated fadeIn">
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
-" data-ishome = "true" >
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand animated pulse" href="/">
-                <span class="brand-logo">
-                    pengpengp&#39;s BLOG
-                </span>
-                's Blog
-            </a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <!-- /.navbar-collapse -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-					
-                    
-					
-					
-                </ul>
-            </div>
-        </div>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
     </div>
-    <!-- /.container -->
-</nav>
-<script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-//    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
-
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
-
-<!-- Main Content -->
-
-
-<style>
-
-    .custom-haojen-container .post-preview:nth-of-type(1),
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) {
-        text-align: center;
-        background-repeat: no-repeat;
-        border-radius: 3px;
-        background-size: cover;
-        padding: 0;
-        height: 300px;
-        display: table;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.16);
-    }
-
-    /*去掉诗歌的背景图片*/
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) {
-        background-image: none !important;
-        background-color: rgba(255, 248, 220, 0.5);
-    }
-
-    .custom-haojen-container .post-preview:nth-child(1) h2,
-    .custom-haojen-container .post-preview:nth-child(1) .post-meta,
-    .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-        text-shadow: 0 0 40px rgba(0, 0, 0, 1);
-        letter-spacing: 1px;
-        color: #fff;
-        margin-top: 0;
-        padding-left: 60px;
-        padding-right: 60px;
-    }
-
-    .custom-haojen-container .post-preview:nth-child(1) .post-meta {
-        font-size: .9em;
-        font-weight: 300;
-        margin-top: 0;
-    }
-
-    .custom-haojen-container .post-preview-poetry:nth-child(1) .post-subtitle {
-        letter-spacing: 6px;
-        font-size: 18px;
-        font-family: unset;
-        font-weight: 400;
-        color: rgba(0, 0, 0, .75)
-    }
-
-    /*不显示摘要*/
-    .custom-haojen-container .post-preview:nth-child(1) .post-content-preview {
-        display: none
-    }
-
-    /*只第一个显示背景图片*/
-    .custom-haojen-container .post-preview:not(:nth-child(1)) {
-        background-image: none !important;
-    }
-
-    /*第一个分界线去掉*/
-    .custom-haojen-container hr:nth-of-type(1) {
-        display: none;
-    }
-
-    /*主题*/
-    .custom-haojen-container .post-preview:nth-of-type(1) > a {
-        display: table-cell;
-        vertical-align: middle;
-    }
-
-    /*诗词标题*/
-    .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-        font-size: 35px;
-        font-family: STKaiti;
-        color: rgba(0, 0, 0, .8);
-    }
-
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) .post-meta {
-        color: #0e2231;
-    }
-
-    @media (max-width: 768px) {
-        .custom-haojen-container .post-preview:nth-child(1) {
-            height: 240px;
-        }
-
-        .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-            font-size: 28px !important;
-            margin-top: 0;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-            font-size: 18px;
-            font-weight: 400;
-            padding-left: 0;
-            padding-right: 0;
-        }
-
-        .custom-haojen-container .post-preview:nth-of-type(1) > a {
-            padding: 20px
-        }
-    }
-
-    /*手机屏幕*/
-    @media (max-width: 400px) {
-        .custom-haojen-container .post-preview:nth-child(1) {
-            height: 195px;
-        }
-
-        .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-            font-size: 20px !important;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-            font-size: 16px;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) a {
-            padding: 30px 20px;
-        }
-    }
-</style>
-
-<!-- Page Header -->
-<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 visible-xs-block visible-sm-block">
-    <div class="row">
-        <header class="intro-header">
-            <div class="container">
-                <div class="site-heading text-center">
-                    <div class="about-me">
-                        <!--移动端头部显示-->
-                        <img src=""/>
-                        <h5><a href="/about/">pengpengp</a></h5>
-                        <p></p>
-                    </div>
-                </div>
-            </div>
-        </header>
-    </div>
-</div>
-<!-- Main Content -->
-<div class="container custom-haojen-container">
-    <!-- Post Container -->
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container">
-            <!-- Main Content -->
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2018/12/16/php-shuzu/">
-        <h2 class="post-title">
-            php_shuzu
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-16
-        </p>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
         
-        <div class="post-content-preview">
-            <p>
-                数组函数 对象数组：定义一个数组：第一种$arr=array();或者第二种$arr =[];
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-PHP-useage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/23/PHP-useage/" class="article-date">
+  <time datetime="2018-12-23T09:36:45.000Z" itemprop="datePublished">2018-12-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/23/PHP-useage/">PHP_useage</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code>*** php用法 ***</code></pre>
+<p>文件包含    include(‘文件名’)    require(‘文件名’)</p>
+<ul>
+<li><p>用法1.包含头信息—每个页面头部都是一样的</p>
+</li>
+<li><p>用法2.包含账号密码的配置文件</p>
+</li>
+<li><p>用法3.包含远程文件<br>  include “<a target="_blank" rel="noopener" href="http://www.baidu.com&quot;/">http://www.baidu.com&quot;</a>;</p>
+</li>
+</ul>
+<p>注意：远程文件任何后缀都可以打开<br>（图片木马的制作执行）</p>
+<ul>
+<li><p>区别:include出错会继续执行，程序开始时候包含；require出错终止，在执行到require代码时才包含进来</p>
+</li>
+<li><p>//伪协议常用  <a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html">https://www.leavesongs.com/PENETRATION/php-filter-magic.html</a></p>
+</li>
+<li><p>cookie<br>  setcookie(‘user’,’admin’，time()+3600)设置一个cookie<br>  $_COOKIE[‘user’]获取一个cookie</p>
+</li>
+<li><p>如何放置cookie伪造？<br>  setcookie(‘id’,’’,time()-1)清空COOKIE</p>
+</li>
+<li><p>session—-全局变量<br>  session_start()启动session功能</p>
+</li>
+</ul>
+<p>例子PHP用session做验证：<br>    session_start();</p>
+<pre><code>$_SESSION[&#39;name&#39;]=&quot;za&quot;;
+
+验证
+    if(isset($_SESSION[&#39;name&#39;]))&#123;
+echo &quot;欢迎&quot;;
+&#125;
+session_destory（）    删除session创建的文件
+
+
+//header(&quot;location:a.php&quot;);跳转</code></pre>
+<p>** PHP中的文件上传：<br>    <!-- <form enctype="multipart/form-data" method="post" >
+        <input type="file" name="Filedata">
+        <input type="submit">
+        </form> --></p>
+<pre><code>接收：$_FILES;</code></pre>
+<p>**  mysql **</p>
+<ul>
+<li><p>往表中插入数据：<br>  insert into 表名称(字段1，字段2…) value(字段1的值，字段2的值…)</p>
+<p>  例子：insert into news(title,content) value(‘标题’,’内容‘)；</p>
+</li>
+<li><p>查询数据：<br>  select 字段名1,字段名2,…,字段名n from 表名称</p>
+<p>  select username,password from user where id =1;单条件</p>
+<p>  select * from stu where number=31100 and name=hu;多条件用and连接</p>
+<p>  select 字段1，字段2，字段n from 表名 limit 0,1；用limit加限制条件 从0开始读1条</p>
+<p>  limit a,b  limit—限制读取记录   a—索引  b—-记录数</p>
+</li>
+<li><p>更新：<br>  update 表名 set 字段1=新值1，字段2=新值2 条件；</p>
+</li>
+</ul>
+<ul>
+<li><p>删除表：<br>  delete from 表名 条件；一定要加好条件，否则都删了</p>
+<p>  delete from 表名；清空一个表</p>
+</li>
+<li><p>like子句：<br>  通配符：</p>
+<pre><code>  *表示任意的字符
+  %表示任意的字符
+  ？表示任意一个字符
+  select * from 表名  where name like &#39;%sd&#39;;</code></pre>
+</li>
+<li><p>union***    联合查询</p>
+<pre><code>  select * from 表1 union select * from 表2；把表1和表2内容放在一起展示
+  注意：表1和表2中字段个数要保持一致，否则会报错</code></pre>
+</li>
+<li><p>order by 条件***    根据条件排序</p>
+<pre><code>  select * from user where city =&#39;beijng&#39; order by name;
+  ASC（升序） 或DESC（降序）默认升序
+  order by 1\2\3.。。 根据第几列来排序，如果超过列数就会报错*****</code></pre>
+</li>
+<li><p>group by 根据一个或多个列对结果进行分组，常和count sum、AVG组合使用</p>
+<pre><code>  select name，count（*）from  emply by name；根据名字来给表分组；</code></pre>
+</li>
+<li><p>删除字段：</p>
+<pre><code>  alter table 表名  drop 字段名；在表中将某个字段删除</code></pre>
+</li>
+<li><p>增加字段：</p>
+<pre><code>  alter table 字段名 add 字段名 字段类型</code></pre>
+</li>
+<li><p>改字段：</p>
+<pre><code>  alter table to modify 字段名 字段类型;</code></pre>
+</li>
+<li><p>改表名：</p>
+<pre><code>  alter table 原表名 rename to  新表名;</code></pre>
+</li>
+</ul>
+<ul>
+<li><p>导入数据：</p>
+<pre><code>  方法1.mysql -uroot -p 密码 &lt; 要导入的数据（注意：.sql中要自动创建数据库，如果runoob.sql中不会自动创建数据库，需要用第二种方法）
+
+  方法2.登录mysql，use数据库，source 路径文件
+
+  方法3.mysqlimport -uroot -p --local database_name dump.txt dump.txt（注意：dump.txt不会创建数据库时，需要database_name）</code></pre>
+</li>
+<li><p>导出数据：</p>
+<pre><code>  方法1.select * from 表名 into outfile 文件路径；</code></pre>
+</li>
+<li><p>注释****注入</p>
+<pre><code>  #（%23） --  注释当前行
+  /*  */      中间注释</code></pre>
+</li>
+<li><p>查询用户连接数</p>
+<pre><code>  select connection_id();</code></pre>
+</li>
+<li><p>替换字符<br>  例子</p>
+<pre><code>  select insert(&#39;ichunqiu&#39;,1,1,&#39;kk&#39;);结果是kkchunqiu</code></pre>
+</li>
+<li><p>截取字符串<br>  例子</p>
+<pre><code>  select LEFT(&quot;helloworld&quot;,5);结果是hello
+  select LEFT（被截取的字符串，左截取长度）;
+  select RIGHT 同理</code></pre>
+<p>  截取</p>
+<pre><code>  select substring()/mid()/substr()都是三个参数，第一个：被截取的字符串，第二个：开始的位置，第三个：截取的长度</code></pre>
+</li>
+<li><p>2个报错函数***  一般情况下要放在条件后面</p>
+<pre><code>  1.extractvalue(XML_document，XPath_string)；
+  例子：
+  select * from news where tid=1 and extractvalue(1,concat(0x7e,(select user()),0x7e));
+  两个参数（1，拼接的第二个报错参数）
+
+  2.UPDATEXML (XML_document, XPath_string, new_value); 
+  updatexml（1，拼接参数，1）；</code></pre>
+</li>
+<li><p>去重函数    </p>
+<pre><code>  select distinct title from news;不显示重复函数</code></pre>
+</li>
+<li><p>把查询结果连接在一起</p>
+<pre><code>  group_concat(DISTINCT field) from table_name where conditions;</code></pre>
+</li>
+<li><p>PHP连接mysql数据库</p>
+<pre><code>  方法1：使用mysqli扩展连接(面向对象)
+  方法2：使用mysql扩展（php低于5.5）
+
+  方法3：使用PDO技术（面向对象的，防止sql注入）</code></pre>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/23/PHP-useage/" data-id="ckgg5oe0e0003zov2bagd9x6o" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-php-shuzu" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/16/php-shuzu/" class="article-date">
+  <time datetime="2018-12-16T14:07:40.000Z" itemprop="datePublished">2018-12-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/16/php-shuzu/">php_shuzu</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="数组函数-对象"><a href="#数组函数-对象" class="headerlink" title="数组函数 对象"></a>数组函数 对象</h2><h2 id="数组："><a href="#数组：" class="headerlink" title="数组："></a>数组：</h2><pre><code>定义一个数组：第一种$arr=array();或者第二种$arr =[];
 创建数组时添加元素：$arr=array(&#39;wang&#39;,&#39;133&#39;);
 
 数组分类：关联数组和索引数组：
-关联数组：
-$arr1=[‘name’=&gt;’wang’,..
-            </p>
-        </div>
-    </a>
+关联数组：</code></pre>
+<p>$arr1=[<br>‘name’=&gt;’wang’,<br>‘pass’=&gt;’111’<br>];</p>
+<h2 id="索引数组："><a href="#索引数组：" class="headerlink" title="索引数组："></a>索引数组：</h2><p>$arr=array(‘wang’,’133’);</p>
+<h2 id="索引数组添加元素："><a href="#索引数组添加元素：" class="headerlink" title="索引数组添加元素："></a>索引数组添加元素：</h2><p>$arr51[2] = ‘144’;</p>
+<h2 id="关联数组添加内容："><a href="#关联数组添加内容：" class="headerlink" title="关联数组添加内容："></a>关联数组添加内容：</h2><p>$arr[“fun”]=’钓鱼’;</p>
+<h2 id="混合关联数组和混合数组："><a href="#混合关联数组和混合数组：" class="headerlink" title="混合关联数组和混合数组："></a>混合关联数组和混合数组：</h2><p>$arr =array(<br>‘name’=&gt;’wang’,<br>18,<br>5 =&gt;’hello’<br>);</p>
+<h2 id="数组可以放任何类型的数据"><a href="#数组可以放任何类型的数据" class="headerlink" title="数组可以放任何类型的数据"></a>数组可以放任何类型的数据</h2><p>$arr6 =[fopen(),true,3.14,[123,455]];</p>
+<h2 id="数组长度计算："><a href="#数组长度计算：" class="headerlink" title="数组长度计算："></a>数组长度计算：</h2><p>echo count（$arr）;</p>
+<p>echo sizeof($arr6);</p>
+<h2 id="数组中元素的排序：sort-arr-升序"><a href="#数组中元素的排序：sort-arr-升序" class="headerlink" title="数组中元素的排序：sort($arr)升序"></a>数组中元素的排序：sort($arr)升序</h2><p>$arr7 =[12,5,6,’12a’];<br>sort($arr7) ;</p>
+<h2 id="数组的输出："><a href="#数组的输出：" class="headerlink" title="数组的输出："></a>数组的输出：</h2><p>索引数组：echo $arr7[0];<br>关联数组：echo $arr[“name”];</p>
+<p>用foreach($arr as $key=&gt;$value){<br>        echo $key,$value;</p>
+<h2 id="用for-i-0-i-lt-count（-arr）-i"><a href="#用for-i-0-i-lt-count（-arr）-i" class="headerlink" title="用for ($i=0;$i&lt;count（$arr）;$i++){"></a>用for ($i=0;$i&lt;count（$arr）;$i++){</h2><p>echo $arr[$i];<br>}</p>
+<h2 id="统计数组键个数array-count-value"><a href="#统计数组键个数array-count-value" class="headerlink" title="统计数组键个数array_count_value()"></a>统计数组键个数array_count_value()</h2><p>创建包含数组所有键名的新数组：array_keys()</p>
+<p>数组指针：current()<br>销毁变量：unset（）<br>判断变量是否定义isset()<br>合并两个数组，一个组是键名，另一个为值array_combine()</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>函数名不区分大小写<br>function name(){<br>echo “yi”;<br>}<br>echo “wang”;<br>name();            //wangyi</p>
+<h2 id="函数中传入参数："><a href="#函数中传入参数：" class="headerlink" title="函数中传入参数："></a>函数中传入参数：</h2><p>function b($a,$b){<br>    echo $a+$b;<br>}<br>b(123,456);   //579</p>
+<h2 id="函数返回值："><a href="#函数返回值：" class="headerlink" title="函数返回值："></a>函数返回值：</h2><p>function b($a,$b){<br>$count=$a+$b;<br>return $count;<br>}<br>b(123,456);<br>$data=b(123,456);<br>echo $data;</p>
+<h2 id="随机数-rand（）"><a href="#随机数-rand（）" class="headerlink" title="随机数 rand（）"></a>随机数 rand（）</h2><h3 id="练习：-参数1舒勇ARGV-1-获取，参数2使用ARGV-2-参数传入后是string格式-获取随机从命令行输入的随机参数"><a href="#练习：-参数1舒勇ARGV-1-获取，参数2使用ARGV-2-参数传入后是string格式-获取随机从命令行输入的随机参数" class="headerlink" title="练习：    //参数1舒勇ARGV[1]获取，参数2使用ARGV[2]  参数传入后是string格式,获取随机从命令行输入的随机参数"></a>练习：    //参数1舒勇ARGV[1]获取，参数2使用ARGV[2]  参数传入后是string格式,获取随机从命令行输入的随机参数</h3><p>function suiji($a,$b){<br>    $a= (int)$a;$b=(int)$b;</p>
+<p>if ($a==”” || $b==””){<br>    print “请输入两个正整数”;return;<br>}<br>else if ($a&gt;$b){<br>    $rr=rand($a,$b);<br>}<br>else {<br>    $tmp=$b;<br>    $b=$a;<br>    $a=$tmp;<br>    $rr=rand($a,$b);<br>}echo $rr;<br>}<br>suiji($argv[1],$argv[2]);</p>
+<h2 id="面向对象："><a href="#面向对象：" class="headerlink" title="面向对象："></a>面向对象：</h2><p>class person{<br>public $name =’duan’;<br>public $age=21;</p>
+<p>function go(){<br>    echo $this-&gt;name .’is running’;<br>}<br>}</p>
+<p>$p1=new person();<br>$p1-&gt;name =’xu’;<br>echo $p1-&gt;name;</p>
+<p>$p2=new person();<br>$p2-&gt;name=’cai’;</p>
+<h2 id="构造函数：destruct"><a href="#构造函数：destruct" class="headerlink" title="构造函数：destruct"></a>构造函数：destruct</h2><p>继承 class newperson extends person{}</p>
+<p>方法覆盖:</p>
+<h2 id="全局变量："><a href="#全局变量：" class="headerlink" title="全局变量："></a>全局变量：</h2><pre><code>    $_GET;
+    $_POST;</code></pre>
 
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2018/12/08/linux-exam/">
-        <h2 class="post-title">
-            linux exam
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-08
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                Linux基础知识试卷
-一、选择题
-
-下面哪个Linux命令可以一次显示一页内容？(C)A. pause暂停B. cat   读取文件内容C. more  分页显示D. grep   查找字符
-统计当前目录(或文件)所占磁盘空间的大小命令是：(B)A. df /    查看指定分区大小B. du..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2018/12/06/iis/">
-        <h2 class="post-title">
-            windows server 2008 iis服务器搭建
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-06
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                准备工作：首先在虚拟机中安装好windows server 2008 R2系统（64位），下载sql server 2008版本（64位）不用拉进虚拟机。
-搭建网站：1.进入windows server 2008，打开服务管理器—–&gt;添加角色—-&gt;添加web服务器——-&gt;勾选常..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/16/php-shuzu/" data-id="ckgg5oe0o000lzov2a5oy0dmk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
 
 
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2018/12/05/LAMP/">
-        <h2 class="post-title">
-            LAMP环境搭建
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-05
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                l—linux；A—Apache；M—mysql;P—PHP;Apache是一款web服务器，mysql是多线程、多用户管理系统，PHP可以用来编写网站源代码，作为Apache的扩展，今天的主题就是如何搭建一款LAMP环境。
-Apache：
-1.安装yum install httpd httpd..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2018/12/04/APACHE-linux/">
-        <h2 class="post-title">
-            学习如何在linux环境安装Apache
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-04
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                1.首先需要下载好安装套件（yum groupinstall “Development Tools”）然后在网上下载好apache的安装包,（这里使用下载的是源码压缩包，名字为httpd-2.4.37.tar.gz）2.把httpd-2.4.37.tar.gz传到虚拟机中，我用的是centOS7..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2018/12/03/first_blog/">
-        <h2 class="post-title">
-            在windows下如何开通自己的博客
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-03
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-先期准备工作：配置.net   安装shadowsocks（代理服务器）
-1.github安装注册，下载githubDesktop（同步工具）2.下载node.js安装包node.js官网*    安装好node.js后可以cmd中运行npm试试安装成功了没   （node.js安装软件用的命..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-
-<!-- 翻页 pager -->
-
-<ul class="pager">
+  
+    <article id="post-linux-exam" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/08/linux-exam/" class="article-date">
+  <time datetime="2018-12-08T05:40:43.000Z" itemprop="datePublished">2018-12-08</time>
+</a>
     
-    <li class="previous">
-        <a href="/page/2/">&larr; Newer Posts</a>
-    </li>
+  </div>
+  <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/08/linux-exam/">linux exam</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Linux基础知识试卷</p>
+<p>一、选择题</p>
+<ol>
+<li>下面哪个Linux命令可以一次显示一页内容？(C)<br>A. pause暂停<br>B. cat   读取文件内容<br>C. more  分页显示<br>D. grep   查找字符</li>
+<li>统计当前目录(或文件)所占磁盘空间的大小命令是：(B)<br>A. df /    查看指定分区大小<br>B. du /    查看根目录文件大小<br>C. du     查看当前目录大小<br>D. df     查看所有分区大小</li>
+<li>怎样更改一个文件的权限设置？(B)<br>A. attrib<br>B. chmod    改权限<br>C. change<br>D. file</li>
+<li>假如您需要找出 /etc/my.conf 文件属于哪个包 (package) ，您可以执行：<br>A. rpm -q /etc/my.conf      查询软件包 +软件包名称<br>B. rpm -requires /etc/my.conf<br>C. rpm -qf /etc/my.conf查看某个文件属于哪个软件包，可以是普通文件或可执行文件，跟文件的绝对路径<br>D. rpm -q | grep /etc/my.conf  查询是否安装了某个软件</li>
+<li>在使用了shadow口令的系统中，/etc/passwd和/etc/shadow两个文件的权限正确的是：（C）<br>A. -rw-r—– , -r——–<br>B. -rw-r–r– , -r–r–r–<br>C. -rw-r–r– , -r——–<br>D. -rw-r–rw- , -r—–r–<br>14．下面哪个参数可以删除一个用户并同时删除用户的主目录？(C)<br>A. rmuser -r<br>B. deluser –r       deluser   –remove-home<br>C. userdel -r<br>D. usermgr -r<br>17．如果你的umask设置为022，缺省的你创建的文件的权限为：(D)<br>A. —-w–w-<br>B. -w–w—-<br>C. r-xr-x—<br>D. rw-r–r—<br>root的缺省unmask是022，一般用户是002。<br>例如：unmask为022的用户创建了一个新文件，那么新文件的权限644，而目录则为755。如果用户的umask为000，则创建的文件权限为666，目录权限为777，<br>运行umask命令可以查看用户自己的umask值。<br>18．在一条命令中如何查找一个二进制命令 Xconfigurator 的路径？(D)<br>A. apropos Xconfigurator    用来通过关键字查找定位手册页的名字和描述。<br>B. find Xconfigurator         查文件<br>C. where Xconfigurator       whereis<br>D. which Xconfigurator<br>20．运行一个脚本，用户不需要什么样的权限？（B）<br>A. read<br>B. write<br>C. execute<br>D. browse on the directory<br>23．在 bash 中, 在一条命令后加入”1&gt;&amp;2” 意味着：（B）0—标准输入、1—标准输出、2—标准错误输出<br>A. 标准错误输出重定向到标准输入<br>B. 标准输入重定向到标准错误输出<br>C. 标准输出重定向到标准错误输出<br>D. 标准输出重定向到标准输入<br>24．下面哪条命令可以把f1.txt复制为f2.txt?（C）<br>A. cp f1.txt | f2.txt<br>B. cat f1.txt | f2.txt<br>C. cat f1.txt &gt; f2.txt<br>D. copy f1.txt | f2.txt<br>25．显示一个文件最后几行的命令是： （B）<br>A. tac<br>B. tail<br>C. rear<br>D. last</li>
+<li>使用ln命令将生成了一个指向文件old的符号链接new，如果你将文件old删除，是否还能够访问文件中的数据？       （A）<br>A. 不可能再访问<br>B. 仍然可以访问<br>C. 能否访问取决于文件的所有者<br>D. 能否访问取决于文件的权限</li>
+<li>如何在文件中查找显示所有以”<em>“打头的行？<br>A. find \</em> file   <em>没有效果<br>B. wc -l * &lt; file    wc –l数一下文件内容行数<br>C. grep -n * file<br>D. grep ‘^\</em>’ file   grep -n ‘^[a-z]’以a-z开头 grep ‘\a$’以a结尾<br>. (小数点)：代表『一定有一个任意字节』的意思；grep -n ‘g..d’</li>
+</ol>
+<ul>
+<li>(星号)：代表『重复前一个字符， 0 到无穷多次』的意思，为组合形态<br>grep -n ‘g.*g’搜索g开头g结尾的行<br>\表示匹配字符</li>
+</ul>
+<p>38.在ps命令中什么参数是用来显示所有用户的进程的？（A）<br>A. a                  所有用户<br>B. b<br>C. u              某个用户 –u root<br>D. x               与a搭配，显示完整进程<br>40.如何显示Linux系统中注册的用户数（包含系统用户）？（D）<br>A. account -l<br>B. nl /etc/passwd |head             显示头十行<br>C. wc –users /etc/passwd<br>D. wc –lines /etc/passwd        显示用户数<br>42.命令 kill 9 的含义是：           (A)<br>A. kills the process whose PID is 9.<br>B. kills all processes belonging to UID 9.<br>C. sends SIGKILL to the process whose PID is 9.<br>D. sends SIGTERM to the process whose PID IS 9.<br>43.如何删除一个非空子目录/tmp？（D）<br>A. del /tmp/*<br>B. rm -rf /tmp         删除tmp目录<br>C. rm -Ra /tmp/*       R与r相同 a未知<br>D. rm -rf /tmp/*       删除tmp目录内容<br>48.在Linux系统中的脚本文件一般以什么开头？（B）<br>A. $/bin/sh<br>B. #!/bin/sh<br>C. use /bin/sh<br>D. set shell=/bin/sh<br>49.下面哪种写法表示如果cmd1成功执行，则执行cmd2命令？（A）<br>A. cmd1&amp;&amp;cmd2<br>B. cmd1|cmd2        把cmd1结果导入cmd2执行<br>C. cmd1;cmd2<br>D. cmd1||cmd2<br>51.Linux中，提供TCP/IP包过滤功能的软件叫什么？（C）<br>A. rarp<br>B. route     路由<br>C. iptables   防火墙<br>D. filter<br>53.在vi中退出不保存的命令是？（A）<br>A. :q           退出<br>B. :w         保存<br>C. :wq         保存退出<br>D. :q!         强退<br>55.使用什么命令检测基本网络连接？（A）<br>A. ping<br>B. route<br>C. netstat         连接状态<br>D. ifconfig        网卡信息<br>56.下面哪个协议使用了二个以上的端口？（B）<br>A. telnet           23<br>B. FTP         20、21<br>C. ssh             22<br>D. HTTP           80<br>59.如何在Debian系统中安装rpm包？(D)alien是包转换工具<br>A. alien pkgname.rpm     alien –I    .rpm<br>B. dpkg –rpm pkgname.rpm     dpkg –I   .rpm<br>C. dpkg –alien pkgname.rpm<br>D. alien pkganme.rpm ; dpkg -i pkganme.deb<br>　<br>60.在安装软件时下面哪一步需要root权限？(D)<br>A. make<br>B. make deps<br>C. make config<br>D. make install          install需要<br>61.什么命令用来只更新已经安装过的rpm软件包？（B）<br>A. rpm -U *.rpm     强行安装<br>B. rpm -F *.rpm     只更新<br>C. rpm -e *.rpm      卸载<br>D. rpm -q *.rpm      查询包<br>64.下面哪个命令可以压缩部分文件：（C）<br>A. tar -dzvf filename.tgz *    特殊文件<br>B. tar -tzvf filename.tgz *   查询包内容<br>C. tar -czvf filename.tgz *     打包压缩<br>D. tar -xzvf filename.tgz *     解压缩<br>67.对于Apache服务器，提供的子进程的缺省的用户是：（D）<br>A. root<br>B. apached<br>C. httpd<br>D. nobody<br>69.apache的主配置文件是：（A）<br>A. httpd.conf<br>B. httpd.cfg<br>C. access.cfg<br>D. apache.conf<br>77.通过Makefile来安装已编译过的代码的命令是：（D）<br>A. make          编译<br>B. install<br>C. make depend<br>D. make install    安装<br>Configure检测安装平台是否具备所需条件<br>78.什么命令解压缩tar文件？（B）<br>A. tar -czvf filename.tgz<br>B. tar -xzvf filename.tgz<br>C. tar -tzvf filename.tgz<br>D. tar -dzvf filename.tgz<br>84.命令 netstat -a 停了很长时间没有响应，这可能是哪里的问题？（B）<br>A. NFS.<br>B. DNS.<br>C. NIS.<br>D. routing.<br>85.ping使用的协议是：（D）<br>A. TCP<br>B. UDP<br>C. SMB<br>D. ICMP<br>86.下面哪个命令不是用来查看网络故障的？（B）<br>A. ping<br>B. init<br>C. telnet<br>D. netstat<br>87.拨号上网使用的协议通常是：（A）<br>A. PPP 网络安全系统认证（Authentication）、授权（Authorization）和计费（Accounting）<br>B. UUCP  文件传输协议<br>C. SLIP  Serial Line Internet Protocol，串行线路网际协议 拨号<br>D. Ethernet<br>88.TCP/IP中，哪个协议是用来进行IP自动分配的？（C）<br>A. ARP       局域网通信<br>B. NFS   Network File System）即网络文件系统—freeBSD<br>C. DHCP<br>D. DNS     域名解析<br>90.下面哪个功能用来生成一个文件的校验码？(A)？D<br>A. md5          密文<br>B. tar<br>C. crypt        crypt 库<br>D. md5sum    md5sum aaa.txt &gt; checksum/aaa.md5  生成校验文件<br>93.如何停止一台机器的telnet服务？（A）<br>A. Put NONE in /etc/telnet.allow  白名单 sshd:192.168.220.1    in.telnetd:192.168.220.1<br>B. Put a line ‘ALL:ALL’ in /etc/hosts.deny     黑名单<br>C. Comment the telnet entry in /etc/inittab     配置启动模式<br>D. Comment the telnet entry in /etc/xinetd.conf      用来管理多种轻量级Internet服务  xinetd.conf代替原来的inetd.conf</p>
+<p>二、操作题：<br>1.假设你是系统管理员，需要增加一个新的用户账号zheng，为新用户设置初始密码，锁定用户账号uly，并删除用户账号chang。<br>答：<br>Useradd zheng<br>Password zheng<br>usermod -s /sbin/nologin wangshibo<br> userdel chang</p>
+<p>2.若给需要将/home/zheng目录下的所有文件打包压缩成/tmp/zheng.tar.gz，你准备怎么做？当需要从压缩包中恢复时，又该如何处理？<br>答：<br>Tar  –zcvf     /tmp/zheng.tar.gz  /home/zheng/*<br>Tar –zxvf   zheng.tar.gz<br>3.介绍什么是桥接，什么是nat？<br>答：<br>桥接是把虚拟机模拟成同网中的一台设备<br>Nat 是路由模式，把虚拟机模拟成另一个网段的设备并路由到本网段<br><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1600811597383089586&wfr=spider&for=pc">完整试题及答案1</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hermito/article/details/51018243">完整试题及答案2</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/08/linux-exam/" data-id="ckgg5oe0n000jzov21gix31d4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-iis" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/06/iis/" class="article-date">
+  <time datetime="2018-12-06T14:07:28.000Z" itemprop="datePublished">2018-12-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/06/iis/">windows server 2008 iis服务器搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="准备工作：首先在虚拟机中安装好windows-server-2008-R2系统（64位），下载sql-server-2008版本（64位）不用拉进虚拟机。"><a href="#准备工作：首先在虚拟机中安装好windows-server-2008-R2系统（64位），下载sql-server-2008版本（64位）不用拉进虚拟机。" class="headerlink" title="准备工作：首先在虚拟机中安装好windows server 2008 R2系统（64位），下载sql server 2008版本（64位）不用拉进虚拟机。"></a>准备工作：首先在虚拟机中安装好windows server 2008 R2系统（64位），下载sql server 2008版本（64位）不用拉进虚拟机。</h2><hr>
+<h2 id="搭建网站："><a href="#搭建网站：" class="headerlink" title="搭建网站："></a>搭建网站：</h2><p>1.进入windows server 2008，打开服务管理器—–&gt;添加角色—-&gt;添加web服务器——-&gt;勾选常见HTTP功能（需要后台的话还要勾选应用程序开发）、iis可承载web核心 ——&gt;安装、完成即可；<br><img src="iis/juese2.jpg" alt="juese2"><br><img src="iis/juese3.jpg" alt="juese3"><br>2.导入网站源码（以aspcms为实验对象）在C盘创建个文件夹叫www，把源码复制进去；</p>
+<p>3.在iis服务器中点右键选择添加网站。<br><img src="iis/wangzhan.jpg" alt="wangzhan"></p>
+<hr>
+<h2 id="网站设置："><a href="#网站设置：" class="headerlink" title="网站设置："></a>网站设置：</h2><p>1.在iis管理器中找到自己刚建的网站右键“编辑权限”，——&gt;安全——&gt;编辑———&gt;给user赋予完全控制的权限；<br><img src="iis/quanxian.jpg" alt="quanxian"><br>2.iis管理器中找到“ASP”双击启动，更改“启用父路径”位“TRUE”；<br><img src="iis/asp.jpg" alt="asp"><br>3.iis管理器中打开“默认文档”，把刚才导入的网站执行文件名字导入(如果里面有了就不用了)；<br><img src="iis/asp.php.jpg" alt="asp.php"><br>4.iis管理器中的应用池—–&gt;基本设置改为自己想要的.net版本<br>                    —–&gt;高级设置中把“启用32位应用程序”支持改为“true”<br><img src="iis/32wei.jpg" alt="32wei"></p>
+<hr>
+<h2 id="sql-server安装："><a href="#sql-server安装：" class="headerlink" title="sql server安装："></a>sql server安装：</h2><p>1.用虚拟机cd加载sql server的镜像，选择“全新安装”<br>        &gt;功能选择：数据库引擎服务、</p>
+<p>2.全新安装，一路下一步——-&gt;功能选择：数据库引擎服务、客户端工具连接、管理工具、sql客户端连接sdk——–&gt;验证方式：混合模式，用户名sa—安装。</p>
+<p>3.开始菜单——-&gt; sql server management studio——-&gt;服务器名127.0.0.1、验证方式选择windows验证—–&gt;完成。</p>
+<hr>
+<h2 id="把Access数据库文件导入sql-server数据库："><a href="#把Access数据库文件导入sql-server数据库：" class="headerlink" title="把Access数据库文件导入sql server数据库："></a>把Access数据库文件导入sql server数据库：</h2><p>新建一个数据库—–&gt;右键点任务——-&gt;导入数据——–&gt;数据源选Access（导入文件在网站配置文件中能找到）———&gt;选择要导入的表和视图———&gt;修改配置文件。<br><img src="iis/peizhi.jpg" alt="peizhi"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/06/iis/" data-id="ckgg5oe0n000hzov27h0385n9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LAMP" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/05/LAMP/" class="article-date">
+  <time datetime="2018-12-05T13:30:09.000Z" itemprop="datePublished">2018-12-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/05/LAMP/">LAMP环境搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="l—linux；A—Apache；M—mysql-P—PHP"><a href="#l—linux；A—Apache；M—mysql-P—PHP" class="headerlink" title="l—linux；A—Apache；M—mysql;P—PHP;"></a>l—linux；A—Apache；M—mysql;P—PHP;</h2><h2 id="Apache是一款web服务器，mysql是多线程、多用户管理系统，PHP可以用来编写网站源代码，作为Apache的扩展，今天的主题就是如何搭建一款LAMP环境。"><a href="#Apache是一款web服务器，mysql是多线程、多用户管理系统，PHP可以用来编写网站源代码，作为Apache的扩展，今天的主题就是如何搭建一款LAMP环境。" class="headerlink" title="Apache是一款web服务器，mysql是多线程、多用户管理系统，PHP可以用来编写网站源代码，作为Apache的扩展，今天的主题就是如何搭建一款LAMP环境。"></a>Apache是一款web服务器，mysql是多线程、多用户管理系统，PHP可以用来编写网站源代码，作为Apache的扩展，今天的主题就是如何搭建一款LAMP环境。</h2><hr>
+<h3 id="Apache："><a href="#Apache：" class="headerlink" title="Apache："></a>Apache：</h3><ul>
+<li><p>1.安装yum install httpd httpd-devel httpd-menaul mod_ssl mod_perl mod_auth_mysql -y</p>
+</li>
+<li><p>2.启动服务service httpd start</p>
+</li>
+<li><p>3.更改servername（vi /etc/httpd/conf/httpd.conf）<br><img src="LAMP/servername.jpg" alt="servername"></p>
+</li>
+<li><p>4.重启apache服务：service httpd restart</p>
+</li>
+<li><p>5.启动Apache服务service httpd start</p>
+</li>
+<li><p>6.设置开机自启动chkconfig httpd on</p>
+</li>
+</ul>
+<hr>
+<h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql:"></a>mysql:</h3><ul>
+<li><p>1.安装yum install mysql-server mysql -y</p>
+</li>
+<li><p>2.设置mysql开机启动chkconfig mysqld on</p>
+</li>
+<li><p>3.启动服务service mysqld start</p>
+</li>
+<li><p>4.mysql服务初始化 mysql_secure_installation（如果默认有密码，在/etc/my.cnf中加入参数skip-grant-tables然后在输入密码阶段，直接回车登陆）<br><img src="LAMP/mycnf.jpg" alt="mycnf"></p>
+</li>
+</ul>
+<hr>
+<h3 id="PHP："><a href="#PHP：" class="headerlink" title="PHP："></a>PHP：</h3><ul>
+<li><p>1.安装yum install php php-mysql php-gd libjpeg* php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-mcrypt php-bcmath php-mhash libmcrypt -y</p>
+</li>
+<li><p>2.修改PHP配置文件vi  /etc/httpd/conf/httpd.conf</p>
+</li>
+<li><p>3.重启apache服务： service httpd restart</p>
+</li>
+<li><p>4.打开网页输入localhost即可看到效果<br><img src="LAMP/apache.jpg" alt="apache"></p>
+</li>
+<li><p>5.把自己做好的网页文件传入/var/www/html目录下，再打开网页</p>
+</li>
+</ul>
+<p>![copy](LAMP/copy -r.jpg)</p>
+<ul>
+<li><p>6.打开mysql，选择数据库use vauditdemo；<br>  ![use database](LAMP/use database.jpg)</p>
+</li>
+<li><p>7.用source /var/www/html/install/install.sql命令导入数据库文件<br>![source database](LAMP/source database.jpg)</p>
+</li>
 </ul>
 
-
-        </div>
-        <!-- Sidebar Container -->
-        <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
-
-            <!-- About Me -->
-            <section class="visible-md visible-lg" style="padding: 0 18px">
-                <div class="short-about">
-                    <!--侧边栏头像-->
-                    
-                    <h5><a href="/about/">pengpengp</a></h5>
-                    
-                    <hr>
-                    <!-- SNS Link 社交 -->
-                    <ul class="list-inline">
-                        
-                        
-                        
-
-                        
-
-                        
-
-                        
-
-                        
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Featured Tags  标签 -->
-            
-
-            
-
-        </div>
+      
     </div>
-</div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/05/LAMP/" data-id="ckgg5oe0e0002zov2gozz3zf4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
 
-<!-- Footer -->
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <br>
-                <ul class="list-inline text-center">
-                
-                
-                
 
-                
+  
+    <article id="post-APACHE-linux" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/04/APACHE-linux/" class="article-date">
+  <time datetime="2018-12-04T12:27:34.000Z" itemprop="datePublished">2018-12-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/04/APACHE-linux/">学习如何在linux环境安装Apache</a>
+    </h1>
+  
 
-                
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-首先需要下载好安装套件（yum-groupinstall-“Development-Tools”）然后在网上下载好apache的安装包-（这里使用下载的是源码压缩包，名字为httpd-2-4-37-tar-gz）"><a href="#1-首先需要下载好安装套件（yum-groupinstall-“Development-Tools”）然后在网上下载好apache的安装包-（这里使用下载的是源码压缩包，名字为httpd-2-4-37-tar-gz）" class="headerlink" title="1.首先需要下载好安装套件（yum groupinstall “Development Tools”）然后在网上下载好apache的安装包,（这里使用下载的是源码压缩包，名字为httpd-2.4.37.tar.gz）"></a>1.首先需要下载好安装套件（yum groupinstall “Development Tools”）然后在网上下载好apache的安装包,（这里使用下载的是源码压缩包，名字为httpd-2.4.37.tar.gz）</h3><h3 id="2-把httpd-2-4-37-tar-gz传到虚拟机中，我用的是centOS7。"><a href="#2-把httpd-2-4-37-tar-gz传到虚拟机中，我用的是centOS7。" class="headerlink" title="2.把httpd-2.4.37.tar.gz传到虚拟机中，我用的是centOS7。"></a>2.把httpd-2.4.37.tar.gz传到虚拟机中，我用的是centOS7。</h3><ul>
+<li>这里为了把文件传到linux，使用了openssh连接虚拟机</li>
+<li><img src="APACHE-linux/openssh.jpg" alt="openssh.jpg"></li>
+<li>通过openssh把文件传到centOS桌面上</li>
+<li><img src="APACHE-linux/ssh.jpg" alt="ssh.jpg"><h3 id="3-用源码方式安装httpd（apache）–step1：解压–-gt-step2：configure–-gt-解决依赖–-gt-step3：make–-gt-step4：make-install，这里的详细操作步骤及我遇到的问题如下："><a href="#3-用源码方式安装httpd（apache）–step1：解压–-gt-step2：configure–-gt-解决依赖–-gt-step3：make–-gt-step4：make-install，这里的详细操作步骤及我遇到的问题如下：" class="headerlink" title="3.用源码方式安装httpd（apache）–step1：解压–&gt;step2：configure–&gt;解决依赖–&gt;step3：make–&gt;step4：make install，这里的详细操作步骤及我遇到的问题如下："></a>3.用源码方式安装httpd（apache）–step1：解压–&gt;step2：configure–&gt;解决依赖–&gt;step3：make–&gt;step4：make install，这里的详细操作步骤及我遇到的问题如下：</h3></li>
+<li>用tar -zxvf解压httpd-2.4.37.tar.gz，在桌面上生成了一个httpd-2.4.37 文件夹，cd进入文件夹</li>
+<li>运行./configure –prefix=/usr/local/</li>
+<li>报错：依赖问题需要解决，提示的是缺少APR组件<br><img src="APACHE-linux/error1.jpg" alt="error1"></li>
+<li>秉承着有问题找百度的精神，我找了一篇帖子…<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xdouby/p/6406873.html">地址</a></li>
+<li>下载并解压apr-1.6.5.tar.gz  apr-util-1.6.1.tar.gz 两个文件，开始安装<br><img src="APACHE-linux/solve1.jpg" alt="solve1.jpg"></li>
+<li>（这里再啰嗦一下源码文件通用的安装思路）解压文件–&gt;进入解压生成的文件夹–&gt;./configure –&gt;make&amp;&amp;make install</li>
+<li>我在安装apr-util的时候文件损坏了，所以用yum安装了这个文件</li>
+<li>依然要解决依赖，下载pcre-8.10.zip文件用openssh传到虚拟机（注意文件用unzip解压）<br><img src="APACHE-linux/error2.jpg" alt="error2.jpg"><ul>
+<li>应该是缺少gcc组件<br>yum install -y gcc gcc-c++</li>
+</ul>
+</li>
+<li>问题解决</li>
+<li>回到httpd-2.4.37文件夹，cd进入用./configure –/usr/local/命令继续安装step2的操作，再次报错<br><img src="APACHE-linux/error3.jpg" alt="error3.jpg"><br>./configure –prefix=/usr/local命令指定路径<br>接下来还要重新安装apr-util-1.6.1，./configure继续报错error: APR could not be located. Please use the –with-apr option.里面说的意思应该是apr-util-1.6.1运行需要apr-1.4.5目录（也就是上一个软件安装目录）的支持所以我们执行命令[root@localhost apr-util-1.6.1]# ./configure –with-apr来执行，成功完成</li>
+</ul>
+<hr>
+<ul>
+<li>回到httpd目录继续执行./configure –prefix=/usr/local/命令，继续报错。。。error1，不知道为什么，<br>百度了半天没有头绪，我就猜是不是报错本身是错误的，所以继续输入make install，神奇的是竟然没有报错<br>![make install_finish.jpg](APACHE-linux/make install_finish.jpg)<br>漫长的安装过程终于结束了<h3 id="4-关闭防火墙，启动Apache服务"><a href="#4-关闭防火墙，启动Apache服务" class="headerlink" title="4.关闭防火墙，启动Apache服务"></a>4.关闭防火墙，启动Apache服务</h3></li>
+<li>centos 7关防火墙：systemctl stop firewalld; centos 6关防火墙：service iptables stop</li>
+<li>启动Apache服务的方法：安装的根目录/usr/local/apache2/bin/apachectl start(可以再输入一次”路径 restart”)</li>
+<li>启动Apache服务/usr/local/bin/apachectl start又报错了<br><img src="APACHE-linux/error4.jpg" alt="error4.jpg"></li>
+<li>这个好解决，cd进入apache目录下的htdocs目录，编辑httpd.conf文件vi conf/httpd.conf 在里面搜索#ServerName 把前面的注释符号#去掉保存<br><img src="APACHE-linux/ServerName.jpg" alt="ServerName.jpg"></li>
+<li>现在再次启动apache服务<code>/usr/local/bin/apachectl start``````/usr/local/bin/apachectl restart</code><br>![apache start.jpg](APACHE-linux/apache start.jpg)<h3 id="5-输入虚拟机IP地址来试一下新建的网站吧（我在这就在虚拟机中测试一下）"><a href="#5-输入虚拟机IP地址来试一下新建的网站吧（我在这就在虚拟机中测试一下）" class="headerlink" title="5.输入虚拟机IP地址来试一下新建的网站吧（我在这就在虚拟机中测试一下）"></a>5.输入虚拟机IP地址来试一下新建的网站吧（我在这就在虚拟机中测试一下）</h3><code>[root@localhost Desktop]# curl 192.168.11.147</code><br><code>&lt;html&gt;&lt;body&gt;&lt;h1&gt;It works!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;</code></li>
+<li>实际的图在这<img src="APACHE-linux/localhost.jpg" alt="localhost.jpg"><h3 id="6-终于到了最后一步，是不是很好奇刚才打开的网页文件存放在哪儿呢？其实它就在刚才安装的根目录-usr-local-apache2-htdocs里面安静的呆着呢，试着用我们自己喜欢的网站成品文件替换index-heml，然后再次访问虚拟机的ip地址，是不是一个个人专属的Apache网站就搭建好了哈哈。日记到这里就结束了，明天继续更新"><a href="#6-终于到了最后一步，是不是很好奇刚才打开的网页文件存放在哪儿呢？其实它就在刚才安装的根目录-usr-local-apache2-htdocs里面安静的呆着呢，试着用我们自己喜欢的网站成品文件替换index-heml，然后再次访问虚拟机的ip地址，是不是一个个人专属的Apache网站就搭建好了哈哈。日记到这里就结束了，明天继续更新" class="headerlink" title="6.终于到了最后一步，是不是很好奇刚才打开的网页文件存放在哪儿呢？其实它就在刚才安装的根目录/usr/local/apache2/htdocs里面安静的呆着呢，试着用我们自己喜欢的网站成品文件替换index.heml，然后再次访问虚拟机的ip地址，是不是一个个人专属的Apache网站就搭建好了哈哈。日记到这里就结束了，明天继续更新"></a>6.终于到了最后一步，是不是很好奇刚才打开的网页文件存放在哪儿呢？其实它就在刚才安装的根目录/usr/local/apache2/htdocs里面安静的呆着呢，试着用我们自己喜欢的网站成品文件替换index.heml，然后再次访问虚拟机的ip地址，是不是一个个人专属的Apache网站就搭建好了哈哈。日记到这里就结束了，明天继续更新</h3></li>
+</ul>
 
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; pengpengp&#39;s BLOG 2020
-                    <br>
-                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
-                    <br>
-                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
-                </p>
-
-            </div>
-        </div>
+      
     </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/04/APACHE-linux/" data-id="ckgg5oe090000zov28t2p2h5s" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-first_blog" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/03/first_blog/" class="article-date">
+  <time datetime="2018-12-03T07:55:56.000Z" itemprop="datePublished">2018-12-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/03/first_blog/">在windows下如何开通自己的博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="先期准备工作：配置-net-安装shadowsocks（代理服务器）"><a href="#先期准备工作：配置-net-安装shadowsocks（代理服务器）" class="headerlink" title="先期准备工作：配置.net   安装shadowsocks（代理服务器）"></a>先期准备工作：配置.net   安装shadowsocks（代理服务器）</h2><hr>
+<h3 id="1-github安装注册，下载githubDesktop（同步工具）"><a href="#1-github安装注册，下载githubDesktop（同步工具）" class="headerlink" title="1.github安装注册，下载githubDesktop（同步工具）"></a>1.github安装注册，下载githubDesktop（同步工具）</h3><h3 id="2-下载node-js安装包node-js官网"><a href="#2-下载node-js安装包node-js官网" class="headerlink" title="2.下载node.js安装包node.js官网"></a>2.下载node.js安装包<a target="_blank" rel="noopener" href="https://nodejs.org/en/">node.js官网</a></h3><pre><code>*    安装好node.js后可以cmd中运行npm试试安装成功了没   （node.js安装软件用的命令）</code></pre>
+<h3 id="3-下载git（百度搜git官网）或点击git官网并在硬盘中创建一个自己博客的目录（例：c：-blog），然后在目录中用cmd命令行安装hexo并初始化文件夹，hexo安装和文件夹初始化方法如下："><a href="#3-下载git（百度搜git官网）或点击git官网并在硬盘中创建一个自己博客的目录（例：c：-blog），然后在目录中用cmd命令行安装hexo并初始化文件夹，hexo安装和文件夹初始化方法如下：" class="headerlink" title="3.下载git（百度搜git官网）或点击git官网并在硬盘中创建一个自己博客的目录（例：c：\blog），然后在目录中用cmd命令行安装hexo并初始化文件夹，hexo安装和文件夹初始化方法如下："></a>3.下载git（百度搜git官网）或点击<a target="_blank" rel="noopener" href="https://git-scm.com/">git官网</a>并在硬盘中创建一个自己博客的目录（例：c：\blog），然后在目录中用cmd命令行安装hexo并初始化文件夹，hexo安装和文件夹初始化方法如下：</h3><pre><code>*   安装hexo的方法：在文件夹地址栏中把地址改为cmd然后回车打开cmd窗口， 运行 npm install -g hexo-cli命令  
+安装hexo（hexo.io）（hexo是自动生成网页的工具） 
+
+*   还是在d:\blog目录打开cmd命令行输入hexo init.回车， 来初始化你博客目录</code></pre>
+<h3 id="4-用VS编辑软件打开d：-blog-选择-config-yml，把url改成自己的博客地址"><a href="#4-用VS编辑软件打开d：-blog-选择-config-yml，把url改成自己的博客地址" class="headerlink" title="4.用VS编辑软件打开d：\blog  ,选择_config.yml，把url改成自己的博客地址"></a>4.用VS编辑软件打开d：\blog  ,选择_config.yml，把url改成自己的博客地址</h3><p> <img src="first_blog/vs.png" alt="图挂了？"></p>
+<h3 id="5-申请自己的博客仓库（域名）注意：必须是注册名-github-io的格式否则无法访问（www-github-com），仓库创建也可以在注册github时操作。"><a href="#5-申请自己的博客仓库（域名）注意：必须是注册名-github-io的格式否则无法访问（www-github-com），仓库创建也可以在注册github时操作。" class="headerlink" title="5.申请自己的博客仓库（域名）注意：必须是注册名.github.io的格式否则无法访问（www.github.com），仓库创建也可以在注册github时操作。"></a>5.申请自己的博客仓库（域名）<em>注意：必须是注册名.github.io的格式否则无法访问</em><a target="_blank" rel="noopener" href="https://github.com/">（www.github.com）</a>，仓库创建也可以在注册github时操作。</h3><h3 id="6-利用素材生成网页文件包（即生成-public目录）；hexo目录包含三个重点文件夹：theme主题、source内容、public网站成品"><a href="#6-利用素材生成网页文件包（即生成-public目录）；hexo目录包含三个重点文件夹：theme主题、source内容、public网站成品" class="headerlink" title="6.利用素材生成网页文件包（即生成/public目录）；hexo目录包含三个重点文件夹：theme主题、source内容、public网站成品"></a>6.利用素材生成网页文件包（即生成/public目录）；hexo目录包含三个重点文件夹：theme主题、source内容、public网站成品</h3><pre><code>*  cmd窗口中 执行hexo  generate来生成/public文件夹（做好的网页文件夹） 然后执行hexo  server
+来启动你的服务器,提示hexo运行的地址localhost：4000，在浏览器中输入localhost：4000即可看到你创建的页面</code></pre>
+<p> ![hexo server](first_blog/hexo server.jpg)  </p>
+<h3 id="7-登录gitHub-desktop-客户端-克隆刚才的路径（界面最右侧有个“clone”按钮，打开选择你之前创建的域名）来下载你网页文件到本地硬盘（这里要记住保存的路径，方便之后替换）"><a href="#7-登录gitHub-desktop-客户端-克隆刚才的路径（界面最右侧有个“clone”按钮，打开选择你之前创建的域名）来下载你网页文件到本地硬盘（这里要记住保存的路径，方便之后替换）" class="headerlink" title="7.登录gitHub desktop 客户端   克隆刚才的路径（界面最右侧有个“clone”按钮，打开选择你之前创建的域名）来下载你网页文件到本地硬盘（这里要记住保存的路径，方便之后替换）"></a>7.登录gitHub desktop 客户端   克隆刚才的路径（界面最右侧有个“clone”按钮，打开选择你之前创建的域名）来下载你网页文件到本地硬盘（这里要记住保存的路径，方便之后替换）</h3><pre><code>*   先用克隆的方法下载网页文件到本地路径（默认下载到我的文档中的GitHub文件夹中，有个文件夹名字是你的域名）
+*   打开名字是域名的文件夹，删除里面的内容（隐藏文件不要删）
+*   最后把之前博客目录里面的public目录文件拷贝到域名文件夹中</code></pre>
+<h3 id="8-上传：这时打开hexo-Desktop软件，就会提示你有变动，先保存变动（commit-to-master）然后上传（Fetch-orgin）"><a href="#8-上传：这时打开hexo-Desktop软件，就会提示你有变动，先保存变动（commit-to-master）然后上传（Fetch-orgin）" class="headerlink" title="8.上传：这时打开hexo Desktop软件，就会提示你有变动，先保存变动（commit to master）然后上传（Fetch orgin）"></a>8.上传：这时打开hexo Desktop软件，就会提示你有变动，先保存变动（commit to master）然后上传（Fetch orgin）</h3><pre><code>  大家就可以通过你的域名来看你的博客了！</code></pre>
+<p>   ![hexo change](first_blog/hexo change.jpg)<br>   ![change post](first_blog/change post.png)</p>
+<hr>
+<h2 id="附："><a href="#附：" class="headerlink" title="附："></a>附：</h2><h2 id="换主题-先找一个别人做好的主题文件，-在cmd-输入-git-clone“url”-下载到跟目标，把它解压到-theme文件夹中，-修改config文件theme为主题文件夹的名字，然后删除public文件夹重新生成网页文件"><a href="#换主题-先找一个别人做好的主题文件，-在cmd-输入-git-clone“url”-下载到跟目标，把它解压到-theme文件夹中，-修改config文件theme为主题文件夹的名字，然后删除public文件夹重新生成网页文件" class="headerlink" title="换主题  先找一个别人做好的主题文件， 在cmd  输入  git clone“url” 下载到跟目标，把它解压到/theme文件夹中，  修改config文件theme为主题文件夹的名字，然后删除public文件夹重新生成网页文件"></a>换主题  先找一个别人做好的主题文件， 在cmd  输入  git clone“url” 下载到跟目标，把它解压到/theme文件夹中，  修改config文件theme为主题文件夹的名字，然后删除public文件夹重新生成网页文件</h2><pre><code>*   删除public目录---git  clear  重新生成网页文件（即public目录）---执行hexo  generate     
+重新开启服务器 ---hexo  server   </code></pre>
+<h2 id="9-发微博：hexo-new-“my-new-post”在-source-post-文件夹中新建一个-md文件，用编辑软件打开这个文件就可以修改内容发表了。（发表方法见第8条的上传）"><a href="#9-发微博：hexo-new-“my-new-post”在-source-post-文件夹中新建一个-md文件，用编辑软件打开这个文件就可以修改内容发表了。（发表方法见第8条的上传）" class="headerlink" title="9.发微博：hexo new “my new post”在/source/_post/文件夹中新建一个.md文件，用编辑软件打开这个文件就可以修改内容发表了。（发表方法见第8条的上传）"></a>9.发微博：hexo new “my new post”在/source/_post/文件夹中新建一个.md文件，用编辑软件打开这个文件就可以修改内容发表了。（发表方法见第8条的上传）</h2><p>  <a target="_blank" rel="noopener" href="https://github.com/younghz/Markdown">学习使用markdown语法</a></p>
+<p>  <a target="_blank" rel="noopener" href="https://markdown-zh.readthedocs.io/en/latest/">markdown中文文档样子</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/03/first_blog/" data-id="ckgg5oe0j0009zov2anox4k53" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-api-php-registry/" rel="tag">docker-api,php,registry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/information-collect/" rel="tag">information collect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E6%9F%A5%E6%89%BE/" rel="tag">linux命令之查找</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-%E6%89%AB%E6%8F%8F/" rel="tag">python 扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis%E6%BC%8F%E6%B4%9E-%E4%B8%80%E8%88%AC%E5%86%85%E7%BD%91%EF%BC%89/" rel="tag">redis漏洞(一般内网）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell-%E8%84%9A%E6%9C%AC-Linux-search/" rel="tag">shell 脚本 Linux search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell%E5%8F%8D%E5%BC%B9%E3%80%81powershell%E5%8F%8D%E5%BC%B9/" rel="tag">shell反弹、powershell反弹</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql-inject/" rel="tag">sql_inject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B/" rel="tag">sql注入流程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-%E5%9F%9F-%E5%9F%9F%E6%B8%97%E9%80%8F/" rel="tag">windows 域 域渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91-%E6%8F%90%E6%9D%83/" rel="tag">内网/提权</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E8%BD%AC%E5%8F%91/" rel="tag">内网转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E4%BD%BF%E7%94%A8/" rel="tag">常用工具及使用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" rel="tag">文件包含漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%87waf/" rel="tag">过waf</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/docker-api-php-registry/" style="font-size: 10px;">docker-api,php,registry</a> <a href="/tags/information-collect/" style="font-size: 10px;">information collect</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">linux命令之查找</a> <a href="/tags/python-%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">python 扫描</a> <a href="/tags/redis%E6%BC%8F%E6%B4%9E-%E4%B8%80%E8%88%AC%E5%86%85%E7%BD%91%EF%BC%89/" style="font-size: 10px;">redis漏洞(一般内网）</a> <a href="/tags/shell-%E8%84%9A%E6%9C%AC-Linux-search/" style="font-size: 10px;">shell 脚本 Linux search</a> <a href="/tags/shell%E5%8F%8D%E5%BC%B9%E3%80%81powershell%E5%8F%8D%E5%BC%B9/" style="font-size: 10px;">shell反弹、powershell反弹</a> <a href="/tags/sql-inject/" style="font-size: 10px;">sql_inject</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">sql注入</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B/" style="font-size: 10px;">sql注入流程</a> <a href="/tags/windows-%E5%9F%9F-%E5%9F%9F%E6%B8%97%E9%80%8F/" style="font-size: 10px;">windows 域 域渗透</a> <a href="/tags/%E5%86%85%E7%BD%91-%E6%8F%90%E6%9D%83/" style="font-size: 10px;">内网/提权</a> <a href="/tags/%E5%86%85%E7%BD%91%E8%BD%AC%E5%8F%91/" style="font-size: 10px;">内网转发</a> <a href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E4%BD%BF%E7%94%A8/" style="font-size: 10px;">常用工具及使用</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">文件包含漏洞</a> <a href="/tags/%E8%BF%87waf/" style="font-size: 10px;">过waf</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/10/19/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/31/python%E6%89%B9%E9%87%8F%E7%88%AC%E5%8F%96URL%E9%85%8D%E5%90%88AWVS/">python批量爬取URL配合AWVS</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/24/first-shell/">first shell</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/24/docker-api/">php与docker-api与私有仓库</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/24/%E5%9F%9F%E6%B8%97%E9%80%8F/">域渗透</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
 </footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
 
-<!-- jQuery -->
-
-<script src="/js/jquery.min.js"></script>
-
-
-<!-- Bootstrap Core JavaScript -->
-
-<script src="/js/bootstrap.min.js"></script>
-
-
-<!-- Custom Theme JavaScript -->
-
-<script src="/js/blog.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
-<!-- jquery.tagcloud.js -->
-<script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://pengpengp.github.io/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-<!--fastClick.js -->
-<script>
-    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
-<!-- Google Analytics -->
+
+<script src="/js/script.js"></script>
 
 
 
-<!-- Baidu Tongji -->
 
-
-<!-- swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install','','2.0.0');
-</script>
-
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<!--wechat title img-->
-<img class="wechat-title-img" src="">
+  </div>
 </body>
-
 </html>

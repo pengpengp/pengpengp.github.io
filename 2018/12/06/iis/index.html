@@ -1,177 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <meta name="theme-color" content="#600090">
-    <meta name="msapplication-navbutton-color" content="#600090">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
-    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
-    <link rel="alternate" type="application/atom+xml" title="pengpengp&#39;s BLOG" href="/atom.xml">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
-    <title>
-        
-        windows server 2008 iis服务器搭建｜undefined
-        
-    </title>
+  <meta charset="utf-8">
+  
 
-    <link rel="canonical" href="https://pengpengp.github.io/2018/12/06/iis/">
-
-    <!-- Bootstrap Core CSS -->
-    
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-
-
-    <!-- Custom CSS -->
-    
-<link rel="stylesheet" href="/css/blog-style.css">
-
-
-    <!-- Pygments Github CSS -->
-    
-<link rel="stylesheet" href="/css/syntax.css">
+  
+  <title>windows server 2008 iis服务器搭建 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="准备工作：首先在虚拟机中安装好windows server 2008 R2系统（64位），下载sql server 2008版本（64位）不用拉进虚拟机。 搭建网站：1.进入windows server 2008，打开服务管理器—–&gt;添加角色—-&gt;添加web服务器——-&gt;勾选常见HTTP功能（需要后台的话还要勾选应用程序开发）、iis可承载web核心 ——&gt;安装、完成即可；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="windows server 2008 iis服务器搭建">
+<meta property="og:url" content="http://example.com/2018/12/06/iis/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="准备工作：首先在虚拟机中安装好windows server 2008 R2系统（64位），下载sql server 2008版本（64位）不用拉进虚拟机。 搭建网站：1.进入windows server 2008，打开服务管理器—–&gt;添加角色—-&gt;添加web服务器——-&gt;勾选常见HTTP功能（需要后台的话还要勾选应用程序开发）、iis可承载web核心 ——&gt;安装、完成即可；">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2018/12/06/iis/iis/juese2.jpg">
+<meta property="og:image" content="http://example.com/2018/12/06/iis/iis/juese3.jpg">
+<meta property="og:image" content="http://example.com/2018/12/06/iis/iis/wangzhan.jpg">
+<meta property="og:image" content="http://example.com/2018/12/06/iis/iis/quanxian.jpg">
+<meta property="og:image" content="http://example.com/2018/12/06/iis/iis/asp.jpg">
+<meta property="og:image" content="http://example.com/2018/12/06/iis/iis/asp.php.jpg">
+<meta property="og:image" content="http://example.com/2018/12/06/iis/iis/32wei.jpg">
+<meta property="og:image" content="http://example.com/2018/12/06/iis/iis/peizhi.jpg">
+<meta property="article:published_time" content="2018-12-06T14:07:28.000Z">
+<meta property="article:modified_time" content="2018-12-07T13:28:25.401Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2018/12/06/iis/iis/juese2.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
 <meta name="generator" content="Hexo 5.2.0"></head>
 
-<style>
-
-    header.intro-header {
-        background-image: url('')
-    }
-</style>
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="" class="animated fadeIn">
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
-" data-ishome = "false" >
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand animated pulse" href="/">
-                <span class="brand-logo">
-                    pengpengp&#39;s BLOG
-                </span>
-                's Blog
-            </a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <!-- /.navbar-collapse -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-					
-                    
-					
-					
-                </ul>
-            </div>
-        </div>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
     </div>
-    <!-- /.container -->
-</nav>
-<script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-//    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
-
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
-
-<!-- Main Content -->
-
-<!--only post-->
-
-
-<img class="wechat-title-img"
-     src="">
-
-
-<style>
-    
-    header.intro-header {
-        background-image: url('')
-    }
-
-    
-</style>
-
-<header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <div class="post-heading">
-                    <h1>windows server 2008 iis服务器搭建</h1>
-                    
-                    <span class="meta">
-                         作者 pengpengp
-                        <span>
-                          日期 2018-12-06
-                         </span>
-                    </span>
-                    <div class="tags text-center">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
     </div>
-    <div class="post-title-haojen">
-        <span>
-            windows server 2008 iis服务器搭建
-        </span>
-    </div>
+  </div>
 </header>
+      <div class="outer">
+        <section id="main"><article id="post-iis" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/06/iis/" class="article-date">
+  <time datetime="2018-12-06T14:07:28.000Z" itemprop="datePublished">2018-12-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      windows server 2008 iis服务器搭建
+    </h1>
+  
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-            <!-- Post Container -->
-            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="准备工作：首先在虚拟机中安装好windows-server-2008-R2系统（64位），下载sql-server-2008版本（64位）不用拉进虚拟机。"><a href="#准备工作：首先在虚拟机中安装好windows-server-2008-R2系统（64位），下载sql-server-2008版本（64位）不用拉进虚拟机。" class="headerlink" title="准备工作：首先在虚拟机中安装好windows server 2008 R2系统（64位），下载sql server 2008版本（64位）不用拉进虚拟机。"></a>准备工作：首先在虚拟机中安装好windows server 2008 R2系统（64位），下载sql server 2008版本（64位）不用拉进虚拟机。</h2><hr>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="准备工作：首先在虚拟机中安装好windows-server-2008-R2系统（64位），下载sql-server-2008版本（64位）不用拉进虚拟机。"><a href="#准备工作：首先在虚拟机中安装好windows-server-2008-R2系统（64位），下载sql-server-2008版本（64位）不用拉进虚拟机。" class="headerlink" title="准备工作：首先在虚拟机中安装好windows server 2008 R2系统（64位），下载sql server 2008版本（64位）不用拉进虚拟机。"></a>准备工作：首先在虚拟机中安装好windows server 2008 R2系统（64位），下载sql server 2008版本（64位）不用拉进虚拟机。</h2><hr>
 <h2 id="搭建网站："><a href="#搭建网站：" class="headerlink" title="搭建网站："></a>搭建网站：</h2><p>1.进入windows server 2008，打开服务管理器—–&gt;添加角色—-&gt;添加web服务器——-&gt;勾选常见HTTP功能（需要后台的话还要勾选应用程序开发）、iis可承载web核心 ——&gt;安装、完成即可；<br><img src="iis/juese2.jpg" alt="juese2"><br><img src="iis/juese3.jpg" alt="juese3"><br>2.导入网站源码（以aspcms为实验对象）在C盘创建个文件夹叫www，把源码复制进去；</p>
 <p>3.在iis服务器中点右键选择添加网站。<br><img src="iis/wangzhan.jpg" alt="wangzhan"></p>
 <hr>
@@ -183,174 +109,144 @@
 <hr>
 <h2 id="把Access数据库文件导入sql-server数据库："><a href="#把Access数据库文件导入sql-server数据库：" class="headerlink" title="把Access数据库文件导入sql server数据库："></a>把Access数据库文件导入sql server数据库：</h2><p>新建一个数据库—–&gt;右键点任务——-&gt;导入数据——–&gt;数据源选Access（导入文件在网站配置文件中能找到）———&gt;选择要导入的表和视图———&gt;修改配置文件。<br><img src="iis/peizhi.jpg" alt="peizhi"></p>
 
-                <hr>
-                
-
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/2018/12/08/linux-exam/" data-toggle="tooltip" data-placement="top"
-                           title="linux exam">&larr; Previous Post</a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/2018/12/05/LAMP/" data-toggle="tooltip" data-placement="top"
-                           title="LAMP环境搭建">Next Post &rarr;</a>
-                    </li>
-                    
-                </ul>
-
-                
-
-                
-
-
-                <!--加入新的评论系统-->
-                
-
-                
-
-            </div>
-
-            <div class="hidden-xs col-sm-3 toc-col">
-                <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C%EF%BC%9A%E9%A6%96%E5%85%88%E5%9C%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E5%AE%89%E8%A3%85%E5%A5%BDwindows-server-2008-R2%E7%B3%BB%E7%BB%9F%EF%BC%8864%E4%BD%8D%EF%BC%89%EF%BC%8C%E4%B8%8B%E8%BD%BDsql-server-2008%E7%89%88%E6%9C%AC%EF%BC%8864%E4%BD%8D%EF%BC%89%E4%B8%8D%E7%94%A8%E6%8B%89%E8%BF%9B%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%82"><span class="toc-text">准备工作：首先在虚拟机中安装好windows server 2008 R2系统（64位），下载sql server 2008版本（64位）不用拉进虚拟机。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99%EF%BC%9A"><span class="toc-text">搭建网站：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%AB%99%E8%AE%BE%E7%BD%AE%EF%BC%9A"><span class="toc-text">网站设置：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sql-server%E5%AE%89%E8%A3%85%EF%BC%9A"><span class="toc-text">sql server安装：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%8AAccess%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6%E5%AF%BC%E5%85%A5sql-server%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%9A"><span class="toc-text">把Access数据库文件导入sql server数据库：</span></a></li></ol>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-
-                <!-- Friends Blog -->
-                
-            </div>
-        </div>
-
+      
     </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/06/iis/" data-id="ckgg5oe0n000hzov27h0385n9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/12/08/linux-exam/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          linux exam
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/12/05/LAMP/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">LAMP环境搭建</div>
+    </a>
+  
+</nav>
+
+  
 </article>
 
+</section>
+        
+          <aside id="sidebar">
+  
+    
 
-
-
-
-
-
-<!-- Footer -->
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <br>
-                <ul class="list-inline text-center">
-                
-                
-                
-
-                
-
-                
-
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; pengpengp&#39;s BLOG 2020
-                    <br>
-                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
-                    <br>
-                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
-                </p>
-
-            </div>
-        </div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-api-php-registry/" rel="tag">docker-api,php,registry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/information-collect/" rel="tag">information collect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E6%9F%A5%E6%89%BE/" rel="tag">linux命令之查找</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-%E6%89%AB%E6%8F%8F/" rel="tag">python 扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis%E6%BC%8F%E6%B4%9E-%E4%B8%80%E8%88%AC%E5%86%85%E7%BD%91%EF%BC%89/" rel="tag">redis漏洞(一般内网）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell-%E8%84%9A%E6%9C%AC-Linux-search/" rel="tag">shell 脚本 Linux search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell%E5%8F%8D%E5%BC%B9%E3%80%81powershell%E5%8F%8D%E5%BC%B9/" rel="tag">shell反弹、powershell反弹</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql-inject/" rel="tag">sql_inject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B/" rel="tag">sql注入流程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-%E5%9F%9F-%E5%9F%9F%E6%B8%97%E9%80%8F/" rel="tag">windows 域 域渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91-%E6%8F%90%E6%9D%83/" rel="tag">内网/提权</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E8%BD%AC%E5%8F%91/" rel="tag">内网转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E4%BD%BF%E7%94%A8/" rel="tag">常用工具及使用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" rel="tag">文件包含漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%87waf/" rel="tag">过waf</a></li></ul>
     </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/docker-api-php-registry/" style="font-size: 10px;">docker-api,php,registry</a> <a href="/tags/information-collect/" style="font-size: 10px;">information collect</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">linux命令之查找</a> <a href="/tags/python-%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">python 扫描</a> <a href="/tags/redis%E6%BC%8F%E6%B4%9E-%E4%B8%80%E8%88%AC%E5%86%85%E7%BD%91%EF%BC%89/" style="font-size: 10px;">redis漏洞(一般内网）</a> <a href="/tags/shell-%E8%84%9A%E6%9C%AC-Linux-search/" style="font-size: 10px;">shell 脚本 Linux search</a> <a href="/tags/shell%E5%8F%8D%E5%BC%B9%E3%80%81powershell%E5%8F%8D%E5%BC%B9/" style="font-size: 10px;">shell反弹、powershell反弹</a> <a href="/tags/sql-inject/" style="font-size: 10px;">sql_inject</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">sql注入</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B/" style="font-size: 10px;">sql注入流程</a> <a href="/tags/windows-%E5%9F%9F-%E5%9F%9F%E6%B8%97%E9%80%8F/" style="font-size: 10px;">windows 域 域渗透</a> <a href="/tags/%E5%86%85%E7%BD%91-%E6%8F%90%E6%9D%83/" style="font-size: 10px;">内网/提权</a> <a href="/tags/%E5%86%85%E7%BD%91%E8%BD%AC%E5%8F%91/" style="font-size: 10px;">内网转发</a> <a href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E4%BD%BF%E7%94%A8/" style="font-size: 10px;">常用工具及使用</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">文件包含漏洞</a> <a href="/tags/%E8%BF%87waf/" style="font-size: 10px;">过waf</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/10/19/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/31/python%E6%89%B9%E9%87%8F%E7%88%AC%E5%8F%96URL%E9%85%8D%E5%90%88AWVS/">python批量爬取URL配合AWVS</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/24/first-shell/">first shell</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/24/docker-api/">php与docker-api与私有仓库</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/24/%E5%9F%9F%E6%B8%97%E9%80%8F/">域渗透</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
 </footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
 
-<!-- jQuery -->
-
-<script src="/js/jquery.min.js"></script>
-
-
-<!-- Bootstrap Core JavaScript -->
-
-<script src="/js/bootstrap.min.js"></script>
-
-
-<!-- Custom Theme JavaScript -->
-
-<script src="/js/blog.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
-<!-- jquery.tagcloud.js -->
-<script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://pengpengp.github.io/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-<!--fastClick.js -->
-<script>
-    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
-<!-- Google Analytics -->
+
+<script src="/js/script.js"></script>
 
 
 
-<!-- Baidu Tongji -->
 
-
-<!-- swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install','','2.0.0');
-</script>
-
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<!--wechat title img-->
-<img class="wechat-title-img" src="">
+  </div>
 </body>
-
 </html>

