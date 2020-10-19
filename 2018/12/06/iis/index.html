@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,14 +25,20 @@
     <link rel="canonical" href="https://pengpengp.github.io/2018/12/06/iis/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-</head>
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 <style>
 
@@ -43,8 +49,8 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
-" data-ishome="false">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -119,7 +125,8 @@
 <!--only post-->
 
 
-<img class="wechat-title-img" src="">
+<img class="wechat-title-img"
+     src="">
 
 
 <style>
@@ -165,16 +172,16 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <h2 id="准备工作：首先在虚拟机中安装好windows-server-2008-R2系统（64位），下载sql-server-2008版本（64位）不用拉进虚拟机。"><a href="#准备工作：首先在虚拟机中安装好windows-server-2008-R2系统（64位），下载sql-server-2008版本（64位）不用拉进虚拟机。" class="headerlink" title="准备工作：首先在虚拟机中安装好windows server 2008 R2系统（64位），下载sql server 2008版本（64位）不用拉进虚拟机。"></a>准备工作：首先在虚拟机中安装好windows server 2008 R2系统（64位），下载sql server 2008版本（64位）不用拉进虚拟机。</h2><hr>
-<h2 id="搭建网站："><a href="#搭建网站：" class="headerlink" title="搭建网站："></a>搭建网站：</h2><p>1.进入windows server 2008，打开服务管理器—–&gt;添加角色—-&gt;添加web服务器——-&gt;勾选常见HTTP功能（需要后台的话还要勾选应用程序开发）、iis可承载web核心 ——&gt;安装、完成即可；<br><img src="/2018/12/06/iis/juese2.jpg" alt="juese2"><br><img src="/2018/12/06/iis/juese3.jpg" alt="juese3"><br>2.导入网站源码（以aspcms为实验对象）在C盘创建个文件夹叫www，把源码复制进去；</p>
-<p>3.在iis服务器中点右键选择添加网站。<br><img src="/2018/12/06/iis/wangzhan.jpg" alt="wangzhan"></p>
+<h2 id="搭建网站："><a href="#搭建网站：" class="headerlink" title="搭建网站："></a>搭建网站：</h2><p>1.进入windows server 2008，打开服务管理器—–&gt;添加角色—-&gt;添加web服务器——-&gt;勾选常见HTTP功能（需要后台的话还要勾选应用程序开发）、iis可承载web核心 ——&gt;安装、完成即可；<br><img src="iis/juese2.jpg" alt="juese2"><br><img src="iis/juese3.jpg" alt="juese3"><br>2.导入网站源码（以aspcms为实验对象）在C盘创建个文件夹叫www，把源码复制进去；</p>
+<p>3.在iis服务器中点右键选择添加网站。<br><img src="iis/wangzhan.jpg" alt="wangzhan"></p>
 <hr>
-<h2 id="网站设置："><a href="#网站设置：" class="headerlink" title="网站设置："></a>网站设置：</h2><p>1.在iis管理器中找到自己刚建的网站右键“编辑权限”，——&gt;安全——&gt;编辑———&gt;给user赋予完全控制的权限；<br><img src="/2018/12/06/iis/quanxian.jpg" alt="quanxian"><br>2.iis管理器中找到“ASP”双击启动，更改“启用父路径”位“TRUE”；<br><img src="/2018/12/06/iis/asp.jpg" alt="asp"><br>3.iis管理器中打开“默认文档”，把刚才导入的网站执行文件名字导入(如果里面有了就不用了)；<br><img src="/2018/12/06/iis/asp.php.jpg" alt="asp.php"><br>4.iis管理器中的应用池—–&gt;基本设置改为自己想要的.net版本<br>                    —–&gt;高级设置中把“启用32位应用程序”支持改为“true”<br><img src="/2018/12/06/iis/32wei.jpg" alt="32wei"></p>
+<h2 id="网站设置："><a href="#网站设置：" class="headerlink" title="网站设置："></a>网站设置：</h2><p>1.在iis管理器中找到自己刚建的网站右键“编辑权限”，——&gt;安全——&gt;编辑———&gt;给user赋予完全控制的权限；<br><img src="iis/quanxian.jpg" alt="quanxian"><br>2.iis管理器中找到“ASP”双击启动，更改“启用父路径”位“TRUE”；<br><img src="iis/asp.jpg" alt="asp"><br>3.iis管理器中打开“默认文档”，把刚才导入的网站执行文件名字导入(如果里面有了就不用了)；<br><img src="iis/asp.php.jpg" alt="asp.php"><br>4.iis管理器中的应用池—–&gt;基本设置改为自己想要的.net版本<br>                    —–&gt;高级设置中把“启用32位应用程序”支持改为“true”<br><img src="iis/32wei.jpg" alt="32wei"></p>
 <hr>
 <h2 id="sql-server安装："><a href="#sql-server安装：" class="headerlink" title="sql server安装："></a>sql server安装：</h2><p>1.用虚拟机cd加载sql server的镜像，选择“全新安装”<br>        &gt;功能选择：数据库引擎服务、</p>
 <p>2.全新安装，一路下一步——-&gt;功能选择：数据库引擎服务、客户端工具连接、管理工具、sql客户端连接sdk——–&gt;验证方式：混合模式，用户名sa—安装。</p>
 <p>3.开始菜单——-&gt; sql server management studio——-&gt;服务器名127.0.0.1、验证方式选择windows验证—–&gt;完成。</p>
 <hr>
-<h2 id="把Access数据库文件导入sql-server数据库："><a href="#把Access数据库文件导入sql-server数据库：" class="headerlink" title="把Access数据库文件导入sql server数据库："></a>把Access数据库文件导入sql server数据库：</h2><p>新建一个数据库—–&gt;右键点任务——-&gt;导入数据——–&gt;数据源选Access（导入文件在网站配置文件中能找到）———&gt;选择要导入的表和视图———&gt;修改配置文件。<br><img src="/2018/12/06/iis/peizhi.jpg" alt="peizhi"></p>
+<h2 id="把Access数据库文件导入sql-server数据库："><a href="#把Access数据库文件导入sql-server数据库：" class="headerlink" title="把Access数据库文件导入sql server数据库："></a>把Access数据库文件导入sql server数据库：</h2><p>新建一个数据库—–&gt;右键点任务——-&gt;导入数据——–&gt;数据源选Access（导入文件在网站配置文件中能找到）———&gt;选择要导入的表和视图———&gt;修改配置文件。<br><img src="iis/peizhi.jpg" alt="peizhi"></p>
 
                 <hr>
                 
@@ -182,12 +189,14 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/12/08/linux-exam/" data-toggle="tooltip" data-placement="top" title="linux exam">&larr; Previous Post</a>
+                        <a href="/2018/12/08/linux-exam/" data-toggle="tooltip" data-placement="top"
+                           title="linux exam">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2018/12/05/LAMP/" data-toggle="tooltip" data-placement="top" title="LAMP环境搭建">Next Post &rarr;</a>
+                        <a href="/2018/12/05/LAMP/" data-toggle="tooltip" data-placement="top"
+                           title="LAMP环境搭建">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -206,7 +215,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备工作：首先在虚拟机中安装好windows-server-2008-R2系统（64位），下载sql-server-2008版本（64位）不用拉进虚拟机。"><span class="toc-text">准备工作：首先在虚拟机中安装好windows server 2008 R2系统（64位），下载sql server 2008版本（64位）不用拉进虚拟机。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建网站："><span class="toc-text">搭建网站：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网站设置："><span class="toc-text">网站设置：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sql-server安装："><span class="toc-text">sql server安装：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#把Access数据库文件导入sql-server数据库："><span class="toc-text">把Access数据库文件导入sql server数据库：</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C%EF%BC%9A%E9%A6%96%E5%85%88%E5%9C%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E5%AE%89%E8%A3%85%E5%A5%BDwindows-server-2008-R2%E7%B3%BB%E7%BB%9F%EF%BC%8864%E4%BD%8D%EF%BC%89%EF%BC%8C%E4%B8%8B%E8%BD%BDsql-server-2008%E7%89%88%E6%9C%AC%EF%BC%8864%E4%BD%8D%EF%BC%89%E4%B8%8D%E7%94%A8%E6%8B%89%E8%BF%9B%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%82"><span class="toc-text">准备工作：首先在虚拟机中安装好windows server 2008 R2系统（64位），下载sql server 2008版本（64位）不用拉进虚拟机。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99%EF%BC%9A"><span class="toc-text">搭建网站：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%AB%99%E8%AE%BE%E7%BD%AE%EF%BC%9A"><span class="toc-text">网站设置：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sql-server%E5%AE%89%E8%A3%85%EF%BC%9A"><span class="toc-text">sql server安装：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%8AAccess%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6%E5%AF%BC%E5%85%A5sql-server%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%9A"><span class="toc-text">把Access数据库文件导入sql server数据库：</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -258,11 +267,11 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; pengpengp&#39;s BLOG 2019
+                    Copyright &copy; pengpengp&#39;s BLOG 2020
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>
@@ -271,13 +280,19 @@
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>

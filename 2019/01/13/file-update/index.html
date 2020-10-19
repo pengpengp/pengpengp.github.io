@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,14 +25,20 @@
     <link rel="canonical" href="https://pengpengp.github.io/2019/01/13/file-update/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-</head>
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 <style>
 
@@ -43,8 +49,8 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
-" data-ishome="false">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -119,7 +125,8 @@
 <!--only post-->
 
 
-<img class="wechat-title-img" src="">
+<img class="wechat-title-img"
+     src="">
 
 
 <style>
@@ -146,7 +153,8 @@
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#文件上传" title="文件上传">文件上传</a>
+                        <a class="tag" href="/tags/#文件上传"
+                           title="文件上传">文件上传</a>
                         
                     </div>
                 </div>
@@ -176,22 +184,21 @@
 <p>二. 上传漏洞</p>
 <p>1.哪里会产生漏洞：相册、视频、附件、文件管理器</p>
 <p>2.php接收上传的方式：</p>
-<pre><code>$_FILES[&apos;file&apos;]            文件名
-$_FILES[&apos;temp_name&apos;]    临时目录
-$_FILES[&apos;type&apos;]            类型
-$_FILES[&apos;size&apos;]            大小
-</code></pre><p>3.移动接收到的文件    </p>
+<pre><code>$_FILES[&#39;file&#39;]            文件名
+$_FILES[&#39;temp_name&#39;]    临时目录
+$_FILES[&#39;type&#39;]            类型
+$_FILES[&#39;size&#39;]            大小</code></pre>
+<p>3.移动接收到的文件    </p>
 <p><code>move_uploaded_files($_FILES[&#39;file&#39;],&#39;uploads/a.jpg&#39;)</code></p>
 <p>4.上传成功后需要找到文件名和路径==》<br>问题：<br>    文件名处理：<br>    后缀名处理：<br>    不显示路径:先传正常的文件，找到文件，再上传木马 </p>
 <p>5.上传文件的处理方式：***重要</p>
-<p><em>不处理
-    </em>js验证  ==》关闭浏览器js/用burp工具改文件名<br>    <em>type类型验证：浏览器识别的类型            content-type修改
-    </em>文件头检测</p>
+<p>*不处理<br>    *js验证  ==》关闭浏览器js/用burp工具改文件名<br>    *type类型验证：浏览器识别的类型            content-type修改<br>    *文件头检测</p>
 <blockquote>
 <p>测试文件上传漏洞的三个点：类型、内容、后缀名</p>
 </blockquote>
 <p>注意burp抓到包后显示的内容的对应关系：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">name=&quot;file&quot; 对应--&gt; &lt;name=&quot;file&quot;&gt;	</span><br><span class="line"></span><br><span class="line">filename=&quot;123.jpg&quot;对应--&gt;上传的文件名</span><br><span class="line"></span><br><span class="line">content-Type对应--&gt;浏览器识别的文件类型</span><br><span class="line"></span><br><span class="line">下面的空白  对应--&gt;上传文件的内容</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">name&#x3D;&quot;file&quot; 对应--&gt; &lt;name&#x3D;&quot;file&quot;&gt;	</span><br><span class="line"></span><br><span class="line">filename&#x3D;&quot;123.jpg&quot;对应--&gt;上传的文件名</span><br><span class="line"></span><br><span class="line">content-Type对应--&gt;浏览器识别的文件类型</span><br><span class="line"></span><br><span class="line">下面的空白  对应--&gt;上传文件的内容</span><br></pre></td></tr></table></figure>
+
 <p>制作图片木马：cmd下  <code>copy 213.jpg/b + 123.php /a 1.php</code></p>
 <p>实验：i春秋网站文件上传实验</p>
 <ul>
@@ -203,11 +210,11 @@ $_FILES[&apos;size&apos;]            大小
 </ul>
 <p>  1.文件名截断：（php5.2漏洞）</p>
 <p>  ​    </p>
-<p>  1.1.–&gt;文件名后加点<code>.</code>、空格<code></code>、点空格点<code>. .</code>、?.jpg、冒号 冒号空格、%00、_、::$DATA加很多…….</p>
-<pre><code>例如：    404.php%00.jpg--&gt;会保存成404.php
+<p>  1.1.–&gt;文件名后加点<code>.</code>、空格<code> </code>、点空格点<code>. .</code>、?.jpg、冒号 冒号空格、%00、_、::$DATA加很多…….</p>
+<pre><code>      例如：    404.php%00.jpg--&gt;会保存成404.php
 
-    404.php .jpg--&gt;会保存成404.php
-</code></pre><p>  1.2.–&gt;用<code>SetHandler application/x-httpd-php</code>命令,保存成.htaccess文件上传，然后用浏览器访问看看成功没有；–&gt;或者用<code>AddHandler application/x-httpd-php .jpg</code>命令添加一条允许的后缀</p>
+          404.php .jpg--&gt;会保存成404.php</code></pre>
+<p>  1.2.–&gt;用<code>SetHandler application/x-httpd-php</code>命令,保存成.htaccess文件上传，然后用浏览器访问看看成功没有；–&gt;或者用<code>AddHandler application/x-httpd-php .jpg</code>命令添加一条允许的后缀</p>
 <p>  2.目录截断    </p>
 <p>  ​        文件名改成404.jpg，再把上传的目录后的文件名改成404.php .jpg, 然后在hex中找到20改成00再上传—- &gt;会保存成404.php</p>
 <ul>
@@ -221,7 +228,7 @@ $_FILES[&apos;size&apos;]            大小
 <p>-&gt;线上实验：FCK编辑器漏洞</p>
 <p>nginx和iis7.5解析漏洞<br>        1.aa.pdf/aa.txt会被运行<br>        2.%00截断比较少见</p>
 <p>例：<code>http://192.168.11.29/404.txt/aaasfa.php会把404.txt里面的php</code>的代码运行</p>
-<p>windows解析漏洞（详情见前面的黑白名单解析部分）<br>        test.asp(空格)–&gt;在windows环境下，xx.jpg[空格] 或xx.jpg. 这两类文件都是不允许存在的，若这样命名，windows会默认除去空格或点，这也是可以被利用的！ {<a href="http://link.zhihu.com/?target=http%3A//lib.csdn.net/base/linux" target="_blank" rel="noopener">Linux</a>主机中不行，Linux允许这类文件存在}<br>        test.asp(. .)–&gt;点空格点</p>
+<p>windows解析漏洞（详情见前面的黑白名单解析部分）<br>        test.asp(空格)–&gt;在windows环境下，xx.jpg[空格] 或xx.jpg. 这两类文件都是不允许存在的，若这样命名，windows会默认除去空格或点，这也是可以被利用的！ {<a href="http://link.zhihu.com/?target=http://lib.csdn.net/base/linux">Linux</a>主机中不行，Linux允许这类文件存在}<br>        test.asp(. .)–&gt;点空格点</p>
 <p>​    </p>
 
                 <hr>
@@ -230,12 +237,14 @@ $_FILES[&apos;size&apos;]            大小
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2019/01/15/cross-waf/" data-toggle="tooltip" data-placement="top" title="cross_waf">&larr; Previous Post</a>
+                        <a href="/2019/01/15/cross-waf/" data-toggle="tooltip" data-placement="top"
+                           title="cross_waf">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2019/01/04/sql-inject-advance/" data-toggle="tooltip" data-placement="top" title="sql_注入进阶">Next Post &rarr;</a>
+                        <a href="/2019/01/04/sql-inject-advance/" data-toggle="tooltip" data-placement="top"
+                           title="sql_注入进阶">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -306,11 +315,11 @@ $_FILES[&apos;size&apos;]            大小
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; pengpengp&#39;s BLOG 2019
+                    Copyright &copy; pengpengp&#39;s BLOG 2020
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>
@@ -319,13 +328,19 @@ $_FILES[&apos;size&apos;]            大小
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>

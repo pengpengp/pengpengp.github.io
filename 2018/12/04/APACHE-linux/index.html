@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,14 +25,20 @@
     <link rel="canonical" href="https://pengpengp.github.io/2018/12/04/APACHE-linux/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-</head>
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 <style>
 
@@ -43,8 +49,8 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
-" data-ishome="false">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -119,7 +125,8 @@
 <!--only post-->
 
 
-<img class="wechat-title-img" src="">
+<img class="wechat-title-img"
+     src="">
 
 
 <style>
@@ -166,35 +173,32 @@
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <h3 id="1-首先需要下载好安装套件（yum-groupinstall-“Development-Tools”）然后在网上下载好apache的安装包-（这里使用下载的是源码压缩包，名字为httpd-2-4-37-tar-gz）"><a href="#1-首先需要下载好安装套件（yum-groupinstall-“Development-Tools”）然后在网上下载好apache的安装包-（这里使用下载的是源码压缩包，名字为httpd-2-4-37-tar-gz）" class="headerlink" title="1.首先需要下载好安装套件（yum groupinstall “Development Tools”）然后在网上下载好apache的安装包,（这里使用下载的是源码压缩包，名字为httpd-2.4.37.tar.gz）"></a>1.首先需要下载好安装套件（yum groupinstall “Development Tools”）然后在网上下载好apache的安装包,（这里使用下载的是源码压缩包，名字为httpd-2.4.37.tar.gz）</h3><h3 id="2-把httpd-2-4-37-tar-gz传到虚拟机中，我用的是centOS7。"><a href="#2-把httpd-2-4-37-tar-gz传到虚拟机中，我用的是centOS7。" class="headerlink" title="2.把httpd-2.4.37.tar.gz传到虚拟机中，我用的是centOS7。"></a>2.把httpd-2.4.37.tar.gz传到虚拟机中，我用的是centOS7。</h3><ul>
 <li>这里为了把文件传到linux，使用了openssh连接虚拟机</li>
-<li><img src="/2018/12/04/APACHE-linux/openssh.jpg" alt="openssh.jpg"></li>
+<li><img src="APACHE-linux/openssh.jpg" alt="openssh.jpg"></li>
 <li>通过openssh把文件传到centOS桌面上</li>
-<li><img src="/2018/12/04/APACHE-linux/ssh.jpg" alt="ssh.jpg"><h3 id="3-用源码方式安装httpd（apache）–step1：解压–-gt-step2：configure–-gt-解决依赖–-gt-step3：make–-gt-step4：make-install，这里的详细操作步骤及我遇到的问题如下："><a href="#3-用源码方式安装httpd（apache）–step1：解压–-gt-step2：configure–-gt-解决依赖–-gt-step3：make–-gt-step4：make-install，这里的详细操作步骤及我遇到的问题如下：" class="headerlink" title="3.用源码方式安装httpd（apache）–step1：解压–&gt;step2：configure–&gt;解决依赖–&gt;step3：make–&gt;step4：make install，这里的详细操作步骤及我遇到的问题如下："></a>3.用源码方式安装httpd（apache）–step1：解压–&gt;step2：configure–&gt;解决依赖–&gt;step3：make–&gt;step4：make install，这里的详细操作步骤及我遇到的问题如下：</h3></li>
+<li><img src="APACHE-linux/ssh.jpg" alt="ssh.jpg"><h3 id="3-用源码方式安装httpd（apache）–step1：解压–-gt-step2：configure–-gt-解决依赖–-gt-step3：make–-gt-step4：make-install，这里的详细操作步骤及我遇到的问题如下："><a href="#3-用源码方式安装httpd（apache）–step1：解压–-gt-step2：configure–-gt-解决依赖–-gt-step3：make–-gt-step4：make-install，这里的详细操作步骤及我遇到的问题如下：" class="headerlink" title="3.用源码方式安装httpd（apache）–step1：解压–&gt;step2：configure–&gt;解决依赖–&gt;step3：make–&gt;step4：make install，这里的详细操作步骤及我遇到的问题如下："></a>3.用源码方式安装httpd（apache）–step1：解压–&gt;step2：configure–&gt;解决依赖–&gt;step3：make–&gt;step4：make install，这里的详细操作步骤及我遇到的问题如下：</h3></li>
 <li>用tar -zxvf解压httpd-2.4.37.tar.gz，在桌面上生成了一个httpd-2.4.37 文件夹，cd进入文件夹</li>
 <li>运行./configure –prefix=/usr/local/</li>
-<li>报错：依赖问题需要解决，提示的是缺少APR组件<br><img src="/2018/12/04/APACHE-linux/error1.jpg" alt="error1"></li>
-<li>秉承着有问题找百度的精神，我找了一篇帖子…<a href="https://www.cnblogs.com/xdouby/p/6406873.html" target="_blank" rel="noopener">地址</a></li>
-<li>下载并解压apr-1.6.5.tar.gz  apr-util-1.6.1.tar.gz 两个文件，开始安装<br><img src="/2018/12/04/APACHE-linux/solve1.jpg" alt="solve1.jpg"></li>
+<li>报错：依赖问题需要解决，提示的是缺少APR组件<br><img src="APACHE-linux/error1.jpg" alt="error1"></li>
+<li>秉承着有问题找百度的精神，我找了一篇帖子…<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xdouby/p/6406873.html">地址</a></li>
+<li>下载并解压apr-1.6.5.tar.gz  apr-util-1.6.1.tar.gz 两个文件，开始安装<br><img src="APACHE-linux/solve1.jpg" alt="solve1.jpg"></li>
 <li>（这里再啰嗦一下源码文件通用的安装思路）解压文件–&gt;进入解压生成的文件夹–&gt;./configure –&gt;make&amp;&amp;make install</li>
 <li>我在安装apr-util的时候文件损坏了，所以用yum安装了这个文件</li>
-<li>依然要解决依赖，下载pcre-8.10.zip文件用openssh传到虚拟机（注意文件用unzip解压）<br><img src="/2018/12/04/APACHE-linux/error2.jpg" alt="error2.jpg"><ul>
+<li>依然要解决依赖，下载pcre-8.10.zip文件用openssh传到虚拟机（注意文件用unzip解压）<br><img src="APACHE-linux/error2.jpg" alt="error2.jpg"><ul>
 <li>应该是缺少gcc组件<br>yum install -y gcc gcc-c++</li>
 </ul>
 </li>
 <li>问题解决</li>
-<li>回到httpd-2.4.37文件夹，cd进入用./configure –/usr/local/命令继续安装step2的操作，再次报错<br><img src="/2018/12/04/APACHE-linux/error3.jpg" alt="error3.jpg"><br>./configure –prefix=/usr/local命令指定路径<br>接下来还要重新安装apr-util-1.6.1，./configure继续报错error: APR could not be located. Please use the –with-apr option.里面说的意思应该是apr-util-1.6.1运行需要apr-1.4.5目录（也就是上一个软件安装目录）的支持所以我们执行命令[root@localhost apr-util-1.6.1]# ./configure –with-apr来执行，成功完成</li>
+<li>回到httpd-2.4.37文件夹，cd进入用./configure –/usr/local/命令继续安装step2的操作，再次报错<br><img src="APACHE-linux/error3.jpg" alt="error3.jpg"><br>./configure –prefix=/usr/local命令指定路径<br>接下来还要重新安装apr-util-1.6.1，./configure继续报错error: APR could not be located. Please use the –with-apr option.里面说的意思应该是apr-util-1.6.1运行需要apr-1.4.5目录（也就是上一个软件安装目录）的支持所以我们执行命令[root@localhost apr-util-1.6.1]# ./configure –with-apr来执行，成功完成</li>
 </ul>
 <hr>
 <ul>
-<li>回到httpd目录继续执行./configure –prefix=/usr/local/命令，继续报错。。。error1，不知道为什么，<br>百度了半天没有头绪，我就猜是不是报错本身是错误的，所以继续输入make install，神奇的是竟然没有报错<br><img src="/2018/12/04/APACHE-linux/make install_finish.jpg" alt="make install_finish.jpg"><br>漫长的安装过程终于结束了<h3 id="4-关闭防火墙，启动Apache服务"><a href="#4-关闭防火墙，启动Apache服务" class="headerlink" title="4.关闭防火墙，启动Apache服务"></a>4.关闭防火墙，启动Apache服务</h3></li>
+<li>回到httpd目录继续执行./configure –prefix=/usr/local/命令，继续报错。。。error1，不知道为什么，<br>百度了半天没有头绪，我就猜是不是报错本身是错误的，所以继续输入make install，神奇的是竟然没有报错<br>![make install_finish.jpg](APACHE-linux/make install_finish.jpg)<br>漫长的安装过程终于结束了<h3 id="4-关闭防火墙，启动Apache服务"><a href="#4-关闭防火墙，启动Apache服务" class="headerlink" title="4.关闭防火墙，启动Apache服务"></a>4.关闭防火墙，启动Apache服务</h3></li>
 <li>centos 7关防火墙：systemctl stop firewalld; centos 6关防火墙：service iptables stop</li>
 <li>启动Apache服务的方法：安装的根目录/usr/local/apache2/bin/apachectl start(可以再输入一次”路径 restart”)</li>
-<li>启动Apache服务/usr/local/bin/apachectl start又报错了<br><img src="/2018/12/04/APACHE-linux/error4.jpg" alt="error4.jpg"></li>
-<li>这个好解决，cd进入apache目录下的htdocs目录，编辑httpd.conf文件vi conf/httpd.conf 在里面搜索#ServerName 把前面的注释符号#去掉保存<br><img src="/2018/12/04/APACHE-linux/ServerName.jpg" alt="ServerName.jpg"></li>
-<li>现在再次启动apache服务<figure class="highlight plain"><figcaption><span>start``````/usr/local/bin/apachectl restart```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">![apache start.jpg](APACHE-linux/apache start.jpg)</span><br><span class="line">### 5.输入虚拟机IP地址来试一下新建的网站吧（我在这就在虚拟机中测试一下）</span><br><span class="line">```[root@localhost Desktop]# curl 192.168.11.147</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><code>&lt;html&gt;&lt;body&gt;&lt;h1&gt;It works!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;</code></p>
-<ul>
-<li>实际的图在这<img src="/2018/12/04/APACHE-linux/localhost.jpg" alt="localhost.jpg"><h3 id="6-终于到了最后一步，是不是很好奇刚才打开的网页文件存放在哪儿呢？其实它就在刚才安装的根目录-usr-local-apache2-htdocs里面安静的呆着呢，试着用我们自己喜欢的网站成品文件替换index-heml，然后再次访问虚拟机的ip地址，是不是一个个人专属的Apache网站就搭建好了哈哈。日记到这里就结束了，明天继续更新"><a href="#6-终于到了最后一步，是不是很好奇刚才打开的网页文件存放在哪儿呢？其实它就在刚才安装的根目录-usr-local-apache2-htdocs里面安静的呆着呢，试着用我们自己喜欢的网站成品文件替换index-heml，然后再次访问虚拟机的ip地址，是不是一个个人专属的Apache网站就搭建好了哈哈。日记到这里就结束了，明天继续更新" class="headerlink" title="6.终于到了最后一步，是不是很好奇刚才打开的网页文件存放在哪儿呢？其实它就在刚才安装的根目录/usr/local/apache2/htdocs里面安静的呆着呢，试着用我们自己喜欢的网站成品文件替换index.heml，然后再次访问虚拟机的ip地址，是不是一个个人专属的Apache网站就搭建好了哈哈。日记到这里就结束了，明天继续更新"></a>6.终于到了最后一步，是不是很好奇刚才打开的网页文件存放在哪儿呢？其实它就在刚才安装的根目录/usr/local/apache2/htdocs里面安静的呆着呢，试着用我们自己喜欢的网站成品文件替换index.heml，然后再次访问虚拟机的ip地址，是不是一个个人专属的Apache网站就搭建好了哈哈。日记到这里就结束了，明天继续更新</h3></li>
+<li>启动Apache服务/usr/local/bin/apachectl start又报错了<br><img src="APACHE-linux/error4.jpg" alt="error4.jpg"></li>
+<li>这个好解决，cd进入apache目录下的htdocs目录，编辑httpd.conf文件vi conf/httpd.conf 在里面搜索#ServerName 把前面的注释符号#去掉保存<br><img src="APACHE-linux/ServerName.jpg" alt="ServerName.jpg"></li>
+<li>现在再次启动apache服务<code>/usr/local/bin/apachectl start``````/usr/local/bin/apachectl restart</code><br>![apache start.jpg](APACHE-linux/apache start.jpg)<h3 id="5-输入虚拟机IP地址来试一下新建的网站吧（我在这就在虚拟机中测试一下）"><a href="#5-输入虚拟机IP地址来试一下新建的网站吧（我在这就在虚拟机中测试一下）" class="headerlink" title="5.输入虚拟机IP地址来试一下新建的网站吧（我在这就在虚拟机中测试一下）"></a>5.输入虚拟机IP地址来试一下新建的网站吧（我在这就在虚拟机中测试一下）</h3><code>[root@localhost Desktop]# curl 192.168.11.147</code><br><code>&lt;html&gt;&lt;body&gt;&lt;h1&gt;It works!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;</code></li>
+<li>实际的图在这<img src="APACHE-linux/localhost.jpg" alt="localhost.jpg"><h3 id="6-终于到了最后一步，是不是很好奇刚才打开的网页文件存放在哪儿呢？其实它就在刚才安装的根目录-usr-local-apache2-htdocs里面安静的呆着呢，试着用我们自己喜欢的网站成品文件替换index-heml，然后再次访问虚拟机的ip地址，是不是一个个人专属的Apache网站就搭建好了哈哈。日记到这里就结束了，明天继续更新"><a href="#6-终于到了最后一步，是不是很好奇刚才打开的网页文件存放在哪儿呢？其实它就在刚才安装的根目录-usr-local-apache2-htdocs里面安静的呆着呢，试着用我们自己喜欢的网站成品文件替换index-heml，然后再次访问虚拟机的ip地址，是不是一个个人专属的Apache网站就搭建好了哈哈。日记到这里就结束了，明天继续更新" class="headerlink" title="6.终于到了最后一步，是不是很好奇刚才打开的网页文件存放在哪儿呢？其实它就在刚才安装的根目录/usr/local/apache2/htdocs里面安静的呆着呢，试着用我们自己喜欢的网站成品文件替换index.heml，然后再次访问虚拟机的ip地址，是不是一个个人专属的Apache网站就搭建好了哈哈。日记到这里就结束了，明天继续更新"></a>6.终于到了最后一步，是不是很好奇刚才打开的网页文件存放在哪儿呢？其实它就在刚才安装的根目录/usr/local/apache2/htdocs里面安静的呆着呢，试着用我们自己喜欢的网站成品文件替换index.heml，然后再次访问虚拟机的ip地址，是不是一个个人专属的Apache网站就搭建好了哈哈。日记到这里就结束了，明天继续更新</h3></li>
 </ul>
 
                 <hr>
@@ -203,12 +207,14 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/12/05/LAMP/" data-toggle="tooltip" data-placement="top" title="LAMP环境搭建">&larr; Previous Post</a>
+                        <a href="/2018/12/05/LAMP/" data-toggle="tooltip" data-placement="top"
+                           title="LAMP环境搭建">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2018/12/03/first_blog/" data-toggle="tooltip" data-placement="top" title="在windows下如何开通自己的博客">Next Post &rarr;</a>
+                        <a href="/2018/12/03/first_blog/" data-toggle="tooltip" data-placement="top"
+                           title="在windows下如何开通自己的博客">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -227,7 +233,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-首先需要下载好安装套件（yum-groupinstall-“Development-Tools”）然后在网上下载好apache的安装包-（这里使用下载的是源码压缩包，名字为httpd-2-4-37-tar-gz）"><span class="toc-text">1.首先需要下载好安装套件（yum groupinstall “Development Tools”）然后在网上下载好apache的安装包,（这里使用下载的是源码压缩包，名字为httpd-2.4.37.tar.gz）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-把httpd-2-4-37-tar-gz传到虚拟机中，我用的是centOS7。"><span class="toc-text">2.把httpd-2.4.37.tar.gz传到虚拟机中，我用的是centOS7。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-用源码方式安装httpd（apache）–step1：解压–-gt-step2：configure–-gt-解决依赖–-gt-step3：make–-gt-step4：make-install，这里的详细操作步骤及我遇到的问题如下："><span class="toc-text">3.用源码方式安装httpd（apache）–step1：解压–&gt;step2：configure–&gt;解决依赖–&gt;step3：make–&gt;step4：make install，这里的详细操作步骤及我遇到的问题如下：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-关闭防火墙，启动Apache服务"><span class="toc-text">4.关闭防火墙，启动Apache服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-终于到了最后一步，是不是很好奇刚才打开的网页文件存放在哪儿呢？其实它就在刚才安装的根目录-usr-local-apache2-htdocs里面安静的呆着呢，试着用我们自己喜欢的网站成品文件替换index-heml，然后再次访问虚拟机的ip地址，是不是一个个人专属的Apache网站就搭建好了哈哈。日记到这里就结束了，明天继续更新"><span class="toc-text">6.终于到了最后一步，是不是很好奇刚才打开的网页文件存放在哪儿呢？其实它就在刚才安装的根目录/usr/local/apache2/htdocs里面安静的呆着呢，试着用我们自己喜欢的网站成品文件替换index.heml，然后再次访问虚拟机的ip地址，是不是一个个人专属的Apache网站就搭建好了哈哈。日记到这里就结束了，明天继续更新</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%A6%96%E5%85%88%E9%9C%80%E8%A6%81%E4%B8%8B%E8%BD%BD%E5%A5%BD%E5%AE%89%E8%A3%85%E5%A5%97%E4%BB%B6%EF%BC%88yum-groupinstall-%E2%80%9CDevelopment-Tools%E2%80%9D%EF%BC%89%E7%84%B6%E5%90%8E%E5%9C%A8%E7%BD%91%E4%B8%8A%E4%B8%8B%E8%BD%BD%E5%A5%BDapache%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85-%EF%BC%88%E8%BF%99%E9%87%8C%E4%BD%BF%E7%94%A8%E4%B8%8B%E8%BD%BD%E7%9A%84%E6%98%AF%E6%BA%90%E7%A0%81%E5%8E%8B%E7%BC%A9%E5%8C%85%EF%BC%8C%E5%90%8D%E5%AD%97%E4%B8%BAhttpd-2-4-37-tar-gz%EF%BC%89"><span class="toc-text">1.首先需要下载好安装套件（yum groupinstall “Development Tools”）然后在网上下载好apache的安装包,（这里使用下载的是源码压缩包，名字为httpd-2.4.37.tar.gz）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%8A%8Ahttpd-2-4-37-tar-gz%E4%BC%A0%E5%88%B0%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%EF%BC%8C%E6%88%91%E7%94%A8%E7%9A%84%E6%98%AFcentOS7%E3%80%82"><span class="toc-text">2.把httpd-2.4.37.tar.gz传到虚拟机中，我用的是centOS7。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%94%A8%E6%BA%90%E7%A0%81%E6%96%B9%E5%BC%8F%E5%AE%89%E8%A3%85httpd%EF%BC%88apache%EF%BC%89%E2%80%93step1%EF%BC%9A%E8%A7%A3%E5%8E%8B%E2%80%93-gt-step2%EF%BC%9Aconfigure%E2%80%93-gt-%E8%A7%A3%E5%86%B3%E4%BE%9D%E8%B5%96%E2%80%93-gt-step3%EF%BC%9Amake%E2%80%93-gt-step4%EF%BC%9Amake-install%EF%BC%8C%E8%BF%99%E9%87%8C%E7%9A%84%E8%AF%A6%E7%BB%86%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4%E5%8F%8A%E6%88%91%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-text">3.用源码方式安装httpd（apache）–step1：解压–&gt;step2：configure–&gt;解决依赖–&gt;step3：make–&gt;step4：make install，这里的详细操作步骤及我遇到的问题如下：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99%EF%BC%8C%E5%90%AF%E5%8A%A8Apache%E6%9C%8D%E5%8A%A1"><span class="toc-text">4.关闭防火墙，启动Apache服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%BE%93%E5%85%A5%E8%99%9A%E6%8B%9F%E6%9C%BAIP%E5%9C%B0%E5%9D%80%E6%9D%A5%E8%AF%95%E4%B8%80%E4%B8%8B%E6%96%B0%E5%BB%BA%E7%9A%84%E7%BD%91%E7%AB%99%E5%90%A7%EF%BC%88%E6%88%91%E5%9C%A8%E8%BF%99%E5%B0%B1%E5%9C%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%8B%EF%BC%89"><span class="toc-text">5.输入虚拟机IP地址来试一下新建的网站吧（我在这就在虚拟机中测试一下）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%BB%88%E4%BA%8E%E5%88%B0%E4%BA%86%E6%9C%80%E5%90%8E%E4%B8%80%E6%AD%A5%EF%BC%8C%E6%98%AF%E4%B8%8D%E6%98%AF%E5%BE%88%E5%A5%BD%E5%A5%87%E5%88%9A%E6%89%8D%E6%89%93%E5%BC%80%E7%9A%84%E7%BD%91%E9%A1%B5%E6%96%87%E4%BB%B6%E5%AD%98%E6%94%BE%E5%9C%A8%E5%93%AA%E5%84%BF%E5%91%A2%EF%BC%9F%E5%85%B6%E5%AE%9E%E5%AE%83%E5%B0%B1%E5%9C%A8%E5%88%9A%E6%89%8D%E5%AE%89%E8%A3%85%E7%9A%84%E6%A0%B9%E7%9B%AE%E5%BD%95-usr-local-apache2-htdocs%E9%87%8C%E9%9D%A2%E5%AE%89%E9%9D%99%E7%9A%84%E5%91%86%E7%9D%80%E5%91%A2%EF%BC%8C%E8%AF%95%E7%9D%80%E7%94%A8%E6%88%91%E4%BB%AC%E8%87%AA%E5%B7%B1%E5%96%9C%E6%AC%A2%E7%9A%84%E7%BD%91%E7%AB%99%E6%88%90%E5%93%81%E6%96%87%E4%BB%B6%E6%9B%BF%E6%8D%A2index-heml%EF%BC%8C%E7%84%B6%E5%90%8E%E5%86%8D%E6%AC%A1%E8%AE%BF%E9%97%AE%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84ip%E5%9C%B0%E5%9D%80%EF%BC%8C%E6%98%AF%E4%B8%8D%E6%98%AF%E4%B8%80%E4%B8%AA%E4%B8%AA%E4%BA%BA%E4%B8%93%E5%B1%9E%E7%9A%84Apache%E7%BD%91%E7%AB%99%E5%B0%B1%E6%90%AD%E5%BB%BA%E5%A5%BD%E4%BA%86%E5%93%88%E5%93%88%E3%80%82%E6%97%A5%E8%AE%B0%E5%88%B0%E8%BF%99%E9%87%8C%E5%B0%B1%E7%BB%93%E6%9D%9F%E4%BA%86%EF%BC%8C%E6%98%8E%E5%A4%A9%E7%BB%A7%E7%BB%AD%E6%9B%B4%E6%96%B0"><span class="toc-text">6.终于到了最后一步，是不是很好奇刚才打开的网页文件存放在哪儿呢？其实它就在刚才安装的根目录&#x2F;usr&#x2F;local&#x2F;apache2&#x2F;htdocs里面安静的呆着呢，试着用我们自己喜欢的网站成品文件替换index.heml，然后再次访问虚拟机的ip地址，是不是一个个人专属的Apache网站就搭建好了哈哈。日记到这里就结束了，明天继续更新</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -279,11 +285,11 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; pengpengp&#39;s BLOG 2019
+                    Copyright &copy; pengpengp&#39;s BLOG 2020
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>
@@ -292,13 +298,19 @@
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>

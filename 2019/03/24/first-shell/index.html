@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,14 +25,20 @@
     <link rel="canonical" href="https://pengpengp.github.io/2019/03/24/first-shell/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-</head>
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 <style>
 
@@ -43,8 +49,8 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
-" data-ishome="false">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -119,7 +125,8 @@
 <!--only post-->
 
 
-<img class="wechat-title-img" src="">
+<img class="wechat-title-img"
+     src="">
 
 
 <style>
@@ -146,7 +153,8 @@
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#shell 脚本 Linux search" title="shell 脚本 Linux search">shell 脚本 Linux search</a>
+                        <a class="tag" href="/tags/#shell 脚本 Linux search"
+                           title="shell 脚本 Linux search">shell 脚本 Linux search</a>
                         
                     </div>
                 </div>
@@ -166,7 +174,10 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">echo $*</span><br><span class="line">if [ $# == 0 ];</span><br><span class="line">then</span><br><span class="line">    echo '-h获取帮助';</span><br><span class="line">    exit</span><br><span class="line">elif [ $1 = '-h' ];</span><br><span class="line">then</span><br><span class="line">    echo 'search使用说明:先输入-p 后面加路径，再输入-f后面加搜索的文件';</span><br><span class="line"></span><br><span class="line">elif [ $1 ] &amp;&amp; [ $3 ] &amp;&amp; [ $1 = '-p' ] &amp;&amp; [ $3 = '-f' ]; </span><br><span class="line">then</span><br><span class="line">    echo "files:"</span><br><span class="line">    find $2/ -iregex ".*$4.*"</span><br><span class="line">    count=$(find $2/ -iregex ".*$4.*" |wc -l)</span><br><span class="line">    echo "count:$count";</span><br><span class="line">else</span><br><span class="line">    echo "请检查输入是否正确";</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+                <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">echo $*</span><br><span class="line">if [ $# == 0 ];</span><br><span class="line">then</span><br><span class="line">    echo &#x27;-h获取帮助&#x27;;</span><br><span class="line">    exit</span><br><span class="line">elif [ $1 = &#x27;-h&#x27; ];</span><br><span class="line">then</span><br><span class="line">    echo &#x27;search使用说明:先输入-p 后面加路径，再输入-f后面加搜索的文件&#x27;;</span><br><span class="line"></span><br><span class="line">elif [ $1 ] &amp;&amp; [ $3 ] &amp;&amp; [ $1 = &#x27;-p&#x27; ] &amp;&amp; [ $3 = &#x27;-f&#x27; ]; </span><br><span class="line">then</span><br><span class="line">    echo &quot;files:&quot;</span><br><span class="line">    find $2/ -iregex &quot;.*$4.*&quot;</span><br><span class="line">    count=$(find $2/ -iregex &quot;.*$4.*&quot; |wc -l)</span><br><span class="line">    echo &quot;count:$count&quot;;</span><br><span class="line">else</span><br><span class="line">    echo &quot;请检查输入是否正确&quot;;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+
+
 
                 <hr>
                 
@@ -174,12 +185,14 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2019/03/31/python批量爬取URL配合AWVS/" data-toggle="tooltip" data-placement="top" title="python批量爬取URL配合AWVS">&larr; Previous Post</a>
+                        <a href="/2019/03/31/python批量爬取URL配合AWVS/" data-toggle="tooltip" data-placement="top"
+                           title="python批量爬取URL配合AWVS">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2019/03/24/域渗透/" data-toggle="tooltip" data-placement="top" title="域渗透">Next Post &rarr;</a>
+                        <a href="/2019/03/24/docker-api/" data-toggle="tooltip" data-placement="top"
+                           title="php与docker-api与私有仓库">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -250,11 +263,11 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; pengpengp&#39;s BLOG 2019
+                    Copyright &copy; pengpengp&#39;s BLOG 2020
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>
@@ -263,13 +276,19 @@
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>

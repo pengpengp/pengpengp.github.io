@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,14 +25,20 @@
     <link rel="canonical" href="https://pengpengp.github.io/2018/12/24/http-request/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-</head>
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 <style>
 
@@ -43,8 +49,8 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
-" data-ishome="false">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -119,7 +125,8 @@
 <!--only post-->
 
 
-<img class="wechat-title-img" src="">
+<img class="wechat-title-img"
+     src="">
 
 
 <style>
@@ -166,47 +173,47 @@
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p>*** 一.http基础：</p>
 <ul>
-<li><p>URL：<a href="http://admin:123@www.baidu.com：80/new/index.php？id=1#" target="_blank" rel="noopener">http://admin:123@www.baidu.com：80/new/index.php？id=1#</a><br>  *协议  + http基础认证  +域名     +端口  +路径  +文件名  +参数  +锚部分</p>
+<li><p>URL：<a href="http://admin:123@www.baidu.com：80/new/index.php？id=1#">http://admin:123@www.baidu.com：80/new/index.php？id=1#</a><br>  *协议  + http基础认证  +域名     +端口  +路径  +文件名  +参数  +锚部分</p>
 </li>
-<li><p>URL编码<em>**</em></p>
-<pre><code>‘’    --%27
-“”    --%22
-#    --%23
-空格    --%20
-%    --%25
-</code></pre></li>
+<li><p>URL编码****</p>
+<pre><code>  ‘’    --%27
+  “”    --%22
+  #    --%23
+  空格    --%20
+  %    --%25</code></pre>
+</li>
 <li><p>GET\POST请求结构</p>
-<pre><code>GET请求
-GET  /HTTP基础/123.txt   /HTTP/1.1
-hOST:192.168.11.111:8000
-Accept：*/*
-换行
+<pre><code>  GET请求
+  GET  /HTTP基础/123.txt   /HTTP/1.1
+  hOST:192.168.11.111:8000
+  Accept：*/*
+  换行
 
-POST请求
-POST /HTTP基础/123.txt   /HTTP/1.1
-hOST:192.168.11.111:8000
-Accept：*/*
-换行
-id=123&amp;password=123
-</code></pre></li>
+  POST请求
+  POST /HTTP基础/123.txt   /HTTP/1.1
+  hOST:192.168.11.111:8000
+  Accept：*/*
+  换行
+  id=123&amp;password=123</code></pre>
+</li>
 <li><p>请求方法：</p>
-<pre><code>GET
-HEAD  用于捕获报头
-PUT        iis put方法漏洞（自己研究）
-DELETE    请求删除
-CONNECT
-OPTIONS    允许客户端查看服务器支持的方法
-</code></pre></li>
+<pre><code>  GET
+  HEAD  用于捕获报头
+  PUT        iis put方法漏洞（自己研究）
+  DELETE    请求删除
+  CONNECT
+  OPTIONS    允许客户端查看服务器支持的方法</code></pre>
+</li>
 <li><p>*状态码   302临时重定向（location）</p>
-<pre><code>301永久跳转        百度看一下区别
+<pre><code>  301永久跳转        百度看一下区别
 
-400
-403 禁止访问
-404    Not Found
-405  不允许
+  400
+  403 禁止访问
+  404    Not Found
+  405  不允许
 
-5xx  服务器问题（代码）
-</code></pre></li>
+  5xx  服务器问题（代码）</code></pre>
+</li>
 <li><p>练习：用wireshark抓http数据包</p>
 </li>
 </ul>
@@ -233,7 +240,7 @@ OPTIONS    允许客户端查看服务器支持的方法
 <li><p>Cookie：客户机通过这个头可以向服务器带数据</p>
 </li>
 </ul>
-<p><strong>*</strong>三.重点：  五层模型、tcp三次握手 、 四次挥手 、wireshark、http请求\响应的行、头、空行、内容 、burpSuite代理，看数据包    </p>
+<p>*****三.重点：  五层模型、tcp三次握手 、 四次挥手 、wireshark、http请求\响应的行、头、空行、内容 、burpSuite代理，看数据包    </p>
 
                 <hr>
                 
@@ -241,12 +248,14 @@ OPTIONS    允许客户端查看服务器支持的方法
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/12/26/Create-VPN/" data-toggle="tooltip" data-placement="top" title="Create_VPN">&larr; Previous Post</a>
+                        <a href="/2018/12/26/Create-VPN/" data-toggle="tooltip" data-placement="top"
+                           title="Create_VPN">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2018/12/23/PHP-useage/" data-toggle="tooltip" data-placement="top" title="PHP_useage">Next Post &rarr;</a>
+                        <a href="/2018/12/23/PHP-useage/" data-toggle="tooltip" data-placement="top"
+                           title="PHP_useage">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -317,11 +326,11 @@ OPTIONS    允许客户端查看服务器支持的方法
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; pengpengp&#39;s BLOG 2019
+                    Copyright &copy; pengpengp&#39;s BLOG 2020
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>
@@ -330,13 +339,19 @@ OPTIONS    允许客户端查看服务器支持的方法
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>

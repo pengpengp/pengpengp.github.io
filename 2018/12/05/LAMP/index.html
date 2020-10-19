@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,14 +25,20 @@
     <link rel="canonical" href="https://pengpengp.github.io/2018/12/05/LAMP/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-</head>
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 <style>
 
@@ -43,8 +49,8 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
-" data-ishome="false">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -119,7 +125,8 @@
 <!--only post-->
 
 
-<img class="wechat-title-img" src="">
+<img class="wechat-title-img"
+     src="">
 
 
 <style>
@@ -170,7 +177,7 @@
 </li>
 <li><p>2.启动服务service httpd start</p>
 </li>
-<li><p>3.更改servername（vi /etc/httpd/conf/httpd.conf）<br><img src="/2018/12/05/LAMP/servername.jpg" alt="servername"></p>
+<li><p>3.更改servername（vi /etc/httpd/conf/httpd.conf）<br><img src="LAMP/servername.jpg" alt="servername"></p>
 </li>
 <li><p>4.重启apache服务：service httpd restart</p>
 </li>
@@ -187,7 +194,7 @@
 </li>
 <li><p>3.启动服务service mysqld start</p>
 </li>
-<li><p>4.mysql服务初始化 mysql_secure_installation（如果默认有密码，在/etc/my.cnf中加入参数skip-grant-tables然后在输入密码阶段，直接回车登陆）<br><img src="/2018/12/05/LAMP/mycnf.jpg" alt="mycnf"></p>
+<li><p>4.mysql服务初始化 mysql_secure_installation（如果默认有密码，在/etc/my.cnf中加入参数skip-grant-tables然后在输入密码阶段，直接回车登陆）<br><img src="LAMP/mycnf.jpg" alt="mycnf"></p>
 </li>
 </ul>
 <hr>
@@ -198,15 +205,16 @@
 </li>
 <li><p>3.重启apache服务： service httpd restart</p>
 </li>
-<li><p>4.打开网页输入localhost即可看到效果<br><img src="/2018/12/05/LAMP/apache.jpg" alt="apache"></p>
+<li><p>4.打开网页输入localhost即可看到效果<br><img src="LAMP/apache.jpg" alt="apache"></p>
 </li>
-<li>5.把自己做好的网页文件传入/var/www/html目录下，再打开网页</li>
+<li><p>5.把自己做好的网页文件传入/var/www/html目录下，再打开网页</p>
+</li>
 </ul>
-<p><img src="/2018/12/05/LAMP/copy -r.jpg" alt="copy"></p>
+<p>![copy](LAMP/copy -r.jpg)</p>
 <ul>
-<li><p>6.打开mysql，选择数据库use vauditdemo；<br>  <img src="/2018/12/05/LAMP/use database.jpg" alt="use database"></p>
+<li><p>6.打开mysql，选择数据库use vauditdemo；<br>  ![use database](LAMP/use database.jpg)</p>
 </li>
-<li><p>7.用source /var/www/html/install/install.sql命令导入数据库文件<br><img src="/2018/12/05/LAMP/source database.jpg" alt="source database"></p>
+<li><p>7.用source /var/www/html/install/install.sql命令导入数据库文件<br>![source database](LAMP/source database.jpg)</p>
 </li>
 </ul>
 
@@ -216,12 +224,14 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/12/06/iis/" data-toggle="tooltip" data-placement="top" title="windows server 2008 iis服务器搭建">&larr; Previous Post</a>
+                        <a href="/2018/12/06/iis/" data-toggle="tooltip" data-placement="top"
+                           title="windows server 2008 iis服务器搭建">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2018/12/04/APACHE-linux/" data-toggle="tooltip" data-placement="top" title="学习如何在linux环境安装Apache">Next Post &rarr;</a>
+                        <a href="/2018/12/04/APACHE-linux/" data-toggle="tooltip" data-placement="top"
+                           title="学习如何在linux环境安装Apache">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -240,7 +250,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#l—linux；A—Apache；M—mysql-P—PHP"><span class="toc-text">l—linux；A—Apache；M—mysql;P—PHP;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Apache是一款web服务器，mysql是多线程、多用户管理系统，PHP可以用来编写网站源代码，作为Apache的扩展，今天的主题就是如何搭建一款LAMP环境。"><span class="toc-text">Apache是一款web服务器，mysql是多线程、多用户管理系统，PHP可以用来编写网站源代码，作为Apache的扩展，今天的主题就是如何搭建一款LAMP环境。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Apache："><span class="toc-text">Apache：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql"><span class="toc-text">mysql:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP："><span class="toc-text">PHP：</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#l%E2%80%94linux%EF%BC%9BA%E2%80%94Apache%EF%BC%9BM%E2%80%94mysql-P%E2%80%94PHP"><span class="toc-text">l—linux；A—Apache；M—mysql;P—PHP;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Apache%E6%98%AF%E4%B8%80%E6%AC%BEweb%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8Cmysql%E6%98%AF%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%81%E5%A4%9A%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%8CPHP%E5%8F%AF%E4%BB%A5%E7%94%A8%E6%9D%A5%E7%BC%96%E5%86%99%E7%BD%91%E7%AB%99%E6%BA%90%E4%BB%A3%E7%A0%81%EF%BC%8C%E4%BD%9C%E4%B8%BAApache%E7%9A%84%E6%89%A9%E5%B1%95%EF%BC%8C%E4%BB%8A%E5%A4%A9%E7%9A%84%E4%B8%BB%E9%A2%98%E5%B0%B1%E6%98%AF%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E4%B8%80%E6%AC%BELAMP%E7%8E%AF%E5%A2%83%E3%80%82"><span class="toc-text">Apache是一款web服务器，mysql是多线程、多用户管理系统，PHP可以用来编写网站源代码，作为Apache的扩展，今天的主题就是如何搭建一款LAMP环境。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Apache%EF%BC%9A"><span class="toc-text">Apache：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql"><span class="toc-text">mysql:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%EF%BC%9A"><span class="toc-text">PHP：</span></a></li></ol></li></ol>
                 </div>
             </div>
         </div>
@@ -292,11 +302,11 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; pengpengp&#39;s BLOG 2019
+                    Copyright &copy; pengpengp&#39;s BLOG 2020
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>
@@ -305,13 +315,19 @@
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>

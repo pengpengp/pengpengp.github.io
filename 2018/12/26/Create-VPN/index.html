@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,14 +25,20 @@
     <link rel="canonical" href="https://pengpengp.github.io/2018/12/26/Create-VPN/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-</head>
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 <style>
 
@@ -43,8 +49,8 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
-" data-ishome="false">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -119,7 +125,8 @@
 <!--only post-->
 
 
-<img class="wechat-title-img" src="">
+<img class="wechat-title-img"
+     src="">
 
 
 <style>
@@ -194,10 +201,10 @@
 <p>安装docker：sudo apt-get install docker.io</p>
 </blockquote>
 <blockquote>
-<p>安装加速器（可选）<a href="https://yeasy.gitbooks.io/docker_practice/install/mirror.html" target="_blank" rel="noopener">https://yeasy.gitbooks.io/docker_practice/install/mirror.html</a></p>
+<p>安装加速器（可选）<a target="_blank" rel="noopener" href="https://yeasy.gitbooks.io/docker_practice/install/mirror.html">https://yeasy.gitbooks.io/docker_practice/install/mirror.html</a></p>
 </blockquote>
 <blockquote>
-<p>或者在 /etc/docker/daemon.json 中写入<br>    {<br>        “registry-mirrors”: [“<a href="https://registry.docker-cn.com&quot;]" target="_blank" rel="noopener">https://registry.docker-cn.com&quot;]</a><br>    }</p>
+<p>或者在 /etc/docker/daemon.json 中写入<br>    {<br>        “registry-mirrors”: [“<a href="https://registry.docker-cn.com&quot;]">https://registry.docker-cn.com&quot;]</a><br>    }</p>
 </blockquote>
 <blockquote>
 <p>启动docker：sudo docker run –rm -it alpine /bin/sh</p>
@@ -214,7 +221,7 @@
 <p>1.把镜像拉入虚拟机：</p>
 </blockquote>
 <blockquote>
-<p>2.docker pull mobtitude/vpn-pptp<br>然后创建一个文件chap-secrets，打开写入   name <em>  password </em> 并记住路径/vpn-k</p>
+<p>2.docker pull mobtitude/vpn-pptp<br>然后创建一个文件chap-secrets，打开写入   name *  password * 并记住路径/vpn-k</p>
 </blockquote>
 <blockquote>
 <p>3.docker run -d –privileged –net host -v /root/chap-secrets:/ppp/chap-secrets mobtitude/vpn-pptp</p>
@@ -248,8 +255,8 @@
 &quot;method&quot;:&quot;aes-256-cfb&quot;,
 &quot;fast_open&quot;: false,
 &quot;workers&quot;: 1,
-&quot;prefer_ipv6&quot;: false
-</code></pre><blockquote>
+&quot;prefer_ipv6&quot;: false</code></pre>
+<blockquote>
 <p>3.（可选）开启BBR加速支持echo “net.core.default_qdisc=fq” &gt;&gt; /etc/sysctl.conf<br>echo “net.ipv4.tcp_congestion_control=bbr” &gt;&gt; /etc/sysctl.conf<br>sysctl -p<br>lsmod | grep bbr</p>
 </blockquote>
 
@@ -259,12 +266,14 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/12/28/sql-inject/" data-toggle="tooltip" data-placement="top" title="'sql_inject'">&larr; Previous Post</a>
+                        <a href="/2018/12/28/sql-inject/" data-toggle="tooltip" data-placement="top"
+                           title="'sql_inject'">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2018/12/24/http-request/" data-toggle="tooltip" data-placement="top" title="http_request ">Next Post &rarr;</a>
+                        <a href="/2018/12/24/http-request/" data-toggle="tooltip" data-placement="top"
+                           title="http_request ">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -335,11 +344,11 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; pengpengp&#39;s BLOG 2019
+                    Copyright &copy; pengpengp&#39;s BLOG 2020
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>
@@ -348,13 +357,19 @@
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>

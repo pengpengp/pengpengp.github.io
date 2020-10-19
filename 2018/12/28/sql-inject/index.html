@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,14 +25,20 @@
     <link rel="canonical" href="https://pengpengp.github.io/2018/12/28/sql-inject/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-</head>
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 <style>
 
@@ -43,8 +49,8 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
-" data-ishome="false">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -119,7 +125,8 @@
 <!--only post-->
 
 
-<img class="wechat-title-img" src="">
+<img class="wechat-title-img"
+     src="">
 
 
 <style>
@@ -146,7 +153,8 @@
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#sql注入" title="sql注入">sql注入</a>
+                        <a class="tag" href="/tags/#sql注入"
+                           title="sql注入">sql注入</a>
                         
                     </div>
                 </div>
@@ -188,25 +196,25 @@
 <p>6.写报告</p>
 </blockquote>
 <p>​    </p>
-<pre><code>www.exploit-db.com
-https://www.somd5.com/
-https://blog.csdn.net/u012278016/article/details/81772566
-</code></pre><p>扫描工具：</p>
+<pre><code>    www.exploit-db.com
+    https://www.somd5.com/
+    https://blog.csdn.net/u012278016/article/details/81772566</code></pre>
+<p>扫描工具：</p>
 <ul>
 <li><p>测网站漏洞工具：    </p>
 <p>​    AWVS（通过爬虫进行网站漏洞测试）的安装</p>
-<p>​    网站漏洞扫描<a href="https://butian.360.cn/Register/补天公益" target="_blank" rel="noopener">https://butian.360.cn/Register/补天公益</a></p>
+<p>​    网站漏洞扫描<a target="_blank" rel="noopener" href="https://butian.360.cn/Register/%E8%A1%A5%E5%A4%A9%E5%85%AC%E7%9B%8A">https://butian.360.cn/Register/补天公益</a></p>
 <p>​    啊d–&gt;ASP网站</p>
 <p>​    sql注入工具</p>
-<pre><code>sqlmap
-</code></pre></li>
+<pre><code>    sqlmap</code></pre>
+</li>
 <li><p>综合平台类：</p>
 <p>BurpSuite、Metasploit</p>
 </li>
 <li><p>搜集域名信息</p>
 <p>//子域名：news.baidu.com这种</p>
-<pre><code>子域名挖掘：subDomainsBrute、子域名挖掘机
-</code></pre></li>
+<pre><code>子域名挖掘：subDomainsBrute、子域名挖掘机</code></pre>
+</li>
 <li><p>端口扫描：NMAP—功能强大，隐蔽</p>
 <p>安装vc扩展、npcap组件，增加环境变量</p>
 <pre><code>扫描指定ip：    nmap ip
@@ -219,27 +227,27 @@ nmap -p 80    指定扫描端口
 nmap -O    ip    探测操作系统版本
 nmap -A        详细信息
 nmap -iL 目录 根据ip列表进行扫描
-nmap -iL 目录 --webxml 文件名    把结果以xml形式&gt;输出        到文件
-</code></pre></li>
+nmap -iL 目录 --webxml 文件名    把结果以xml形式&gt;输出        到文件</code></pre>
+</li>
 <li><p>python环境安装</p>
 <p>1.安装python2.7</p>
 <pre><code>2.在家目录下创建.pip文件夹，把源文件移动进去
-3.执行pip install requests
-</code></pre></li>
+3.执行pip install requests</code></pre>
+</li>
 <li><p>字典生成工具</p>
 <p>pentest.db工具</p>
 <pre><code>解压，在目录中用cmd执行pip install lxml
 使用 python pen.py
-帮助    python pen.py --help
-</code></pre></li>
+帮助    python pen.py --help</code></pre>
+</li>
 <li><p>爆破工具</p>
 <p>*BurpSuite</p>
 <pre><code>*hydra***   hydra -l用户名 -p密码字典 
 -s指定非默认端口
 -e ns空密码试探
 -f成功后立刻停止
-例子：hydra -l root -P 目录 -s 3308  -e ns -t 5         114.115.175.102 mysql
-</code></pre></li>
+例子：hydra -l root -P 目录 -s 3308  -e ns -t 5         114.115.175.102 mysql</code></pre>
+</li>
 </ul>
 
                 <hr>
@@ -248,12 +256,14 @@ nmap -iL 目录 --webxml 文件名    把结果以xml形式&gt;输出        到
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/12/28/sql-inject-Process/" data-toggle="tooltip" data-placement="top" title="'sql_inject_Process'">&larr; Previous Post</a>
+                        <a href="/2018/12/28/sql-inject-Process/" data-toggle="tooltip" data-placement="top"
+                           title="'sql_inject_Process'">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2018/12/26/Create-VPN/" data-toggle="tooltip" data-placement="top" title="Create_VPN">Next Post &rarr;</a>
+                        <a href="/2018/12/26/Create-VPN/" data-toggle="tooltip" data-placement="top"
+                           title="Create_VPN">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -324,11 +334,11 @@ nmap -iL 目录 --webxml 文件名    把结果以xml形式&gt;输出        到
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; pengpengp&#39;s BLOG 2019
+                    Copyright &copy; pengpengp&#39;s BLOG 2020
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>
@@ -337,13 +347,19 @@ nmap -iL 目录 --webxml 文件名    把结果以xml形式&gt;输出        到
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>

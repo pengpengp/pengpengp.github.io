@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="pengpengp&#39;s BLOG" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        php与docker-api与私有仓库｜undefined
+        
+    </title>
+
+    <link rel="canonical" href="https://pengpengp.github.io/2019/03/24/docker-api/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    pengpengp&#39;s BLOG
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>php与docker-api与私有仓库</h1>
+                    
+                    <span class="meta">
+                         作者 pengpengp
+                        <span>
+                          日期 2019-03-24
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#docker-api,php,registry"
+                           title="docker-api,php,registry">docker-api,php,registry</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            php与docker-api与私有仓库
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="1-封装的方法："><a href="#1-封装的方法：" class="headerlink" title="1.封装的方法："></a>1.封装的方法：</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CreateURL</span>(<span class="params">$image_name,$apache_port,$hostname=<span class="string">&#x27;test&#x27;</span>,$Volumes=<span class="string">&#x27;&#123;&quot;/var/lib/docker/volumes/de96b8143c2808ead5cb9dda7ad69f5b8024cae0e4b364a7cef7adf7f387dd89/_data&quot;: &#123;&quot;/var/lib/mysql&quot;:&quot;rw&quot; &#125;&#125;&#x27;</span></span>)</span>&#123;</span><br><span class="line">        <span class="comment">#$data  = json_encode($data);    </span></span><br><span class="line">        $data=<span class="string">&#x27;&#123;&quot;Image&quot;:&quot;&#x27;</span>.$image_name.<span class="string">&#x27;&quot;,&quot;Hostname&quot;:&quot;&#x27;</span>.$hostname.<span class="string">&#x27;&quot;,&quot;Volumes&quot;:&#x27;</span>.$Volumes.<span class="string">&#x27;,&quot;ExposedPorts&quot;:&#123;&quot;80/tcp&quot;:&#123;&#125; &#125;,&quot;PortBindings&quot;:&#123;&quot;80/tcp&quot;:[&#123;&quot;HostPort&quot;:&quot;&#x27;</span>.$apache_port.<span class="string">&#x27;&quot;&#125;] &#125;,&quot;StopTimeout&quot;: 1     &#125;&#x27;</span>;</span><br><span class="line">        $url = <span class="string">&#x27;http://&#x27;</span>.$_SERVER[SERVER_ADDR].<span class="string">&#x27;:5555/containers/create&#x27;</span>;</span><br><span class="line">        $headerArray =<span class="keyword">array</span>(<span class="string">&quot;Content-type:application/json;charset=&#x27;utf-8&#x27;&quot;</span>,<span class="string">&quot;Accept:application/json&quot;</span>);</span><br><span class="line">        $curl = curl_init();</span><br><span class="line">        curl_setopt($curl, CURLOPT_URL, $url);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, <span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST,<span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_POST, <span class="number">1</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);</span><br><span class="line">        curl_setopt($curl,CURLOPT_HTTPHEADER,$headerArray);</span><br><span class="line">        curl_setopt($curl, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        $output = curl_exec($curl);</span><br><span class="line">        curl_close($curl);</span><br><span class="line">        <span class="keyword">return</span> json_decode($output);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">StartContainer</span>(<span class="params">$id</span>)</span>&#123;</span><br><span class="line">        $url = <span class="string">&#x27;http://&#x27;</span>.$_SERVER[SERVER_ADDR].<span class="string">&#x27;:5555/containers/&#x27;</span>.$id.<span class="string">&#x27;/start&#x27;</span>;</span><br><span class="line">        $headerArray =<span class="keyword">array</span>(<span class="string">&quot;Content-type:application/json;charset=&#x27;utf-8&#x27;&quot;</span>,<span class="string">&quot;Accept:application/json&quot;</span>);</span><br><span class="line">        $curl = curl_init();</span><br><span class="line">        curl_setopt($curl, CURLOPT_URL, $url);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, <span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST,<span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_POST, <span class="number">1</span>);</span><br><span class="line">        <span class="comment">#curl_setopt($curl, CURLOPT_POSTFIELDS, $data);</span></span><br><span class="line">        curl_setopt($curl,CURLOPT_HTTPHEADER,$headerArray);</span><br><span class="line">        curl_setopt($curl, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        $output = curl_exec($curl);</span><br><span class="line">        curl_close($curl);</span><br><span class="line">        <span class="keyword">return</span> json_decode($output);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">StopContainer</span>(<span class="params">$id</span>)</span>&#123;</span><br><span class="line">        <span class="comment">#$data  = json_encode($data);</span></span><br><span class="line">        $url = <span class="string">&#x27;http://&#x27;</span>.$_SERVER[SERVER_ADDR].<span class="string">&#x27;:5555/containers/&#x27;</span>.$id.<span class="string">&#x27;/stop?t=1&#x27;</span>;</span><br><span class="line">        $headerArray =<span class="keyword">array</span>(<span class="string">&quot;Content-type:application/json;charset=&#x27;utf-8&#x27;&quot;</span>,<span class="string">&quot;Accept:application/json&quot;</span>);</span><br><span class="line">        $curl = curl_init();</span><br><span class="line">        curl_setopt($curl, CURLOPT_URL, $url);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, <span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST,<span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_POST, <span class="number">1</span>);</span><br><span class="line">        <span class="comment">#curl_setopt($curl, CURLOPT_POSTFIELDS, $data);</span></span><br><span class="line">        curl_setopt($curl,CURLOPT_HTTPHEADER,$headerArray);</span><br><span class="line">        curl_setopt($curl, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        $output = curl_exec($curl);</span><br><span class="line">        $httpCode = curl_getinfo($curl,CURLINFO_HTTP_CODE); </span><br><span class="line">        curl_close($curl);</span><br><span class="line">        <span class="keyword">return</span> $httpCode;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">RmContainer</span>(<span class="params">$id</span>)</span>&#123;</span><br><span class="line">        $url = <span class="string">&#x27;http://&#x27;</span>.$_SERVER[SERVER_ADDR].<span class="string">&#x27;:5555/containers/&#x27;</span>.$id;</span><br><span class="line">        <span class="comment">#$data  = json_encode($data);</span></span><br><span class="line">        $ch = curl_init();</span><br><span class="line">        curl_setopt ($ch,CURLOPT_URL,$url);</span><br><span class="line">        curl_setopt ($ch, CURLOPT_HTTPHEADER, <span class="keyword">array</span>(<span class="string">&#x27;Content-type:application/json&#x27;</span>));</span><br><span class="line">        curl_setopt ($ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        curl_setopt ($ch, CURLOPT_CUSTOMREQUEST, <span class="string">&quot;DELETE&quot;</span>);   </span><br><span class="line">        <span class="comment">#curl_setopt($ch, CURLOPT_POSTFIELDS,$data);</span></span><br><span class="line">        $output = curl_exec($ch);</span><br><span class="line">        curl_close($ch);</span><br><span class="line">        $output = json_decode($output,<span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">RenameContainer</span>(<span class="params">$id,$username</span>)</span>&#123;</span><br><span class="line">        <span class="comment">#$data  = json_encode($data);</span></span><br><span class="line">        $url = <span class="string">&#x27;http://&#x27;</span>.$_SERVER[SERVER_ADDR].<span class="string">&#x27;:5555/containers/&#x27;</span>.$id.<span class="string">&#x27;/rename?name=&#x27;</span>.$username;</span><br><span class="line">        $headerArray =<span class="keyword">array</span>(<span class="string">&quot;Content-type:application/json;charset=&#x27;utf-8&#x27;&quot;</span>,<span class="string">&quot;Accept:application/json&quot;</span>);</span><br><span class="line">        $curl = curl_init();</span><br><span class="line">        curl_setopt($curl, CURLOPT_URL, $url);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, <span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST,<span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_POST, <span class="number">1</span>);</span><br><span class="line">        <span class="comment">#curl_setopt($curl, CURLOPT_POSTFIELDS, $data);</span></span><br><span class="line">        curl_setopt($curl,CURLOPT_HTTPHEADER,$headerArray);</span><br><span class="line">        curl_setopt($curl, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        $output = curl_exec($curl);</span><br><span class="line">        $httpCode = curl_getinfo($curl,CURLINFO_HTTP_CODE); </span><br><span class="line">        curl_close($curl);</span><br><span class="line">        <span class="comment">#return json_decode($output);</span></span><br><span class="line">        <span class="keyword">return</span> $httpCode;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show_url</span>(<span class="params">$apache_port</span>)</span>&#123;</span><br><span class="line">        $url=<span class="string">&quot;http://&quot;</span>.$_SERVER[SERVER_ADDR].<span class="string">&quot;:&quot;</span>.$apache_port;</span><br><span class="line">        <span class="keyword">print</span>(<span class="string">&quot;&lt;a href=&quot;</span>.$url.<span class="string">&quot; &quot;</span>. <span class="string">&quot;target=&#x27;_blank&#x27;&gt;打开习题&lt;/a&gt;&quot;</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;&lt;script&gt;alert(&#x27;习题页面<span class="subst">$url</span>&#x27;)&lt;/script&gt;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-使用"><a href="#2-使用" class="headerlink" title="2.使用"></a>2.使用</h2><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>$id = CreateURL($image_name,$apache_port)-&gt;Id</code></td>
+<td>创建容器 201创建成功 404无容器     $id为容器id</td>
+</tr>
+<tr>
+<td align="left"><code>StartContainer($id)</code></td>
+<td>开启容器 204成功 304已经开启 404无容器</td>
+</tr>
+<tr>
+<td align="left"><code>RenameContainer($id,$username)</code></td>
+<td>重命名   204成功 404无容器</td>
+</tr>
+<tr>
+<td align="left"><code>StopContainer(容器id/名称)</code></td>
+<td>停止容器 204成功 304已经停止 404无容器</td>
+</tr>
+<tr>
+<td align="left"><code>RmContainer(容器id/名称);</code></td>
+<td>删除容器 200成功</td>
+</tr>
+</tbody></table>
+<h2 id="3-搭建私有容器仓库："><a href="#3-搭建私有容器仓库：" class="headerlink" title="3.搭建私有容器仓库："></a>3.搭建私有容器仓库：</h2><h4 id="01-拉取仓库镜像"><a href="#01-拉取仓库镜像" class="headerlink" title="01.拉取仓库镜像"></a>01.拉取仓库镜像</h4><pre><code>`docker pull registry`</code></pre>
+<h4 id="02-配置https支持"><a href="#02-配置https支持" class="headerlink" title="02.配置https支持"></a>02.配置https支持</h4><pre><code>`vim /etc/docker/daemon.json</code></pre>
+<p>{<br> “insecure-registries”:[“9.1.1.128:5000”]<br>}<br>或vim/etc/default/docker<br>添加 “- - insecure-registry 127.0.0.1:5000”<br>`</p>
+<h4 id="03-启动仓库服务"><a href="#03-启动仓库服务" class="headerlink" title="03.启动仓库服务"></a>03.启动仓库服务</h4><pre><code>`sudo vi /data/docker/config.yml
+    version: 0.1
+    log:
+    fields:
+        service: registry
+    storage:
+    delete:
+        enabled: true
+    cache:
+        blobdescriptor: inmemory
+    filesystem:
+        rootdirectory: /var/lib/registry
+    http:
+    addr: :5000
+    headers:
+        X-Content-Type-Options: [nosniff]
+    health:
+    storagedriver:
+        enabled: true
+        interval: 10s
+        threshold: 3
+`
+`docker run -d -p 5000:5000 -v /data/docker/registry:/var/lib/registry  -v /data/docker/config.yml:/etc/docker/registry/config.yml --restart always --name registry registry`</code></pre>
+<h4 id="04-搭建完仓库，开始配置镜像"><a href="#04-搭建完仓库，开始配置镜像" class="headerlink" title="04.搭建完仓库，开始配置镜像"></a>04.搭建完仓库，开始配置镜像</h4><pre><code>` docker tag image_name:tags  ip:5000/image_name`</code></pre>
+<h4 id="05-推送到本地"><a href="#05-推送到本地" class="headerlink" title="05.推送到本地"></a>05.推送到本地</h4><pre><code>`docker push ip:5000/image_name`</code></pre>
+<h4 id="06-查看仓库内镜像"><a href="#06-查看仓库内镜像" class="headerlink" title="06.查看仓库内镜像"></a>06.查看仓库内镜像</h4><pre><code>`curl http://ip:5000/v2/_catalog`     
+`curl  &lt;仓库地址&gt;/v2/&lt;镜像名&gt;/tags/list`   查看镜像版本
+`curl --header &quot;Accept:application/vnd.docker.distribution.manifest.v2+json&quot; -I -XGET http://镜像地址/v2/镜像名称/manifests/镜像版本` 查看hash，注意url前只能有一个空格</code></pre>
+<h4 id="07-从仓库拉取镜像"><a href="#07-从仓库拉取镜像" class="headerlink" title="07.从仓库拉取镜像"></a>07.从仓库拉取镜像</h4><pre><code>`docker pull ip:5000/image_name`</code></pre>
+<h4 id="08-删除仓库镜像"><a href="#08-删除仓库镜像" class="headerlink" title="08.删除仓库镜像"></a>08.删除仓库镜像</h4><pre><code>正常情况：`curl -I -XDELETE 私有仓库地址/v2/镜像名称/manifests/镜像对应sha256值`，如果不好用的话：
+001进入容器：`docker exec -it registry sh`
+002查看是否开启了删除数据功能：`cat /etc/docker/registry/config.yml`delete值为`true`
+003找到要删除的镜像：`find . -name &quot;*elasticsearch*&quot;`
+004手动删除：`rm -r ./var/lib/registry/docker/registry/v2/repositories/elasticsearch`
+005删后同步registry/config.yml文件：`registry garbage-collect /etc/docker/registry/config.yml`
+006等待完成后再次查看镜像：`http://localhost:5000/v2/_catalog`</code></pre>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/03/24/first-shell/" data-toggle="tooltip" data-placement="top"
+                           title="first shell">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/03/24/域渗透/" data-toggle="tooltip" data-placement="top"
+                           title="域渗透">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B0%81%E8%A3%85%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-text">1.封装的方法：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8"><span class="toc-text">2.使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E5%AE%B9%E5%99%A8%E4%BB%93%E5%BA%93%EF%BC%9A"><span class="toc-text">3.搭建私有容器仓库：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#01-%E6%8B%89%E5%8F%96%E4%BB%93%E5%BA%93%E9%95%9C%E5%83%8F"><span class="toc-text">01.拉取仓库镜像</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#02-%E9%85%8D%E7%BD%AEhttps%E6%94%AF%E6%8C%81"><span class="toc-text">02.配置https支持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#03-%E5%90%AF%E5%8A%A8%E4%BB%93%E5%BA%93%E6%9C%8D%E5%8A%A1"><span class="toc-text">03.启动仓库服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#04-%E6%90%AD%E5%BB%BA%E5%AE%8C%E4%BB%93%E5%BA%93%EF%BC%8C%E5%BC%80%E5%A7%8B%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F"><span class="toc-text">04.搭建完仓库，开始配置镜像</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#05-%E6%8E%A8%E9%80%81%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="toc-text">05.推送到本地</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#06-%E6%9F%A5%E7%9C%8B%E4%BB%93%E5%BA%93%E5%86%85%E9%95%9C%E5%83%8F"><span class="toc-text">06.查看仓库内镜像</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#07-%E4%BB%8E%E4%BB%93%E5%BA%93%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F"><span class="toc-text">07.从仓库拉取镜像</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#08-%E5%88%A0%E9%99%A4%E4%BB%93%E5%BA%93%E9%95%9C%E5%83%8F"><span class="toc-text">08.删除仓库镜像</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; pengpengp&#39;s BLOG 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://pengpengp.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="">
+</body>
+
+</html>
