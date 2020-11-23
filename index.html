@@ -113,6 +113,79 @@
 
 
   
+    <article id="post-k8s环境搭建" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/23/k8s%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="article-date">
+  <time datetime="2019-11-23T08:58:09.000Z" itemprop="datePublished">2019-11-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/23/k8s%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">k8s搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="主机环境预设"><a href="#主机环境预设" class="headerlink" title="主机环境预设:"></a>主机环境预设:</h2><h2 id="0x00-master"><a href="#0x00-master" class="headerlink" title="0x00.master"></a>0x00.master</h2><h3 id="1-主机：master01、node01、node02-centos7-5-1804-ilinux-io"><a href="#1-主机：master01、node01、node02-centos7-5-1804-ilinux-io" class="headerlink" title="1.主机：master01、node01、node02  centos7.5 1804   ilinux.io"></a>1.主机：master01、node01、node02  centos7.5 1804   ilinux.io</h3><h3 id="2-主机配置："><a href="#2-主机配置：" class="headerlink" title="2.主机配置："></a>2.主机配置：</h3><pre><code>(1)NTP服务使时间同步   `systemctl start chronyd.service`
+(2)dns或hosts完成主机名称解析 
+(3)关闭iptables或selinux
+(4)禁用swap
+(5)若使用ipvs的proxy，各节点要载入ipvs相关模块  
+(6)免密ssh:  `ssh-keygen -t rsa`    `ssh-copy-id -i /root/.ssh/id_rsa.pub node01`</code></pre>
+<h3 id="3-启动docker服务-各个节点"><a href="#3-启动docker服务-各个节点" class="headerlink" title="3.启动docker服务(各个节点)"></a>3.启动docker服务(各个节点)</h3><p><code>yum install -y docker-ce</code></p>
+<h4 id="省略"><a href="#省略" class="headerlink" title="省略"></a>省略</h4><pre><code>vim /usr/lib/systemd/system/docker.service
+配置docker Environment变量，定义HTTPS_PROXY   
+Environment=&quot;HTTPS_PROXY=http://HOST:PORT&quot;
+Environment=&quot;NO_PROXY=172.20.0.0/16,127.0.0.1/8&quot;
+开启docker的iptables转发     
+    vim /usr/lib/systemd/system/docker.service-&gt; &quot;ExecStart=/usr/lib/dockerd&quot;后加上 ExecStartPost=/usr/sbin/iptables -P FORWARD ACCEPT</code></pre>
+<p> 修改dockergroup驱动为systemd驱动：ExecStart=/usr/bin/dockerd -H fd:// –containerd=/run/containerd/containerd.sock –exec-opt native.cgroupdriver=systemd</p>
+<h4 id="省略结束"><a href="#省略结束" class="headerlink" title="省略结束"></a>省略结束</h4><p>重启docker<br><code>systemctl daemon-reload &amp;&amp; systemctl start docker.service &amp;&amp; systemctl enable docker</code><br>(1)开启ipv4转发<br><code>echo 1 &gt; /proc/sys/net/ipv4/ip_forward</code><br><code>vim /etc/sysctl.d/k8s.conf</code><br><code>net.bridge.bridge-nf-call-ip6tables = 1</code><br><code>net.bridge.bridge-nf-call-iptables = 1</code><br>(2)cp给其他节点一份: </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scp /etc/sysctl.d/k8s.conf node01:/etc/sysctl.d/</span><br><span class="line">scp /usr/lib/systemd/system/docker.service node01:/usr/lib/systemd/system/</span><br><span class="line">systemctl daemon-reload &amp;&amp; systemctl start docker.service &amp;&amp; systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure>
+<h3 id="4-配置k8s镜像源"><a href="#4-配置k8s镜像源" class="headerlink" title="4.配置k8s镜像源"></a>4.配置k8s镜像源</h3><p>(1)添加源<br>    网站mirrors.aliyun.com/docker-ce<br>    mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64<br><code>vim  /etc/yum.repos.d/kubernetes.repo</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes Repository</span><br><span class="line">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</span><br><span class="line">	http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg</span><br></pre></td></tr></table></figure>
+<p>(2)检查是否添加成功<br><code>yum repolist</code><br>(3)查找kubernetes<br><code>yum list all |grep &quot;^kube&quot;</code>   -&gt;   kubeadm</p>
+<h2 id="0x01-安装k8s"><a href="#0x01-安装k8s" class="headerlink" title="0x01.安装k8s"></a>0x01.安装k8s</h2><p><code>yum install kubeadm  kubelet kubectl</code>(自动依赖安装)<br><code>rpm -ql kubelet</code></p>
+<h2 id="0x02-初始化"><a href="#0x02-初始化" class="headerlink" title="0x02.初始化"></a>0x02.初始化</h2><p>(1)忽略内存错误</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysconfig/kubelet</span><br><span class="line">        KUBELET_EXTRA_ARGS=<span class="string">&quot;--fail-swap-on=false&quot;</span></span><br></pre></td></tr></table></figure>
+<p>(2)查看镜像列表<code>kubeadm  config images list</code><br>(3)拉取需要的镜像<code>kubeadm config images pull</code><br>(4)尝试初始化<code>kubeadm init --kubernetes-version=&quot;v1.19.0&quot; --image-repository registry.aliyuncs.com/google_containers --pod-network-cidr=&quot;10.244.0.0/16&quot; --dry-run --ignore-preflight-errors=Swap</code></p>
+<p>(4)注意：出现 “Your kubernetes master has initialized successfully!”就完成了，注意成功后的提示，并保存kubeadm join命令****！<br><code>kubeadm join 192.168.25.155:6443 --token na66ga.z7qmt4n3ba12f6zu --discovery-token-ca-cert-hash sha256:09827f00a67a826026339a24237f25ebb49646ba3356e548500e181e34dc77ab</code><br>找不到时候用<code>kubeadm token create --print-join-command</code>生成<br>此时用<code>kubectl get nodes</code>发现还不是Ready，需要再配置网络才可以</p>
+<h2 id="0x03-配置普通用户"><a href="#0x03-配置普通用户" class="headerlink" title="0x03.配置普通用户"></a>0x03.配置普通用户</h2><p><code>mkdir -p $HOME/.kube</code><br><code>sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</code><br><code>sudo chown $(id -u):$(id -g) $HOME/.kube/config</code></p>
+<h2 id="0x04-配置网络"><a href="#0x04-配置网络" class="headerlink" title="0x04.配置网络"></a>0x04.配置网络</h2><p>(1)k8s包含多种网络，service网络、pod网络(默认地址flannel：10.244.0.0/16 calico：192.168.0.0/16)、节点网络<br>(2)下载地址：<a target="_blank" rel="noopener" href="https://github.com/coreos-&gt;flannel-&gt;Deploying">https://github.com/coreos-&gt;flannel-&gt;Deploying</a> flannel manually中<br><code>kubectl apply -f  https://xxxxxx.yml</code>来直接安装网络<br><code>kubectl get pods -n kube-system</code><br>(3)创建/run/flannel/subnet.env </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FLANNEL_NETWORK&#x3D;10.244.0.0&#x2F;16</span><br><span class="line">FLANNEL_SUBNET&#x3D;10.244.0.1&#x2F;24</span><br><span class="line">FLANNEL_MTU&#x3D;1450</span><br><span class="line">FLANNEL_IPMASQ&#x3D;true</span><br></pre></td></tr></table></figure>
+<p>master到此为止！</p>
+<h2 id="0x05-master安装总结："><a href="#0x05-master安装总结：" class="headerlink" title="0x05 master安装总结："></a>0x05 master安装总结：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s#SELINUX=enforcing#SELINUX=disabled#g&#x27;</span> /etc/selinux/config</span><br><span class="line">setenforce 0 </span><br><span class="line">swapoff -a</span><br><span class="line">注释掉swap分区vi /etc/fstab</span><br><span class="line">systemctl <span class="built_in">disable</span> iptables-services firewalld </span><br><span class="line">systemctl stop iptables-services firewalld</span><br><span class="line">yum install epel-release</span><br><span class="line">yum install -y docker</span><br><span class="line">systemctl <span class="built_in">enable</span> docker &amp;&amp; sudo systemctl start docker</span><br><span class="line">cat &lt;&lt;<span class="string">EOF &gt;  /etc/sysctl.d/k8s.conf</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-ip6tables = 1</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-iptables = 1</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line">sudo sysctl --system</span><br><span class="line">yum install/localinstall kubelet kubectl kubeadm</span><br><span class="line">systemctl <span class="built_in">enable</span> kubelet &amp;&amp;  systemctl start kubelet</span><br><span class="line">kubeadm init \</span><br><span class="line">--kubernetes-version=<span class="string">&quot;v1.19.4&quot;</span> \</span><br><span class="line">--image-repository registry.aliyuncs.com/google_containers \</span><br><span class="line">--pod-network-cidr=<span class="string">&quot;10.244.0.0/16&quot;</span></span><br><span class="line">flannel:https://github.com/coreos-&gt;flannel-&gt;Deploying flannel manually中 kubectl apply -f </span><br></pre></td></tr></table></figure>
+<h2 id="0x06-node节点"><a href="#0x06-node节点" class="headerlink" title="0x06 node节点"></a>0x06 node节点</h2><p>(1).在master01上:<code>scp /etc/yum.repos.d/kubernetes.repo node01:/etc/yum.repos.d/</code><br>(2).回到node01:<code>yum install kubelet  kubeadm -y</code><br>(3).在master01上:<code>scp /etc/sysconfig/kubelet node01:/etc/sysconfig/</code><br>(4).回到node01:<code>kubeadm join xxxxxx    --ignore-preflight-errors=Swap</code><br>(5).打包kube-proxy,flannel,pause三个镜像到其他节点上</p>
+<h2 id="0x07-k8s-安装-dashboard"><a href="#0x07-k8s-安装-dashboard" class="headerlink" title="0x07 k8s 安装 dashboard"></a>0x07 k8s 安装 dashboard</h2><p>(1).<code>wget https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-rc5/aio/deploy/recommended.yaml</code><br>(2).spec:添加type: NodePort <code>vim dashboard-svc-account.yaml</code><br>(3).<code>kubectl apply -f recommended.yaml</code></p>
+<h3 id="0x08排错："><a href="#0x08排错：" class="headerlink" title="0x08排错："></a>0x08排错：</h3><p>(1)get <code>cs提示 unhealthy</code>:<br>配置文件路径：/etc/kubernetes/manifests/scheduler.conf 、/etc/kubernetes/manifests/controller-manager.conf<br>如controller-manager组件的配置如下：可以<code>去掉--port=0</code>这个设置，然后重启<code>sudo systemctl restart kubelet</code></p>
+<p>(2)<code>cni0 already exist and</code> ….</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">kubeadm reset</span><br><span class="line">systemctl stop kubelet</span><br><span class="line">systemctl stop docker</span><br><span class="line">rm -rf /var/lib/cni/</span><br><span class="line">rm -rf /var/lib/kubelet/*</span><br><span class="line">rm -rf /etc/cni/</span><br><span class="line">ifconfig cni0 down</span><br><span class="line">ifconfig flannel.1 down</span><br><span class="line">ifconfig docker0 down</span><br><span class="line">ip link delete cni0</span><br><span class="line">ip link delete flannel.1</span><br><span class="line">systemctl start docker</span><br><span class="line">systemctl start kubelet</span><br></pre></td></tr></table></figure>
+<p>(3)<code>重新初始化</code><br><code>kubeadm reset</code><br>#记得reset 后<br>#证书重新初始化<code>kubeadm alpha certs renew all</code><br><code>mkdir -p $HOME/.kube</code><br><code>sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</code><br><code>sudo chown $(id -u):$(id -g) $HOME/.kube/config</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/11/23/k8s%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" data-id="ckhu6rwdr0000u8v2gtph8q67" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/" rel="tag">k8s</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-python批量爬取URL配合AWVS" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/03/31/python%E6%89%B9%E9%87%8F%E7%88%AC%E5%8F%96URL%E9%85%8D%E5%90%88AWVS/" class="article-date">
@@ -1269,133 +1342,6 @@ powershell脚本获取密码：
 
 
   
-    <article id="post-信息搜集" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/02/24/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/" class="article-date">
-  <time datetime="2019-02-24T00:17:54.000Z" itemprop="datePublished">2019-02-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/24/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/">信息搜集</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>只要能挖掘到对黑客有用的信息,就是信息泄露</p>
-<h2 id="目标：只要能挖掘到对黑客有用的信息-就是信息泄露"><a href="#目标：只要能挖掘到对黑客有用的信息-就是信息泄露" class="headerlink" title="目标：只要能挖掘到对黑客有用的信息,就是信息泄露"></a>目标：只要能挖掘到对黑客有用的信息,就是信息泄露</h2><h3 id="需要搜集的信息-分类-web安全方向"><a href="#需要搜集的信息-分类-web安全方向" class="headerlink" title="*****需要搜集的信息:    分类(web安全方向)"></a><code>*****</code>需要搜集的信息:    分类(web安全方向)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.web服务器信息(中间件)</span><br><span class="line">2.web应用信息(web脚本,数据库类型,cms)</span><br><span class="line">3.服务器操作系统信息(系统版本)</span><br><span class="line">4.服务器其他信息(服务,端口)</span><br><span class="line">5.域名信息(子域名,ip)</span><br><span class="line">6.相关人员信息(注册域名相关人员)</span><br></pre></td></tr></table></figure>
-
-
-
-<hr>
-<hr>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="*****步骤:"></a><code>*****</code>步骤:</h3><h4 id="一-搜集域名-顶级域名-子域名"><a href="#一-搜集域名-顶级域名-子域名" class="headerlink" title="一.搜集域名(顶级域名,子域名)"></a>一.搜集域名(顶级域名,子域名)</h4><p><a target="_blank" rel="noopener" href="https://baidu.com/">https://baidu.com</a>          顶级子域名</p>
-<p><a target="_blank" rel="noopener" href="https://www.baidu.com/">https://www.baidu.com</a>       二级子域名<br>    <a target="_blank" rel="noopener" href="https://baike.baidu.com/">https://baike.baidu.com</a></p>
-<p><a target="_blank" rel="noopener" href="https://a.b.baidu.com/">https://a.b.baidu.com</a>       三级子域名    </p>
-<p>http:/asdasd.com.cn         顶级域名<br>    <a target="_blank" rel="noopener" href="http://beijing.gov.cn/">http://beijing.gov.cn</a>       顶级域名</p>
-<ul>
-<li>搜索方式:工具(layer,sublist3r,wydomain),谷歌(site:域名),网站(site.ip138.com)/(dnsdb.io),http证书,备案信息(icp.chinaz.com)</li>
-</ul>
-<blockquote>
-<p>技巧1:在tool.chinaz.com的备案号查看所有顶级域名</p>
-<p>技巧2.:域名+crossdomain.xml也可以查看其他子域名</p>
-<p>技巧3:利用同源策略,通过子域名绕过当前无法突破的域名</p>
-</blockquote>
-<h4 id="二-搜集相关注册人"><a href="#二-搜集相关注册人" class="headerlink" title="二.搜集相关注册人"></a>二.搜集相关注册人</h4><p>1.通过搜集网站seo.chinaz.com–&gt;</p>
-<p>2.通过浏览器插件portal查看***</p>
-<p>3.whois反查</p>
-<h4 id="三-搜集服务器信息"><a href="#三-搜集服务器信息" class="headerlink" title="三.搜集服务器信息"></a>三.搜集服务器信息</h4><p>1.判断操作系统</p>
-<p>–&gt;通过开放的端口和服务(后台一直扫着就可以,同时往下进行)<br>    windows:</p>
-<blockquote>
-<p>iis 80<br>        rpc 135<br>        smb 445<br>       rdp 3389</p>
-</blockquote>
-<p>linux:</p>
-<blockquote>
-<p>ssh 22<br>        NETBIOS 137 138 139</p>
-</blockquote>
-<ul>
-<li><p>通过大小写  <code>http://test.com/test.php</code></p>
-<pre><code>                `http://test.com/TEST.php`</code></pre>
-</li>
-<li><p>通过nmap -O ip查看系统信息</p>
-</li>
-</ul>
-<p>2.脚本语言</p>
-<ul>
-<li><p>识别伪静态</p>
-</li>
-<li><p>类似:<code>http://test.com/index/id/49</code></p>
-</li>
-</ul>
-<p>3.web中间件</p>
-<ul>
-<li><p>nmap -A选项</p>
-</li>
-<li><p>burp抓包查看response的server头</p>
-</li>
-</ul>
-<p>4.搜集cms信息</p>
-<p>(1).查看首页源代码<br>    (2).访问wp-login.php文件<br>    (3).discuz(论坛)平台特性:包含forum.php文件<br>    (4).robots.txt文件<br>    (5).网页底部的版权信息(copyright)</p>
-<p>工具-&gt;whatweb  (ruby写的)</p>
-<p>5.搜集服务器开放的端口及服务</p>
-<p>工具-&gt;：</p>
-<ul>
-<li><p>nmap</p>
-</li>
-<li><p>masscan</p>
-</li>
-<li><p>x-scan</p>
-</li>
-</ul>
-<hr>
-<hr>
-<h4 id="四-可能存在的信息泄露"><a href="#四-可能存在的信息泄露" class="headerlink" title="四.可能存在的信息泄露"></a>四.可能存在的信息泄露</h4><p>1.github信息泄露</p>
-<ul>
-<li><p>管理员的博客会包含一些自己网站的信     </p>
-</li>
-<li><p>如:运维脚本\源代码\配置文件</p>
-</li>
-</ul>
-<p>2.目录遍历</p>
-<ul>
-<li>如:127.0.0.1/admin/目录能正常打开</li>
-</ul>
-<p>3.任意文件下载</p>
-<ul>
-<li><p>针对有下载功能的页面,尝试下载重要文件</p>
-</li>
-<li><p>分系统—windows\linux           </p>
-</li>
-<li><p>分权限</p>
-</li>
-<li><p>分重要文件—passwd\shadow\history\</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2019/02/24/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/" data-id="ckgg5oe0t000yzov2502wbb54" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/information-collect/" rel="tag">information collect</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -1414,7 +1360,7 @@ powershell脚本获取密码：
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-api-php-registry/" rel="tag">docker-api,php,registry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/information-collect/" rel="tag">information collect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E6%9F%A5%E6%89%BE/" rel="tag">linux命令之查找</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-%E6%89%AB%E6%8F%8F/" rel="tag">python 扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis%E6%BC%8F%E6%B4%9E-%E4%B8%80%E8%88%AC%E5%86%85%E7%BD%91%EF%BC%89/" rel="tag">redis漏洞(一般内网）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell-%E8%84%9A%E6%9C%AC-Linux-search/" rel="tag">shell 脚本 Linux search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell%E5%8F%8D%E5%BC%B9%E3%80%81powershell%E5%8F%8D%E5%BC%B9/" rel="tag">shell反弹、powershell反弹</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql-inject/" rel="tag">sql_inject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B/" rel="tag">sql注入流程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-%E5%9F%9F-%E5%9F%9F%E6%B8%97%E9%80%8F/" rel="tag">windows 域 域渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91-%E6%8F%90%E6%9D%83/" rel="tag">内网/提权</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E8%BD%AC%E5%8F%91/" rel="tag">内网转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E4%BD%BF%E7%94%A8/" rel="tag">常用工具及使用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" rel="tag">文件包含漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%87waf/" rel="tag">过waf</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-api-php-registry/" rel="tag">docker-api,php,registry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/information-collect/" rel="tag">information collect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E6%9F%A5%E6%89%BE/" rel="tag">linux命令之查找</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-%E6%89%AB%E6%8F%8F/" rel="tag">python 扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis%E6%BC%8F%E6%B4%9E-%E4%B8%80%E8%88%AC%E5%86%85%E7%BD%91%EF%BC%89/" rel="tag">redis漏洞(一般内网）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell-%E8%84%9A%E6%9C%AC-Linux-search/" rel="tag">shell 脚本 Linux search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell%E5%8F%8D%E5%BC%B9%E3%80%81powershell%E5%8F%8D%E5%BC%B9/" rel="tag">shell反弹、powershell反弹</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql-inject/" rel="tag">sql_inject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B/" rel="tag">sql注入流程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-%E5%9F%9F-%E5%9F%9F%E6%B8%97%E9%80%8F/" rel="tag">windows 域 域渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91-%E6%8F%90%E6%9D%83/" rel="tag">内网/提权</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E8%BD%AC%E5%8F%91/" rel="tag">内网转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E4%BD%BF%E7%94%A8/" rel="tag">常用工具及使用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" rel="tag">文件包含漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%87waf/" rel="tag">过waf</a></li></ul>
     </div>
   </div>
 
@@ -1424,7 +1370,7 @@ powershell脚本获取密码：
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/docker-api-php-registry/" style="font-size: 10px;">docker-api,php,registry</a> <a href="/tags/information-collect/" style="font-size: 10px;">information collect</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">linux命令之查找</a> <a href="/tags/python-%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">python 扫描</a> <a href="/tags/redis%E6%BC%8F%E6%B4%9E-%E4%B8%80%E8%88%AC%E5%86%85%E7%BD%91%EF%BC%89/" style="font-size: 10px;">redis漏洞(一般内网）</a> <a href="/tags/shell-%E8%84%9A%E6%9C%AC-Linux-search/" style="font-size: 10px;">shell 脚本 Linux search</a> <a href="/tags/shell%E5%8F%8D%E5%BC%B9%E3%80%81powershell%E5%8F%8D%E5%BC%B9/" style="font-size: 10px;">shell反弹、powershell反弹</a> <a href="/tags/sql-inject/" style="font-size: 10px;">sql_inject</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">sql注入</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B/" style="font-size: 10px;">sql注入流程</a> <a href="/tags/windows-%E5%9F%9F-%E5%9F%9F%E6%B8%97%E9%80%8F/" style="font-size: 10px;">windows 域 域渗透</a> <a href="/tags/%E5%86%85%E7%BD%91-%E6%8F%90%E6%9D%83/" style="font-size: 10px;">内网/提权</a> <a href="/tags/%E5%86%85%E7%BD%91%E8%BD%AC%E5%8F%91/" style="font-size: 10px;">内网转发</a> <a href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E4%BD%BF%E7%94%A8/" style="font-size: 10px;">常用工具及使用</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">文件包含漏洞</a> <a href="/tags/%E8%BF%87waf/" style="font-size: 10px;">过waf</a>
+      <a href="/tags/docker-api-php-registry/" style="font-size: 10px;">docker-api,php,registry</a> <a href="/tags/information-collect/" style="font-size: 10px;">information collect</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">linux命令之查找</a> <a href="/tags/python-%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">python 扫描</a> <a href="/tags/redis%E6%BC%8F%E6%B4%9E-%E4%B8%80%E8%88%AC%E5%86%85%E7%BD%91%EF%BC%89/" style="font-size: 10px;">redis漏洞(一般内网）</a> <a href="/tags/shell-%E8%84%9A%E6%9C%AC-Linux-search/" style="font-size: 10px;">shell 脚本 Linux search</a> <a href="/tags/shell%E5%8F%8D%E5%BC%B9%E3%80%81powershell%E5%8F%8D%E5%BC%B9/" style="font-size: 10px;">shell反弹、powershell反弹</a> <a href="/tags/sql-inject/" style="font-size: 10px;">sql_inject</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">sql注入</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B/" style="font-size: 10px;">sql注入流程</a> <a href="/tags/windows-%E5%9F%9F-%E5%9F%9F%E6%B8%97%E9%80%8F/" style="font-size: 10px;">windows 域 域渗透</a> <a href="/tags/%E5%86%85%E7%BD%91-%E6%8F%90%E6%9D%83/" style="font-size: 10px;">内网/提权</a> <a href="/tags/%E5%86%85%E7%BD%91%E8%BD%AC%E5%8F%91/" style="font-size: 10px;">内网转发</a> <a href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E4%BD%BF%E7%94%A8/" style="font-size: 10px;">常用工具及使用</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">文件包含漏洞</a> <a href="/tags/%E8%BF%87waf/" style="font-size: 10px;">过waf</a>
     </div>
   </div>
 
@@ -1433,7 +1379,7 @@ powershell脚本获取密码：
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
     </div>
   </div>
 
@@ -1450,6 +1396,10 @@ powershell脚本获取密码：
           </li>
         
           <li>
+            <a href="/2019/11/23/k8s%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">k8s搭建</a>
+          </li>
+        
+          <li>
             <a href="/2019/03/31/python%E6%89%B9%E9%87%8F%E7%88%AC%E5%8F%96URL%E9%85%8D%E5%90%88AWVS/">python批量爬取URL配合AWVS</a>
           </li>
         
@@ -1459,10 +1409,6 @@ powershell脚本获取密码：
         
           <li>
             <a href="/2019/03/24/docker-api/">php与docker-api与私有仓库</a>
-          </li>
-        
-          <li>
-            <a href="/2019/03/24/%E5%9F%9F%E6%B8%97%E9%80%8F/">域渗透</a>
           </li>
         
       </ul>
