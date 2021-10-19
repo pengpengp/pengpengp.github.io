@@ -64,6 +64,138 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ipv6Server&amp;DNS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/19/ipv6Server&DNS/" class="article-date">
+  <time datetime="2021-10-19T04:58:09.000Z" itemprop="datePublished">2021-10-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/19/ipv6Server&DNS/">ipv6Server&amp;DNS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="one-准备工作"><a href="#one-准备工作" class="headerlink" title=":one:准备工作"></a>:one:准备工作</h3><p>1）启用ipv6</p>
+<p>vi /etc/sysctl.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">net.ipv6.conf.all.disable_ipv6 &#x3D; 0</span><br><span class="line">net.ipv6.conf.default.disable_ipv6 &#x3D; 0</span><br><span class="line">net.ipv6.conf.lo.disable_ipv6 &#x3D; 0</span><br><span class="line">net.ipv6.conf.all.forwarding &#x3D; 1</span><br></pre></td></tr></table></figure>
+
+<p>vi /etc/sysconfig/network</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NETWORKING_IPV6&#x3D;yes</span><br><span class="line">IPV6FORWARDING&#x3D;yes</span><br><span class="line">HOSTNAME&#x3D;dhcpserver</span><br><span class="line">ONBOOT&#x3D;yes</span><br></pre></td></tr></table></figure>
+
+<p>使配置生效并查看效果</p>
+<p><code>sysctl -p</code></p>
+<p>2）配置网卡</p>
+<p>vi /etc/sysconfig/network-scripts/ifcfg-ens33</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">TYPE&#x3D;Ethernet</span><br><span class="line">PROXY_METHOD&#x3D;none</span><br><span class="line">BROWSER_ONLY&#x3D;no</span><br><span class="line">BOOTPROTO&#x3D;static</span><br><span class="line">DEFROUTE&#x3D;yes</span><br><span class="line">IPV4_FAILURE_FATAL&#x3D;no</span><br><span class="line">IPV6INIT&#x3D;yes</span><br><span class="line">IPV6_AUTOCONF&#x3D;no</span><br><span class="line">IPV6_DEFROUTE&#x3D;yes</span><br><span class="line">IPV6_PEERDNS&#x3D;yes</span><br><span class="line">IPV6_PEERROUTES&#x3D;yes</span><br><span class="line">IPV6_FAILURE_FATAL&#x3D;no</span><br><span class="line">IPV6_ADDR_GEN_MODE&#x3D;stable-privacy</span><br><span class="line">NAME&#x3D;ens33									#改成实际的名称</span><br><span class="line">UUID&#x3D;c99f931f-acbe-4769-99de-63625a57ddba    #改成实际的网卡id，也可以不写</span><br><span class="line">DEVICE&#x3D;ens33                       			#改成实际的名称</span><br><span class="line">ONBOOT&#x3D;yes</span><br><span class="line">#IPADDR&#x3D;x.x.x.x</span><br><span class="line">#GATEWAY&#x3D;x.x.x.x</span><br><span class="line">#NETMASK&#x3D;X.X.X.X</span><br><span class="line">PEERDNS&#x3D;yes</span><br><span class="line">PEERROUTES&#x3D;yes</span><br><span class="line">IPV6ADDR&#x3D;2001:db8:8::1&#x2F;64                   #根据DHCP的情况来写</span><br><span class="line">IPV6_DEFAULTGW&#x3D;2001:db8:8::1000				#根据DHCP的情况来写</span><br><span class="line">IPV6FORWARDING&#x3D;yes</span><br><span class="line">#&#x2F;&#x2F;IPV6 SLAAC configure client</span><br><span class="line">#IPV6_AUTOCONF&#x3D;no</span><br><span class="line">#DHCPV6C&#x3D;yes</span><br></pre></td></tr></table></figure>
+
+<p>重启网络服务</p>
+<p><code>systemctl restart network</code></p>
+<h3 id="two-radvd"><a href="#two-radvd" class="headerlink" title=":two:radvd"></a>:two:radvd</h3><p>1）安装并配置radvd</p>
+<p><code>yum -y install radvd</code></p>
+<p>vi /etc/radvd.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">interface ens33      #ens33改成实际的网卡名</span><br><span class="line">&#123;</span><br><span class="line">  AdvSendAdvert on;</span><br><span class="line">  AdvManagedFlag on;</span><br><span class="line">  AdvOtherConfigFlag on;</span><br><span class="line">  MinRtrAdvInterval 30;</span><br><span class="line">  MaxRtrAdvInterval 100;</span><br><span class="line"></span><br><span class="line">  AdvLinkMTU 1480;</span><br><span class="line">#  prefix 2001:db8:8::&#x2F;64</span><br><span class="line">#  &#123;</span><br><span class="line">#    AdvOnLink on;</span><br><span class="line">#    AdvAutonomous on;</span><br><span class="line">#    AdvRouterAddr off;</span><br><span class="line">#  &#125;;</span><br><span class="line">#  RDNSS 2001:db8:8::100</span><br><span class="line">#  &#123;&#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>2）启动radvd并自启</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> radvd</span><br><span class="line">systemctl start radvd</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="three-dhcp"><a href="#three-dhcp" class="headerlink" title=":three:dhcp"></a>:three:dhcp</h3><p>1）安装并配置DHCP</p>
+<p><code>yum -y install dhcp</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># vi &#x2F;etc&#x2F;dhcp&#x2F;dhcpd6.conf</span><br><span class="line"> </span><br><span class="line">default-lease-time 2592000;</span><br><span class="line">preferred-lifetime 604800;</span><br><span class="line">option dhcp-renewal-time 3600;</span><br><span class="line">option dhcp-rebinding-time 7200;</span><br><span class="line">allow leasequery;</span><br><span class="line">option dhcp6.name-servers 2001:db8:8::100;</span><br><span class="line">option dhcp6.domain-search &quot;test.example.com&quot;,&quot;example.com&quot;;</span><br><span class="line">option dhcp6.preference 255;</span><br><span class="line">option dhcp6.info-refresh-time 21600;</span><br><span class="line">option dhcp6.rapid-commit;</span><br><span class="line">dhcpv6-lease-file-name &quot;&#x2F;var&#x2F;lib&#x2F;dhcpd&#x2F;dhcpd6.leases&quot;;</span><br><span class="line"># The subnet where the server is attached</span><br><span class="line">subnet6 2001:db8:8::&#x2F;64 &#123; </span><br><span class="line">        #    Range for clients</span><br><span class="line">        range6 2001:db8:8::2 2001:db8:8::10;</span><br><span class="line">        #    Range for clients requesting a temporary address</span><br><span class="line">        #range6 2001:db8:0:1::&#x2F;64 temporary;</span><br><span class="line">        #    Additional options</span><br><span class="line">        #option dhcp6.name-servers fec0:0:0:1::1;</span><br><span class="line">        #option dhcp6.domain-search &quot;domain.example&quot;;</span><br><span class="line">        #     Prefix range for delegation to sub-routers</span><br><span class="line">        prefix6 2201:db8:0:100:: 2201:db8:0:f00:: &#x2F;56;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2）启动并自启HDCP6</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> dhcpd6</span><br><span class="line">systemctl start dhcpd6</span><br></pre></td></tr></table></figure>
+
+<h3 id="four-调整防火墙状态"><a href="#four-调整防火墙状态" class="headerlink" title=":four:调整防火墙状态"></a>:four:调整防火墙状态</h3><p>systemctl stop firewalld.service </p>
+<p> 或放行相应的端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --add-port=xx/tcp</span><br><span class="line">firewall-cmd --permanent --add-port=xx/udp</span><br><span class="line">firewall-cmd --reload  // 重新加载防火墙配置，让配置生效</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="five-阶段检测"><a href="#five-阶段检测" class="headerlink" title=":five:阶段检测"></a>:five:阶段检测</h3><p>目前可以测试ipv6地址的可用性</p>
+<p>可以用另一台机器ping这台启用了ipv6地址的机器，此时应使用的命令为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Win:  ping -6 2001:db8:8::1</span><br><span class="line">Linux:  ping6   2001:db8:8::1</span><br></pre></td></tr></table></figure>
+
+<p>有web服务还可以curl，格式如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl  -g -d -k -v --interface [本机ipv6地址] https://[目标ipv6地址]:端口号/test.html </span><br></pre></td></tr></table></figure>
+
+<h3 id="six-DNS"><a href="#six-DNS" class="headerlink" title=":six:DNS"></a>:six:DNS</h3><p>1）安装 BIND 服务器软件并启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum -y install <span class="built_in">bind</span> bind-utils</span><br><span class="line">systemctl start named.service  // 启动服务</span><br><span class="line">systemctl <span class="built_in">enable</span> named  // 设为开机启动</span><br></pre></td></tr></table></figure>
+
+<p>2）DNS 服务的相关配置文件</p>
+<p><code>cp -p /etc/named.conf /etc/named.conf.bak</code> // 参数-p表示备份文件与源文件的属性一致。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"># vi &#x2F;etc&#x2F;named.conf</span><br><span class="line"></span><br><span class="line">options &#123;</span><br><span class="line">        listen-on port 53 &#123; any; &#125;;         #需要修改的</span><br><span class="line">        listen-on-v6 port 53 &#123; any; &#125;;		#需要修改的</span><br><span class="line">        directory       &quot;&#x2F;var&#x2F;named&quot;;</span><br><span class="line">        dump-file       &quot;&#x2F;var&#x2F;named&#x2F;data&#x2F;cache_dump.db&quot;;</span><br><span class="line">        statistics-file &quot;&#x2F;var&#x2F;named&#x2F;data&#x2F;named_stats.txt&quot;;</span><br><span class="line">        memstatistics-file &quot;&#x2F;var&#x2F;named&#x2F;data&#x2F;named_mem_stats.txt&quot;;</span><br><span class="line">        allow-query     &#123; any; &#125;;			#需要修改的</span><br><span class="line"></span><br><span class="line">   &#x2F;*</span><br><span class="line">         - If you are building an AUTHORITATIVE DNS server, do NOT enable recursion.</span><br><span class="line">         - If you are building a RECURSIVE (caching) DNS server, you need to enable</span><br><span class="line">           recursion.</span><br><span class="line">         - If your recursive DNS server has a public IP address, you MUST enable access</span><br><span class="line">           control to limit queries to your legitimate users. Failing to do so will</span><br><span class="line">           cause your server to become part of large scale DNS amplification</span><br><span class="line">           attacks. Implementing BCP38 within your network would greatly</span><br><span class="line">           reduce such attack surface</span><br><span class="line">        *&#x2F;</span><br><span class="line">        recursion yes;</span><br><span class="line"></span><br><span class="line">        dnssec-enable yes;</span><br><span class="line">        dnssec-validation yes;</span><br><span class="line"></span><br><span class="line">        &#x2F;* Path to ISC DLV key *&#x2F;</span><br><span class="line">        bindkeys-file &quot;&#x2F;etc&#x2F;named.iscdlv.key&quot;;</span><br><span class="line"></span><br><span class="line">        managed-keys-directory &quot;&#x2F;var&#x2F;named&#x2F;dynamic&quot;;</span><br><span class="line"></span><br><span class="line">        pid-file &quot;&#x2F;run&#x2F;named&#x2F;named.pid&quot;;</span><br><span class="line">        session-keyfile &quot;&#x2F;run&#x2F;named&#x2F;session.key&quot;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">include &quot;&#x2F;etc&#x2F;named.rfc1912.zones&quot;;      # 在这里配置要解析的域</span><br></pre></td></tr></table></figure>
+
+<p><code>named-checkconf </code>    # 检查named.conf是否有语法问题</p>
+<p>3）配置要解析的域</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#  vi &#x2F;etc&#x2F;named.rfc1912.zones</span><br><span class="line"></span><br><span class="line">zone &quot;reading.zt&quot; IN &#123;</span><br><span class="line">        type master;</span><br><span class="line">        file &quot;named.reading.zt&quot;;     #针对域的具体配置文件，放在&#x2F;var&#x2F;named目录中</span><br><span class="line">        allow-update &#123; none; &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>4）每个域的配置文件</p>
+<p>基于 name.localhost 模板，创建配置文件：<code>cp -p /var/named/named.localhost /var/named/named.reading.zt</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$TTL 1D</span><br><span class="line">@   IN SOA  @ rname.invalid. (       #域名    TTL   SOA    解析的域名     邮箱</span><br><span class="line">                    0   ; serial</span><br><span class="line">                    1D  ; refresh</span><br><span class="line">                    1H  ; retry</span><br><span class="line">                    1W  ; expire</span><br><span class="line">                    3H )    ; minimum</span><br><span class="line">    NS  @</span><br><span class="line">    A   127.0.0.1</span><br><span class="line">    AAAA    ::1</span><br><span class="line">mirror  A   192.168.0.233</span><br><span class="line">test    A   192.168.0.232</span><br></pre></td></tr></table></figure>
+
+<p>改为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$TTL 1D</span><br><span class="line">@       IN SOA  master.reading.zt.  admin.reading.com. (</span><br><span class="line">                                        0       ; serial</span><br><span class="line">                                        1D      ; refresh</span><br><span class="line">                                        1H      ; retry</span><br><span class="line">                                        1W      ; expire</span><br><span class="line">                                        3H )    ;  minimum</span><br><span class="line">        NS      master</span><br><span class="line">master A 192.168.1.51</span><br><span class="line">ftp    A  1.1.1.1</span><br><span class="line">www    AAAA  2001:db8:8::1</span><br><span class="line">&#x2F;** </span><br><span class="line">* 也可以使用 www CNAME  xxx.reading.zt     </span><br><span class="line">* xxx.reading.zt   A 192.168.1.x</span><br><span class="line">* 来实现多种绑定方式</span><br><span class="line">*&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>4）修改权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown :named /var/named/named.reading.zt</span><br></pre></td></tr></table></figure>
+
+<p>5） 测试域的语法有没有错误</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">named-checkzone <span class="string">&quot;reading.zt&quot;</span> <span class="string">&quot;/var/named/named.reading.zt&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>6）重启 named 服务，让配置生效 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart named</span><br></pre></td></tr></table></figure>
+
+<p>7）把网卡配置文件中添加新搭建的DNS服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DNS1&#x3D;192.168.1.123    #举例</span><br></pre></td></tr></table></figure>
+
+<p>8）重启网卡</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart network.service</span><br></pre></td></tr></table></figure>
+
+<h3 id="seven-DNS测试"><a href="#seven-DNS测试" class="headerlink" title=":seven:DNS测试"></a>:seven:DNS测试</h3><p>如curl  域名， host 域名  ，dig 域名等</p>
+<ul>
+<li>ethtool</li>
+<li>mii-tool  检测网线是否连接</li>
+<li>route -n</li>
+<li>host 域名 [dns]</li>
+<li>dig  域名</li>
+<li>dig  NS  域名</li>
+<li>dig -t  mx  域名  @[dns]   #查询域名的邮箱</li>
+</ul>
+<h3 id="eight-故障排查"><a href="#eight-故障排查" class="headerlink" title=":eight:故障排查"></a>:eight:故障排查</h3><p>思路：ipv4通 -&gt; ipv6通 -&gt; 域名通</p>
+<p>if   ipv6不通 :</p>
+<p>​    排查ipv6服务的搭建情况，要注意配置pv6地址每台机器都需要配置允许ipv6才行</p>
+<p>if    ipv6通    且  域名不通:</p>
+<p>​    排查named服务器是否有错误</p>
+<p>​    还有一个坑是<code>/etc/resolve</code>文件会自动被NetworkManager修改，网上有两种办法，我采用的是停止NetworkManager的进程，然后再手动添加<code>nameserver 192.168.1.xx &gt; /etc/resolv.conf</code>  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/19/ipv6Server&DNS/" data-id="ckuxkbrss000hrwv25stad7hq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ipv6-DNS/" rel="tag">ipv6  DNS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-k8s环境搭建" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/11/23/k8s%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="article-date">
@@ -125,7 +257,7 @@ Environment=&quot;NO_PROXY=172.20.0.0/16,127.0.0.1/8&quot;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2019/11/23/k8s%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" data-id="ckngvj772000fzkv2duvh8kdd" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2019/11/23/k8s%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" data-id="ckuxkbrss000jrwv22jss5su9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/" rel="tag">k8s</a></li></ul>
@@ -182,7 +314,7 @@ Environment=&quot;NO_PROXY=172.20.0.0/16,127.0.0.1/8&quot;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2019/03/31/python%E6%89%B9%E9%87%8F%E7%88%AC%E5%8F%96URL%E9%85%8D%E5%90%88AWVS/" data-id="ckngvj775000nzkv241fqcdzs" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2019/03/31/python%E6%89%B9%E9%87%8F%E7%88%AC%E5%8F%96URL%E9%85%8D%E5%90%88AWVS/" data-id="ckuxkbrsv000prwv24j734vuq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python-%E6%89%AB%E6%8F%8F/" rel="tag">python 扫描</a></li></ul>
@@ -224,7 +356,7 @@ Environment=&quot;NO_PROXY=172.20.0.0/16,127.0.0.1/8&quot;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2019/03/24/first-shell/" data-id="ckngvj76z0008zkv2ekwhfjzi" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2019/03/24/first-shell/" data-id="ckuxkbrsn0008rwv20bah3n1v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell-%E8%84%9A%E6%9C%AC-Linux-search/" rel="tag">shell 脚本 Linux search</a></li></ul>
@@ -264,8 +396,9 @@ Environment=&quot;NO_PROXY=172.20.0.0/16,127.0.0.1/8&quot;
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">sudo service docker restart</span><br></pre></td></tr></table></figure>
 
 <p>测试</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl  http://127.0.0.1:5555/version</span><br><span class="line">&#123;&quot;Version&quot;:&quot;1.13.1&quot;,&quot;ApiVersion&quot;:&quot;1.26&quot;,&quot;MinAPIVersion&quot;:&quot;1.12&quot;,&quot;GitCommit&quot;:&quot;092cba3&quot;,</span><br><span class="line">&quot;GoVersion&quot;:&quot;go1.7.5&quot;,&quot;Os&quot;:&quot;linux&quot;,&quot;Arch&quot;:&quot;amd64&quot;,&quot;KernelVersion&quot;:&quot;4.4.0-57-generic&quot;,</span><br><span class="line">&quot;BuildTime&quot;:&quot;2017-02-08T06:50:14.717554785+00:00&quot;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl  http://127.0.0.1:5555/version</span><br><span class="line">&#123;&quot;Version&quot;:&quot;1.13.1&quot;,&quot;ApiVersion&quot;:&quot;1.26&quot;,&quot;MinAPIVersion&quot;:&quot;1.12&quot;,&quot;GitCommit&quot;:&quot;092cba3&quot;,</span><br><span class="line">&quot;GoVersion&quot;:&quot;go1.7.5&quot;,&quot;Os&quot;:&quot;linux&quot;,&quot;Arch&quot;:&quot;amd64&quot;,&quot;KernelVersion&quot;:&quot;4.4.0-57-generic&quot;,</span><br><span class="line">&quot;BuildTime&quot;:&quot;2017-02-08T06:50:14.717554785+00:00&quot;&#125;</span><br><span class="line"></span><br><span class="line">curl -X POST -H “Content-Type: application/json” http://127.0.0.1:2375/containers/create -d &#x27;&#123;“image”:“docker.io/centos”&#125;</span><br></pre></td></tr></table></figure>
 
+<p>使用参考文档：<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/api/v1.41/#operation/ContainerCreate">https://docs.docker.com/engine/api/v1.41/#operation/ContainerCreate</a></p>
 <h4 id="2-封装的方法："><a href="#2-封装的方法：" class="headerlink" title="2.封装的方法："></a>2.封装的方法：</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CreateURL</span>(<span class="params">$image_name,$apache_port,$hostname=<span class="string">&#x27;test&#x27;</span>,$Volumes=<span class="string">&#x27;&#123;&quot;/var/lib/docker/volumes/de96b8143c2808ead5cb9dda7ad69f5b8024cae0e4b364a7cef7adf7f387dd89/_data&quot;: &#123;&quot;/var/lib/mysql&quot;:&quot;rw&quot; &#125;&#125;&#x27;</span></span>)</span>&#123;</span><br><span class="line">        <span class="comment">#$data  = json_encode($data);    </span></span><br><span class="line">        $data=<span class="string">&#x27;&#123;&quot;Image&quot;:&quot;&#x27;</span>.$image_name.<span class="string">&#x27;&quot;,&quot;Hostname&quot;:&quot;&#x27;</span>.$hostname.<span class="string">&#x27;&quot;,&quot;Volumes&quot;:&#x27;</span>.$Volumes.<span class="string">&#x27;,&quot;ExposedPorts&quot;:&#123;&quot;80/tcp&quot;:&#123;&#125; &#125;,&quot;PortBindings&quot;:&#123;&quot;80/tcp&quot;:[&#123;&quot;HostPort&quot;:&quot;&#x27;</span>.$apache_port.<span class="string">&#x27;&quot;&#125;] &#125;,&quot;StopTimeout&quot;: 1     &#125;&#x27;</span>;</span><br><span class="line">        $url = <span class="string">&#x27;http://&#x27;</span>.$_SERVER[SERVER_ADDR].<span class="string">&#x27;:5555/containers/create&#x27;</span>;</span><br><span class="line">        $headerArray =<span class="keyword">array</span>(<span class="string">&quot;Content-type:application/json;charset=&#x27;utf-8&#x27;&quot;</span>,<span class="string">&quot;Accept:application/json&quot;</span>);</span><br><span class="line">        $curl = curl_init();</span><br><span class="line">        curl_setopt($curl, CURLOPT_URL, $url);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, <span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST,<span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_POST, <span class="number">1</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);</span><br><span class="line">        curl_setopt($curl,CURLOPT_HTTPHEADER,$headerArray);</span><br><span class="line">        curl_setopt($curl, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        $output = curl_exec($curl);</span><br><span class="line">        curl_close($curl);</span><br><span class="line">        <span class="keyword">return</span> json_decode($output);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">StartContainer</span>(<span class="params">$id</span>)</span>&#123;</span><br><span class="line">        $url = <span class="string">&#x27;http://&#x27;</span>.$_SERVER[SERVER_ADDR].<span class="string">&#x27;:5555/containers/&#x27;</span>.$id.<span class="string">&#x27;/start&#x27;</span>;</span><br><span class="line">        $headerArray =<span class="keyword">array</span>(<span class="string">&quot;Content-type:application/json;charset=&#x27;utf-8&#x27;&quot;</span>,<span class="string">&quot;Accept:application/json&quot;</span>);</span><br><span class="line">        $curl = curl_init();</span><br><span class="line">        curl_setopt($curl, CURLOPT_URL, $url);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, <span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST,<span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_POST, <span class="number">1</span>);</span><br><span class="line">        <span class="comment">#curl_setopt($curl, CURLOPT_POSTFIELDS, $data);</span></span><br><span class="line">        curl_setopt($curl,CURLOPT_HTTPHEADER,$headerArray);</span><br><span class="line">        curl_setopt($curl, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        $output = curl_exec($curl);</span><br><span class="line">        curl_close($curl);</span><br><span class="line">        <span class="keyword">return</span> json_decode($output);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">StopContainer</span>(<span class="params">$id</span>)</span>&#123;</span><br><span class="line">        <span class="comment">#$data  = json_encode($data);</span></span><br><span class="line">        $url = <span class="string">&#x27;http://&#x27;</span>.$_SERVER[SERVER_ADDR].<span class="string">&#x27;:5555/containers/&#x27;</span>.$id.<span class="string">&#x27;/stop?t=1&#x27;</span>;</span><br><span class="line">        $headerArray =<span class="keyword">array</span>(<span class="string">&quot;Content-type:application/json;charset=&#x27;utf-8&#x27;&quot;</span>,<span class="string">&quot;Accept:application/json&quot;</span>);</span><br><span class="line">        $curl = curl_init();</span><br><span class="line">        curl_setopt($curl, CURLOPT_URL, $url);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, <span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST,<span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_POST, <span class="number">1</span>);</span><br><span class="line">        <span class="comment">#curl_setopt($curl, CURLOPT_POSTFIELDS, $data);</span></span><br><span class="line">        curl_setopt($curl,CURLOPT_HTTPHEADER,$headerArray);</span><br><span class="line">        curl_setopt($curl, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        $output = curl_exec($curl);</span><br><span class="line">        $httpCode = curl_getinfo($curl,CURLINFO_HTTP_CODE); </span><br><span class="line">        curl_close($curl);</span><br><span class="line">        <span class="keyword">return</span> $httpCode;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">RmContainer</span>(<span class="params">$id</span>)</span>&#123;</span><br><span class="line">        $url = <span class="string">&#x27;http://&#x27;</span>.$_SERVER[SERVER_ADDR].<span class="string">&#x27;:5555/containers/&#x27;</span>.$id;</span><br><span class="line">        <span class="comment">#$data  = json_encode($data);</span></span><br><span class="line">        $ch = curl_init();</span><br><span class="line">        curl_setopt ($ch,CURLOPT_URL,$url);</span><br><span class="line">        curl_setopt ($ch, CURLOPT_HTTPHEADER, <span class="keyword">array</span>(<span class="string">&#x27;Content-type:application/json&#x27;</span>));</span><br><span class="line">        curl_setopt ($ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        curl_setopt ($ch, CURLOPT_CUSTOMREQUEST, <span class="string">&quot;DELETE&quot;</span>);   </span><br><span class="line">        <span class="comment">#curl_setopt($ch, CURLOPT_POSTFIELDS,$data);</span></span><br><span class="line">        $output = curl_exec($ch);</span><br><span class="line">        curl_close($ch);</span><br><span class="line">        $output = json_decode($output,<span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">RenameContainer</span>(<span class="params">$id,$username</span>)</span>&#123;</span><br><span class="line">        <span class="comment">#$data  = json_encode($data);</span></span><br><span class="line">        $url = <span class="string">&#x27;http://&#x27;</span>.$_SERVER[SERVER_ADDR].<span class="string">&#x27;:5555/containers/&#x27;</span>.$id.<span class="string">&#x27;/rename?name=&#x27;</span>.$username;</span><br><span class="line">        $headerArray =<span class="keyword">array</span>(<span class="string">&quot;Content-type:application/json;charset=&#x27;utf-8&#x27;&quot;</span>,<span class="string">&quot;Accept:application/json&quot;</span>);</span><br><span class="line">        $curl = curl_init();</span><br><span class="line">        curl_setopt($curl, CURLOPT_URL, $url);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, <span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST,<span class="literal">FALSE</span>);</span><br><span class="line">        curl_setopt($curl, CURLOPT_POST, <span class="number">1</span>);</span><br><span class="line">        <span class="comment">#curl_setopt($curl, CURLOPT_POSTFIELDS, $data);</span></span><br><span class="line">        curl_setopt($curl,CURLOPT_HTTPHEADER,$headerArray);</span><br><span class="line">        curl_setopt($curl, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        $output = curl_exec($curl);</span><br><span class="line">        $httpCode = curl_getinfo($curl,CURLINFO_HTTP_CODE); </span><br><span class="line">        curl_close($curl);</span><br><span class="line">        <span class="comment">#return json_decode($output);</span></span><br><span class="line">        <span class="keyword">return</span> $httpCode;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show_url</span>(<span class="params">$apache_port</span>)</span>&#123;</span><br><span class="line">        $url=<span class="string">&quot;http://&quot;</span>.$_SERVER[SERVER_ADDR].<span class="string">&quot;:&quot;</span>.$apache_port;</span><br><span class="line">        <span class="keyword">print</span>(<span class="string">&quot;&lt;a href=&quot;</span>.$url.<span class="string">&quot; &quot;</span>. <span class="string">&quot;target=&#x27;_blank&#x27;&gt;打开习题&lt;/a&gt;&quot;</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;&lt;script&gt;alert(&#x27;习题页面<span class="subst">$url</span>&#x27;)&lt;/script&gt;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -303,25 +436,17 @@ Environment=&quot;NO_PROXY=172.20.0.0/16,127.0.0.1/8&quot;
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="attr">&quot;insecure-registries&quot;</span>:[<span class="string">&quot;9.1.1.128:5000&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line">或vim/etc/default/docker</span><br><span class="line">添加 &quot;- - insecure-registry 127.0.0.1:5000&quot;</span><br></pre></td></tr></table></figure>
 <h4 id="03-启动仓库服务"><a href="#03-启动仓库服务" class="headerlink" title="03.启动仓库服务"></a>03.启动仓库服务</h4><pre><code>`sudo vi /data/docker/config.yml`</code></pre>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="number">0.1</span></span><br><span class="line"><span class="attr">log:</span></span><br><span class="line">  <span class="attr">fields:</span></span><br><span class="line">    <span class="attr">service:</span> <span class="string">registry</span></span><br><span class="line"><span class="attr">storage:</span></span><br><span class="line">  <span class="attr">delete:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">cache:</span></span><br><span class="line">    <span class="attr">blobdescriptor:</span> <span class="string">inmemory</span></span><br><span class="line">  <span class="attr">filesystem:</span></span><br><span class="line">    <span class="attr">rootdirectory:</span> <span class="string">/var/lib/registry</span></span><br><span class="line"><span class="attr">http:</span></span><br><span class="line">  <span class="attr">addr:</span> <span class="string">:5000</span></span><br><span class="line">  <span class="attr">headers:</span></span><br><span class="line">    <span class="attr">X-Content-Type-Options:</span> [<span class="string">nosniff</span>]</span><br><span class="line"><span class="attr">health:</span></span><br><span class="line">  <span class="attr">storagedriver:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">interval:</span> <span class="string">10s</span></span><br><span class="line">    <span class="attr">threshold:</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
-<pre><code>`docker run -d -p 5000:5000 -v /data/docker/registry:/var/lib/registry  -v /data/docker/config.yml:/etc/docker/registry/config.yml --restart always --name registry registry`</code></pre>
-<h4 id="04-搭建完仓库，开始配置镜像"><a href="#04-搭建完仓库，开始配置镜像" class="headerlink" title="04.搭建完仓库，开始配置镜像"></a>04.搭建完仓库，开始配置镜像</h4><pre><code>` docker tag image_name:tags  ip:5000/image_name`</code></pre>
-<h4 id="05-推送到本地"><a href="#05-推送到本地" class="headerlink" title="05.推送到本地"></a>05.推送到本地</h4><pre><code>`docker push ip:5000/image_name`</code></pre>
-<h4 id="06-查看仓库内镜像"><a href="#06-查看仓库内镜像" class="headerlink" title="06.查看仓库内镜像"></a>06.查看仓库内镜像</h4><pre><code>`curl http://ip:5000/v2/_catalog`     
-`curl  &lt;仓库地址&gt;/v2/&lt;镜像名&gt;/tags/list`   查看镜像版本
-`curl --header &quot;Accept:application/vnd.docker.distribution.manifest.v2+json&quot; -I -XGET http://镜像地址/v2/镜像名称/manifests/镜像版本` 查看hash，注意url前只能有一个空格</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`docker run -d -p 5000:5000 -v /data/docker/registry:/var/lib/registry  -v /data/docker/config.yml:/etc/docker/registry/config.yml --restart always --name registry registry`</span><br></pre></td></tr></table></figure>
+<h4 id="04-搭建完仓库，开始配置镜像"><a href="#04-搭建完仓库，开始配置镜像" class="headerlink" title="04.搭建完仓库，开始配置镜像"></a>04.搭建完仓库，开始配置镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">` docker tag image_name:tags  ip:5000/image_name`</span><br></pre></td></tr></table></figure>
+<h4 id="05-推送到本地"><a href="#05-推送到本地" class="headerlink" title="05.推送到本地"></a>05.推送到本地</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`docker push ip:5000/image_name`</span><br></pre></td></tr></table></figure>
+<h4 id="06-查看仓库内镜像"><a href="#06-查看仓库内镜像" class="headerlink" title="06.查看仓库内镜像"></a>06.查看仓库内镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">`curl http://ip:5000/v2/_catalog`     </span><br><span class="line">`curl  &lt;仓库地址&gt;/v2/&lt;镜像名&gt;/tags/list`   查看镜像版本</span><br><span class="line">`curl --header <span class="string">&quot;Accept:application/vnd.docker.distribution.manifest.v2+json&quot;</span> -I -XGET http://镜像地址/v2/镜像名称/manifests/镜像版本` 查看<span class="built_in">hash</span>，注意url前只能有一个空格</span><br></pre></td></tr></table></figure>
 <h4 id="07-从仓库拉取镜像"><a href="#07-从仓库拉取镜像" class="headerlink" title="07.从仓库拉取镜像"></a>07.从仓库拉取镜像</h4><pre><code>`docker pull ip:5000/image_name`</code></pre>
-<h4 id="08-删除仓库镜像"><a href="#08-删除仓库镜像" class="headerlink" title="08.删除仓库镜像"></a>08.删除仓库镜像</h4><pre><code>正常情况：`curl -I -XDELETE 私有仓库地址/v2/镜像名称/manifests/镜像对应sha256值`，如果不好用的话：
-001进入容器：`docker exec -it registry sh`
-002查看是否开启了删除数据功能：`cat /etc/docker/registry/config.yml`delete值为`true`
-003找到要删除的镜像：`find . -name &quot;*elasticsearch*&quot;`
-004手动删除：`rm -r ./var/lib/registry/docker/registry/v2/repositories/elasticsearch`
-005删后同步registry/config.yml文件：`registry garbage-collect /etc/docker/registry/config.yml`
-006等待完成后再次查看镜像：`http://localhost:5000/v2/_catalog`</code></pre>
+<h4 id="08-删除仓库镜像"><a href="#08-删除仓库镜像" class="headerlink" title="08.删除仓库镜像"></a>08.删除仓库镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">正常情况：`curl -I -XDELETE 私有仓库地址/v2/镜像名称/manifests/镜像对应sha256值`，如果不好用的话：</span><br><span class="line">001进入容器：`docker <span class="built_in">exec</span> -it registry sh`</span><br><span class="line">002查看是否开启了删除数据功能：`cat /etc/docker/registry/config.yml`delete值为`<span class="literal">true</span>`</span><br><span class="line">003找到要删除的镜像：`find . -name <span class="string">&quot;*elasticsearch*&quot;</span>`</span><br><span class="line">004手动删除：`rm -r ./var/lib/registry/docker/registry/v2/repositories/elasticsearch`</span><br><span class="line">005删后同步registry/config.yml文件：`registry garbage-collect /etc/docker/registry/config.yml`</span><br><span class="line">006等待完成后再次查看镜像：`http://localhost:5000/v2/_catalog`</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2019/03/24/docker-api/" data-id="ckngvj76w0005zkv22g00gbhj" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2019/03/24/docker-api/" data-id="ckuxkbrsj0005rwv27qxa8g37" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-api-php-registry/" rel="tag">docker-api,php,registry</a></li></ul>
@@ -418,7 +543,7 @@ Environment=&quot;NO_PROXY=172.20.0.0/16,127.0.0.1/8&quot;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2019/03/24/%E5%9F%9F%E6%B8%97%E9%80%8F/" data-id="ckngvj77c0012zkv23vl5evig" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2019/03/24/%E5%9F%9F%E6%B8%97%E9%80%8F/" data-id="ckuxkbrt20014rwv2b08g3arx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows-%E5%9F%9F-%E5%9F%9F%E6%B8%97%E9%80%8F/" rel="tag">windows 域 域渗透</a></li></ul>
@@ -952,7 +1077,7 @@ Environment=&quot;NO_PROXY=172.20.0.0/16,127.0.0.1/8&quot;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2019/03/16/%E5%B8%B8%E7%94%A8%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/" data-id="ckngvj77j001lzkv22wk67ua5" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2019/03/16/%E5%B8%B8%E7%94%A8%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/" data-id="ckuxkbrtl001rrwv2eip4eeb1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E4%BD%BF%E7%94%A8/" rel="tag">常用工具及使用</a></li></ul>
@@ -1078,7 +1203,7 @@ lcx -slave 1.1.1.1 4444 127.0.0.1 80
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2019/03/10/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%B7%A5%E5%85%B7/" data-id="ckngvj77b0010zkv2eaeddonf" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2019/03/10/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%B7%A5%E5%85%B7/" data-id="ckuxkbrt10012rwv29z88bn1s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E8%BD%AC%E5%8F%91/" rel="tag">内网转发</a></li></ul>
@@ -1206,7 +1331,7 @@ powershell脚本获取密码：
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2019/03/03/%E6%8F%90%E6%9D%83/" data-id="ckngvj77i001izkv2crhvao01" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2019/03/03/%E6%8F%90%E6%9D%83/" data-id="ckuxkbrt20016rwv2gfoj3gzd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91-%E6%8F%90%E6%9D%83/" rel="tag">内网/提权</a></li></ul>
@@ -1289,137 +1414,10 @@ powershell脚本获取密码：
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2019/03/03/grep-find-awk-sed%E6%8C%87%E4%BB%A4%E5%9F%BA%E7%A1%80/" data-id="ckngvj771000czkv257o86sgd" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2019/03/03/grep-find-awk-sed%E6%8C%87%E4%BB%A4%E5%9F%BA%E7%A1%80/" data-id="ckuxkbrsp000crwv27vry6rh7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E6%9F%A5%E6%89%BE/" rel="tag">linux命令之查找</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-信息搜集" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/02/24/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/" class="article-date">
-  <time datetime="2019-02-24T00:17:54.000Z" itemprop="datePublished">2019-02-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/24/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/">信息搜集</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>只要能挖掘到对黑客有用的信息,就是信息泄露</p>
-<h2 id="目标：只要能挖掘到对黑客有用的信息-就是信息泄露"><a href="#目标：只要能挖掘到对黑客有用的信息-就是信息泄露" class="headerlink" title="目标：只要能挖掘到对黑客有用的信息,就是信息泄露"></a>目标：只要能挖掘到对黑客有用的信息,就是信息泄露</h2><h3 id="需要搜集的信息-分类-web安全方向"><a href="#需要搜集的信息-分类-web安全方向" class="headerlink" title="*****需要搜集的信息:    分类(web安全方向)"></a><code>*****</code>需要搜集的信息:    分类(web安全方向)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.web服务器信息(中间件)</span><br><span class="line">2.web应用信息(web脚本,数据库类型,cms)</span><br><span class="line">3.服务器操作系统信息(系统版本)</span><br><span class="line">4.服务器其他信息(服务,端口)</span><br><span class="line">5.域名信息(子域名,ip)</span><br><span class="line">6.相关人员信息(注册域名相关人员)</span><br></pre></td></tr></table></figure>
-
-
-
-<hr>
-<hr>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="*****步骤:"></a><code>*****</code>步骤:</h3><h4 id="一-搜集域名-顶级域名-子域名"><a href="#一-搜集域名-顶级域名-子域名" class="headerlink" title="一.搜集域名(顶级域名,子域名)"></a>一.搜集域名(顶级域名,子域名)</h4><p><a target="_blank" rel="noopener" href="https://baidu.com/">https://baidu.com</a>          顶级子域名</p>
-<p><a target="_blank" rel="noopener" href="https://www.baidu.com/">https://www.baidu.com</a>       二级子域名<br>    <a target="_blank" rel="noopener" href="https://baike.baidu.com/">https://baike.baidu.com</a></p>
-<p><a target="_blank" rel="noopener" href="https://a.b.baidu.com/">https://a.b.baidu.com</a>       三级子域名    </p>
-<p>http:/asdasd.com.cn         顶级域名<br>    <a target="_blank" rel="noopener" href="http://beijing.gov.cn/">http://beijing.gov.cn</a>       顶级域名</p>
-<ul>
-<li>搜索方式:工具(layer,sublist3r,wydomain),谷歌(site:域名),网站(site.ip138.com)/(dnsdb.io),http证书,备案信息(icp.chinaz.com)</li>
-</ul>
-<blockquote>
-<p>技巧1:在tool.chinaz.com的备案号查看所有顶级域名</p>
-<p>技巧2.:域名+crossdomain.xml也可以查看其他子域名</p>
-<p>技巧3:利用同源策略,通过子域名绕过当前无法突破的域名</p>
-</blockquote>
-<h4 id="二-搜集相关注册人"><a href="#二-搜集相关注册人" class="headerlink" title="二.搜集相关注册人"></a>二.搜集相关注册人</h4><p>1.通过搜集网站seo.chinaz.com–&gt;</p>
-<p>2.通过浏览器插件portal查看***</p>
-<p>3.whois反查</p>
-<h4 id="三-搜集服务器信息"><a href="#三-搜集服务器信息" class="headerlink" title="三.搜集服务器信息"></a>三.搜集服务器信息</h4><p>1.判断操作系统</p>
-<p>–&gt;通过开放的端口和服务(后台一直扫着就可以,同时往下进行)<br>    windows:</p>
-<blockquote>
-<p>iis 80<br>        rpc 135<br>        smb 445<br>       rdp 3389</p>
-</blockquote>
-<p>linux:</p>
-<blockquote>
-<p>ssh 22<br>        NETBIOS 137 138 139</p>
-</blockquote>
-<ul>
-<li><p>通过大小写  <code>http://test.com/test.php</code></p>
-<pre><code>                `http://test.com/TEST.php`</code></pre>
-</li>
-<li><p>通过nmap -O ip查看系统信息</p>
-</li>
-</ul>
-<p>2.脚本语言</p>
-<ul>
-<li><p>识别伪静态</p>
-</li>
-<li><p>类似:<code>http://test.com/index/id/49</code></p>
-</li>
-</ul>
-<p>3.web中间件</p>
-<ul>
-<li><p>nmap -A选项</p>
-</li>
-<li><p>burp抓包查看response的server头</p>
-</li>
-</ul>
-<p>4.搜集cms信息</p>
-<p>(1).查看首页源代码<br>    (2).访问wp-login.php文件<br>    (3).discuz(论坛)平台特性:包含forum.php文件<br>    (4).robots.txt文件<br>    (5).网页底部的版权信息(copyright)</p>
-<p>工具-&gt;whatweb  (ruby写的)</p>
-<p>5.搜集服务器开放的端口及服务</p>
-<p>工具-&gt;：</p>
-<ul>
-<li><p>nmap</p>
-</li>
-<li><p>masscan</p>
-</li>
-<li><p>x-scan</p>
-</li>
-</ul>
-<hr>
-<hr>
-<h4 id="四-可能存在的信息泄露"><a href="#四-可能存在的信息泄露" class="headerlink" title="四.可能存在的信息泄露"></a>四.可能存在的信息泄露</h4><p>1.github信息泄露</p>
-<ul>
-<li><p>管理员的博客会包含一些自己网站的信     </p>
-</li>
-<li><p>如:运维脚本\源代码\配置文件</p>
-</li>
-</ul>
-<p>2.目录遍历</p>
-<ul>
-<li>如:127.0.0.1/admin/目录能正常打开</li>
-</ul>
-<p>3.任意文件下载</p>
-<ul>
-<li><p>针对有下载功能的页面,尝试下载重要文件</p>
-</li>
-<li><p>分系统—windows\linux           </p>
-</li>
-<li><p>分权限</p>
-</li>
-<li><p>分重要文件—passwd\shadow\history\</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2019/02/24/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/" data-id="ckngvj77a000yzkv2f8dw7p2s" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/information-collect/" rel="tag">information collect</a></li></ul>
 
     </footer>
   </div>
@@ -1446,7 +1444,7 @@ powershell脚本获取密码：
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-api-php-registry/" rel="tag">docker-api,php,registry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/information-collect/" rel="tag">information collect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E6%9F%A5%E6%89%BE/" rel="tag">linux命令之查找</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-%E6%89%AB%E6%8F%8F/" rel="tag">python 扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis%E6%BC%8F%E6%B4%9E-%E4%B8%80%E8%88%AC%E5%86%85%E7%BD%91%EF%BC%89/" rel="tag">redis漏洞(一般内网）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell-%E8%84%9A%E6%9C%AC-Linux-search/" rel="tag">shell 脚本 Linux search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell%E5%8F%8D%E5%BC%B9%E3%80%81powershell%E5%8F%8D%E5%BC%B9/" rel="tag">shell反弹、powershell反弹</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql-inject/" rel="tag">sql_inject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B/" rel="tag">sql注入流程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-%E5%9F%9F-%E5%9F%9F%E6%B8%97%E9%80%8F/" rel="tag">windows 域 域渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91-%E6%8F%90%E6%9D%83/" rel="tag">内网/提权</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E8%BD%AC%E5%8F%91/" rel="tag">内网转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E4%BD%BF%E7%94%A8/" rel="tag">常用工具及使用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" rel="tag">文件包含漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%87waf/" rel="tag">过waf</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-api-php-registry/" rel="tag">docker-api,php,registry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/information-collect/" rel="tag">information collect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ipv6-DNS/" rel="tag">ipv6  DNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E6%9F%A5%E6%89%BE/" rel="tag">linux命令之查找</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-%E6%89%AB%E6%8F%8F/" rel="tag">python 扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis%E6%BC%8F%E6%B4%9E-%E4%B8%80%E8%88%AC%E5%86%85%E7%BD%91%EF%BC%89/" rel="tag">redis漏洞(一般内网）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell-%E8%84%9A%E6%9C%AC-Linux-search/" rel="tag">shell 脚本 Linux search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell%E5%8F%8D%E5%BC%B9%E3%80%81powershell%E5%8F%8D%E5%BC%B9/" rel="tag">shell反弹、powershell反弹</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql-inject/" rel="tag">sql_inject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B/" rel="tag">sql注入流程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-%E5%9F%9F-%E5%9F%9F%E6%B8%97%E9%80%8F/" rel="tag">windows 域 域渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91-%E6%8F%90%E6%9D%83/" rel="tag">内网/提权</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E8%BD%AC%E5%8F%91/" rel="tag">内网转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E4%BD%BF%E7%94%A8/" rel="tag">常用工具及使用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" rel="tag">文件包含漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%87waf/" rel="tag">过waf</a></li></ul>
     </div>
   </div>
 
@@ -1456,7 +1454,7 @@ powershell脚本获取密码：
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/docker-api-php-registry/" style="font-size: 10px;">docker-api,php,registry</a> <a href="/tags/information-collect/" style="font-size: 10px;">information collect</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">linux命令之查找</a> <a href="/tags/python-%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">python 扫描</a> <a href="/tags/redis%E6%BC%8F%E6%B4%9E-%E4%B8%80%E8%88%AC%E5%86%85%E7%BD%91%EF%BC%89/" style="font-size: 10px;">redis漏洞(一般内网）</a> <a href="/tags/shell-%E8%84%9A%E6%9C%AC-Linux-search/" style="font-size: 10px;">shell 脚本 Linux search</a> <a href="/tags/shell%E5%8F%8D%E5%BC%B9%E3%80%81powershell%E5%8F%8D%E5%BC%B9/" style="font-size: 10px;">shell反弹、powershell反弹</a> <a href="/tags/sql-inject/" style="font-size: 10px;">sql_inject</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">sql注入</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B/" style="font-size: 10px;">sql注入流程</a> <a href="/tags/windows-%E5%9F%9F-%E5%9F%9F%E6%B8%97%E9%80%8F/" style="font-size: 10px;">windows 域 域渗透</a> <a href="/tags/%E5%86%85%E7%BD%91-%E6%8F%90%E6%9D%83/" style="font-size: 10px;">内网/提权</a> <a href="/tags/%E5%86%85%E7%BD%91%E8%BD%AC%E5%8F%91/" style="font-size: 10px;">内网转发</a> <a href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E4%BD%BF%E7%94%A8/" style="font-size: 10px;">常用工具及使用</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">文件包含漏洞</a> <a href="/tags/%E8%BF%87waf/" style="font-size: 10px;">过waf</a>
+      <a href="/tags/docker-api-php-registry/" style="font-size: 10px;">docker-api,php,registry</a> <a href="/tags/information-collect/" style="font-size: 10px;">information collect</a> <a href="/tags/ipv6-DNS/" style="font-size: 10px;">ipv6  DNS</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">linux命令之查找</a> <a href="/tags/python-%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">python 扫描</a> <a href="/tags/redis%E6%BC%8F%E6%B4%9E-%E4%B8%80%E8%88%AC%E5%86%85%E7%BD%91%EF%BC%89/" style="font-size: 10px;">redis漏洞(一般内网）</a> <a href="/tags/shell-%E8%84%9A%E6%9C%AC-Linux-search/" style="font-size: 10px;">shell 脚本 Linux search</a> <a href="/tags/shell%E5%8F%8D%E5%BC%B9%E3%80%81powershell%E5%8F%8D%E5%BC%B9/" style="font-size: 10px;">shell反弹、powershell反弹</a> <a href="/tags/sql-inject/" style="font-size: 10px;">sql_inject</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">sql注入</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B/" style="font-size: 10px;">sql注入流程</a> <a href="/tags/windows-%E5%9F%9F-%E5%9F%9F%E6%B8%97%E9%80%8F/" style="font-size: 10px;">windows 域 域渗透</a> <a href="/tags/%E5%86%85%E7%BD%91-%E6%8F%90%E6%9D%83/" style="font-size: 10px;">内网/提权</a> <a href="/tags/%E5%86%85%E7%BD%91%E8%BD%AC%E5%8F%91/" style="font-size: 10px;">内网转发</a> <a href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E4%BD%BF%E7%94%A8/" style="font-size: 10px;">常用工具及使用</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" style="font-size: 10px;">文件包含漏洞</a> <a href="/tags/%E8%BF%87waf/" style="font-size: 10px;">过waf</a>
     </div>
   </div>
 
@@ -1465,7 +1463,7 @@ powershell脚本获取密码：
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
     </div>
   </div>
 
@@ -1476,6 +1474,10 @@ powershell脚本获取密码：
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2021/10/19/ipv6Server&DNS/">ipv6Server&amp;DNS</a>
+          </li>
         
           <li>
             <a href="/2019/11/23/k8s%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">k8s搭建</a>
@@ -1491,10 +1493,6 @@ powershell脚本获取密码：
         
           <li>
             <a href="/2019/03/24/docker-api/">php与docker-api与私有仓库</a>
-          </li>
-        
-          <li>
-            <a href="/2019/03/24/%E5%9F%9F%E6%B8%97%E9%80%8F/">域渗透</a>
           </li>
         
       </ul>
